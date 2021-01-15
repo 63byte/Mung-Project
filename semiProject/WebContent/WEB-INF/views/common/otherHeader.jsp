@@ -50,6 +50,9 @@
 	display: block;
 	position: absolute;
 	right: 45%;
+	
+    top:0;
+    bottom:0;
 }
 
 .header-right-items {
@@ -125,9 +128,11 @@ a:hover{
 			<!-- <form class="search">
                 <input class="search-input" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
             </form> -->
-
+			
+			<a href="${contextPath}">
 			<img id="logo" src="${pageContext.request.contextPath}/resources/image/common/logo2.png">
-
+			</a>
+			
 			<c:choose>
 				<c:when test="${empty sessionScope.loginMember }">
 					<div class="header-right-items">
