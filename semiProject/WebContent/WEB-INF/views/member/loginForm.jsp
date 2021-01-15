@@ -144,6 +144,7 @@ html, body {
 		</div>
 
 	</form>
+	
 	<div id="cloudDiv">
 		<img
 			src="${pageContext.request.contextPath}/resources/image/cloud.png"

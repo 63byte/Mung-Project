@@ -145,17 +145,26 @@
         right: 0;
         bottom: 0;
     }
+    
+    #mung {
+	width: 300px;
+	margin: 110px;
+	margin-left: -75px;
+	}
 
     </style>
 </head>
 
 <body>
 	
+	
     <div id="wrapper">
         
-        <div id="logoDiv">
-            <a href="#"><img src="logo(login).png" width="300px"></a>
-        </div>
+        <a href="${contextPath}">
+			<div id="logoDiv" style="width: 150px; height: 300px">
+				<img src="${pageContext.request.contextPath}/resources/image/logo.png" id="mung">
+			</div>
+        </a>
         
         <div id="btnDiv">
             <button id="idBtn">아이디 찾기</button>
@@ -189,10 +198,12 @@
             <button id="nextBtn">다음</button>
         </div>
     </div>
-
+    
     <div id="cloudDiv">
-        <img src="cloud2.png">
-    </div>
+		<img
+			src="${pageContext.request.contextPath}/resources/image/cloud.png"
+			id="cloud">
+	</div>
 
 </body>
 </html>
