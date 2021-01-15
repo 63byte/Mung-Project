@@ -82,10 +82,8 @@
 }
 
 #nav>ul {
-	#nav>ul {
    list-style-type: none; /* 불렛 없음 */
     margin-top: 15px; /* 부트스트랩으로 올라가있던 네비 위치 내리기  */
-}
 }
 
 #nav>ul>li>a {
