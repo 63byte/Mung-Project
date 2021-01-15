@@ -14,14 +14,10 @@ import javax.servlet.http.HttpSession;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 
-
 @WebServlet("/member/*")
 public class MemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
-	
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String uri = request.getRequestURI();	
@@ -187,8 +183,14 @@ public class MemberController extends HttpServlet {
 				view.forward(request, response);
 			}
 			
+			// ----------------- id, pw 찾기 ------------------------------
+			else if(command.equals("/findIdForm.do")) {
+				
+				path = "/WEB-INF/views/member/findIdForm.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
 			
-			
+			}	
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -201,7 +203,8 @@ public class MemberController extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
