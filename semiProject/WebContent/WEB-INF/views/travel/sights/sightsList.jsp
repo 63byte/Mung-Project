@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관광지 목록</title>
 </head>
 <body>
-test
+관광지 리스트 연결 테스트..
 </body>
 </html>
