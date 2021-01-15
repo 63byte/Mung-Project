@@ -105,8 +105,14 @@
 }
 
 /* ------------------------------------------------------ */
-a {
-	text-decoration-line: none;
+a{
+   color:#000000;
+   text-decoration: none;
+}
+
+a:hover{
+   color:#ffffff;
+   text-decoration: none;
 }
 </style>
 </head>
