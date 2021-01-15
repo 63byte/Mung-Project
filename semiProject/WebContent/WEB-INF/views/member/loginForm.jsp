@@ -90,7 +90,7 @@ html, body {
 }
 
 #logo {
-	width: 400px;
+	width: 300px;
 	margin: 110px;
 	margin-left: -75px;
 }
