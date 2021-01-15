@@ -68,6 +68,7 @@
 	.col-md-3{
 		float: left;
 		width: 21%;
+		margin-bottom : 50px;
 	}
 	
 /* 	.col-md-3:hover{
@@ -106,7 +107,7 @@
 			
 				<div class="col-md-3">
 					<div class="card" style="width: 11rem;">
-					  <img src="..." class="card-img-top" alt="...">
+					  <img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
 						  <div class="card-body">
 						    <p class="card-text">제목제목제목제목[] <br> 작성자 : <br> yyyy년 MM월 dd일 HH:mm</p>
 						  </div>
@@ -114,7 +115,7 @@
 				</div>
 				<div class="col-md-3">
 					<div class="card" style="width: 11rem;">
-					  <img src="..." class="card-img-top" alt="...">
+					  <img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
 						  <div class="card-body">
 						    <p class="card-text">제목제목제목제목[] <br> 작성자 : <br> yyyy년 MM월 dd일 HH:mm</p>
 						  </div>
@@ -122,7 +123,7 @@
 				</div>
 				<div class="col-md-3">
 					<div class="card" style="width: 11rem;">
-					  <img src="..." class="card-img-top" alt="...">
+					  <img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
 						  <div class="card-body">
 						    <p class="card-text">제목제목제목제목[] <br> 작성자 : <br> yyyy년 MM월 dd일 HH:mm</p>
 						  </div>
@@ -130,7 +131,7 @@
 				</div>
 				<div class="col-md-3">
 					<div class="card" style="width: 11rem;">
-					  <img src="${pageContext.request.contextPath}/resources/image/logo(login).png" class="card-img-top" alt="...">
+					  <img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
 						  <div class="card-body">
 						    <p class="card-text">제목제목제목제목[] <br> 작성자 : <br> yyyy년 MM월 dd일 HH:mm</p>
 						  </div>
@@ -138,7 +139,7 @@
 				</div>
 				<div class="col-md-3">
 					<div class="card" style="width: 11rem;">
-					  <img src="${pageContext.request.contextPath}/resources/image/logo(login).png" class="card-img-top" alt="...">
+					  <img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
 						  <div class="card-body">
 						    <p class="card-text">제목제목제목제목[] <br> 작성자 : <br> yyyy년 MM월 dd일 HH:mm</p>
 						  </div>

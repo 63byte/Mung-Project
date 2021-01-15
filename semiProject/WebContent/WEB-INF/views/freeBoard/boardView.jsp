@@ -97,6 +97,7 @@
 					
 					<a href="${goToList}" class="btn btn-info float-right">목록으로</a>
 				
+				<jsp:include page="reply.jsp"></jsp:include>
 		</div>
 	</div>
 </div>
