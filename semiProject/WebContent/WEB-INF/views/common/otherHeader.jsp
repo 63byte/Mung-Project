@@ -60,6 +60,9 @@
 	display: block;
 	position: absolute;
 	right: 45%;
+	
+    top:0;
+    bottom:0;
 }
 
 .header-right-items {
@@ -92,7 +95,8 @@
 }
 
 #nav>ul {
-	list-style-type: none; /* 불렛 없음 */
+   list-style-type: none; /* 불렛 없음 */
+    margin-top: 15px; /* 부트스트랩으로 올라가있던 네비 위치 내리기  */
 }
 
 #nav>ul>li>a {
@@ -115,8 +119,14 @@
 }
 
 /* ------------------------------------------------------ */
-a {
-	text-decoration-line: none;
+a{
+   color:#000000;
+   text-decoration: none;
+}
+
+a:hover{
+   color:#ffffff;
+   text-decoration: none;
 }
 </style>
 </head>
@@ -128,9 +138,11 @@ a {
 			<!-- <form class="search">
                 <input class="search-input" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
             </form> -->
-
+			
+			<a href="${contextPath}">
 			<img id="logo" src="${pageContext.request.contextPath}/resources/image/common/logo2.png">
-
+			</a>
+			
 			<c:choose>
 				<c:when test="${empty sessionScope.loginMember }">
 					<div class="header-right-items">
@@ -160,11 +172,13 @@ a {
 
 	<div id="nav">
        <ul>
-           <li><a href="${contenxtPath }" class="nav-items" id="nav-home">홈</a></li>
-           <li><a href="#" class="nav-items" id="nav-travel">여행</a></li>
+
+           <li><a href="#" class="nav-items" id="nav-home">홈</a></li>
+           <li><a href="${contextPath}/travel/localInfo.do" class="nav-items" id="nav-travel">여행</a></li>
            <li><a href="#" class="nav-items" id="nav-room">숙소</a></li>
-           <li><a href="${contextPath }/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
-           <li><a href="${contextPath}/freeBoard/freeList.do" class="nav-items" id="nav-board">게시판</a></li>
+
+           <li><a href="${contextPath}/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
+           <li><a href="#" class="nav-items" id="nav-board">게시판</a></li>
            <li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
            <li><a href="#" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
        </ul>

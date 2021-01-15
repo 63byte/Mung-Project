@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>login</title>
+<title>로그인</title>
 
 <!-- 구글 폰트 -->
 <link
@@ -15,16 +15,16 @@
 	rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
+
 html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	background: #8ad2d5;
 }
-/* 위의 부분이 div를 화면에 꽉 차게 만들어 주는 스타일 */
+
 * {
 	font-family: 'Noto Sans KR', sans-serif;
-	color: gray;
 }
 
 #inputDiv {
@@ -36,6 +36,7 @@ html, body {
 	width: 200px;
 	height: 30px;
 	border: 1px solid white;
+	border-radius : 5px;
 }
 
 #userId {
@@ -88,7 +89,7 @@ html, body {
 	margin-right: auto;
 }
 
-#mung {
+#logo {
 	width: 300px;
 	margin: 110px;
 	margin-left: -75px;
@@ -104,6 +105,7 @@ html, body {
 #cloud {
 	vertical-align: bottom;
 }
+
 </style>
 
 </head>
@@ -113,7 +115,7 @@ html, body {
 
 		<a href="${contextPath}">
 			<div id="logoDiv" style="width: 150px; height: 300px">
-				<img src="${pageContext.request.contextPath}/resources/image/logo.png" id="mung">
+				<img src="${pageContext.request.contextPath}/resources/image/logo.png" id="logo">
 			</div>
 		</a>
 
@@ -142,8 +144,8 @@ html, body {
 			&nbsp;|&nbsp; 
 			<a id="sign" href="${contextPath}/member/signUpForm.do">회원가입</a>
 		</div>
-
 	</form>
+
 	
 	<div id="cloudDiv">
 		<img
