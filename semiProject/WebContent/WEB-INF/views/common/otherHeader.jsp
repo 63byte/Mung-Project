@@ -119,7 +119,7 @@ a {
                 <input class="search-input" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
             </form> -->
 
-			<img id="logo" src="KakaoTalk_20210103_173038542.png">
+			<img id="logo" src="${pageContext.request.contextPath}/resources/image/common/logo2.png">
 
 			<c:choose>
 				<c:when test="${empty sessionScope.loginMember }">
