@@ -129,7 +129,7 @@ a {
                 <input class="search-input" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
             </form> -->
 
-			<img id="logo" src="${pageContext.request.contextPath}/resources/image/logo.png">
+			<img id="logo" src="${pageContext.request.contextPath}/resources/image/common/logo2.png">
 
 			<c:choose>
 				<c:when test="${empty sessionScope.loginMember }">
@@ -160,7 +160,7 @@ a {
 
 	<div id="nav">
        <ul>
-           <li><a href="${contextPath }" class="nav-items" id="nav-home">홈</a></li>
+           <li><a href="${contenxtPath }" class="nav-items" id="nav-home">홈</a></li>
            <li><a href="#" class="nav-items" id="nav-travel">여행</a></li>
            <li><a href="#" class="nav-items" id="nav-room">숙소</a></li>
            <li><a href="${contextPath }/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>

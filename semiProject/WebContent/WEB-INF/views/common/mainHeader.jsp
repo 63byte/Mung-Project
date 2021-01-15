@@ -38,7 +38,7 @@ a {
 	padding: 0;
 	background: #8ad2d5;
 	position: relative;
-	background-image: url("${pageContext.request.contextPath}/resources/image/cloud.png");
+	background-image: url("${pageContext.request.contextPath}/resources/image/common/cloud.png");
 	background-size: 100%;
 	background-repeat: repeat-x; /* x축 반복 */
 	background-position: center bottom; /* 아래 정렬 */
@@ -144,7 +144,7 @@ a {
 	<div id="header">
 		<a href="${contextPath}">
 			<div id="logoDiv">
-				<img src="${pageContext.request.contextPath}/resources/image/logo.png" id="logo">
+				<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" id="logo">
 			</div>
 		</a>
 
