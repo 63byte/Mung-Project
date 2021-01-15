@@ -144,7 +144,7 @@ a {
 	<div id="header">
 		<a href="${contextPath}">
 			<div id="logoDiv">
-				<img src="${pageContext.request.contextPath}/resources/image/logo.png" id="logo">
+				<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" id="logo">
 			</div>
 		</a>
 

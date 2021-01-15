@@ -37,7 +37,7 @@
                     <div class="search">
                         <input type="text" name="" class="searchBar" placeholder="검색어를 입력해 주세요.">
                         <button class="btn_class" id="searchBtn">
-                            <img src="${pageContext.request.contextPath}/resources/image/common/searchIcon.png" id="searchIcon">
+                            <img src="${pageContext.request.contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
                             <!-- <span></span> -->
                         </button>
                     </div>
