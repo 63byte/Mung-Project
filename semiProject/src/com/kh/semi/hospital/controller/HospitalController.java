@@ -37,6 +37,7 @@ public class HospitalController extends HttpServlet {
 		try {
 			HospitalService service = new HospitalService();
 			
+			// 동물병원 목록 조회**************************************
 			if(command.equals("/list")) {
 				
 				errorMsg = "동물병원 목록 조회 중 오류 발생";
@@ -47,6 +48,13 @@ public class HospitalController extends HttpServlet {
 				view.forward(request, response);
 				
 			}
+			
+			// 동물병원 등록 화면 전환 **************************************
+						else if(command.contentEquals("/insertForm")) {
+							path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
+							view = request.getRequestDispatcher(path);
+							view.forward(request, response);
+						}
 			
 			
 			
