@@ -87,7 +87,7 @@ html, body {
 
 		<a href="${contextPath}">
 			<div id="logoDiv" style="width: 150px; height: 300px">
-				<img src="${pageContext.request.contextPath}/resources/image/logo.png" id="logo">
+				<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" id="logo">
 			</div>
 		</a>
 
