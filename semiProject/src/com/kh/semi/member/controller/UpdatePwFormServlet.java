@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/myPageUpdateNormal.do")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/member/myPageUpdatePw.do") // 절대 경로
+public class UpdatePwFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		String path = "/WEB-INF/views/member/myPageUpdateNormal.jsp";
+		String path = "/WEB-INF/views/member/myPageUpdatePw.jsp"; // 요청 위임
 		RequestDispatcher view = request.getRequestDispatcher(path);
 		view.forward(request, response);
 	}

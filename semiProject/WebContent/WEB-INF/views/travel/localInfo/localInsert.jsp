@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지역정보 글쓰기</title>
 <link rel="stylesheet" href="join.css" type="text/css">
 
 <!-- 구글 폰트 -->
@@ -26,6 +26,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
 	crossorigin="anonymous"></script>
+
+<!-- 이미지 파일 업로드 버튼 경로를 위한 제이쿼리 -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
 <style>
@@ -54,8 +57,6 @@ div {
 	height: 800px;
 	display: block;
 	margin: auto;
-
-	/* background-color: ghostwhite; */
 }
 
 .aside {
@@ -63,12 +64,11 @@ div {
 	height: 100%;
 	float: left;
 	border-right: 1px solid #e5e5e5;
-
-	/* border: 1px solid red; */
 }
 
 .aside>ul {
-	list-style-type: none; /* 불렛 없음 */
+	list-style-type: none;
+	/* 불렛 없음 */
 	padding: 0;
 }
 
@@ -78,11 +78,10 @@ div {
 }
 
 .aside>ul>li>a {
-	text-decoration: none; /* 불렛 없음 */
+	text-decoration: none;
+	/* 불렛 없음 */
 	font-weight: 700;
 	color: black;
-
-	/* border: 1px solid red; */
 }
 
 /* 메뉴에 마우스 오버 했을 경우 민트색을 변경 */
@@ -90,131 +89,167 @@ div {
 	color: #8ad2d5;
 }
 
-/* ------------------------------------------------------ */
+/* -------------------------- 내용(컨텐츠부분) ---------------------------- */
 .main {
 	width: 900px;
 	height: 100%;
 	float: left;
+	padding-left: 10px;
+	/* 왼쪽 간격 띄우기 */
 }
 
-/* ------ 상단 빅배너 ------ */
-#localInfo-bigBanner {
-	width: 900px;
-	height: 200px;
-	position: relative;
+/* ------------------------------------------ */
+.btn-primary {
+	background-color: #8ad2d5;
+	border-color: #8ad2d5;
 }
 
-#big-banner-title {
-	/* background-color: yellow; */
-	color: white;
-	font-size: 45px;
-	text-align: center;
+.btn-primary:hover {
+	color: #8ad2d5;
+	background-color: #ffffff;
+	border-color: #8ad2d5;
+}
+
+/* --------------- 업로드 버튼 --------------- */
+
+/* 파일 선택 필드 숨기기 */
+.filebox input[type="file"] {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	width: 0;
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 0;
 }
 
-/* ------ 인기도시 ------ */
-.hot-city-area {
-	width: 900px;
-	height: 100px;
-	border: 1px solid red;
-	display: flex;
+/* 업로드 버튼 */
+.filebox label {
+	display: inline-block;
+	padding: 6px 12px 6px 12px;
+	color: #8ad2d5;
+	/* vertical-align: middle; */
+	background-color: #fdfdfd;
+	cursor: pointer;
+	border: 1px solid #8ad2d5;
+	border-radius: 5px;
 }
 
-.hot-city-box {
-	width: 100px;
-	height: 100px;
-	background-color: lightgrey;
-	/* padding: 0px 5px 0px 5px ; */
-	margin: 0px 14px 0px 0px;
-}
-
-.hot-city-thumbnail-img {
-	width: 100px;
-	height: 60px;
-	border: 1px solid red;
-}
-
-.hot-city-title {
-	width: 100px;
-	height: 40px;
-	text-align: center;
-	/* border:1px solid blue; */
+/* 파일경로 부분 스타일 */
+.filebox .file-upload-name {
+	display: inline-block;
+	padding: 6px 12px 6px 12px;
+	/* vertical-align: middle; */
+	background-color: #f5f5f5;
+	border: 1px solid #ebebeb;
+	border-radius: 5px;
+	color: gray;
 }
 </style>
-</head>
-
-
-
-
 </head>
 <body>
 
 	<!-- header 연결 -->
 	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
+
+
 	<div id="container">
 		<div class="aside">
-
 			<ul>
-				<li><a href="#" class="aside-items" id="aside-localInfo">지역정보</a></li>
-				<li><a href="#" class="aside-items" id="aside-touristSpot">관광지</a></li>
+				<li><a href="${contextPath}/travel/localList.do" class="aside-items" id="aside-localInfo">지역정보</a></li>
+				<li><a href="${contextPath}/travel/sightsList.do" class="aside-items" id="aside-touristSpot">관광지</a></li>
 			</ul>
 		</div>
 
-
 		<div class="main">
 
-			<div id="localInfo-bigBanner">
-				<img
-					src="${pageContext.request.contextPath}/resources/image/travel/localInfo/local-bigbanner(900x200)_seoul.jpg">
-				<div id="big-banner-title">서울</div>
-			</div>
+			<br>
+			<h3>지역정보 글쓰기</h3>
+			<hr>
 
-			<div>인기도시</div>
-			<div class="hot-city-area">
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="서울">서울</div>
+			<form>
+				<div class="form-group row">
+					<label for="my-1 mr-sm-2" class="col-sm-2 col-form-label">지역</label>
+					<div class="col-sm-10">
+						<form class="form-inline">
+							<select class="custom-select my-1 mr-sm-2" id="">
+								<option value="강원도">강원도</option>
+								<option value="경기도">경기도</option>
+								<option value="경상도">경상도</option>
+								<option value="광주">광주</option>
+								<option value="대구">대구</option>
+								<option value="대전">대전</option>
+								<option value="부산">부산</option>
+								<option value="서울" selected>서울</option>
+								<option value="세종">세종</option>
+								<option value="울산">울산</option>
+								<option value="인천">인천</option>
+								<option value="전라도">전라도</option>
+								<option value="제주">제주</option>
+								<option value="충청도">충청도</option>
+							</select>
+						</form>
+					</div>
 				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="인천">인천</div>
+
+				<div class="form-group row">
+					<label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputTitle"
+							placeholder="제목을 입력하세요">
+					</div>
 				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="대구">대구</div>
+
+				<div class="form-group row">
+					<label for="file" class="col-sm-2 col-form-label">이미지 업로드</label>
+					<div class="col-sm-10">
+
+						<!-- 이미지 업로드 버튼 -->
+						<div class="filebox">
+							<label for="file">업로드</label> <input type="file" id="file">
+							<input class="file-upload-name" value="파일경로..">
+						</div>
+
+					</div>
 				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="부산">부산</div>
+
+				<div class="form-group row">
+					<label for="writingDate" class="col-sm-2 col-form-label">작성일</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control-plaintext" id="writingDate"
+							value="2021-01-12">
+					</div>
 				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="강원도">강원도</div>
+
+				<div class="form-group row">
+					<label for="writingContent" class="col-sm-2 col-form-label">내용</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" id="writingContent" rows="5"
+							placeholder="내용을 입력하세요"></textarea>
+					</div>
 				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="경상도">경상도</div>
-				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="전라도">전라도</div>
-				</div>
-				<div class="hot-city-box">
-					<div class="hot-city-thumbnail-img"></div>
-					<div class="hot-city-title" name="제주도">제주도</div>
-				</div>
+			</form>
+
+			<div class="text-center">
+				<button type="button" class="btn btn-primary">등록</button>
+				<button type="button" class="btn btn-primary">목록으로</button>
 			</div>
 
 		</div>
 	</div>
 
 
+	<!-- ************************* 푸터 연결 ************************* -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+
+	<script>
+		/* 이미지 파일 첨부 경로 뜨게 하는 구문 */
+		$("#file").on('change', function() {
+			var fileName = $("#file").val();
+			$(".file-upload-name").val(fileName);
+		});
+	</script>
 
 
 </body>

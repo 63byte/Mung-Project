@@ -186,11 +186,10 @@ a {
 	<div id="nav">
 		<ul>
 			<li><a href="#" class="nav-items" id="nav-home">홈</a></li>
-			<li><a href="${contextPath}/travel/localInfo.do"
-				class="nav-items" id="nav-travel">여행</a></li>
+			<li><a href="${contextPath}/travel/localList.do" class="nav-items" id="nav-travel">여행</a></li>
 			<li><a href="#" class="nav-items" id="nav-room">숙소</a></li>
-			<li><a href="${contextPath }/hospital/list" class="nav-items"
-				id="nav-animalHospital">동물병원</a></li>
+			<li><a href="${contextPath }/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
+
 			<li><a href="#" class="nav-items" id="nav-board">게시판</a></li>
 
 

@@ -33,17 +33,46 @@ public class travelController extends HttpServlet {
 		try {
 //			NoticeService service = new NoticeService();
 
-			// 지역정보 Controller **************************************************
-			if (command.equals("/localInfo.do")) {
-				errorMsg = "공지사항 목록 조회 중 오류 발생.";
+			// 지역정보 리스트 Controller **************************************************
+			if (command.equals("/localList.do")) {
+				errorMsg = "지역정보 리스트 조회 중 오류 발생.";
 
 				// 요청을 위임할 경로 jsp 경로 지정
-				path = "/WEB-INF/views/travel/localInfo/localInfo.jsp";
+				path = "/WEB-INF/views/travel/localInfo/localList.jsp";
 
 				// 요청 위임 객체 생성 후 위임 진행
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
+
+			// 지역정보 글쓰기 Controller **************************************************
+			if (command.equals("/localInsert.do")) {
+				errorMsg = "지역정보 글쓰기 중 오류 발생.";
+
+				// 요청을 위임할 경로 jsp 경로 지정
+				path = "/WEB-INF/views/travel/localInfo/localInsert.jsp";
+
+				// 요청 위임 객체 생성 후 위임 진행
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
+			
+			
+			// ***********************************************************************
+			// 관광지 리스트 Controller **************************************************
+			if (command.equals("/sightsList.do")) {
+				errorMsg = "관광지 리스트 조회 중 오류 발생.";
+
+				// 요청을 위임할 경로 jsp 경로 지정
+				path = "/WEB-INF/views/travel/sights/sightsList.jsp";
+
+				// 요청 위임 객체 생성 후 위임 진행
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
