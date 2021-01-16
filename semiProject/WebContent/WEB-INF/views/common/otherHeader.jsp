@@ -181,7 +181,7 @@ a:hover{
 
            <li><a href="${contextPath}/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
            
-           <li><a href="#" class="nav-items" id="nav-board">게시판</a></li>
+           <li><a href="${contextPath}/freeBoard/freeList.do" class="nav-items" id="nav-board">게시판</a></li>
            
            <li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
            
