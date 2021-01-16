@@ -39,6 +39,11 @@
     box-sizing: border-box;
 }
 
+.memberJoin > hr {
+	border : 1px solid orange;
+	margin-top : -10px;
+}
+
 /* 레이블 태그 class명*/
 .lb{
     font-weight : bold;
