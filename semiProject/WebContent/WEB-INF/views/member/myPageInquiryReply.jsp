@@ -109,26 +109,24 @@ h6 {
 
                 <br>
                 
-                <h6>게시글 조회 결과</h6>
+                <h6>댓글 조회 결과</h6>
 
                 <div id="resultDiv">
                     <table class="table table-hover table-striped text-center" id="result">
                         <thead>
                             <tr>
                                 <th>글 번호</th>
-                                <th>카테고리</th>
-                                <th>제목</th>
+                                <th>글 제목</th>
+                                <th>댓글 내용</th>
                                 <th>작성일</th>
-                                <th>조회수</th>
                             </tr>
                         </thead>
 
                         <tr>
                             <td>1</td>
-                            <th>여행 후기</th>
-                            <td>제주도 2박3일 후기</td>
-                            <td>2021-01-12</td>
-                            <td>1004</td>
+                            <th>서울 쪽 반려견과 함께 갈 수 있는 숙소 추천 해주세요.</th>
+                            <td>저는 @@호텔 좋았어요 ^ㅅ^</td>
+                            <td>2021-01-13</td>
                         </tr>
                     </table>
                 </div>
@@ -169,7 +167,6 @@ h6 {
     
     
                 </div>
-
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
