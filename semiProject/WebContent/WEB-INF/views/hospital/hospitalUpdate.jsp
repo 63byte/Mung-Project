@@ -4,20 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동물병원 등록하기</title>
+<title>동물병원 수정</title>
 <!-- css연결  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hospital/hospitalInsert.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hospital/hospitalUpdate.css" type="text/css">
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
-<!-- 동물병원 등록하기 -->
-    <div class="wrapper">
+
+<!-- 동물병원 수정 -->
+<div class="wrapper">
 
         <div class="main">
 
             <div class="row-item">
-                <div id="page_name">병원 등록</div>
+                <div id="page_name">병원 수정</div>
                 <hr id="hr_tag">
             </div>
             
@@ -54,7 +55,7 @@
                             <label for="companyName">업체명</label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="companyName" name="" autocomplete="off" required>
+                            XXX 동물병원
                         </div>
                     </div>
 
@@ -151,7 +152,7 @@
                     <!-- 등록 / 취소 버튼  -->
                     <div class="row-item">
                         <div class="btn_item">
-                            <input class= "btn_class"  id="insertBtn" type="submit" value="등록">
+                            <input class= "btn_class"  id="insertBtn" type="submit" value="수정">
                             <input class= "btn_class"  id="resetBtn" type="reset" value="취소">
                         </div>
                     </div>
@@ -159,6 +160,8 @@
 	        </div>
 	    </div>
 	</div>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
 </body>
 </html>
