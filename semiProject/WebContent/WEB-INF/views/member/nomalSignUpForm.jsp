@@ -90,8 +90,6 @@
     height : 32px;
     width : 108px;
     padding : 0;
-    border : 1px solid  #8bd2d6;
-    background-color: #8bd2d6;
 }
 
 
@@ -119,9 +117,26 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     height:40px;
     width: 100%;
     font-size : 16px;
+}
+
+.btn_class:hover{
+	background-color: #17a2b8;
+}
+
+.btn_class{
+    height : 40px;
+    width : 108px;
+    padding : 0;
     border : 1px solid  #8bd2d6;
     background-color: #8bd2d6;
+    color : #fffefe;
+    cursor: pointer;
+    outline:none;
 }
+
+
+
+
 
 </style>
 </head>
@@ -225,7 +240,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요." required>
                     </div>
                     <div class= "verifyBtn display-ib">
-                        <input type="button" id="emailBtn" value="인증번호 받기">
+                        <button class="btn_class" type="button" id="emailBtn">인증번호 받기</button>
                     </div>
                     <div>
                         <span id="checkEmail" >&nbsp;</span>
@@ -272,7 +287,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
                 <br><br>
                 <div class="submit">
-                    <input id="submitBtn" type="submit" name="" value="회원가입">
+                    <button class="btn_class" id="submitBtn" type="submit">회원가입</button>
                 </div>
             </div>
         </form>

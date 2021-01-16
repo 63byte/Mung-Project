@@ -7,7 +7,7 @@
 <title>숙소 리스트</title>
 
 <!-- css연결  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/room/roomList.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/room/roomList.css" type="text/css">
 
 
 
@@ -36,7 +36,7 @@
                 <div class="search">
                     <input type="text" name="" class="searchBar" placeholder="검색어를 입력해 주세요.">
                     <button class="btn_class" id="searchBtn">
-                        <img src="${pageContext.request.contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
+                        <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
                         <!-- <span></span> -->
                     </button>
                 </div>
@@ -78,7 +78,7 @@
                   <td>
                       <div class="roomList">
                           <div class="thumbnail_area">
-                              <img class="thumbnail_img" src="${pageContext.request.contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
+                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
                             </div>
                             <div class="title_area">
                                 <p class="title">서울 북한산 럭셔리 카라반&수영장</p>
@@ -89,7 +89,7 @@
                        </div>
                       <div class="roomList">
                           <div class="thumbnail_area">
-                              <img class="thumbnail_img" src="${pageContext.request.contextPath}/resources/image/room/seoul/adam.jpg"></img>
+                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/adam.jpg"></img>
                             </div>
                             <div class="title_area">
                                 <p class="title">아담한옥</p>
@@ -100,7 +100,7 @@
                        </div>
                       <div class="roomList">
                           <div class="thumbnail_area">
-                              <img class="thumbnail_img" src="${pageContext.request.contextPath}/resources/image/room/seoul/dalbit.jpg"></img>
+                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/dalbit.jpg"></img>
                             </div>
                             <div class="title_area">
                                 <p class="title">달빛애견글램핑 럭셔리수영장</p>
@@ -111,7 +111,7 @@
                        </div>
                       <div class="roomList">
                           <div class="thumbnail_area">
-                              <img class="thumbnail_img" src="${pageContext.request.contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
+                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
                             </div>
                             <div class="title_area">
                                 <p class="title">서울 북한산 럭셔리 카라반&수영장</p>
@@ -122,7 +122,7 @@
                        </div>
                       <div class="roomList">
                           <div class="thumbnail_area">
-                              <img class="thumbnail_img" src="${pageContext.request.contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
+                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
                             </div>
                             <div class="title_area">
                                 <p class="title">서울 북한산 럭셔리 카라반&수영장</p>
@@ -133,7 +133,7 @@
                        </div>
                       <div class="roomList">
                           <div class="thumbnail_area">
-                              <img class="thumbnail_img" src="${pageContext.request.contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
+                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
                             </div>
                             <div class="title_area">
                                 <p class="title">서울 북한산 럭셔리 카라반&수영장</p>
@@ -150,7 +150,7 @@
 
         <!-- 등록하기 버튼  -->
         <div class="row-item">
-            <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = 'insertForm';">등록하기</button>
+            <button type="button" class= "btn_class"  id="insertRoom" onclick="#;">등록하기</button>
         </div>
         
         <!-- 페이징 -->

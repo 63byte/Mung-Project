@@ -167,3 +167,6 @@ margin: 0;
     margin-left: 235px;
 }
 
+.btn_class:hover{
+	background-color: #17a2b8;
+}

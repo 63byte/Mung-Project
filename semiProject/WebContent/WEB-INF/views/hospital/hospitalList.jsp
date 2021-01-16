@@ -8,7 +8,7 @@
 <title>동물병원</title>
 
 <!-- css연결  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hospital/hospitalList.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalList.css" type="text/css">
 
 
 
@@ -37,7 +37,7 @@
                     <div class="search">
                         <input type="text" name="" class="searchBar" placeholder="검색어를 입력해 주세요.">
                         <button class="btn_class" id="searchBtn">
-                            <img src="${pageContext.request.contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
+                            <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
                             <!-- <span></span> -->
                         </button>
                     </div>
@@ -75,14 +75,14 @@
                 <div class="thumbnail">
                     <div class="thumbnail_img">
                         <a href="#">
-                            <img class="hospital_img" src="${pageContext.request.contextPath}/resources/image/hospital/seoul/dana.jpg">
+                            <img class="hospital_img" src="${contextPath}/resources/image/hospital/seoul/dana.jpg">
                         </a>
                     </div>
                     <div class="thumbnail_info">
                       <div class="hospital_info"><a id="hospital_name" href="#"> 다나 동물병원</a></div>
-                      <div class="hospital_info" ><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/site.png">주소 : 사당동 1019-54</div>
-                      <div class="hospital_info" ><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/phone.png">연락처 : 02-3471-0375</div>
-                      <div class="hospital_info" ><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 20:00</div>
+                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : 사당동 1019-54</div>
+                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : 02-3471-0375</div>
+                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 20:00</div>
                     </div>
                 </div>
             </div>
@@ -91,14 +91,14 @@
                 <div class="thumbnail">
                     <div class="thumbnail_img">
                         <a href="#">
-                            <img class="hospital_img" src="${pageContext.request.contextPath}/resources/image/hospital/seoul/goodpapa.jpg">
+                            <img class="hospital_img" src="${contextPath}/resources/image/hospital/seoul/goodpapa.jpg">
                         </a>
                     </div>
                     <div class="thumbnail_info">
                       <div class="hospital_info"><a id="hospital_name" href="#">굿파파 24시 반려동물건강검진센터</a></div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/site.png">주소 : 서울 동작구 사당로 289 사당의원</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/phone.png">연락처 : 02-593-8275</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/clock.png">영업시간 : 00:00 ~ 24:00</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : 서울 동작구 사당로 289 사당의원</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : 02-593-8275</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : 00:00 ~ 24:00</div>
                     </div>
                 </div>
             </div>
@@ -107,14 +107,14 @@
                 <div class="thumbnail">
                     <div class="thumbnail_img">
                         <a href="#">
-                            <img class="hospital_img" src="${pageContext.request.contextPath}/resources/image/hospital/seoul/naeul.jpg">
+                            <img class="hospital_img" src="${contextPath}/resources/image/hospital/seoul/naeul.jpg">
                         </a>
                     </div>
                     <div class="thumbnail_info">
                       <div class="hospital_info"><a id="hospital_name" href="#">나을동물병원</a></div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/site.png">주소 : 서울 동작구 사당로 196 거묵프리미엄상가 1층</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/phone.png">연락처 : 02-521-5775</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 19:00</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : 서울 동작구 사당로 196 거묵프리미엄상가 1층</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : 02-521-5775</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 19:00</div>
                     </div>
                 </div>
             </div>
@@ -123,14 +123,14 @@
                 <div class="thumbnail">
                     <div class="thumbnail_img">
                         <a href="#">
-                            <img class="hospital_img" src="${pageContext.request.contextPath}/resources/image/hospital/seoul/myfriend.jpg">
+                            <img class="hospital_img" src="${contextPath}/resources/image/hospital/seoul/myfriend.jpg">
                         </a>
                     </div>
                     <div class="thumbnail_info">
                       <div class="hospital_info"><a id="hospital_name" href="#">동물은 내친구</a></div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/site.png">주소 : 서울 동작구 사당로 252</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/phone.png">연락처 : 02-582-7708</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 19:00</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : 서울 동작구 사당로 252</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : 02-582-7708</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 19:00</div>
                     </div>
                 </div>
             </div>
@@ -139,14 +139,14 @@
                 <div class="thumbnail">
                     <div class="thumbnail_img">
                         <a href="#">
-                            <img class="hospital_img" src="${pageContext.request.contextPath}/resources/image/hospital/seoul/lojan.jpg">
+                            <img class="hospital_img" src="${contextPath}/resources/image/hospital/seoul/lojan.jpg">
                         </a>
                     </div>
                     <div class="thumbnail_info">
                       <div class="hospital_info"><a id="hospital_name" href="#">로잔동물의료센터</a></div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/site.png">주소 : 서울 관악구 관악로29길 3</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/phone.png">연락처 : 02-872-7588</div>
-                       <div class="hospital_info"><img class="icon" src="${pageContext.request.contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 20:00</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : 서울 관악구 관악로29길 3</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : 02-872-7588</div>
+                       <div class="hospital_info"><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : 10:00 ~ 20:00</div>
                     </div>
                 </div>
             </div>
@@ -156,8 +156,7 @@
 
 						<!-- 등록하기 버튼  -->
             <div class="row-item">
-                <input class= "btn_class"  id="insertHospital" type="button" value="등록하기">
-
+                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = 'insertForm';">등록하기</button>
             </div>
             
             <!-- 페이징 -->

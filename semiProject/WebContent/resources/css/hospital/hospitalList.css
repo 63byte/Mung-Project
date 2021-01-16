@@ -201,6 +201,10 @@ font-size:13px; margin:0;
    font-size : 17px;
 }
 
+.btn_class:hover{
+	background-color: #17a2b8;
+}
+
 /*----------------------------페이징(부트스트랩)---------------------------------  */
 
 .page-item>a{

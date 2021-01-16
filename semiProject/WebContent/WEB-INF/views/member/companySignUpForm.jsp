@@ -128,13 +128,19 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 /* 이메일 인증 버튼, 우편번호 검색 버튼 */
-.btn{
+.btn_class:hover{
+	background-color: #17a2b8;
+}
+
+.btn_class{
     height : 40px;
     width : 108px;
     padding : 0;
     border : 1px solid  #8bd2d6;
     background-color: #8bd2d6;
     color : #fffefe;
+    cursor: pointer;
+    outline:none;
 }
 
 /* 회원가입 버튼 */
@@ -239,7 +245,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요." required>
                     </div>
                     <div class="display-ib">
-                        <input type="button" class="btn" id="emailBtn" style="height:30px;" value="인증번호 받기">
+                        <button class="btn_class" type="button" id="emailBtn">인증번호 받기</button>
                     </div>
                     <div>
                         <span id="checkEmail" >&nbsp;</span>
@@ -286,7 +292,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 
                 <br>
                 <hr>
-                <h3 style="font-weight:lighter;">업체 정보 기입</h3>
+                <span style="font-size:13px; font-weight:lighter; margin-top:0;">업체 정보 기입<span>
                 <br>
                 
                  <!-- 업체명 입력 -->
@@ -348,7 +354,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="text" name="post" class="form-control postcodify_postcode5 inputTag address">
 						</div>
 						<div class="col-md-3 display-ib">
-							<button type="button" class="btn btn-info" id="postcodify_search_button" >검색</button>
+							<button type="button" class="btn_class btn-info" id="postcodify_search_button" >검색</button>
 						</div>
 					</div>
 
@@ -384,7 +390,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="text" class="inputTag" id="license" name=""  required>
                     </div>
                     <div class="display-ib">
-                        <input type="button" class="btn" id="licenseBtn" value="이미지첨부">
+                        <button type="button" class="btn_class" id="licenseBtn">이미지첨부</button>
                     </div>
                 </div>
 
@@ -392,7 +398,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 
                 
                 <div class="submit">
-                    <input class="btn" id="submitBtn" type="submit" name="" value="회원가입">
+                    <button class="btn_class" id="submitBtn" type="submit">회원가입</button>
                 </div>
             </div>
         </form>
