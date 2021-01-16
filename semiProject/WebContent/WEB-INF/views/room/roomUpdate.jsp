@@ -18,7 +18,7 @@
         <div class="main">
 
             <div class="row-item">
-                <div id="page_name">숙소 등록</div>
+                <div id="page_name">숙소 수정</div>
                 <hr id="hr_tag">
             </div>
 
