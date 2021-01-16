@@ -23,7 +23,7 @@
             </div>
             
             <div class="insert_hospital">
-                <form action="#" method="POST" onsubmit="return hospitalInsertvalidate();">
+                <form action="#" method="POST" onsubmit="return hospitalUpdatevalidate();">
                     
                     <div class="row-item">
                         <div class="label_name">
