@@ -24,7 +24,7 @@
 
 
             <div class="insert_room">
-                <form action="#" method="post" onsubmit="return roomInserValidate();">
+                <form action="#" method="post" onsubmit="return roomUpdateValidate();">
                     
                     <div class="row-item">
                         <div class="label_name">
