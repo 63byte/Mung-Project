@@ -82,6 +82,7 @@
 	align-items: center;
 	font-size: 16px;
 	justify-content: space-between !important;
+	margin-top : -10px;
 }
 
 #nav>ul {
@@ -105,7 +106,7 @@
 
 /* 메뉴에 마우스 오버했을 경우 민트색으로 변경  */
 #nav>ul>li>a:hover {
-	color: #8ad2d5;
+	color: #17a2b8;
 }
 
 /* ------------------------------------------------------ */

@@ -37,7 +37,8 @@ a {
 	padding: 0;
 	background: #8ad2d5;
 	position: relative;
-	background-image: url("${pageContext.request.contextPath}/resources/image/common/cloud.png");
+	background-image:
+		url("${pageContext.request.contextPath}/resources/image/common/cloud.png");
 	background-size: 100%;
 	background-repeat: repeat-x; /* x축 반복 */
 	background-position: center bottom; /* 아래 정렬 */
@@ -79,7 +80,7 @@ a {
         padding: .375rem .75rem;
         border: 1px solid #ced4da;
     } */
-    
+
 /* ------------------------------------------- */
 #nav {
 	height: 56px;
@@ -112,7 +113,7 @@ a {
 
 /* 메뉴에 마우스 오버했을 경우 민트색으로 변경  */
 #nav>ul>li>a:hover {
-	color: #8ad2d5;
+	color: #17a2b8;
 }
 </style>
 </head>
@@ -143,7 +144,9 @@ a {
 	<div id="header">
 		<a href="${contextPath}">
 			<div id="logoDiv">
-				<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" id="logo">
+				<img
+					src="${pageContext.request.contextPath}/resources/image/common/logo.png"
+					id="logo">
 			</div>
 		</a>
 
@@ -183,11 +186,18 @@ a {
 	<div id="nav">
 		<ul>
 			<li><a href="#" class="nav-items" id="nav-home">홈</a></li>
-			<li><a href="${contextPath}/travel/localInfo.do" class="nav-items" id="nav-travel">여행</a></li>
+			<li><a href="${contextPath}/travel/localInfo.do"
+				class="nav-items" id="nav-travel">여행</a></li>
 			<li><a href="#" class="nav-items" id="nav-room">숙소</a></li>
-			<li><a href="${contextPath }/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
+			<li><a href="${contextPath }/hospital/list" class="nav-items"
+				id="nav-animalHospital">동물병원</a></li>
 			<li><a href="#" class="nav-items" id="nav-board">게시판</a></li>
-			<li><a href="${contextPath}/member/myPageNormalChange.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+
+
+				<li><a href="${contextPath}/member/myPageUpdateNormal.do"
+						class="nav-items" id="nav-mypage">마이페이지</a></li>
+
+
 			<li><a href="#" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
 		</ul>
 	</div>

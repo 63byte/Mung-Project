@@ -48,7 +48,8 @@
 	<div class="aside">
 
 		<ul>
-			<li><a href="#" class="aside-items" id="sChange">회원 조회</a></li>
+			<li><a href="#" class="aside-items" id="sChange">내 정보 수정</a></li>
+			
 			<li><a href="#" class="aside-items" id="sLike">비밀번호 변경</a></li>
 			<li><a href="#" class="aside-items" id="sPostcheck">내가 쓴 글
 					조회</a></li>
