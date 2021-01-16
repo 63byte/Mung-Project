@@ -18,7 +18,7 @@
 
             <div class="row-item">
                 <div id="page_name">병원 등록하기</div>
-                <hr style="border: solid 1px orange;">
+                <hr id="hr_tag">
             </div>
             
             <div class="insert_hospital">
