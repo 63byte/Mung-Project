@@ -16,7 +16,7 @@
 
         <!-- 이미지 출력 -->
         <div class="imageArea">
-            <img class="imageArea" src="${pageContext.request.contextPath}/resources/image/hospital/gyeonggido/heartman.jpg">
+            <img class="imageArea" src="${contextPath}/resources/image/hospital/gyeonggido/heartman.jpg">
         </div>
     
         <!-- 동물병원 이름 -->
@@ -27,30 +27,30 @@
         <!-- 조회수/좋아요 -->
         <div class="row-item">
             <div class="viewInfo iconArea">
-                <span><img src="view.png" class="icon"></span>
+                <span><img src="${contextPath}/resources/image/icon/view.png" class="icon"></span>
                 <div class="count">0</div><!-- 최대 999,999 -->
             </div>
             <div class="viewInfo">
-                <button type="button" class="like"><img src="like.png" class="icon"></button>
+                <button type="button" class="like"><img src="${contextPath}/resources/image/icon/like/png" class="icon"></button>
                 <div class="count">0</div><!-- 최대 999,999 -->
             </div>    
         </div>
 
         <!-- 동물병원 주소 -->
         <div class="row-item" >
-            <span><img class="icon" src="/아이콘/site.png"></span>
+            <span><img class="icon" src="${contextPath}/resources/image/icon/site.png"></span>
             <span id="hospitalAddress">동물병원 주소</span>
         </div> 
     
         <!-- 동물병원 전화번호 -->
         <div class="row-item" >
-            <span><img class="icon" src="/아이콘/phone.png"></span>
+            <span><img class="icon" src="${contextPath}/resources/image/icon/phone.png"></span>
             <span id="hospitalPhone">전화번호 : </span>
         </div> 
 
         <!-- 동물병원 운영시간 -->
         <div class="row-item" >
-            <span><img class="icon" src="/아이콘/clock.png"></span>
+            <span><img class="icon" src="${contextPath}/resources/image/icon/clock.png"></span>
             <span id="hospitalHours">운영시간 : 오픈  ~ 마감</span>
         </div> 
 
@@ -60,7 +60,7 @@
 
             <div class="facility">
                 <div class="icon_area">
-                    <img class="facility_icon" src="/아이콘/WiFi.png">
+                    <img class="facility_icon" src="${contextPath}/resources/image/icon/WiFi.png">
                 </div>
                 <div class="text_area"> 
                     WiFi
@@ -68,7 +68,7 @@
             </div>
             <div class="facility">
                 <div class="icon_area">
-                    <img class="facility_icon" src="/아이콘/park.png">
+                    <img class="facility_icon" src="${contextPath}/resources/image/icon/park.png">
                 </div>
                 <div class="text_area"> 
                     주차
@@ -76,7 +76,7 @@
             </div>
             <div class="facility">
                 <div class="icon_area">
-                    <img class="facility_icon" src="/아이콘/appointment.png">
+                    <img class="facility_icon" src="${contextPath}/resources/image/icon/appointment.png">
                 </div>
                 <div class="text_area"> 
                     예약
@@ -84,7 +84,7 @@
             </div>
             <div class="facility">
                 <div class="icon_area">
-                    <img class="facility_icon" src="/아이콘/business-trip.png">
+                    <img class="facility_icon" src="${contextPath}/resources/image/icon/business-trip.png">
                 </div>
                 <div class="text_area"> 
                     출장
@@ -92,7 +92,7 @@
             </div>
             <div class="facility">
                 <div class="icon_area">
-                    <img class="facility_icon" src="/아이콘/24hour.png">
+                    <img class="facility_icon" src="${contextPath}/resources/image/icon/24hour.png">
                 </div>
                 <div class="text_area"> 
                     24시
@@ -129,8 +129,8 @@
         <!-- 관리자만 보이는 버튼 -->
         <div class="row-item" style="margin-top:50px;">
             <div class="btn_item">
-                <input class= "btn_class"  id="updateBtn" type="button" value="수정">
-                <input class= "btn_class"  id="deleteBtn" type="button" value="삭제">
+                <button class= "btn_class"  id="updateBtn" type="button">수정</button>
+                <button class= "btn_class"  id="deleteBtn" type="button">삭제</button>
             </div>
         </div>
 

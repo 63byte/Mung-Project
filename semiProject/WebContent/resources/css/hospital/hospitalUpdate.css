@@ -152,7 +152,7 @@ margin: 0;
 
 
 
-/* 등록 취소 버튼 */
+/* 수정 취소 버튼 */
 .btn_class{
     border-radius: 5px;
     color: #fff;
@@ -165,5 +165,9 @@ margin: 0;
 }
 .btn_item{
     margin-left: 235px;
+}
+
+.btn_class:hover{
+	background-color: #17a2b8;
 }
 

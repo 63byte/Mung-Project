@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>동물병원 등록하기</title>
 <!-- css연결  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hospital/hospitalInsert.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalInsert.css" type="text/css">
 </head>
 <body>
 
@@ -151,8 +151,8 @@
                     <!-- 등록 / 취소 버튼  -->
                     <div class="row-item">
                         <div class="btn_item">
-                            <input class= "btn_class"  id="insertBtn" type="submit" value="등록">
-                            <input class= "btn_class"  id="resetBtn" type="reset" value="취소">
+                            <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
+                            <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
                         </div>
                     </div>
                 </form>

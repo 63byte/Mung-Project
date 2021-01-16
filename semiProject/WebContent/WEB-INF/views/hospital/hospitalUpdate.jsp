@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>동물병원 수정</title>
 <!-- css연결  -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/hospital/hospitalUpdate.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalUpdate.css" type="text/css">
 </head>
 <body>
 
@@ -149,7 +149,7 @@
                     </div>
 
 
-                    <!-- 등록 / 취소 버튼  -->
+                    <!-- 수정 / 취소 버튼  -->
                     <div class="row-item">
                         <div class="btn_item">
                             <input class= "btn_class"  id="insertBtn" type="submit" value="수정">
