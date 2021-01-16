@@ -1,4 +1,6 @@
 @charset "UTF-8";
+
+@charset "UTF-8";
 *{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
@@ -45,8 +47,6 @@ margin:auto;
 width: 360px;
 border: solid 1px orange;
 }
-
-
 /* 병원 등록하기 */
 #page_name{
     text-align : center;
@@ -139,7 +139,7 @@ margin: 0;
     border : 1px solid  #8bd2d6;
     background-color: #8bd2d6;
     cursor: pointer;
-	outline:none;
+	  outline:none;
 }
 
 /* 파일경로 부분 스타일 */

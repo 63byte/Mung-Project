@@ -11,8 +11,6 @@ public class MemberService {
 	private MemberDAO dao = new MemberDAO();
 
 	
-	
-	
 	/** 회원가입용 Service
 	 * @param member
 	 * @return result
@@ -31,8 +29,6 @@ public class MemberService {
 	}
 
 
-
-
 	/** 로그인용 Service
 	 * @param member
 	 * @return loginMember
@@ -46,5 +42,7 @@ public class MemberService {
 		close(conn);
 		return loginMember;
 	}
-
+	
+	
+	
 }

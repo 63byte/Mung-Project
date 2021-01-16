@@ -15,7 +15,17 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- Bootstrap core JS -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+<!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">
+</script>
 
 <style>
 * {
@@ -105,7 +115,7 @@
 
 /* 메뉴에 마우스 오버했을 경우 민트색으로 변경  */
 #nav>ul>li>a:hover {
-	color: #8ad2d5;
+	color: #17a2b8;
 }
 
 /* ------------------------------------------------------ */
@@ -162,12 +172,19 @@ a:hover{
 
 	<div id="nav">
        <ul>
-           <li><a href="#" class="nav-items" id="nav-home">홈</a></li>
+
+           <li><a href="${contextPath}" class="nav-items" id="nav-home">홈</a></li>
+           
            <li><a href="${contextPath}/travel/localList.do" class="nav-items" id="nav-travel">여행</a></li>
+           
            <li><a href="#" class="nav-items" id="nav-room">숙소</a></li>
+
            <li><a href="${contextPath}/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
+           
            <li><a href="#" class="nav-items" id="nav-board">게시판</a></li>
+           
            <li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
+           
            <li><a href="#" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
        </ul>
 	</div>
