@@ -22,7 +22,7 @@
 	font-size: 25px;
 }
 
-hr {
+.memberChange > hr {
 	border: 1px solid orange;
 }
 
