@@ -189,7 +189,7 @@ a {
 			<li><a href="${contextPath}/travel/localList.do" class="nav-items" id="nav-travel">여행</a></li>
 			<li><a href="${contextPath }/room/list" class="nav-items" id="nav-room">숙소</a></li>
 			<li><a href="${contextPath }/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
-			<li><a href="#" class="nav-items" id="nav-board">게시판</a></li>
+			<li><a href="${contextPath}/freeBoard/freeList.do" class="nav-items" id="nav-board">게시판</a></li>
 				<li><a href="${contextPath}/member/myPageUpdateNormal.do"
 						class="nav-items" id="nav-mypage">마이페이지</a></li>
 
