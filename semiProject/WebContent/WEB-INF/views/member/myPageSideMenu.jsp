@@ -52,8 +52,7 @@
 			<li><a href="${contextPath}/member/myPageUpdateNormal.do" class="aside-items" id="changeMy">내 정보 수정</a></li>
 			
 			<li><a href="${contextPath}/member/myPageUpdatePw.do" class="aside-items" id="changePw">비밀번호 변경</a></li>
-			<li><a href="#" class="aside-items" id="postCheck">내가 쓴 글
-					조회</a></li>
+			<li><a href="${contextPath}/member/myPageInquiryPost.do" class="aside-items" id="postCheck">내가 쓴 글 조회</a></li>
 			<li><a href="#" class="aside-items" id="withdrawal">회원 탈퇴</a></li>
 		</ul>
 	</div>
