@@ -138,6 +138,11 @@ div {
     width : 70px;
     height: 40px;
 }
+
+.btn_class:hover{
+	background-color: #17a2b8;
+}
+
 .btn_item{
     margin-left: 955px;
 }
