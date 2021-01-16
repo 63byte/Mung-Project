@@ -22,15 +22,17 @@ WHERE RNUM BETWEEN ? AND ?
 
 <!-- 게시글 상세 조회 -->
 <entry key="selectBoard">
-SELECT * FROM FV_BOARD
-WHERE FREE_BOARD_NO = ?
-AND FREE_BOARD_DELETEFL = 'N'
+SELECT * FROM TV_BOARD
+WHERE TRIP_BOARD_NO = ?
+AND TRIP_BOARD_DELETEFL = 'N'
 </entry>
 
+
+<!-- 조회수 증가 -->
 <entry key="increaseReadCount">
-UPDATE FREE_BOARD SET
-FREE_READ_COUNT = FREE_READ_COUNT + 1
-WHERE  FREE_BOARD_NO = ?
+UPDATE TRIP_REVIEW SET
+TRIP_READ_COUNT = TRIP_READ_COUNT + 1
+WHERE  TRIP_BOARD_NO = ?
 </entry>
 
 <entry key="selectNextNo">

@@ -142,12 +142,15 @@
 			<c:if test="${!empty tList }">
 				<c:forEach var="board"  items="${tList}">
 				<div class="col-md-3">
-					<div class="card" style="width: 11rem;">
-					  <img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
+
+						<div class="card" style="width: 11rem;">
+					  	<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
 						  <div class="card-body">
-						    <p class="card-text">${board.boardTitle} [${board.readCount}] <br> 작성자 : ${board.memberId}<br> ${board.boardCreateDate }</p>
+						  		<p class="card-text">${board.boardNo}</p>
+						    	<p class="card-text">${board.boardTitle} [${board.readCount}] <br> 작성자 : ${board.memberId}<br> ${board.boardCreateDate }</p>
 						  </div>
-					</div>
+						</div>
+					
 				</div>
 				</c:forEach>
 			</c:if>
@@ -167,6 +170,18 @@
 				</c:otherwise>
 				
 			</c:choose>
+			
+			<c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}"/>
+			<c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr}"/>
+			
+			
+			<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10 }" integerOnly="true" />
+			<fmt:parseNumber var="prev" value="${c1 * 10 }" integerOnly="true" />
+			<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}" />
+			
+			<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) /10 }" integerOnly="true" />
+			<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
+			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
 				
 				
 			<div class="container my-5">
@@ -241,10 +256,16 @@
 
 
 <script>
-	/* $(".card-body").on("mouseenter", function(){
-		$(this).css("backgroundColor", "red");
-		
-	}); */
+$(".card").on("click", function(){
+	
+	// 게시글 번호 얻어오기
+	var boardNo = $(this).children().children().eq(0).text();
+	
+	var url = "${contextPath}/tripBoard/tripView.do?cp=${pInfo.currentPage}&no=" + boardNo + "${searchStr}";
+	
+	location.href = url;
+	
+});
 </script>
 
 </body>

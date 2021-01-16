@@ -109,6 +109,68 @@ public class TripBoardDAO {
 		
 		
 	}
+
+
+	/** 게시글 상세조회 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public TripBoard selectBoard(Connection conn, int boardNo) throws Exception{
+		TripBoard board = null;
+		
+		String query = prop.getProperty("selectBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new TripBoard();
+				board.setBoardNo( rset.getInt("TRIP_BOARD_NO") );
+				board.setBoardTitle( rset.getString("TRIP_BOARD_TITLE") );
+				board.setBoardContent( rset.getString("TRIP_BOARD_CONTENT") );
+				board.setMemberId( rset.getString("MEM_ID") );
+				board.setReadCount( rset.getInt("TRIP_READ_COUNT") );
+				board.setBoardCreateDate( rset.getTimestamp("TRIP_BOARD_DT") );
+				
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return board;
+	}
+
+
+	/** 조회수 증가 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	
