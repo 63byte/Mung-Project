@@ -169,9 +169,9 @@ html, body {
 		</a>
 
 		<div id="btnDiv">
-			<button id="idBtn">아이디 찾기</button>
+			<a href="#"><button id="idBtn">아이디 찾기</button></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button id="pwBtn">비밀번호 찾기</button>
+			<a href="#"><button id="pwBtn">비밀번호 찾기</button></a>
 		</div>
 
 		<div id="findWrapper">

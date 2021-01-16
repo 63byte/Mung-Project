@@ -192,6 +192,9 @@ public class MemberController extends HttpServlet {
 			
 			}	
 			
+			
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			path = "/WEB-INF/views/common/errorPage.jsp";

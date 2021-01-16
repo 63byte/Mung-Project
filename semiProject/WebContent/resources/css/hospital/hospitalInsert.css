@@ -40,6 +40,13 @@ div {
     padding-bottom :3%;
 }
 
+#hr_tag{
+margin:auto;
+width: 360px;
+border: solid 1px orange;
+}
+
+
 /* 병원 등록하기 */
 #page_name{
     text-align : center;

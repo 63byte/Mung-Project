@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>지역정보</title>
 
 <!-- 구글폰트 사용 -->
 <link
@@ -31,9 +32,6 @@
 	margin: 0;
 	/* border : 1px solid black;  */
 }
-
-
-
 
 div {
 	/* border : 1px solid black;  */
@@ -140,41 +138,62 @@ div {
 	/* border:1px solid blue; */
 }
 
+/* ------------------------ 글쓰기버튼 ---------------------------------- */
 
-/* 페이징 처리 */
+.row-item{
+    width:100%;
+    box-sizing: border-box;
+}
+
+/* 버튼 */
+.btn_class{
+    border : 1px solid  #8bd2d6;
+    background-color: #8bd2d6;
+    cursor: pointer;
+	outline:none;
+}
+
+#insertLocal {
+   width : 100px;
+   height: 40px;
+   margin: 40px 0 50px 89%;
+   line-height: 20px;
+   border-radius: 5px;
+   color: #fff;
+   font-size : 17px;
+}
+
+
+/*---------------------------- 페이징(부트스트랩) ---------------------------------  */
+
 .page-item>a{
  color: black;
  text-decoration: none; 
 }
+
+.page-item>a:hover{
+	color: hotpink;
+}
+
 </style>
 </head>
 
-
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>지역정보</title>
-<link rel="stylesheet" href="join.css" type="text/css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-</head>
 <body>
 
 	<!-- header 연결 -->
 	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
 	<div id="container">
+		<!-- --------------------- 사이드 --------------------- -->
 		<div class="aside">
 
 			<ul>
-				<li><a href="#" class="aside-items" id="aside-localInfo">지역정보</a></li>
-				<li><a href="#" class="aside-items" id="aside-touristSpot">관광지</a></li>
+				<li><a href="${contextPath}/travel/localList.do" class="aside-items" id="aside-localInfo">지역정보</a></li>
+				<li><a href="${contextPath}/travel/sightsList.do" class="aside-items" id="aside-touristSpot">관광지</a></li>
 			</ul>
 		</div>
-
+		
+		<!-- --------------------- 메인Contents --------------------- -->
 
 		<div class="main">
 
@@ -220,30 +239,41 @@ div {
 				</div>
 			</div>
 
+			<!-- 등록하기 버튼  -->
+		    <div class="row-item">
+		         <button type="button" class= "btn_class" id="insertLocal"
+		         	onclick="location.href = '${contextPath}/travel/localInsert.do'"
+		         	 >
+		         	등록하기
+		         </button>
+		    </div>
+		
+		
+			<!-- 페이징 -->
+			<div class="paging">
+				<nav aria-label="Page navigation example">
+					<ul id="pagingBtn"
+						class="pagination pagination-sm justify-content-center">
+						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">4</a></li>
+						<li class="page-item"><a class="page-link" href="#">5</a></li>
+						<li class="page-item"><a class="page-link" href="#">6</a></li>
+						<li class="page-item"><a class="page-link" href="#">7</a></li>
+						<li class="page-item"><a class="page-link" href="#">8</a></li>
+						<li class="page-item"><a class="page-link" href="#">9</a></li>
+						<li class="page-item"><a class="page-link" href="#">10</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+			
 		</div>
 	</div>
 
 
-	<!-- 페이징 -->
-	<div class="paging">
-		<nav aria-label="Page navigation example">
-			<ul id="pagingBtn"
-				class="pagination pagination-sm justify-content-center">
-				<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">4</a></li>
-				<li class="page-item"><a class="page-link" href="#">5</a></li>
-				<li class="page-item"><a class="page-link" href="#">6</a></li>
-				<li class="page-item"><a class="page-link" href="#">7</a></li>
-				<li class="page-item"><a class="page-link" href="#">8</a></li>
-				<li class="page-item"><a class="page-link" href="#">9</a></li>
-				<li class="page-item"><a class="page-link" href="#">10</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</nav>
-	</div>
 
 
 
