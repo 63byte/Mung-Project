@@ -46,6 +46,11 @@
     box-sizing: border-box;
 }
 
+.memberJoin > hr {
+	border : 1px solid orange;
+	margin-top : -10px;
+}
+
 /* 레이블 태그 class명*/
 .lb{
     font-weight : bold;
@@ -343,7 +348,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="text" name="post" class="form-control postcodify_postcode5 inputTag address">
 						</div>
 						<div class="col-md-3 display-ib">
-							<button type="button" class="btn btn-primary" id="postcodify_search_button" >검색</button>
+							<button type="button" class="btn btn-info" id="postcodify_search_button" >검색</button>
 						</div>
 					</div>
 
