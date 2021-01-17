@@ -49,7 +49,7 @@
 
 		<ul>
 			<li><a href="${contextPath}/manager/managerNormal.do" class="aside-items" id="customer">회원 조회</a></li>
-			<li><a href="#" class="aside-items" id="additional">업체 등록 관리</a></li>
-			<li><a href="#" class="aside-items" id="report">신고 관리</a></li>
+			<li><a href="${contextPath}/manager/managerAdd.do" class="aside-items" id="additional">숙소 등록 관리</a></li>
+			<li><a href="${contextPath}/manager/managerReport.do" class="aside-items" id="report">신고 관리</a></li>
 		</ul>
 	</div>

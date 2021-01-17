@@ -183,7 +183,36 @@ a:hover{
            
            <li><a href="${contextPath}/freeBoard/freeList.do" class="nav-items" id="nav-board">게시판</a></li>
            
-           <li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
+           
+           <c:choose>
+				<%-- 로그인이 되어있지 않을 때 == session에 loginMember라는 값이 없을 때 --%>
+				<c:when test="${empty sessionScope.loginMember}">
+					<li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
+					<script>
+						// 로그인이 안되있을 경우 마이페이지 클릭 시 경고창
+						var loginMemberId = "${loginMember.memberId}";
+						$("#nav-mypage").on("click", function() {
+								alert("로그인 후 이용해 주세요.");
+						});
+					</script>
+				</c:when>
+				
+				<%-- 일반 회원일 때 --%>
+				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'G') }">
+					<li><a href="${contextPath}/member/myPageUpdateNormal.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+				</c:when>
+				
+				<%-- 업체 회원일 때 --%>
+				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'C') }">
+					<li><a href="${contextPath}/member/myPageUpdateCompany.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+				</c:when>
+				
+				<%-- 관리자일 때 --%>
+				<c:otherwise>
+					<li><a href="${contextPath}/manager/managerNormal.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+				</c:otherwise>
+			</c:choose>
+           
            
            <li><a href="#" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
        </ul>
