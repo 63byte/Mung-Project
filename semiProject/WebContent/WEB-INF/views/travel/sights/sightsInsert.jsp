@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>지역정보 글쓰기</title>
+<title>관광지 글쓰기</title>
 <link rel="stylesheet" href="join.css" type="text/css">
 
 <!-- 구글 폰트 -->
@@ -152,7 +152,7 @@ div {
 		<div class="main">
 
 			<br>
-			<h3>지역정보 글쓰기</h3>
+			<h3>관광지 글쓰기</h3>
 			<hr>
 
 			<form>
@@ -181,12 +181,21 @@ div {
 				</div>
 
 				<div class="form-group row">
-					<label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
+					<label for="inputTitle" class="col-sm-2 col-form-label">장소</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="inputTitle"
-							placeholder="제목을 입력하세요">
+							placeholder="장소명을 입력하세요">
 					</div>
 				</div>
+
+				<div class="form-group row">
+					<label for="inputTitle" class="col-sm-2 col-form-label">주소</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="inputTitle"
+							placeholder="주소를 입력하세요">
+					</div>
+				</div>
+				
 
 				<div class="form-group row">
 					<label for="file" class="col-sm-2 col-form-label">이미지 업로드</label>
@@ -197,9 +206,20 @@ div {
 							<label for="file">업로드</label> <input type="file" id="file">
 							<input class="file-upload-name" value="파일경로..">
 						</div>
-
 					</div>
 				</div>
+				
+				<div class="form-group row">
+					<label for="inputTitle" class="col-sm-2 col-form-label">동반견종</label>
+					<div class="col-sm-10">
+				        <div class="input_tag">
+                           <input type="checkbox" class="dog" name="" value="small">소형견
+                           <input type="checkbox" class="dog" name="" value="medium">중형견
+                           <input type="checkbox" class="dog" name="" value="large">대형견
+                        </div>
+					</div>
+				</div>
+				
 
 				<div class="form-group row">
 					<label for="writingDate" class="col-sm-2 col-form-label">작성일</label>
