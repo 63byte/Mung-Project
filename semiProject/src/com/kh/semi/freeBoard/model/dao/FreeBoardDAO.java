@@ -255,10 +255,10 @@ public class FreeBoardDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, at.getParentBoardNo());
-			pstmt.setString(2, at.getFileName());
-			pstmt.setString(3, at.getFilePath());
-			pstmt.setInt(4, at.getFileLevel());
+			pstmt.setString(1, at.getFileName());
+			pstmt.setString(2, at.getFilePath());
+			pstmt.setInt(3, at.getFileLevel());
+			pstmt.setInt(4, at.getParentBoardNo());
 			
 			result = pstmt.executeUpdate();
 			
