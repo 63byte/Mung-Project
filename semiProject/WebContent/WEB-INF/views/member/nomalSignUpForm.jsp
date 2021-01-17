@@ -162,7 +162,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
         <br>
 
         
-        <form action="#" method="POST" onsubmit="return memberJoinvalidate();">
+        <form action="signUp.do" method="POST" onsubmit="return memberJoinvalidate();">
             <div class="memberJoin">
                 <hr>
 
@@ -188,7 +188,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="password" class="inputTag"  id="pwd1" name=""  required>
                     </div>     
                     <div>
-                        <span id="chechPwd1" >&nbsp;</span>
+                        <span id="checkPwd1" >&nbsp;</span>
                     </div>  
                 </div>
 
@@ -201,7 +201,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="password" class="inputTag"  id="pwd2" name=""   required>
                     </div>
                     <div>
-                        <span id="chechPwd2" >&nbsp;</span>
+                        <span id="checkPwd2" >&nbsp;</span>
                     </div>  
                 </div>
                 
@@ -291,6 +291,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 </div>
             </div>
         </form>
+        
+        
+        <script src="${contextPath}/resources/js/semi_member.js"></script>
     </div>
 
      <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

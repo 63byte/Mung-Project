@@ -42,6 +42,23 @@ public class MemberService {
 		close(conn);
 		return loginMember;
 	}
+
+
+	/** 아이디 중복검사용 Service
+	 * @param id
+	 * @return result
+	 * @throws Exception
+	 */
+	public int idDupCheck(String userId) throws Exception{
+		
+		Connection conn = getConnection();
+		
+		int result = dao.idDupCheck(conn, userId);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	
