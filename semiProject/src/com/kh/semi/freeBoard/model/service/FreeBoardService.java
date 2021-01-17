@@ -378,6 +378,7 @@ public class FreeBoardService {
 			
 			if(result > 0)		commit(conn);
 			else				rollback(conn);
+			close(conn);
 			
 			return result;
 		}
