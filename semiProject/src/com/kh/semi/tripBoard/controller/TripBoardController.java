@@ -58,6 +58,37 @@ public class TripBoardController extends HttpServlet {
 				view.forward(request, response);
 			}
 			
+			// -------------- 여행 후기 게시글 상세조회 Controller -----------------------
+			else if(command.equals("/tripView.do")) {
+				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
+				
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+				
+				TripBoard board = service.selectBoard(boardNo);
+				
+				if(board != null) {
+					path = "/WEB-INF/views/tripBoard/tripView.jsp";
+					request.setAttribute("board", board);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+					
+					// ----------------파일 등록 추가해줘야 됨-------------------------------------
+
+				}else {
+					
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "게시글 상세조회 실패");
+					response.sendRedirect("tripList.do?cp=1");
+				}
+				
+				
+			}
+			
+			
+			
+			
+			
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			path = "/WEB-INF/views/common/errorPage.jsp";

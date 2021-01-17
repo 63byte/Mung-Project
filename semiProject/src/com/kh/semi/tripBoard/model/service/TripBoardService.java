@@ -50,4 +50,36 @@ public class TripBoardService {
 		return tList;
 	}
 
+
+
+	/** 게시글 상세조회 Service
+	 * @param boardNo
+	 * @return 
+	 * @throws Exception
+	 */
+	public TripBoard selectBoard(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		TripBoard board = dao.selectBoard(conn, boardNo);
+		
+		if(board != null) {
+			int result = dao.increaseReadCount(conn, boardNo);
+			
+			if(result > 0) {		
+				commit(conn);
+				
+				board.setReadCount(board.getReadCount() + 1);
+				
+			}
+			else {
+				rollback(conn);
+			}
+			
+		}
+		
+		close(conn);
+		
+		return board;
+	}
+
 }

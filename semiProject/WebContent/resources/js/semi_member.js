@@ -12,7 +12,7 @@ var validateCheck = {
 
 // 아이디 유효성 검사
 // 첫 글자는 영어 소문자, 나머지 글자는 영어 대,소문자 + 숫자, 총 6~12글자
- $("#userId").on("input",function(){
+$("#userId").on("input",function(){
     var regExp = /^[a-z][a-zA-Z\d]{5,11}$/;
 
     var value = $("#userId").val();
@@ -22,15 +22,14 @@ var validateCheck = {
         validateCheck.id = false;   
 
     }else{
-        $("#checkId").text("유효한 아이디 형식입니다.")
-                         .css("color", "green");
-    }
-});
-/*
+        // $("#checkId").text("유효한 아이디 형식입니다.")
+        //                 .css("color", "green");
+
+
         // ajax를 이용한 실시간 아이디 중복 검사
         $.ajax({
             url : "idDupCheck.do",
-            data : {"id" : value},
+            data : {"userId" : value},
             type : "POST",
             success : function(result){
             // $("#checkId").text("유효한 아이디 형식입니다.").css("color", "green");
@@ -42,7 +41,7 @@ var validateCheck = {
             }else{
                 $("#checkId").text("이미 사용중인 아이디입니다.")
                 .css("color", "red");
-                validateCheck.id = flase;
+                validateCheck.id = false;
             }
 
             },
@@ -57,7 +56,7 @@ var validateCheck = {
 
     // 아이디가 입력되는 경우 hidden 태그의 값을 false로 변경
     // $("#idDup").val("false");
-}); */
+});
 
 
 
@@ -101,7 +100,7 @@ $("#pwd1, #pwd2").on("input", function () {
     }
     // 비밀번호가 유효하지 않은 상태에서 비밀번호 확인 작성 시
     if (!validateCheck.pwd1 && v2.length > 0) {
-        swal("유효한 비밀번호를 먼저 작성해주세요.");
+        alert("유효한 비밀번호를 먼저 작성해주세요.");
         $("#pwd2").val(""); // 비밀번호 확인에 입력한 값 삭제
         $("#pwd1").focus();
     } else {
@@ -192,7 +191,7 @@ function validate(){
                 case "email" : msg="이메일이"; break;
             }
 
-            swal(msg + " 유효하지 않습니다.");
+            alert(msg + " 유효하지 않습니다.");
 
             $("#"+key).focus();
 

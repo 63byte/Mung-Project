@@ -52,6 +52,13 @@ public class RoomController extends HttpServlet {
 				
 			}
 			
+			// 숙소 등록 화면 전환 **************************************
+			else if(command.contentEquals("/insertForm")) {
+				path = "/WEB-INF/views/room/roomInsert.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
 		}catch(Exception e) {
 			
 		}

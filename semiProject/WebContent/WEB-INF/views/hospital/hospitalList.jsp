@@ -154,9 +154,9 @@
 
 
 
-						<!-- 등록하기 버튼  -->
+			<!-- 등록하기 버튼  -->
             <div class="row-item">
-                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = 'insertForm';">등록하기</button>
+                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = '${contextPath}/hospital/insertForm'">등록하기</button>
             </div>
             
             <!-- 페이징 -->
