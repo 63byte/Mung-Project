@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,9 @@
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 <!-- 동물병원 등록하기 -->
+
+
+
     <div class="wrapper">
 
         <div class="main">
@@ -22,7 +26,7 @@
             </div>
             
             <div class="insert_hospital">
-                <form action="${contextPath }/hospital/insert.do" method="POST" 
+                <form action="${contextPath }/hospital/insert.do" method="post" 
                       enctype="multipart/form-data"  role="form" onsubmit="return hospitalInsertvalidate();">
                     
                     <div class="row-item">
@@ -238,7 +242,7 @@ $(".phone").on("input",function(){
 	if ($(".phone").val().length >4){
 		$(this).val()($(this).val().slice(0,4));
 	}
-}
+});
 
 
 

@@ -122,6 +122,10 @@ margin: 0;
 	height: 100px;
 }
 
+.hospitalArea:hover{
+	cursor: pointer;
+}
+
 .imgarea{
 	width: 65px;
 	display:inline-block;
