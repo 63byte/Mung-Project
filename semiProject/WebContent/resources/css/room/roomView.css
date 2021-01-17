@@ -1,0 +1,148 @@
+@charset "UTF-8";
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    /* 굵기 지정(100, 300, 400, 500, 700) */
+    font-size: 16px;
+    color: #212529;
+    box-sizing: border-box;
+    margin: 0;
+    /* border : 1px solid black;  */
+
+}
+
+div {
+    /* border : 1px solid black;  */
+    box-sizing: border-box;
+}
+
+.wrapper{
+    width:1100px;
+    margin: 0 auto;
+    background-color: rgb(248, 248, 248);   
+    /* border : 1px solid sienna; */
+    
+}
+
+.row-item{
+    width:100%;
+    box-sizing: border-box;
+    /* border : 1px solid yellow; */
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+
+/* 이미지 */
+.imageArea{
+    width:100%;
+    height: 400px;
+    text-align : center;
+}
+
+
+/* 숙소 이름 */
+#roomName{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;;
+}
+
+.viewInfo{
+    display: inline-block;
+}
+
+.iconArea{
+    margin-left: 935px;
+}
+
+.icon {
+    width:20px;
+    height:20px;
+    vertical-align: -4px;
+    margin-right:5px;
+
+}
+
+.count{
+    display: inline-block;
+    width:50px;
+    font-size: 13px;;
+}
+
+
+
+
+
+/* 시설 출력 */
+.facility{
+    width:50px;
+    height:70px;
+    display:inline-block;
+    margin: 5px 20px 5px 0;
+
+}
+
+.icon_area{
+    width: 100%;
+    height: 50px;
+    vertical-align:center;
+}
+
+.facility_icon{
+    width :100%;
+    height:100%;
+}
+
+.text_area{
+    height:20px;
+    font-size:11px;
+    text-align: center;
+}
+
+
+
+/* 지도 API */
+.mapAPI {
+    width:100%;
+    height: 300px;
+    text-align : center;
+    background-color: gray;
+}
+
+
+
+/* 버튼 */
+/* 좋아요버튼 */
+.like{
+    width:25px;
+    background-color: rgb(248, 248, 248); 
+    cursor: pointer;
+    outline:none;
+    border:none;
+}
+
+
+
+/* 등록 취소 버튼 */
+.btn_class{
+    border-radius: 5px;
+    color: #fff;
+    border : 1px solid  #8bd2d6;
+    background-color: #8bd2d6;
+    cursor: pointer;
+    outline:none;
+    width : 70px;
+    height: 40px;
+}
+
+
+
+.btn_item{
+    margin-left: 955px;
+}
+
+.btn_class:hover{
+	background-color: #17a2b8;
+}

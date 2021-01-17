@@ -7,7 +7,7 @@ public class Hospital {
 	private String location2;
 	private String phone;
 	private String openingTime;
-	private String closinTime;
+	private String closingTime;
 	private String hospInfo;
 	private int viewCount;
 	private int like;
@@ -18,20 +18,20 @@ public class Hospital {
 	
 	
 //	조회화면 용 생성자
-	public Hospital(String hospNm, String location2, String phone, String openingTime, String closinTime) {
+	public Hospital(String hospNm, String location2, String phone, String openingTime, String closingTime) {
 		super();
 		this.hospNm = hospNm;
 		this.location2 = location2;
 		this.phone = phone;
 		this.openingTime = openingTime;
-		this.closinTime = closinTime;
+		this.closingTime = closingTime;
 	}
 	
 
 	
 //	전체 매개변수 생성자
 	public Hospital(int hospNo, String hospNm, String location, String location2, String phone, String openingTime,
-			String closinTime, String hospInfo, int viewCount, int like, char hospDelFl, int memNo) {
+			String closingTime, String hospInfo, int viewCount, int like, char hospDelFl, int memNo) {
 		super();
 		this.hospNo = hospNo;
 		this.hospNm = hospNm;
@@ -39,7 +39,7 @@ public class Hospital {
 		this.location2 = location2;
 		this.phone = phone;
 		this.openingTime = openingTime;
-		this.closinTime = closinTime;
+		this.closingTime = closingTime;
 		this.hospInfo = hospInfo;
 		this.viewCount = viewCount;
 		this.like = like;
@@ -111,13 +111,13 @@ public class Hospital {
 	}
 
 
-	public String getClosinTime() {
-		return closinTime;
+	public String getClosingTime() {
+		return closingTime;
 	}
 
 
-	public void setClosinTime(String closinTime) {
-		this.closinTime = closinTime;
+	public void setClosingTime(String closingTime) {
+		this.closingTime = closingTime;
 	}
 
 
@@ -174,7 +174,7 @@ public class Hospital {
 	@Override
 	public String toString() {
 		return "Hospital [hospNo=" + hospNo + ", hospNm=" + hospNm + ", location=" + location + ", location2="
-				+ location2 + ", phone=" + phone + ", openingTime=" + openingTime + ", closinTime=" + closinTime
+				+ location2 + ", phone=" + phone + ", openingTime=" + openingTime + ", closingTime=" + closingTime
 				+ ", hospInfo=" + hospInfo + ", viewCount=" + viewCount + ", like=" + like + ", hospDelFl=" + hospDelFl
 				+ ", memNo=" + memNo + "]";
 	}
