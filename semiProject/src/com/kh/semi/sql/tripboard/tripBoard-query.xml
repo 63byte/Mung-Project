@@ -36,7 +36,7 @@ WHERE  TRIP_BOARD_NO = ?
 </entry>
 
 <entry key="selectNextNo">
-SELECT SEQ_FBN.NEXTVAL FROM DUAL
+SELECT SEQ_TBN.NEXTVAL FROM DUAL
 </entry>
 
 <entry key="insertBoard">
@@ -49,7 +49,7 @@ VALUES(?, ?, ?, ?)
 <!-- 파일 정보 삽입 -->
 <entry key="insertAttachment">
 INSERT INTO FREE_BOARD_IMAGE
-VALUES(SEQ_FFE.NEXTVAL, ?, ?, ?, ?)
+VALUES(SEQ_TFE.NEXTVAL, ?, ?, ?, ?)
 </entry>
 
 
