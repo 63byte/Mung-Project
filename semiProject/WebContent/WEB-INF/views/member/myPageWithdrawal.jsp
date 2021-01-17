@@ -189,7 +189,7 @@
 			</div>
 	</div>
 
-
+	<script src="${contextPath}/resources/js/semi_member.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
