@@ -32,7 +32,6 @@ public class HospitalDAO {
 	}
 	
 	
-	
 
 	/** 전체 동물병원 수 반환 DAO
 	 * @param conn

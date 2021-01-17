@@ -15,7 +15,6 @@ public class HospitalService {
 	private HospitalDAO dao = new HospitalDAO();
 	
 	
-	
 
 	/** 페이징 처리를 위한 값 계산 Service
 	 * @param cp

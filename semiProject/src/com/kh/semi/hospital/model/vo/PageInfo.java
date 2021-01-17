@@ -130,7 +130,6 @@ public class PageInfo { // 페이징 처리를 위한 값을 저장할  객체
 		if(maxPage<=endPage) {
 			endPage = maxPage;
 		}
-		
 	}
 
 }
