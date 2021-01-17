@@ -120,6 +120,66 @@
 					</div>
 				</div>
 
+				
+				<div class="panel panel-default">
+
+							<div class="panel-body">
+								<div class="form-group pull-left">
+									<label class="control-label"> 회원 탈퇴 약관 </label>
+									<div class="col-xs-12">
+										<textarea class="form-control" readonly rows="10" cols="100">
+제1조
+이 약관은 샘플 약관입니다.
+
+① 약관 내용 1
+
+② 약관 내용 2
+
+③ 약관 내용 3
+
+④ 약관 내용 4
+
+
+제2조
+이 약관은 샘플 약관입니다.
+
+① 약관 내용 1
+
+② 약관 내용 2
+
+③ 약관 내용 3
+
+④ 약관 내용 4
+</textarea>
+									</div>
+									<div class="checkbox pull-right">
+										<div class="custom-checkbox">
+											<div class="form-check">
+												<input type="checkbox" name="agree" id="agree"
+													class="form-check-input custom-control-input"> <br>
+												<label class="form-check-label custom-control-label"
+													for="agree">위 약관에 동의합니다.</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<br>
 				<br>
 				<div class="submit">
