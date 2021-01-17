@@ -56,3 +56,4 @@
 			<li><a href="${contextPath}/member/myPageWithdrawal.do" class="aside-items" id="withdrawal">회원 탈퇴</a></li>
 		</ul>
 	</div>
+	

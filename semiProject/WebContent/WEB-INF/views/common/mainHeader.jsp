@@ -186,16 +186,43 @@ a {
 	<div id="nav">
 		<ul>
 			<li><a href="#" class="nav-items" id="nav-home">홈</a></li>
-			<li><a href="${contextPath}/travel/localList.do" class="nav-items" id="nav-travel">여행</a></li>
-			<li><a href="${contextPath }/room/list" class="nav-items" id="nav-room">숙소</a></li>
-			<li><a href="${contextPath }/hospital/list" class="nav-items" id="nav-animalHospital">동물병원</a></li>
-			<li><a href="${contextPath}/freeBoard/freeList.do" class="nav-items" id="nav-board">게시판</a></li>
-				<li><a href="${contextPath}/member/myPageUpdateNormal.do"
-						class="nav-items" id="nav-mypage">마이페이지</a></li>
+			<li><a href="${contextPath}/travel/localList.do"
+				class="nav-items" id="nav-travel">여행</a></li>
+			<li><a href="${contextPath }/room/list" class="nav-items"
+				id="nav-room">숙소</a></li>
+			<li><a href="${contextPath }/hospital/list" class="nav-items"
+				id="nav-animalHospital">동물병원</a></li>
+			<li><a href="${contextPath}/freeBoard/freeList.do"
+				class="nav-items" id="nav-board">게시판</a></li>
+
+			<c:choose>
+				<%-- 로그인이 되어있지 않을 때 == session에 loginMember라는 값이 없을 때 --%>
+				<c:when test="${empty sessionScope.loginMember}">
+					<li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
+					<script>
+						// 로그인이 안되있을 경우 마이페이지 클릭 시 경고창
+						var loginMemberId = "${loginMember.memberId}";
+						$("#nav-mypage").on("click", function() {
+								alert("로그인 후 이용해 주세요.");
+							
+						});
+					</script>
+				</c:when>
+
+				<%-- 로그인이 되어 있을 때 --%>
+				<c:otherwise>
+					<li><a href="${contextPath}/member/myPageUpdateNormal.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+				</c:otherwise>
+			</c:choose>
+
+
+
+
 
 			<li><a href="#" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
 		</ul>
 	</div>
+
 
 </body>
 </html>

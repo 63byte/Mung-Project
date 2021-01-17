@@ -1,5 +1,55 @@
 package com.kh.semi.hospital.model.service;
 
+import static com.kh.semi.common.JDBCTemplate.*;
+
+import java.sql.Connection;
+import java.util.List;
+
+import com.kh.semi.hospital.model.dao.HospitalDAO;
+import com.kh.semi.hospital.model.vo.Hospital;
+import com.kh.semi.hospital.model.vo.PageInfo;
+
 public class HospitalService {
+	
+	
+	private HospitalDAO dao = new HospitalDAO();
+	
+	
+
+	/** 페이징 처리를 위한 값 계산 Service
+	 * @param cp
+	 * @return PageInfo
+	 * @throws Exception
+	 */
+	public PageInfo getPageInfo(String cp) throws Exception {
+		Connection conn = getConnection();
+		
+		// cp가 null일 경우 1, 아니면 cp를 얻어옴.
+		int currentPage = cp == null? 1: Integer.parseInt(cp);
+		
+		// DB에서 전체 게시글 수를 조회하여 반환받기
+		int listCount = dao.getListCount(conn);
+		
+		close(conn);
+		
+		return new PageInfo(currentPage, listCount);
+	}
+
+
+
+
+	/**	동물병원 목록 조회 Service
+	 * @param pInfo
+	 * @return	hList
+	 * @throws Exception
+	 */
+	public List<Hospital> selectHospitalList(PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Hospital> hList = dao.selectHospitalList(conn, pInfo);
+		
+		close(conn);
+		return hList;
+	}
 
 }
