@@ -194,7 +194,7 @@ cursor: pointer;
 #insertRoom {
     width : 100px;
     height: 40px;
-    margin: 10px 0 50px 90%;
+    margin: 10px 0 0 90%;
     line-height: 20px;
     border-radius: 5px;
     color: #fff;
@@ -202,6 +202,10 @@ cursor: pointer;
  }
  
  /*----------------------------페이징(부트스트랩)---------------------------------  */
+ .paging{
+	margin-top:100px;
+}
+ 
  
  .page-item>a{
   color: black;
