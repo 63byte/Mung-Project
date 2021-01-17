@@ -167,7 +167,7 @@ $(".phone").on("input", function(){
 });
 
 
-function validate(){
+function memberJoinvalidate(){
 
     // 아이디 중복검사 여부 확인
 /*     if($("#idDup").val() != "true"){
