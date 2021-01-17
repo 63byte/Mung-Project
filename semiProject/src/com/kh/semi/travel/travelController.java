@@ -57,6 +57,18 @@ public class travelController extends HttpServlet {
 				view.forward(request, response);
 			}
 			
+			// 지역정보 글 상세 조회 Controller **************************************************
+			if (command.equals("/localView.do")) {
+				errorMsg = "지역정보 글 상세보기 중 오류 발생.";
+				
+				// 요청을 위임할 경로 jsp 경로 지정
+				path = "/WEB-INF/views/travel/localInfo/localView.jsp";
+				
+				// 요청 위임 객체 생성 후 위임 진행
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
 			
 			
 			// ***********************************************************************
@@ -67,6 +79,18 @@ public class travelController extends HttpServlet {
 				// 요청을 위임할 경로 jsp 경로 지정
 				path = "/WEB-INF/views/travel/sights/sightsList.jsp";
 
+				// 요청 위임 객체 생성 후 위임 진행
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+			}
+			
+			// 관광지 글쓰기 Controller **************************************************
+			if (command.equals("/sightsInsert.do")) {
+				errorMsg = "관광지 글쓰기 중 오류 발생.";
+				
+				// 요청을 위임할 경로 jsp 경로 지정
+				path = "/WEB-INF/views/travel/sights/sightsInsert.jsp";
+				
 				// 요청 위임 객체 생성 후 위임 진행
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
