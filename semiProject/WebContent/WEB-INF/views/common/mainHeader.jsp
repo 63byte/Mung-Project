@@ -204,15 +204,25 @@ a {
 						var loginMemberId = "${loginMember.memberId}";
 						$("#nav-mypage").on("click", function() {
 								alert("로그인 후 이용해 주세요.");
-							
 						});
 					</script>
 				</c:when>
-
-				<%-- 로그인이 되어 있을 때 --%>
-				<c:otherwise>
+				
+				<%-- 일반 회원일 때 --%>
+				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'G') }">
 					<li><a href="${contextPath}/member/myPageUpdateNormal.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+				</c:when>
+				
+				<%-- 업체 회원일 때 --%>
+				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'C') }">
+					<li><a href="${contextPath}/member/myPageUpdateCompany.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+				</c:when>
+				
+				<%-- 관리자일 때 --%>
+				<c:otherwise>
+					<li><a href="${contextPath}/manager/managerNormal.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
 				</c:otherwise>
+				
 			</c:choose>
 
 
