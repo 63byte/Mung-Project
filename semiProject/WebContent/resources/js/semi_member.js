@@ -7,7 +7,7 @@ var validateCheck = {
     "pwd2" : false,
     "phone2" : false,
     "email" : false,
-    "nickname" : false
+    "nickName" : false
 }
 
 // 아이디 유효성 검사
@@ -186,7 +186,7 @@ function memberJoinvalidate(){
                 case "id" : msg="아이디가"; break;
                 case "pwd1" : 
                 case "pwd2" : msg="비밀번호가"; break;
-                case "name" : msg="이름이"; break;
+                case "nickName" : msg="이름이"; break;
                 case "phone2" : msg="전화번호가"; break;
                 case "email" : msg="이메일이"; break;
             }

@@ -172,7 +172,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="userId">아이디</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag" id="userId" name="" autocomplete="off" required>
+                        <input type="text" class="inputTag" id="userId" name="userId" autocomplete="off" required>
                     </div>
                     <div>
                         <span id="checkId" >&nbsp;</span>
@@ -185,7 +185,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="pwd1">비밀번호</label>  <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd1" name=""  required>
+                        <input type="password" class="inputTag"  id="pwd1" name="pwd1"  required>
                     </div>     
                     <div>
                         <span id="checkPwd1" >&nbsp;</span>
@@ -198,7 +198,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="pwd2">비밀번호 재확인</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd2" name=""   required>
+                        <input type="password" class="inputTag"  id="pwd2" name="pwd2"   required>
                     </div>
                     <div>
                         <span id="checkPwd2" >&nbsp;</span>
@@ -211,7 +211,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="userName">닉네임</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag"  id="userName" name="" required>
+                        <input type="text" class="inputTag"  id="userName" name="userName" required>
                     </div>
                     <div>
                         <span id="checkUserName" >&nbsp;</span>
@@ -224,9 +224,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="email">이메일</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag display-ib email"  id="email1" name="" autocomplete="off" required> 
+                        <input type="text" class="inputTag display-ib email"  id="email1" name="email1" autocomplete="off" required> 
                         @
-                        <select class="inputTag display-ib email" id="email2" name="" required>
+                        <select class="inputTag display-ib email" id="email2" name="email2" required>
                             <option style="color:gray;">이메일 주소 선택</option>
                             <option>daum.net</option>
                             <option>naver.com</option>
@@ -237,7 +237,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                     </div>
                     <br>  
                     <div class="ip display-ib">
-                        <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요." required>
+                        <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요.">
                     </div>
                     <div class= "verifyBtn display-ib">
                         <button class="btn_class" type="button" id="emailBtn">인증번호 받기</button>
@@ -253,7 +253,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="phone">전화번호</label>
                     </div>
                     <div class="ip">
-                        <select class="display-ib inputTag phone" id="phone1" name="" required> 
+                        <select class="display-ib inputTag phone" id="phone1" name="phone1" required> 
                             <option>010</option>
                             <option>011</option>
                             <option>016</option>
@@ -261,9 +261,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                             <option>019</option>
                         </select>
                         &nbsp;-&nbsp;
-                        <input type="number" class="display-ib inputTag phone" id="phone2" name="" required>
+                        <input type="number" class="display-ib inputTag phone" id="phone2" name="phone2" required>
                         &nbsp;-&nbsp;
-                        <input type="number" class="display-ib inputTag phone" id="phone3" name="" required>
+                        <input type="number" class="display-ib inputTag phone" id="phone3" name="phone3" required>
                     </div>
                     <div>
                         <span id="checkPhone" >&nbsp;</span>
@@ -276,7 +276,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="gender">성별</label>
                     </div>
                     <div class="ip">
-                        <select class="inputTag gender" id="gender" name="" required>
+                        <select class="inputTag gender" id="gender" name="gender" required>
                             <option>성별</option>
                             <option>여자</option>
                             <option>남자</option>
