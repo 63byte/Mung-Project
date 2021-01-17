@@ -1,5 +1,9 @@
+@charset "UTF-8";
 
 @charset "UTF-8";
+
+
+
 *{
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: 500;
@@ -41,11 +45,18 @@ div {
     padding-bottom :3%;
 }
 
+
+
+
+
+
 #hr_tag{
-margin:auto;
-width: 360px;
-border: solid 1px orange;
-}
+    margin:auto;
+    width: 360px;
+    border: solid 1px orange;
+    }
+    
+    
 /* 병원 등록하기 */
 #page_name{
     text-align : center;
@@ -54,13 +65,14 @@ border: solid 1px orange;
     font-size : 30px;
 }
 
-.insert_hospital{
+
+.insert_room{
     width: 600px;
     padding:0;
     margin : 0 auto;
     /* border : 1px solid blue; */
-}
 
+}
 
 /* number 태그 화살표 제거 */
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
@@ -79,10 +91,12 @@ margin: 0;
     line-height: 0;
 }
 
+
 .input_tag{
     display: inline-block;
     width: 60%;
     height:40px;
+    
 }
 
 /* 가득 채우는 인풋창  */
@@ -97,24 +111,24 @@ margin: 0;
     height:100%;
 }
 
-/* 영업시간 인풋창  */
-.office_hours{
-    width: 166px;
+/* 체크인/아웃 인풋창 */
+.checkHours{
+    display: inline-block;
+    width: 171px;
     height:100%;
 }
 
-/* 병원시설 체크박스 */
-.facility{
-    margin :10px;
+/* 부대시설 체크박스 */
+.facility,.dog{
+    margin :8px;
 }
 
-/* 동물병원 소개글  */
-.hospital_info{
+/* 숙소 소개글  */
+.room_info{
     resize:none;/* 크기고정 */ 
     height: 100px;
     font-size : 14px;
 }
-
 
 /* --------------- 업로드 버튼 --------------- */
 
@@ -138,7 +152,7 @@ margin: 0;
     border : 1px solid  #8bd2d6;
     background-color: #8bd2d6;
     cursor: pointer;
-	  outline:none;
+	outline:none;
 }
 
 /* 파일경로 부분 스타일 */
@@ -169,4 +183,3 @@ margin: 0;
 .btn_class:hover{
 	background-color: #17a2b8;
 }
-

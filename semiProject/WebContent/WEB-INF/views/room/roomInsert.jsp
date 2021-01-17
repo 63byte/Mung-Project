@@ -4,25 +4,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동물병원 등록하기</title>
+<title>숙소 등록</title>
 <!-- css연결  -->
-<link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalInsert.css" type="text/css">
+<link rel="stylesheet" href="${contextPath}/resources/css/room/roomInsert.css" type="text/css">
 </head>
 <body>
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
-<!-- 동물병원 등록하기 -->
-    <div class="wrapper">
 
+
+<!-- 숙소 등록하기 -->
+    <div class="wrapper">
         <div class="main">
 
             <div class="row-item">
-                <div id="page_name">병원 등록</div>
+                <div id="page_name">숙소 등록</div>
                 <hr id="hr_tag">
             </div>
-            
-            <div class="insert_hospital">
-                <form action="#" method="POST" onsubmit="return hospitalInsertvalidate();">
+
+
+            <div class="insert_room">
+                <form action="#" method="post" onsubmit="return roomInsertValidate();">
                     
                     <div class="row-item">
                         <div class="label_name">
@@ -51,12 +53,13 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="companyName">병원명</label>
+                            <label for="companyName">숙소명</label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="companyName" name="" placeholder="병원명을 입력해 주세요." autocomplete="off" required>
+                            <input type="text" class="full_input" id="companyName" name="" placeholder="숙소명을 입력해 주세요." autocomplete="off" required>
                         </div>
                     </div>
+
 
                     <div class="row-item">
                         <div class="label_name">
@@ -90,7 +93,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="row-item">
                         <div class="label_name">
                             <label for="location2">상세주소</label>
@@ -102,29 +105,38 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="office_hours">영업시간</label>
+                            <label for="checkIn">체크인/체크아웃</label>
                         </div>
                         <div class="input_tag">
-
-                            <input type="text" class="office_hours" id="open_hours" placeholder="00:00 시" name="" autocomplete="off" required>
-                            &nbsp;~&nbsp;&nbsp;
-                            <input type="text" class="office_hours" id="close_hours" placeholder="00:00 시" name="" autocomplete="off" required>
+                            <input type="text" class="checkHours" id="checkIn" name="" placeholder="00:00 시" autocomplete="off" required>
+                            &nbsp;/
+                            <input type="text" class="checkHours" id="checkOut" name="" placeholder="00:00 시" autocomplete="off" required>
                         </div>
                     </div>
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="facility">병원 시설</label>
+                            <label for="facility">숙소 부대 시설</label>
                         </div>
                         <div class="input_tag">
                            <input type="checkbox" class="facility" name="" value="wifi">WiFi
-                           <input type="checkbox" class="facility" name="" value="Parking">주차
-                           <input type="checkbox" class="facility" name="" value="appointmtnet">예약
-                           <input type="checkbox" class="facility" name="" value="businessTrip">출장
-                           <input type="checkbox" class="facility" name="" value="fullTime">24시간
+                           <input type="checkbox" class="facility" name="" value="parking">주차장
+                           <input type="checkbox" class="facility" name="" value="pool">수영장
+                           <input type="checkbox" class="facility" name="" value="BBQ">바베큐
+                           <input type="checkbox" class="facility" name="" value="yard">마당
                         </div>
                     </div>
 
+                    <div class="row-item">
+                        <div class="label_name">
+                            <label for="dog">출입 가능 견종</label>
+                        </div>
+                        <div class="input_tag">
+                           <input type="checkbox" class="dog" name="" value="small">소형견
+                           <input type="checkbox" class="dog" name="" value="medium">중형견
+                           <input type="checkbox" class="dog" name="" value="large">대형견
+                        </div>
+                    </div>
 
                     <div class="row-item">
                         <div class="label_name">
@@ -139,14 +151,13 @@
 
                     <div class="row-item">
                         <div class="label_name" style="vertical-align:80px;" >
-                            <label for="hospital_info" >동물병원 정보</label>
+                            <label for="room_info" >숙소 상세 정보</label>
                         </div>
                         <div class="input_tag">
-                            <textarea class="full_input hospital_info" id="hospital_info" rows="10"
-                                placeholder="동물병원 상세 정보를 작성해 주세요."></textarea>
+                            <textarea class="full_input room_info" id="room_info" rows="10"
+                                placeholder="숙소 상세 정보를 작성해 주세요."></textarea>
                         </div>
                     </div>
-
 
                     <!-- 등록 / 취소 버튼  -->
                     <div class="row-item">
@@ -155,10 +166,20 @@
                             <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
                         </div>
                     </div>
+
+
                 </form>
-	        </div>
-	    </div>
-	</div>
+
+            </div>
+
+        </div>
+
+    </div><!-- wrapper -->
+
+
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

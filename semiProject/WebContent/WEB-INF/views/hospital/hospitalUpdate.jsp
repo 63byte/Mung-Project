@@ -23,7 +23,7 @@
             </div>
             
             <div class="insert_hospital">
-                <form action="#" method="POST" onsubmit="return hospitalInsertvalidate();">
+                <form action="#" method="POST" onsubmit="return hospitalUpdatevalidate();">
                     
                     <div class="row-item">
                         <div class="label_name">
@@ -152,8 +152,8 @@
                     <!-- 수정 / 취소 버튼  -->
                     <div class="row-item">
                         <div class="btn_item">
-                            <input class= "btn_class"  id="insertBtn" type="submit" value="수정">
-                            <input class= "btn_class"  id="resetBtn" type="reset" value="취소">
+                            <button class= "btn_class"  id="insertBtn" type="submit">수정</button>
+                            <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
                         </div>
                     </div>
                 </form>
