@@ -14,7 +14,7 @@ AND FREE_BOARD_NO = ?
 <!-- 댓글 작성 -->
 <entry key="insertReply">
 INSERT INTO FREE_BOARD_REPLY
-VALUES(SEQ_RNO.NEXTVAL, ?, ?, ?, DEFAULT, DEFAULT)
+VALUES(SEQ_RNO.NEXTVAL, ?, DEFAULT, DEFAULT, ?, ?)
 </entry>
 
 

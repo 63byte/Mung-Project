@@ -46,14 +46,14 @@ VALUES(?, ?, ?, ?)
 
 <!-- 파일 정보 삽입 -->
 <entry key="insertAttachment">
-INSERT INTO FREE_BOARD_IMAGE
+INSERT INTO FREE_BOARD_IMG
 VALUES(SEQ_FFE.NEXTVAL, ?, ?, ?, ?)
 </entry>
 
 
 <entry key="selectBoardFiles">
 SELECT FREE_FILE_NO, FREE_FILE_NAME, FREE_FILE_LEVEL, FREE_FILE_PATH
-FROM FREE_BOARD_IMAGE
+FROM FREE_BOARD_IMG
 WHERE FREE_BOARD_NO = ?
 ORDER BY FREE_FILE_LEVEL
 </entry>
@@ -69,7 +69,7 @@ WHERE FREE_BOARD_NO = ?
 
 <!-- 파일 정보 수정 -->
 <entry key="updateAttachment">
-UPDATE FREE_BOARD_IMAGE SET
+UPDATE FREE_BOARD_IMG SET
 FREE_FILE_PATH = ?,
 FREE_FILE_NAME = ?
 WHERE FREE_FILE_NO = ?
