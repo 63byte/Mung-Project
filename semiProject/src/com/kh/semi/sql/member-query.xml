@@ -19,5 +19,11 @@ AND MEM_PW = ?
 AND SCSN_FL = 'N'
 </entry>
 
+<entry key="idDupCheck">
+SELECT COUNT(*) FROM TB_MEMBER
+WHERE MEM_ID = ?
+AND SCSN_FL = 'N'
+</entry>
+
 
 </properties>
