@@ -117,6 +117,16 @@ public class MemberController extends HttpServlet {
 				
 			}
 			
+			// ------- 아이디 중복검사 ajax --------------
+				else if(command.equals("/idDupCheck.do")) {
+					String userId = request.getParameter("userId");
+
+					int result = service.idDupCheck(userId);
+					
+					response.getWriter().print(result);
+					
+				}
+			
 			// -------- 로그인 jsp로 위임
 			else if(command.equals("/loginForm.do")) {
 				path = "/WEB-INF/views/member/loginForm.jsp";

@@ -79,6 +79,8 @@
 #submitBtn:hover {
 	background-color: #17a2b8;
 }
+
+
 </style>
 </head>
 <body>
@@ -120,6 +122,65 @@
 					</div>
 				</div>
 
+				
+				<div class="panel panel-default">
+
+							<div class="panel-body">
+								<div class="form-group pull-left">
+									<label class="control-label"> 회원 탈퇴 약관 </label>
+									<div class="col-xs-12">
+										<textarea class="form-control" readonly rows="10" cols="100">
+제1조 (회원 탈퇴 및 자격 상실)
+
+① 회원자격은 뭉개뭉개 가입 후 탈퇴하는 시점까지 유지됩니다.
+
+②  회원은 회사에 언제든지 회원 탈퇴를 요청할 수 있으며 회사는 요청을 받은 즉시 해당 회원의 회원 탈퇴를 위한 절차를 밟아 개인정보취급방침에 따라 회원 등록을 말소합니다.
+
+③ 회원이 서비스 이용에 있어서 본 양관 제 제 10조 내용을 위반하거나, 다음 각 호의 사유에 해당하는 경우 회사는 직권으로 회원자격 상실 및 회원탈퇴의 조치를 할 수 있습니다.
+1. 다른 사람의 명의를 사용하여 가입 신청한 경우
+2. 신청 시 필수 작성 사항을 허위로 기재한 경우
+3. 관계법령의 위반을 목적으로 신청하거나 그러한 행위를 하는 경우
+
+④ 회사가 직권으로 회원 탈퇴 처리를 하고자 하는 경우에는 말소 전에 회원에게 소명의 기회를 부여합니다.
+
+
+제2조 (개인 정보 및 계정)
+
+① 회원 탈퇴 후 뭉개뭉개 서비스 이용이 불가능합니다.
+
+② 회원 탈퇴 후 모든 개인 정보는 삭제됩니다.
+
+③ 회원 탈퇴 후 계정을 복구할 수 없습니다.
+</textarea>
+									</div>
+									<div class="checkbox pull-right">
+										<div class="custom-checkbox">
+											<div class="form-check">
+												<input type="checkbox" name="agree" id="agree"
+													class="form-check-input custom-control-input"> <br>
+												<label class="form-check-label custom-control-label"
+													for="agree">위 약관에 동의합니다.</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				<br>
 				<br>
 				<div class="submit">
@@ -128,7 +189,7 @@
 			</div>
 	</div>
 
-
+	<script src="${contextPath}/resources/js/semi_member.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
