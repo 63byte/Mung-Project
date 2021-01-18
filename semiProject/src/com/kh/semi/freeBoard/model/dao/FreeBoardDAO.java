@@ -211,7 +211,7 @@ public class FreeBoardDAO {
 
 
 
-	/**
+	/** 게시글 삽입
 	 * @param conn
 	 * @param map
 	 * @return

@@ -340,6 +340,87 @@ public class TripBoardDAO {
 		
 		return trList;
 	}
+
+
+	/** 게시글 수정 DAO
+	 * @param conn
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateBoard(Connection conn, Map<String, Object> map) throws Exception{
+		int result = 0;
+		String query = prop.getProperty("updateBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, (String)map.get("boardTitle"));
+			pstmt.setString(2, (String)map.get("boardContent"));
+			pstmt.setInt(3, (int)map.get("boardNo"));
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	/** 파일 정보 수정 Service
+	 * @param conn
+	 * @param newFile
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateBoard(Connection conn, Attachment newFile) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("updateAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newFile.getFilePath());
+			pstmt.setString(2, newFile.getFileName());
+			pstmt.setInt(3, newFile.getFileNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 게시글 삭제 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int delete(Connection conn, int boardNo) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("deleteFl");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
 	
 	
 	
