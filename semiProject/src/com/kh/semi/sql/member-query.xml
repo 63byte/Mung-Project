@@ -26,6 +26,16 @@ WHERE MEM_ID = ?
 AND SCSN_FL = 'N'
 </entry>
 
+<!-- 내 정보 수정 -->
+<entry key="updateMember">
+UPDATE TB_MEMBER SET 
+NICKNAME = ?,
+EMAIL = ?,
+PHONE = ?,
+GENDER = ?
+WHERE MEM_NO=? 
+</entry>
+
 <!--
 <entry key="checkCurrentPw">
 SELECT COUNT(*) FROM MEMBER

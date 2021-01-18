@@ -4,7 +4,6 @@ public class Member {
 	private int memberNo;
 	private String memberId;
 	private String memberPwd;
-	// private String memberName; 멤버네임 추가해야 할 것 같아요잉 T^T
 	private String memberNickName;
 	private String email;
 	private String phone;

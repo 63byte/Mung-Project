@@ -1,7 +1,7 @@
-/*
 package com.kh.semi.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,13 +18,16 @@ public class UpdateNormalServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		
+	
 		// 닉네임 이메일 전화번호 성별 순
 		
 		// 닉네임
 		String nickName = request.getParameter("memberNickName");
 		
 		// 이메일
-		String email = request.getParameter("email");
+		String email1 = request.getParameter("email1");
+		String email2 = request.getParameter("email2");
+		String memberEmail = email1 + "@" + email2;
 
 		// 전화번호
 		String phone1 = request.getParameter("phone1");
@@ -43,10 +46,12 @@ public class UpdateNormalServlet extends HttpServlet {
 		Member member = new Member();
 		member.setMemberNo(loginMember.getMemberNo());
 		member.setMemberNickName(nickName);
-		member.setEmail(email);
+		member.setEmail(memberEmail);
 		member.setPhone(memberPhone);
 		member.setGender(gender);
-
+		
+		System.out.println("member: "+member);
+		
 		try {
 			// 비즈니스 로직 수행 후 결과 반환
 			int result = new MemberService().updateMember(member);
@@ -65,8 +70,7 @@ public class UpdateNormalServlet extends HttpServlet {
 
 				// 기존 로그인 정보에서 id를 얻어와 갱신에 사용된 member 객체에 저장
 				member.setMemberId(loginMember.getMemberId());
-				member.setMemberName(loginMember.getMemberName());
-				member.setMemberGrade(loginMember.getMemberGrade());
+				member.setMemberAdmin(loginMember.getMemberAdmin());
 				// -> member 객체가 갱신된 회원 정보를 모두 갖게됨
 
 				// Session에 있는 loginMember 정보를 member로 갱신
@@ -83,7 +87,7 @@ public class UpdateNormalServlet extends HttpServlet {
 			session.setAttribute("swalText", swalText);
 
 			// 수정 완료 후 다시 내 정보 페이지로 재요청
-			response.sendRedirect("myPage.do");
+			response.sendRedirect("myPageNormal.do");
 
 		} catch (Exception e) {
 
@@ -95,6 +99,4 @@ public class UpdateNormalServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
-*/

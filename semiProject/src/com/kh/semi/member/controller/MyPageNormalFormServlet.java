@@ -9,15 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/myPageUpdateNormal.do")
+@WebServlet("/member/myPageNormal.do")
+
 public class MyPageNormalFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String path = "/WEB-INF/views/member/myPageUpdateNormal.jsp";
+		String path = "/WEB-INF/views/member/myPageNormal.jsp";
 		RequestDispatcher view = request.getRequestDispatcher(path);
 		view.forward(request, response);
+		
+	
+		
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
