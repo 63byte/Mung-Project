@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
    
 <!DOCTYPE html>
-<html>
+<html>dc
 <head>
 <meta charset="UTF-8">
 <title>동물병원 등록하기</title>
