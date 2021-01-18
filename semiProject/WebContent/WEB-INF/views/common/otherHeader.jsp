@@ -132,6 +132,31 @@ a:hover{
 </head>
 
 <body>
+<%-- 
+		프로젝트의 시작주소(context root)를 얻어와 간단하게 사용할 수 있도록
+		별도의 변수를 생성
+	--%>
+	<c:set var="contextPath" scope="application"
+		value="${pageContext.servletContext.contextPath}" />
+
+	<c:if test="${!empty sessionScope.swalTitle }">
+		<script>
+			swal({
+				icon : "${swalIcon}",
+				title : "${swalTitle}",
+				text : "${swalText}"
+			});
+		</script>
+
+		<%-- 2) 한 번 출력한 메세지를 Session에서 삭제 --%>
+		<c:remove var="swalIcon" />
+		<c:remove var="swalTitle" />
+		<c:remove var="swalText" />
+	</c:if>
+
+
+
+
 	<div id="header">
 
 		<div id="header-group">

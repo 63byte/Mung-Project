@@ -241,4 +241,32 @@ function memberUpdateValidate(){
 }
 
 
+//------------- 비밀번호 변경 유효성 검사---------------
+function memberChangevalidate(){
+	var regExp = /^[a-zA-Z\d]{6,12}$/;
+
+    if( !regExp.test($("#newPwd2").val()) ){
+        swal("비밀번호 형식이 유효하지 않습니다.");
+        $("#newPwd2").focus();
+
+        return false;
+    }
+
+    // 새로운 비밀번호와 확인이 일치하지 않을 때 
+    if( $("#newPwd2").val() != $("#newPwd3").val() ){
+        swal("새로운 비밀번호가 일치하지 않습니다.");
+
+        $("#newPwd2").focus();
+        $("#newPwd2").val("");
+        $("#newPwd3").val("");
+
+        return false;
+    }
+	
+	
+}
+
+
+
+
 

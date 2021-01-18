@@ -18,11 +18,16 @@ public class UpdateNormalServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		
-	
+		
+		String swalIcon = null;
+		String swalTitle = null;
+		String swalText = null;
+		
+		
 		// 닉네임 이메일 전화번호 성별 순
 		
 		// 닉네임
-		String nickName = request.getParameter("memberNickName");
+		String nickName = request.getParameter("userName");
 		
 		// 이메일
 		String email1 = request.getParameter("email1");
@@ -50,15 +55,12 @@ public class UpdateNormalServlet extends HttpServlet {
 		member.setPhone(memberPhone);
 		member.setGender(gender);
 		
-		System.out.println("member: "+member);
 		
 		try {
 			// 비즈니스 로직 수행 후 결과 반환
 			int result = new MemberService().updateMember(member);
 
-			String swalIcon = null;
-			String swalTitle = null;
-			String swalText = null;
+			
 
 			// 수정 성공 시
 			if (result > 0) {
@@ -87,10 +89,12 @@ public class UpdateNormalServlet extends HttpServlet {
 			session.setAttribute("swalText", swalText);
 
 			// 수정 완료 후 다시 내 정보 페이지로 재요청
-			response.sendRedirect("myPageNormal.do");
+			response.sendRedirect(request.getHeader("referer"));
 
 		} catch (Exception e) {
-
+			e.printStackTrace();
+			
+			
 		}
 
 	}
