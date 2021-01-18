@@ -99,6 +99,7 @@ public class TripBoardController extends HttpServlet {
 					view.forward(request, response);
 					
 					// ----------------파일 등록 추가해줘야 됨-------------------------------------
+					// ㄴ 완료
 
 				}else {
 					
@@ -194,6 +195,144 @@ public class TripBoardController extends HttpServlet {
 				
 			}
 			
+			// ------------------- 게시글 수정 화면 전환 Controller --------------------------------
+			
+			else if(command.equals("/updateForm.do")) {
+				errorMsg = "게시글 수정 화면 입장 중 문제 발생";
+				
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+				
+				TripBoard board = service.updateView(boardNo);
+				
+				if(board != null) {
+					// 해당 게시글에 작성된 이미지(파일) 목록 정보 조회
+					List<Attachment> trList = service.selectBoardFiles(boardNo);
+					
+					if(!trList.isEmpty()) {
+						request.setAttribute("trList", trList);
+					}
+					
+					request.setAttribute("board", board);
+					path = "/WEB-INF/views/tripBoard/tripBoardUpdate.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+					
+				}else {
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "게시글 수정 화면 전환 실패");
+					response.sendRedirect(request.getHeader("referer"));
+					// 상세조회 -> 수정화면    이전 상세조회 페이지로 돌아가기
+				}
+				
+			}
+			
+			// -------------- 게시글 수정 Controller ----------------------------------
+			else if(command.equals("/update.do")) {
+				errorMsg = "게시글 수정 과정에서 오류 발생";
+				
+				int maxSize = 20 * 1024 * 1024;	// 최대 크기 20MB
+				String root = request.getSession().getServletContext().getRealPath("/");
+				String filePath = root + "resources/uploadTripImages/";
+				
+				MultipartRequest mRequest
+				= new MultipartRequest(request, filePath, maxSize,
+										"UTF-8", new MyFileRenamePolicy());
+				
+				String boardTitle = mRequest.getParameter("boardTitle");
+				String boardContent = mRequest.getParameter("boardContent");
+				int boardNo = Integer.parseInt(mRequest.getParameter("no"));
+				
+				List<Attachment> trList = new ArrayList<Attachment>();
+				
+				Enumeration<String> files = mRequest.getFileNames();
+				
+				while(files.hasMoreElements()) {
+					
+					String name = files.nextElement();
+					
+					if(mRequest.getFilesystemName(name) != null) {
+						
+						Attachment temp = new Attachment();
+						
+						temp.setFileName(mRequest.getFilesystemName(name));
+						temp.setFilePath(filePath);
+						temp.setParentBoardNo(boardNo);
+						
+						switch(name) {
+						case "img0" : temp.setFileLevel(0); break;
+						case "img1" : temp.setFileLevel(1); break;
+						case "img2" : temp.setFileLevel(2); break;
+						case "img3" : temp.setFileLevel(3); break;
+						case "img4" : temp.setFileLevel(4); break;
+						}
+						
+						// temp를 fList에 추가
+						trList.add(temp);
+						
+					}
+				}
+				int boardWriter 
+				= ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+				
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("boardTitle", boardTitle);
+				map.put("boardContent", boardContent);
+				map.put("boardNo", boardNo);
+				map.put("trList", trList);
+				map.put("boardWriter", boardWriter);
+				
+				int result = service.updateBoard(map);
+				
+				path = "tripView.do?cp=" + cp + "&no=" + boardNo;
+				
+				if(result > 0) {
+					swalIcon = "success";
+					swalTitle = "게시글 수정 성공";
+					
+					
+					String sk = mRequest.getParameter("sk");
+					String sv = mRequest.getParameter("sv");
+					
+					if(sk != null && sv != null) {
+						path += "&sk=" + sk + "&sv=" + sv;
+					}
+				}else {
+					swalIcon = "error";
+					swalTitle = "게시글 수정 실패";
+				}
+				
+				request.getSession().setAttribute("swalIcon", swalIcon);
+				request.getSession().setAttribute("swalTitle", swalTitle);
+				
+				response.sendRedirect(path);
+				
+			}
+			
+			// --------------- 게시글 삭제 Controller ---------------------------
+			else if(command.equals("/delete.do")) {
+				errorMsg = "삭제 과정에서 문제 발생";
+				
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+
+				int result = service.delete(boardNo);
+				
+				if(result > 0) {
+					swalIcon = "success";
+					swalTitle = "게시글삭제 성공";
+					
+					path = "tripList.do";
+				}else {
+					swalIcon = "error";
+					swalTitle = "게시글 삭제 실패";
+					path = request.getHeader("referer");
+				}
+				
+				request.getSession().setAttribute("swalIcon", swalIcon);
+				request.getSession().setAttribute("swalTitle", swalTitle);
+				
+				response.sendRedirect(path);
+				
+			}
 			
 			
 			

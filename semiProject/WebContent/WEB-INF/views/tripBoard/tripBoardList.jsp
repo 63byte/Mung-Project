@@ -68,16 +68,25 @@
 		font-size: 12px;
 	}
 	
-	.col-md-3{
+	.card{
+		width: 200px;
+	}
+	
+	.col-md-4{
 		float: left;
-		width: 21%;
+		width: 34%;
 		margin-bottom : 50px;
 	}
 	
 	.card-img-top{
-		height: 174px;
+		height: 200px;
 	}
 	
+	.card:hover{
+		cursor: pointer;
+		border: 1px solid #17a2b8;
+		
+	}
 	
 
 	
@@ -145,9 +154,9 @@
 			
 			<c:if test="${!empty tList }">
 				<c:forEach var="board"  items="${tList}">
-				<div class="col-md-3">
+				<div class="col-md-4">
 
-						<div class="card" style="width: 11rem;">
+						<div class="card" style="width: 16rem;">
 					  	<c:forEach var="thumbnail" items="${trList}">
 												<%-- 현재 출력하려는 게시글 번호와
 															썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면 
@@ -162,8 +171,25 @@
 								</c:forEach>
 								
 						  <div class="card-body">
-						  		<p class="card-text">${board.boardNo}</p>
-						    	<p class="card-text">${board.boardTitle} [${board.readCount}] <br> 작성자 : ${board.memberId}<br> ${board.boardCreateDate }</p>
+						  		No.<p class="card-text">${board.boardNo}</p>
+						    	<p class="card-text"><h5>${board.boardTitle} [${board.readCount}]</h5>작성자 : ${board.memberId}<br>
+						    	
+						    	 <fmt:formatDate var="createDate" value="${board.boardCreateDate}" pattern="yyyy-MM-dd"/>
+											<fmt:formatDate var="today" value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd"/>
+										
+											<c:choose>
+												<%-- 글 작성일이 오늘이 아닐 경우 --%>
+												<c:when test="${createDate != today}">
+													${createDate}
+												</c:when>
+												
+												<%-- 글 작성일이 오늘일 경우 --%>
+												<c:otherwise>
+													<fmt:formatDate value="${board.boardCreateDate}" pattern="HH:mm"/>
+												</c:otherwise>
+											</c:choose>
+						    	 
+						    	 </p>
 						  </div>
 						</div>
 					
@@ -251,7 +277,7 @@
 				</div>
 			
 				<div class="container my-5">
-				<form action="${contextPath}/search.do" method="GET" class="text-center" id="searchForm">
+				<form action="${contextPath}/search2.do" method="GET" class="text-center" id="searchForm">
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
 						<option value="content">내용</option>
@@ -283,6 +309,18 @@ $(".card").on("click", function(){
 	location.href = url;
 	
 });
+
+
+
+/* $(".card").on("mouseenter", function(){
+	
+	$(this).children().children().css("backgroudColor": "#8ad2d5");
+});
+
+$(".card").on("mouseleave", function(){
+	$(this).off("mouseenter")
+	
+}); */
 </script>
 
 </body>

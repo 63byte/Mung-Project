@@ -4,6 +4,7 @@ import static com.kh.semi.common.JDBCTemplate.*;
 
 import java.io.File;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -237,6 +238,164 @@ public class TripBoardService {
 		close(conn);
 		
 		return trList;
+	}
+
+
+
+	/** 게시글 수정을 위한 정보 Service
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public TripBoard updateView(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		TripBoard board = dao.selectBoard(conn, boardNo);
+		
+		board.setBoardContent(board.getBoardContent().replaceAll("<br>", "\r\n"));
+		
+		close(conn);
+		
+		return board;
+	}
+
+
+
+	/** 게시글 수정 Service
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateBoard(Map<String, Object> map) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = 0;
+		List<Attachment> deleteFiles = null;
+		
+		
+		String boardTitle = (String)map.get("boardTitle");
+		String boardContent = (String)map.get("boardContent");
+		
+		boardTitle = replaceParameter(boardTitle);
+		boardContent = replaceParameter(boardContent);
+		
+		boardContent = boardContent.replaceAll("\r\n", "<br>");
+		
+		map.put("boardTitle", boardTitle);
+		map.put("boardContent", boardContent);
+		
+		try {
+			
+			result = dao.updateBoard(conn, map);
+			
+			List<Attachment> newFileList = (List<Attachment>)map.get("trList");
+			
+			if(result > 0 && !newFileList.isEmpty()) {
+				List<Attachment> oldFileList 
+				= dao.selectBoardFiles(conn, (int)map.get("boardNo"));
+			
+				result = 0;
+				deleteFiles = new ArrayList<Attachment>();
+				
+				for(Attachment newFile : newFileList) {
+					boolean flag = true;
+					
+					for(Attachment oldFile : oldFileList) {
+						
+						if(newFile.getFileLevel() == oldFile.getFileLevel()) {
+							deleteFiles.add(oldFile);
+							
+							newFile.setFileNo(oldFile.getFileNo());
+							
+							flag = false;
+							break;
+						}
+					}
+					
+					if(flag) {
+						result = dao.insertAttachment(conn, newFile);
+					}else {
+						result = dao.updateBoard(conn, newFile);
+					}
+					
+					if(result == 0) {
+						throw new FileInsertFailedException("파일 정보 삽입 또는 수정 실패");
+						
+					}
+				}
+			
+			}
+			
+			
+			
+		}catch (Exception e) {
+			
+			List<Attachment> trList = (List<Attachment>)map.get("trList");
+			
+			if(!trList.isEmpty()) {
+			
+				for(Attachment at : trList) {
+					
+					String filePath = at.getFilePath();
+					String fileName = at.getFileName();
+					
+					File deleteFile = new File(filePath + fileName);
+					// 파일 경로가 나옴
+					
+					if(deleteFile.exists()) {
+						// 해당 경로에 해당 파일이 존재하면
+						deleteFile.delete();
+					}
+				}
+		
+		
+			}
+			throw e;
+		}
+		
+		if(result > 0) {
+			commit(conn);
+			
+			if(deleteFiles != null) {
+			
+			// DB 정보와 맞지 않는 파일 (deleteFiles) 삭제 진행
+			for(Attachment at : deleteFiles) {
+				
+				String filePath = at.getFilePath();
+				String fileName = at.getFileName();
+				
+				File deleteFile = new File(filePath + fileName);
+				
+				if(deleteFile.exists()) {
+					deleteFile.delete();
+				}
+			}
+			
+		}
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
+
+	/** 게시글 삭제 Service
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public int delete(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.delete(conn, boardNo);
+		
+		if(result > 0)		commit(conn);
+		else				rollback(conn);
+		
+		return result;
 	}
 
 

@@ -87,7 +87,7 @@
 						</c:when>
 						
 						<c:otherwise>
-							<c:url var="goToList" value="freeList.do">
+							<c:url var="goToList" value="tripList.do">
 								<c:param name="cp">${param.cp}</c:param>
 							</c:url>
 						</c:otherwise>
@@ -96,7 +96,7 @@
 					
 					<a href="${goToList}" class="btn btn-info float-right">목록으로</a>
 				
-				<%-- <jsp:include page="reply.jsp"></jsp:include> --%>
+			 <jsp:include page="reply2.jsp"></jsp:include>
 		</div>
 	</div>
 </div>
