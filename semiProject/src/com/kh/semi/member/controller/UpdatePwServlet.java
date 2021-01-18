@@ -1,4 +1,4 @@
-/*
+
 package com.kh.semi.member.controller;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 
 
-@WebServlet("/member/myPageUpdatePw.do")
+@WebServlet("/member/UpdatePw.do")
 public class UpdatePwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,9 +23,9 @@ public class UpdatePwServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 현재 비밀번호, 새로운 비밀번호, 회원 번호
-		String currentPwd = request.getParameter("currentPw");
-		String newPw1 = request.getParameter("newPw1");
-		String newPw2 = request.getParameter("newPw1");
+		String currentPwd = request.getParameter("currentPwd");	// 현재
+		String newPwd = request.getParameter("newPwd2");		// 새로운
+		String newPwd2 = request.getParameter("newPwd3");		// 새로운 비번 확인
 		
 		// 현재 로그인한 회원 정보를 얻어옴
 		HttpSession session = request.getSession();
@@ -36,7 +36,7 @@ public class UpdatePwServlet extends HttpServlet {
 			loginMember.setMemberPwd(currentPwd);
 			
 			// 비즈니스 로직 처리 후 결과 반환 받기
-			int result = new MemberService().updatePw(loginMember, newPw1, newPw2);
+			int result = new MemberService().updatePw(loginMember, newPwd);
 													// loginMember 안에 no+pwd가 담겨져있다.
 			
 			String swalIcon = null;
@@ -79,4 +79,3 @@ public class UpdatePwServlet extends HttpServlet {
 	}
 
 }
-*/

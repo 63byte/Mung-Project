@@ -110,7 +110,7 @@
                 <br>
 
 
-                <form action="#" method="POST" onsubmit="return memberChangevalidate();">
+                <form action="${contextPath}/member/UpdatePw.do" method="POST" onsubmit="return memberChangevalidate();">
                     <div class="memberChange">
                         <hr>
                         <br>
@@ -119,38 +119,38 @@
                         <!-- 비밀번호 입력 -->
                 <div>
                     <div class="lb">
-                        <label for="pwd1">현재 비밀번호</label>  <br>
+                        <label for="currentPwd">현재 비밀번호</label>  <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd1" name=""  required>
+                        <input type="password" class="inputTag"  id="currentPwd" name="currentPwd"  required>
                     </div>     
                     <div>
-                        <span id="chechPwd1" >&nbsp;</span>
+                        <span id="checkPwd1" >&nbsp;</span>
                     </div>  
                 </div>
                 
                 <div>
                     <div class="lb">
-                        <label for="pwd2">새 비밀번호</label>  <br>
+                        <label for="newPwd2">새 비밀번호</label>  <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd2" name=""  required>
+                        <input type="password" class="inputTag"  id="newPwd2" name="newPwd2"  required>
                     </div>     
                     <div>
-                        <span id="chechPwd2" >&nbsp;</span>
+                        <span id="checkPwd2" >&nbsp;</span>
                     </div>  
                 </div>
 
                 <!-- 비밀번호 재확인 -->
                 <div>
                     <div class="lb">
-                        <label for="pwd3">새 비밀번호 재확인</label> <br>
+                        <label for="newPwd3">새 비밀번호 재확인</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd3" name=""   required>
+                        <input type="password" class="inputTag"  id="newPwd3" name="newPwd3"   required>
                     </div>
                     <div>
-                        <span id="chechPwd3" >&nbsp;</span>
+                        <span id="checkPwd3" >&nbsp;</span>
                     </div>  
                 </div>
 
