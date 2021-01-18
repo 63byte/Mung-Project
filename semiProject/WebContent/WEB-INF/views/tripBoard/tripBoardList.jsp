@@ -74,6 +74,10 @@
 		margin-bottom : 50px;
 	}
 	
+	.card-img-top{
+		height: 174px;
+	}
+	
 	
 
 	
@@ -144,7 +148,19 @@
 				<div class="col-md-3">
 
 						<div class="card" style="width: 11rem;">
-					  	<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" class="card-img-top" alt="...">
+					  	<c:forEach var="thumbnail" items="${trList}">
+												<%-- 현재 출력하려는 게시글 번호와
+															썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면 
+												--%>
+											<c:if test="${board.boardNo == thumbnail.parentBoardNo}">
+											<img src="${contextPath}/resources/uploadTripImages/${thumbnail.fileName}" class="card-img-top">
+											</c:if>
+											
+											<c:if test="${empty(thumbnail.fileLevel == 0) }">
+												<img src="${contextPath}/resources/image/common/logo2.png" class="card-img-top">
+											</c:if>
+								</c:forEach>
+								
 						  <div class="card-body">
 						  		<p class="card-text">${board.boardNo}</p>
 						    	<p class="card-text">${board.boardTitle} [${board.readCount}] <br> 작성자 : ${board.memberId}<br> ${board.boardCreateDate }</p>
@@ -153,6 +169,7 @@
 					
 				</div>
 				</c:forEach>
+				
 			</c:if>
 				
 				
@@ -227,7 +244,7 @@
 				</ul>
 			<c:if test="${!empty loginMember}">
 				<button type="button" class="btn btn-outline-info btn-md" id="insertBtn" 
-					onclick="location.href = '${contextPath}/freeBoard/insertForm.do'">
+					onclick="location.href = '${contextPath}/tripBoard/insertForm.do'">
 					글쓰기
 				</button>
 			</c:if>
