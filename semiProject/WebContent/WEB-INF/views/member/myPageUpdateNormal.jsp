@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>	
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -126,7 +128,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
 	<jsp:include page="myPageSideMenu.jsp"></jsp:include>
-
+	
+	<%-- 이메일 전화번호 -> 구분자를 이용하여 분리된 배열 형태로 저장 --%>
+	<c:set var="email" value="${fn:split(loginMember.email, '@') }"/>
+	<c:set var="phone" value="${fn:split(loginMember.phone, '-') }"/>
+	
+	
+	
+	
 		<div class="wrapper2">
 			<div class="changeTitle">
 				<p style="font-size: 30px;">내 정보 수정</p>
@@ -147,7 +156,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<label for="userName">닉네임</label> <br>
 						</div>
 						<div class="ip">
-							<input type="text" class="inputTag" id="userName" required>
+							<input type="text" class="inputTag" id="userName" value="${loginMember.memberNickName}" required>
 						</div>
 						<div>
 							<span id="checkUserName">&nbsp;</span>
@@ -160,9 +169,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<label for="email">이메일</label> <br>
 						</div>
 						<div class="ip">
-							<input type="text" class="inputTag display-ib email" id="email1"
-								autocomplete="off" required> @ <select
-								class="inputTag display-ib email" id="email2" required>
+							<input type="text" class="inputTag display-ib email" id="email1" autocomplete="off" value="${email[0]}" required>
+							 @ 
+							 <select class="inputTag display-ib email" id="email2" required>
 								<option style="color: gray;">이메일 주소 선택</option>
 								<option>daum.net</option>
 								<option>naver.com</option>
@@ -190,17 +199,18 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<label for="phone">전화번호</label>
 						</div>
 						<div class="ip">
-							<select class="display-ib inputTag phone" id="phone1" name=""
+							<select class="display-ib inputTag phone" id="phone1"
 								required>
 								<option>010</option>
 								<option>011</option>
 								<option>016</option>
 								<option>017</option>
 								<option>019</option>
-							</select> &nbsp;-&nbsp; <input type="number"
-								class="display-ib inputTag phone" id="phone2" name="" required>
-							&nbsp;-&nbsp; <input type="number"
-								class="display-ib inputTag phone" id="phone3" name="" required>
+							</select> 
+							&nbsp;-&nbsp; 
+							<input type="number" class="display-ib inputTag phone" id="phone2" name="" value="${phone[1]}" required>
+							&nbsp;-&nbsp; 
+							<input type="number" class="display-ib inputTag phone" id="phone3" name="" value="${phone[2]}" required>
 						</div>
 						<div>
 							<span id="checkPhone">&nbsp;</span>
@@ -237,11 +247,30 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	</div>
 
-
+	
+	<script src="${contextPath}/resources/js/wsp_member.js"></script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
-
+	<script>
+	// 전화번호 옵션 정보 불러오기
+	(function(){
+		$("#phone1 > option").each(function(index, item){
+			if($(item).text() == "${phone[0]}"){
+				$(item).prop("selected", true);
+			}
+		});
+	});
+	
+	// 이메일 옵션 정보 불러오기
+	(function(){
+		$("#email2 > option").each(function(index, item){
+			if($(item).text() == "${email[1]}"){
+				$(item).prop("selected", true);
+			}
+		});
+	});
+	</script>
 
 
 

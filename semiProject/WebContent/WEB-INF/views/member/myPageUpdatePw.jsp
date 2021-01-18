@@ -131,7 +131,7 @@
                 
                 <div>
                     <div class="lb">
-                        <label for="pwd1">새 비밀번호</label>  <br>
+                        <label for="pwd2">새 비밀번호</label>  <br>
                     </div>
                     <div class="ip">
                         <input type="password" class="inputTag"  id="pwd2" name=""  required>
@@ -144,7 +144,7 @@
                 <!-- 비밀번호 재확인 -->
                 <div>
                     <div class="lb">
-                        <label for="pwd2">새 비밀번호 재확인</label> <br>
+                        <label for="pwd3">새 비밀번호 재확인</label> <br>
                     </div>
                     <div class="ip">
                         <input type="password" class="inputTag"  id="pwd3" name=""   required>

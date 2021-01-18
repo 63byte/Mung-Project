@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.kh.wsp.member.model.service.MemberService;
-import com.kh.wsp.member.model.vo.Member;
+import com.kh.semi.member.model.service.MemberService;
+import com.kh.semi.member.model.vo.Member;
+
 
 @WebServlet("/member/myPageUpdatePw.do")
 public class UpdatePwServlet extends HttpServlet {
@@ -22,8 +23,9 @@ public class UpdatePwServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// 현재 비밀번호, 새로운 비밀번호, 회원 번호
-		String currentPwd = request.getParameter("currentPwd");
-		String newPwd = request.getParameter("newPwd1");
+		String currentPwd = request.getParameter("currentPw");
+		String newPw1 = request.getParameter("newPw1");
+		String newPw2 = request.getParameter("newPw1");
 		
 		// 현재 로그인한 회원 정보를 얻어옴
 		HttpSession session = request.getSession();
@@ -34,7 +36,7 @@ public class UpdatePwServlet extends HttpServlet {
 			loginMember.setMemberPwd(currentPwd);
 			
 			// 비즈니스 로직 처리 후 결과 반환 받기
-			int result = new MemberService().updatePwd(loginMember, newPwd);
+			int result = new MemberService().updatePw(loginMember, newPw1, newPw2);
 													// loginMember 안에 no+pwd가 담겨져있다.
 			
 			String swalIcon = null;
@@ -42,15 +44,15 @@ public class UpdatePwServlet extends HttpServlet {
 			
 			if(result > 0) { // 비밀번호 변경 성공
 				swalIcon = "success";
-				swalTitle = "비밀번호가 변경되었습니다.";
+				swalTitle = "비밀번호가 변경되었습니다. ᵔᴥᵔ";
 				
 			} else if (result == 0) { // 비밀번호 변경 실패
 				swalIcon = "error";
-				swalTitle = "비밀번호가 변경에 실패했습니다.";
+				swalTitle = "비밀번호가 변경에 실패했습니다. TᴥT";
 				
 			} else { // 현재 비밀번호 불일치
 				swalIcon = "warning";
-				swalTitle = "현재 비밀번호가 일치하지 않습니다.";
+				swalTitle = "현재 비밀번호가 일치하지 않습니다. ㅇᴥㅇ";
 			}
 			
 			// 알림창 전달
