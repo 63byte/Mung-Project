@@ -87,6 +87,37 @@ public class MemberService {
 		return result;
 	}
 
+	
+	/** 비밀번호 변경 Service
+	 * @param loginMember
+	 * @param newPw1
+	 * @param newPw2
+	 * @return
+	 * @throws Exception
+	 */
+	public int updatePw(Member loginMember, String newPwd) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.checkCurrentPw(conn, loginMember);
+		
+		if(result > 0) {
+			loginMember.setMemberPwd(newPwd);
+			
+			result = dao.updatePwd(conn, loginMember);
+			
+			if(result > 0)		commit(conn);
+			else				rollback(conn);
+			
+			
+		}else {	// 현재 비밀번호 불일치
+			result = -1;
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
 	/**
 	 * 비밀번호 변경 Service
 	 * 

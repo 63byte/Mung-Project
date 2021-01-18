@@ -26,8 +26,8 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		switch(name) {
 		case "userPw" : // 로그인 시 비밀번호 name 속성 값
 		case "pwd1" : 	   // 회원가입 시 비밀번호 name 속성 값
-//		case "currentPwd" : // 비밀번호 변경 시 현재 비밀번호
-//		case "newPwd1" :   // 비밀번호 변경 시 새 비밀번호 name 속성 값
+		case "currentPwd" : // 비밀번호 변경 시 현재 비밀번호
+		case "newPwd2" :   // 비밀번호 변경 시 새 비밀번호 name 속성 값
 			
 			encPwd = getSha512(super.getParameter(name)); // 암호화
 			break;
