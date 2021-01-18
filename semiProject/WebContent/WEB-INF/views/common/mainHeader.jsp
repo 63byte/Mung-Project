@@ -229,7 +229,7 @@ a {
 
 
 
-			<li><a href="#" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
+			<li><a href="${contextPath}/notice/notice.do" class="nav-items" id="nav-serviceCenter">고객센터</a></li>
 		</ul>
 	</div>
 
