@@ -99,4 +99,70 @@ public class HospitalDAO {
 		return hList;
 	}
 
+
+
+	/** 동물병원 상세조회 Service
+	 * @param conn
+	 * @param hospitalNo
+	 * @return hospital
+	 * @throws Exception
+	 */
+	public Hospital selectHospital(Connection conn, int hospitalNo) throws Exception {
+		Hospital hospital = null;
+		
+		String query = prop.getProperty("selectHospital");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, hospitalNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				hospital = new Hospital();
+				hospital.setHospNm(rset.getString("HOSP_NM"));
+				hospital.setLocation2(rset.getString("LOCATION2"));
+				hospital.setPhone(rset.getString("PHONE"));
+				hospital.setOpeningTime(rset.getString("OPENING_TIME"));
+				hospital.setClosingTime(rset.getString("CLOSING_TIME"));
+				hospital.setHospInfo(rset.getString("HOSP_INFO"));
+				hospital.setViewCount(rset.getInt("VIEW_COUNT"));
+				hospital.setWifi(rset.getString("WIFI"));
+				hospital.setParking(rset.getString("PARKING"));
+				hospital.setAppointment(rset.getString("APPOINTMENT"));
+				hospital.setFullTime(rset.getString("FULL_TIME"));
+				
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return hospital;
+	}
+
+	
+
+	
+
+	/** 조회 수 증가 DAO
+	 * @param conn
+	 * @param hospitalNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int hospitalNo)throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hospitalNo);
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

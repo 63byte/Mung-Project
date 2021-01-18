@@ -52,4 +52,33 @@ public class HospitalService {
 		return hList;
 	}
 
+
+	
+
+
+	/** 동물병원 상세조회 Service
+	 * @param hospitalNo
+	 * @return hospital
+	 * @throws Exception
+	 */
+	public Hospital selectHospital(int hospitalNo) throws Exception {
+		Connection conn = getConnection();
+		
+		Hospital hospital = dao.selectHospital(conn, hospitalNo);
+				
+		if(hospital != null) {
+//			조회 수 증가
+			int result = dao.increaseReadCount(conn,hospitalNo);
+			
+			if(result>0) {
+				commit(conn);
+//				반환되는 병원 데이터에도 조회수를 1 추가해준다.
+				hospital.setViewCount(hospital.getViewCount() +1);
+			}else rollback(conn);
+		}
+		
+		close(conn);
+		return hospital;
+	}
+
 }

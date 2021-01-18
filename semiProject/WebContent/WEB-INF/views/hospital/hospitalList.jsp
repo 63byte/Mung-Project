@@ -34,7 +34,7 @@
             
             <div class="row-item">
             	<div class="bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/17/41/friends-1149841_960_720.jpg');" >
-            	  <form action="${contextPath }/search" method="GET" id="searchForm">
+            	  <form action="${contextPath }/hospital/search" method="GET" id="searchForm">
                     <div class="search">
                         <input type="text" name="sv" class="searchBar" placeholder="검색어를 입력해 주세요.">
                         <button class="btn_class" id="searchBtn">
@@ -78,8 +78,9 @@
            <c:choose>
            		<c:when test="${empty hList }">
            		<!-- hList가 비어있을 때 : 게시글 목록 조회에서 조회되지 않았을 때  -->
-           			<div style="text-align:center; font-size: 18px;">존재하는 게시글이 없습니다.</div>
-           		
+           		<div class="row-item">
+           			<div style="text-align:center; font-size: 18px;">해당 지역에 등록된 병원이 없습니다.</div>
+           		</div>
            		</c:when>
            
            		<c:otherwise>	<!-- 조회된 게시글 목록이 있을 때  -->
@@ -108,7 +109,7 @@
 
 
 			<!-- 등록하기 버튼  (관리자로 로그인 했을 때만 보인다.-->
-			<c:if test="${loginMember.memberAdmin == 'A' }">
+			<c:if test="${!empty loginMember && loginMember.memberAdmin == 'A' }">
 	            <div class="row-item">
 	                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = '${contextPath}/hospital/insertForm'">등록하기</button>
 	            </div>
