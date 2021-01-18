@@ -53,6 +53,17 @@ public class HospitalController extends HttpServlet {
 				
 				errorMsg = "동물병원 목록 조회 중 오류 발생";
 				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				// 1) 페이징 처리를 위한 값 계산 Service호출
 				PageInfo pInfo = service.getPageInfo(cp);
 				

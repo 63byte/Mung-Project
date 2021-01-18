@@ -37,8 +37,8 @@
             	  <form action="${contextPath }/hospital/search" method="GET" id="searchForm">
                     <div class="search">
                         <input type="text" name="sv" class="searchBar" placeholder="검색어를 입력해 주세요.">
-                        <button class="btn_class" id="searchBtn">
-                            <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
+                        <button class="searchBar btn_class" id="searchBtn">
+                            <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon" style="display:block; margin:0 auto;">
                             <!-- <span></span> -->
                         </button>
                     </div>
@@ -46,13 +46,30 @@
             	</div>
             </div>
             
-            <!-- 지역 선택/옵션 -->
             
+            <div class="my-5">
+				<form action="${contextPath }/search.do" method="GET" class="text-center" id="searchForm">
+					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
+						<option value="title">글제목</option>
+						<option value="content">내용</option>
+						<option value="titcont">제목+내용</option>
+						<option value="writer">작성자</option>
+					</select>
+					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
+					<button class="form-control btn btn-primary" style="width: 100px; display: inline-block;">검색</button>
+				</form>
+            
+            
+            
+            
+            
+            <!-- 지역 선택/옵션 -->
+            <!-- 
             <div class="row-item">
                 <div class="locationSelect">
 	              <form>
                     <span style="font-size:16px; font-weight:bold;">대한민국 ></span>
-		                    <select class="locationNm" name="sk">
+		                    <select class="locationNm" name="location1" id="locationName">
 		                        <option value="강원도">강원도</option>
 		                        <option value="경기도">경기도</option>
 		                        <option value="경상도">경상도</option>
@@ -70,7 +87,7 @@
 		                    </select>
 	               </form>
                 </div>
-            </div>
+            </div> -->
             
            
            <!-- 동물 병원 리스트 -->
@@ -159,5 +176,44 @@
     </div>
 		
 		 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+		 
+		 
+<script>
+
+// 지역선택 (옵션태그)	
+/* $("#locationName").on("change",function(){
+	
+	// 선택된 option의 value
+	var locationName = $("#locationName option:checked").val(); //서울,경기도.. value값이 locationNm에 담긴다.
+	
+	console.log(locationName);
+		
+     var url = "${contextPath}/hospital/list?cp=${pInfo.currentPage}&location="+ locationName;
+    
+    location.href =url; 
+	
+	
+}); */
+
+
+
+
+// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
+(function(){
+	
+	var searchValue ="${param.sv}";
+	
+	// 검색어 입력창에 searchValue 값 출력
+	$("input[name=sv]").val(searchValue);
+	
+	
+})();
+
+
+// 동물병원 상세조회
+
+
+
+</script>
 </body>
 </html>
