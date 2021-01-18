@@ -110,7 +110,7 @@
     border : 1px solid  #8bd2d6;
     background-color: #8bd2d6;
     cursor: pointer;
-		outline:none;
+	outline:none;
 }
 
 
@@ -194,7 +194,7 @@ font-size:13px; margin:0;
 #insertHospital {
    width : 100px;
    height: 40px;
-   margin: 40px 0 50px 90%;
+   margin: 40px 0 0 90%;
    line-height: 20px;
    border-radius: 5px;
    color: #fff;
@@ -206,6 +206,11 @@ font-size:13px; margin:0;
 }
 
 /*----------------------------페이징(부트스트랩)---------------------------------  */
+
+.paging{
+	margin-top:100px;
+}
+
 
 .page-item>a{
  color: black;

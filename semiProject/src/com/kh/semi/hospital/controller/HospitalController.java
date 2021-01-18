@@ -76,12 +76,23 @@ public class HospitalController extends HttpServlet {
 			}
 			
 			// 동물병원 등록 화면 전환 **************************************
-						else if(command.contentEquals("/insertForm")) {
-							path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
-							view = request.getRequestDispatcher(path);
-							view.forward(request, response);
-						}
+				else if(command.contentEquals("/insertForm")) {
+					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				}
 			
+			
+			// 동물병원 등록 **************************************
+				else if(command.contentEquals("insert")) {
+					errorMsg ="동물병원 등록 과정에서 오류 발생";
+					
+					// 1. MultipartRequest 객체 생성하기
+					// 1-1. 전송 파일 용량 지정(byte단위)
+					int maxSize = 20* 1024 * 1024; // 20MB
+					
+				}
+	
 			
 		}catch(Exception e) {
 			e.printStackTrace();
