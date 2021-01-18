@@ -203,3 +203,42 @@ function memberJoinvalidate(){
 }
 
 
+// 내 정보 수정 ------------------------------------------------------------------
+// 유효성 검사
+function memberUpdateValidate(){
+	
+	var updateCheck = {"nickName" : false,
+						"email1" : false,
+						"phone2" : false}
+	
+	var regExp1 = /^[a-zA-Z가-힣\d]{3,8}$/;
+	var regExp2 = /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/;
+	var regExp3 = /^\d{3,4}$/; // 숫자 3~4 글자
+   	var regExp4 = /^\d{4,4}$/; // 숫자 4 글자
+	
+	// 닉네임
+	if(!regExp3.test( $("#userName").val() )){
+        updateCheck.userName = false;
+    }else{
+        updateCheck.userName = true;
+    }
+	
+	// 이메일
+	if(!regExp3.test( $("#email").val() )){
+        updateCheck.email = false;
+    }else{
+        updateCheck.email = true;
+    }
+
+	// 전화번호
+	var p2 = $("#phone2").val();
+    var p3 = $("#phone3").val();
+    if(!regExp1.test(p2) || !regExp2.test(p3)){
+        updateCheck.phone2 = false;
+    }else{
+        updateCheck.phone2 = true;
+    }
+}
+
+
+

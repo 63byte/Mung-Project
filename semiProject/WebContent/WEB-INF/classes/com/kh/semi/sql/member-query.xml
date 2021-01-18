@@ -9,7 +9,7 @@ INSERT INTO TB_MEMBER
 VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ?)
 </entry>
 
-
+<!-- 로그인 -->
 <entry key="loginMember">
 SELECT MEM_NO, MEM_ID, NICKNAME, EMAIL, PHONE,
         GENDER, MEM_GRADE
@@ -19,11 +19,35 @@ AND MEM_PW = ?
 AND SCSN_FL = 'N'
 </entry>
 
+<!-- 아이디 중복 검사 -->
 <entry key="idDupCheck">
 SELECT COUNT(*) FROM TB_MEMBER
 WHERE MEM_ID = ?
 AND SCSN_FL = 'N'
 </entry>
 
+<!-- 내 정보 수정 -->
+<entry key="updateMember">
+UPDATE TB_MEMBER SET 
+NICKNAME = ?,
+EMAIL = ?,
+PHONE = ?,
+GENDER = ?
+WHERE MEM_NO=? 
+</entry>
+
+<!--
+<entry key="checkCurrentPw">
+SELECT COUNT(*) FROM MEMBER
+WHERE MEM_NO = ?
+AND MEM_PW = ?
+</entry>
+
+<entry key="updatePw">
+UPDATE TB_MEMBER SET
+MEM_PW = ?
+WHERE MEM_NO = ?
+</entry>
+-->
 
 </properties>

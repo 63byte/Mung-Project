@@ -62,7 +62,8 @@
 }
 
 .submit {
-	margin-bottom: 387px;
+	margin-top : -15px;
+	margin-bottom : 51px;
 }
 
 #submitBtn {
