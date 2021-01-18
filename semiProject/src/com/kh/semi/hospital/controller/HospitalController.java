@@ -75,6 +75,33 @@ public class HospitalController extends HttpServlet {
 				
 			}
 			
+			// 동물병원 상세조회 Controller ******************************
+			else if(command.contentEquals("/view")) {
+				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
+				
+				int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
+				
+				// 상세조회 비즈니스 로직 수행 후 결과 반환받기
+				Hospital hospital = service.selectHospital(hospitalNo);
+				
+				if(hospital!=null) { // 상세조회 성공 시
+					
+					// 해당 게시글에 포함된 이미지 파일 목록 조회 서비스 호출
+				}
+				
+				
+				
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			// 동물병원 등록 화면 전환 **************************************
 				else if(command.contentEquals("/insertForm")) {
 					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";

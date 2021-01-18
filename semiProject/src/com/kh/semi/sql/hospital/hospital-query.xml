@@ -8,6 +8,7 @@ SELECT COUNT(*) FROM HOSPITAL
 WHERE HOSP_DEL_FL = 'N'
 </entry>
 
+
 <!-- 동물병원 목록 조회(지정된 페이지)  -->
 <entry key="selectHospitalList">
 SELECT * FROM 
@@ -16,5 +17,19 @@ SELECT * FROM
 WHERE RNUM BETWEEN ? AND ?
 </entry>
 
+<!-- 동물병원 상세 조회  -->
+<entry key="selectHospital">
+SELECT HOSP_NM,LOCATION2,PHONE,OPENING_TIME,CLOSING_TIME,HOSP_INFO,VIEW_COUNT,WIFI,PARKING,APPOINTMENT,FULL_TIME
+WHERE HOSP_NO=?
+AND HOSP_DEL_FL='N'
+</entry>
 
+
+
+<!-- 조회수 증가 -->
+<entry key="increaseReadCount">
+UPDATE HOSPITAL SET
+VIEW_COUNT = VIEW_COUNT +1
+WHERE HOSP_NO = ?
+</entry>
 </properties>
