@@ -18,6 +18,8 @@ public class HSearchDAO {
 	private ResultSet rset = null;
 	
 	
+	
+	
 
 	/** 조건을 만족하는 게시글 수 조회 DAO
 	 * @param conn
