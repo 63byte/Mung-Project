@@ -108,19 +108,10 @@
 <body>
 
 			<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
+			<jsp:include page="/WEB-INF/views/freeBoard/freeSideMenu.jsp"></jsp:include>
 <div class="container my-5">
 	
 	<div class="row my-5">
-		<div class="col-md-3">
-			  <div class="aside">
-            <ul>
-                <div class="side-div-1"><li><a href="${contextPath}/freeBoard/freeList.do" class="aside-items" id="aside-localInfo">자유 게시판</a></li></div>
-               <div class="side-div-2"><li><a href="${contextPath}/tripBoard/tripList.do" class="aside-items" id="aside-touristSpot">여행 후기 게시판</a></li></div>
-            </ul>
-        </div>
-		</div>
-		
-		
 		<div class="col-md-9 my-5">
 		
 			<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">

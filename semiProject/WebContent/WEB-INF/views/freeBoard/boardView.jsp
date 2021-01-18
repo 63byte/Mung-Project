@@ -35,7 +35,7 @@
 	<div>
 		<div id="board-area">
 			<!-- Title -->
-				<h3 class="mt-4 display-3">${board.boardTitle }</h3>		
+				<h3 class="mt-4 display-3">${board.boardTitle}</h3>		
 				
 				<p class="lead">
 					작성자 : ${board.memberId }
