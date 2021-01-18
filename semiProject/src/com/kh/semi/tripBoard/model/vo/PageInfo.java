@@ -7,7 +7,7 @@ public class PageInfo {		// 페이징 처리를 위한 값을 저장할 객체
 	private int listCount;		// 전체 게시글 수를 저장할 변수
 	
 	// 설정할 값
-	private int limit = 10;		// 한 페이지에 보여질 게시글 목록 수
+	private int limit = 12;		// 한 페이지에 보여질 게시글 목록 수
 	private int pageSize = 10;	// 페이징바에 표시될 페이지 수
 	
 	// 계산할 값

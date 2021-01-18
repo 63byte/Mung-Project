@@ -50,19 +50,18 @@
 					<span class="float-right">조회수 ${board.readCount }</span>
 				</p>
 		
-		
-				<hr>
-				
-				<c:if test="${!empty fList }">
-					<c:forEach var="file" items="${fList}">
+				<c:if test="${!empty trList }">
+					<c:forEach var="file" items="${trList}">
 						<div class="imgdiv">
 							<img class="boardImg" id="${file.fileNo}"
-								src="${contextPath}/resources/uploadImages/${file.fileName}">
+								src="${contextPath}/resources/uploadTripImages/${file.fileName}">
 					</div>
 					</c:forEach>
 				
 				</c:if>
 				
+		
+				<hr>
 				
 				
 				<div id="board-content">${board.boardContent }</div>

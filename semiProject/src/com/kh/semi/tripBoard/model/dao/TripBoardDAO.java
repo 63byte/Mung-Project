@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
 
@@ -170,6 +172,173 @@ public class TripBoardDAO {
 		}
 		
 		return result;
+	}
+
+
+	/** 다음 게시글 번호  DAO
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int selectNextNo(Connection conn) throws Exception{
+		int boardNo = 0;
+		
+		String query = prop.getProperty("selectNextNo");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				boardNo = rset.getInt(1);
+			}
+			
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return boardNo;
+	}
+
+	
+
+	/** 게시글 삽입 DAO
+	 * @param conn
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertBoard(Connection conn, Map<String, Object> map) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("insertBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (int)map.get("boardNo"));
+			pstmt.setString(2, (String)map.get("boardTitle"));
+			pstmt.setString(3, (String)map.get("boardContent"));
+			pstmt.setInt(4, (int)map.get("boardWriter"));
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		return result;
+	}
+
+
+	/** 파일 정보 게시글 삽입 DAO
+	 * @param conn
+	 * @param at
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertAttachment(Connection conn, Attachment at) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, at.getFileName());
+			pstmt.setString(2, at.getFilePath());
+			pstmt.setInt(3, at.getFileLevel());
+			pstmt.setInt(4, at.getParentBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 파일 정보 상세보기 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Attachment> selectBoardFiles(Connection conn, int boardNo) throws Exception{
+		List<Attachment> trList = null;
+		
+		String query = prop.getProperty("selectBoardFiles");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+					
+			trList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				
+				Attachment at = new Attachment(
+								rset.getInt("TRIP_FILE_NO"),
+								rset.getString("TRIP_FILE_NAME"),
+								rset.getInt("TRIP_FILE_LEVEL"));
+				
+				at.setFilePath(rset.getString("TRIP_FILE_PATH"));
+				
+				trList.add(at);
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return trList;
+	}
+
+
+	/** 썸네일 얻어오기 Service
+	 * @param conn
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(Connection conn, PageInfo pInfo) throws Exception{
+		List<Attachment> trList = null;
+		
+		String query = prop.getProperty("selectThumbnailList");
+		
+		try {
+			// 위치 홀더에 들어갈 시작 행, 끝 행번호 계산
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() + 1;
+			int endRow = startRow + pInfo.getLimit() -1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			trList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				
+				Attachment at = new Attachment();
+				at.setFileName(rset.getString("TRIP_FILE_NAME"));
+				at.setParentBoardNo(rset.getInt("TRIP_BOARD_NO"));
+				
+				trList.add(at);
+			}
+			
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return trList;
 	}
 	
 	
