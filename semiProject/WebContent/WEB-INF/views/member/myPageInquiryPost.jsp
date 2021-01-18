@@ -68,8 +68,8 @@ th, td {
 	background-color: #17a2b8;
 }
 
-.search{
-	margin-bottom : 20px;
+.search {
+	margin-bottom: 20px;
 }
 
 #searchBtn {
@@ -102,82 +102,77 @@ h6 {
 
 	<div class="main">
 
-                <div id="btnDiv">
-                    <a href="myPageInquiryPost.do"><button type="menu" id="inquiryBtn">내가 쓴 게시글</button></a>
-                    <a href="myPageInquiryReply.do"><button type="menu" id="inquiryBtn">내가 쓴 댓글</button></a>
-                </div>
+		<div id="btnDiv">
+			<a href="myPageInquiryPost.do"><button type="menu"
+					id="inquiryBtn">내가 쓴 게시글</button></a> <a href="myPageInquiryReply.do"><button
+					type="menu" id="inquiryBtn">내가 쓴 댓글</button></a>
+		</div>
 
-                <br>
-                
-                <h6>게시글 조회 결과</h6>
+		<br>
 
-                <div id="resultDiv">
-                    <table class="table table-hover table-striped text-center" id="result">
-                        <thead>
-                            <tr>
-                                <th>글 번호</th>
-                                <th>카테고리</th>
-                                <th>제목</th>
-                                <th>작성일</th>
-                                <th>조회수</th>
-                            </tr>
-                        </thead>
+		<h6>게시글 조회 결과</h6>
 
-                        <tr>
-                            <td>1</td>
-                            <th>여행 후기</th>
-                            <td>제주도 2박3일 후기</td>
-                            <td>2021-01-12</td>
-                            <td>1004</td>
-                        </tr>
-                    </table>
-                </div>
+		<div id="resultDiv">
+			<table class="table table-hover table-striped text-center"
+				id="result">
+				<thead>
+					<tr>
+						<th>글 번호</th>
+						<th>카테고리</th>
+						<th>제목</th>
+						<th>작성일</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
 
-                <div class="paging">
-                    <nav aria-label="Page navigation example">
-                        <ul id="pagingBtn" class="pagination pagination-sm justify-content-center">
-                          <li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
-                          <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">4</a></li>
-                          <li class="page-item"><a class="page-link" href="#">5</a></li>
-                          <li class="page-item"><a class="page-link" href="#">6</a></li>
-                          <li class="page-item"><a class="page-link" href="#">7</a></li>
-                          <li class="page-item"><a class="page-link" href="#">8</a></li>
-                          <li class="page-item"><a class="page-link" href="#">9</a></li>
-                          <li class="page-item"><a class="page-link" href="#">10</a></li>
-                          <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-                          <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
-                        </ul>
-                      </nav>
-                    </div>
+				<tr>
+					<td>1</td>
+					<th>여행 후기</th>
+					<td>제주도 2박3일 후기</td>
+					<td>2021-01-12</td>
+					<td>1004</td>
+				</tr>
+			</table>
+		</div>
 
-                <div class="search">
-                    <form action="${contextPath}/search.do" method="GET" class="text-center" id="searchForm">
-                        <select name="sk" class="form-control" style="width: 100px; display: inline-block;">
-                            <option value="title">글제목</option>
-                            <option value="content">내용</option>
-                            <option value="titcont">제목+내용</option>
-                            <option value="writer">작성자</option>
-                        </select>
+		<div class="paging">
+			<nav aria-label="Page navigation example">
+				<ul id="pagingBtn"
+					class="pagination pagination-sm justify-content-center">
+					<li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
+					<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">4</a></li>
+					<li class="page-item"><a class="page-link" href="#">5</a></li>
+					<li class="page-item"><a class="page-link" href="#">6</a></li>
+					<li class="page-item"><a class="page-link" href="#">7</a></li>
+					<li class="page-item"><a class="page-link" href="#">8</a></li>
+					<li class="page-item"><a class="page-link" href="#">9</a></li>
+					<li class="page-item"><a class="page-link" href="#">10</a></li>
+					<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+					<li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
+				</ul>
+			</nav>
+		</div>
 
-                        <input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
-                        <button id="searchBtn" style="width: 100px; display: inline-block;">검색</button>
-                    </form>
-    
-    
-                </div>
-
-
-
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+		<div class="search">
+			<form action="${contextPath}/search.do" method="GET" class="text-center" id="searchForm">
+				<select name="sk" class="form-control"
+					style="width: 100px; display: inline-block;">
+					<option value="title">글제목</option>
+					<option value="content">내용</option>
+					<option value="titcont">제목+내용</option>
+					<option value="writer">작성자</option>
+				</select> <input type="text" name="sv" class="form-control"
+					style="width: 25%; display: inline-block;">
+				<button id="searchBtn" style="width: 100px; display: inline-block;">검색</button>
+			</form>
+		</div>
 
 
 
-
-
-
+		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </body>
 </html>

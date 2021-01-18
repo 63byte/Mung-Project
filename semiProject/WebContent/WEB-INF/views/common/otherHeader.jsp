@@ -212,7 +212,7 @@ a:hover{
            <c:choose>
 				<%-- 로그인이 되어있지 않을 때 == session에 loginMember라는 값이 없을 때 --%>
 				<c:when test="${empty sessionScope.loginMember}">
-					<li><a href="#" class="nav-items" id="nav-mypage">마이페이지</a></li>
+					<li><a href="${contextPath}/member/loginForm.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
 					<script>
 						// 로그인이 안되있을 경우 마이페이지 클릭 시 경고창
 						var loginMemberId = "${loginMember.memberId}";
