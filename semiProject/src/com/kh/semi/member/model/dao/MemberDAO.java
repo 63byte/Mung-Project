@@ -222,6 +222,7 @@ public class MemberDAO {
 		return result;
 	}
 
+
 	/**
 	 * 회원 탈퇴 DAO
 	 * 
@@ -230,10 +231,10 @@ public class MemberDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateStatus(Connection conn, int memberNo) throws Exception {
+	public int withdrawal(Connection conn, int memberNo) throws Exception {
 		int result = 0;
 
-		String query = prop.getProperty("updateStatus");
+		String query = prop.getProperty("withdrawal");
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -248,4 +249,35 @@ public class MemberDAO {
 		return result;
 	}
 
+	/** 아이디 찾기 DAO
+	 * @param conn
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public Member findIdResult(Connection conn, Member member) throws Exception{
+		Member findMember = null;
+		
+		String query = prop.getProperty("findIdResult");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberNickName());
+			pstmt.setString(2, member.getEmail());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				findMember = new Member();
+				findMember.setMemberId(rset.getString("MEM_ID"));
+			}
+			
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return findMember;
+	}
 }

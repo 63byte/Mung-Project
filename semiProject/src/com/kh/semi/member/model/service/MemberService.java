@@ -87,6 +87,7 @@ public class MemberService {
 		return result;
 	}
 
+
 	/**
 	 * 비밀번호 변경 Service
 	 * 
@@ -127,14 +128,15 @@ public class MemberService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateStatus(Member loginMember) throws Exception {
+
+	public int withdrawal(Member loginMember) throws Exception {
 		Connection conn = getConnection();
 
 		int result = dao.checkCurrentPw(conn, loginMember); // 재활용
 
 		if (result > 0) {
 
-			result = dao.updateStatus(conn, loginMember.getMemberNo());
+			result = dao.withdrawal(conn, loginMember.getMemberNo());
 
 			if (result > 0)
 				commit(conn);
@@ -149,6 +151,22 @@ public class MemberService {
 		close(conn);
 
 		return result;
+	}
+	
+	
+	/** 아이디 찾기
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public Member findIdResult(Member member) throws Exception{
+		Connection conn = getConnection();
+		
+		Member findMember = dao.findIdResult(conn, member);
+		
+		close(conn);
+		
+		return findMember;
 	}
 
 }

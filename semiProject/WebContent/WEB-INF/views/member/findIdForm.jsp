@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,9 +155,30 @@ html, body {
 	vertical-align: bottom;
 }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
+
+<c:set var="contextPath" scope="application"
+		value="${pageContext.servletContext.contextPath}" />
+
+	<c:if test="${!empty sessionScope.swalTitle }">
+		<script>
+			swal({
+				icon : "${swalIcon}",
+				title : "${swalTitle}",
+				text : "${swalText}"
+			});
+		</script>
+
+		<%-- 2) 한 번 출력한 메세지를 Session에서 삭제 --%>
+		<c:remove var="swalIcon" />
+		<c:remove var="swalTitle" />
+		<c:remove var="swalText" />
+	</c:if>
+
 
 
 	<div id="wrapper">
@@ -169,9 +192,9 @@ html, body {
 		</a>
 
 		<div id="btnDiv">
-			<a href="${contextPath}/member/findIdForm"><button id="idBtn">아이디 찾기</button></a>
+			<a href="${contextPath}/member/findIdForm.do"><button id="idBtn">아이디 찾기</button></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="${contextPath}/member/findPdForm"><button id="pwBtn">비밀번호 찾기</button></a>
+			<a href="${contextPath}/member/findPdForm.do"><button id="pwBtn">비밀번호 찾기</button></a>
 		</div>
 
 		<div id="findWrapper">
@@ -180,28 +203,88 @@ html, body {
 				<p id="p2">회원정보에 입력하신 성함과 이메일 주소를 입력해 주세요.</p>
 			</div>
 
+		<form action="${contextPath}/member/findIdResultForm.do" method="post" onsubmit="return submitCheck();">
 			<div id="findDiv2">
-				<label id="name">이름</label> 
-				<input type="text" id="input" required>
+				<label id="userName">이름</label> 
+				<input type="text" id="userName" name="userName" required>
 				<br> 
-				<label id="email">이메일</label> 
-				<input type="text" id="input" required>
-				<button id="eCode">인증번호 받기</button>
+				이메일
+				<input type="text" id="mail" name="mail">
+				
+				<button id="sendMail" class="sendMail">인증번호 받기</button>
 
 
-				<label id="email2">&nbsp;</label> <input type="text" id="input" placeholder="인증번호 입력" required>
+				<label id="email2">&nbsp;</label> <input type="text" id="inputEmail" placeholder="인증번호 입력" required>
+				<span id="checkFl"></span>
 			</div>
 
-		</div>
 
 		<div id="nextDiv">
-			<a href="여기에 아이디 찾기 결과 경로 넣기"><button type="submit" id="nextBtn">다음</button>></a>
+			<button type="submit" id="nextBtn">다음</button>
 		</div>
+	</form>
 	</div>
-
+		</div>
 	<div id="cloudDiv">
 		<img src="${pageContext.request.contextPath}/resources/image/common/cloud.png" id="cloud">
 	</div>
+	
+	
+	
+	<script>
+	
+	var isCertification = false;
+	
+	$("#sendMail").click(function() {// 메일 입력 유효성 검사
+		var mail = $("#mail").val(); //사용자의 이메일 입력값. 
+		
+		if (mail == "") {
+			alert("메일 주소가 입력되지 않았습니다.");
+		} else {
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/member/CheckMail',
+				data : {
+					mail:mail
+					},
+				dataType :'json',
+
+			});
+			alert("인증번호가 전송되었습니다.") 
+			isCertification=true; //추후 인증 여부를 알기위한 값
+		}
+	});
+	
+	
+	$("#inputEmail").on("propertychange change keyup paste input", function() {
+		if ($("#inputEmail").val() == map.key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+			$("#checkFl").text("인증 성공!").css("color", "green");
+			isCertification = true;  //인증 성공여부 check
+		} else {
+			$("#checkFl").text("불일치!").css("color", "red");
+			isCertification = false; //인증 실패
+		}
+	});
+	
+	
+	
+	$("#nextBtn").click(function(){
+		if(isCertification==false){ //인증이 완료되지 않았다면
+			alert("메일 인증이 완료되지 않았습니다.");
+		}
+	});
+	
+	
+	
+	$("#nextBtn").click(function submitCheck(){
+		if(isCertification==false){
+			alert("메일 인증이 완료되지 않았습니다.");
+			return false;
+		}else
+			true;
+	});
+	
+	</script>
 
 </body>
 </html>
