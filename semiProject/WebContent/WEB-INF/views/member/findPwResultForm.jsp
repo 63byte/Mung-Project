@@ -25,7 +25,6 @@ html, body {
 	background: #8ad2d5;
 }
 
-
 /* 전체 화면 */
     #wrapper {
         width : 1100px;
@@ -152,6 +151,7 @@ html, body {
         right: 0;
         bottom: 0;
     }
+
 </style>
 </head>
 
@@ -167,7 +167,6 @@ html, body {
 					id="logo">
 			</div>
 		</a>
-
         
         <div id="btnDiv">
             <a href="${contextPath}/member/findIdForm"><button id="idBtn">아이디 찾기</button></a>
@@ -177,12 +176,8 @@ html, body {
     
         <div id="findWrapper">
         <div id="findDiv1">
-            <p id="p1">본인 확인 완료!</p> 
-            <p id="p2">해당 고객님의 아이디는 ${memberId} 입니다.</p>
-        </div>
-
-        
-
+            <p id="p1">비밀번호 변경 완료!</p> 
+            <p id="p2">비밀번호가 변경되었습니다. 새로운 비밀번호로 로그인해주세요.</p>
         </div>
 
         <div id="loginDiv">
@@ -192,10 +187,8 @@ html, body {
 
 
     <div id="cloudDiv">
-		<img
-			src="${pageContext.request.contextPath}/resources/image/common/cloud.png"
-			id="cloud">
-	</div>
+        <img src="${pageContext.request.contextPath}/resources/image/common/cloud.png" id="cloud">
+    </div>
 
 </body>
 </html>
