@@ -76,10 +76,11 @@
 		float: left;
 		width: 34%;
 		margin-bottom : 50px;
+		margin-right : 30px;
 	}
 	
 	.card-img-top{
-		height: 200px;
+		height: 174px;
 	}
 	
 	.card:hover{
@@ -147,7 +148,7 @@
 				<c:forEach var="board"  items="${tList}">
 				<div class="col-md-4">
 
-						<div class="card" style="width: 16rem;">
+						<div class="card" style="width: 14rem;">
 					  	<c:forEach var="thumbnail" items="${trList}">
 												<%-- 현재 출력하려는 게시글 번호와
 															썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면 
@@ -179,7 +180,6 @@
 													<fmt:formatDate value="${board.boardCreateDate}" pattern="HH:mm"/>
 												</c:otherwise>
 											</c:choose>
-						    	 
 						    	 </p>
 						  </div>
 						</div>
