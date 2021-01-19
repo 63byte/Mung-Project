@@ -281,7 +281,9 @@ div {
 
 								</tbody>
 							</table>
-
+							
+							<hr style="color:gray; margin-top : -43px;" >
+							<br>
 							<c:if test="${!empty loginMember}">
 								<button type="button" id="insertBtn"
 									style="width: 100px; width: 100px;"

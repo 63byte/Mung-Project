@@ -169,9 +169,9 @@ html, body {
 		</a>
 
 		<div id="btnDiv">
-			<a href="#"><button id="idBtn">아이디 찾기</button></a>
+			<a href="${contextPath}/member/findIdForm"><button id="idBtn">아이디 찾기</button></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="#"><button id="pwBtn">비밀번호 찾기</button></a>
+			<a href="${contextPath}/member/findPdForm"><button id="pwBtn">비밀번호 찾기</button></a>
 		</div>
 
 		<div id="findWrapper">
@@ -181,27 +181,26 @@ html, body {
 			</div>
 
 			<div id="findDiv2">
-				<label id="name">이름</label> <input type="text" id="input" required>
-				<br> <label id="email">이메일</label> <input type="text"
-					id="input" required>
+				<label id="name">이름</label> 
+				<input type="text" id="input" required>
+				<br> 
+				<label id="email">이메일</label> 
+				<input type="text" id="input" required>
 				<button id="eCode">인증번호 받기</button>
 
 
-				<label id="email2">&nbsp;</label> <input type="text" id="input"
-					placeholder="인증번호 입력" required>
+				<label id="email2">&nbsp;</label> <input type="text" id="input" placeholder="인증번호 입력" required>
 			</div>
 
 		</div>
 
 		<div id="nextDiv">
-			<button id="nextBtn">다음</button>
+			<a href="여기에 아이디 찾기 결과 경로 넣기"><button type="submit" id="nextBtn">다음</button>></a>
 		</div>
 	</div>
 
 	<div id="cloudDiv">
-		<img
-			src="${pageContext.request.contextPath}/resources/image/common/cloud.png"
-			id="cloud">
+		<img src="${pageContext.request.contextPath}/resources/image/common/cloud.png" id="cloud">
 	</div>
 
 </body>
