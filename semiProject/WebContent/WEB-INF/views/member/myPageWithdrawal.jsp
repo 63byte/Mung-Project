@@ -97,8 +97,7 @@
 		<br>
 
 
-		<form action="#" method="POST"
-			onsubmit="return memberChangevalidate();">
+		<form action="withdrawal.do" method="POST" onsubmit="return withdrawalValidate();">
 			<div class="memberWithdrawal">
 				<hr>
 				<br>
@@ -116,13 +115,12 @@
 						<label for="pwd1">비밀번호</label> <br>
 					</div>
 					<div class="ip">
-						<input type="password" class="inputTag" id="pwd1" name="" required>
-					</div>
-					<div>
-						<span id="chechPwd1">&nbsp;</span>
+						<input type="password" class="inputTag" id="currentPw" name="currentPw" required>
 					</div>
 				</div>
 
+				<br>
+				<br>
 				
 				<div class="panel panel-default">
 
@@ -188,6 +186,7 @@
 					<input id="submitBtn" type="submit" name="" value="다음">
 				</div>
 			</div>
+			</form>
 	</div>
 
 	<script src="${contextPath}/resources/js/semi_member.js"></script>
