@@ -48,29 +48,24 @@ public class HospitalController extends HttpServlet {
 			// 2) 효율적인 UI/UX를 제공하기 위해서 사용한다(상세조회/북마크...)
 		    // 처음엔 얻어 올 값이 없어서 null 이 된다.
 			
+			
+			
 			// 동물병원 목록 조회**************************************
 			if(command.equals("/list")) {
 				
 				errorMsg = "동물병원 목록 조회 중 오류 발생";
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+								
 				
 				// 1) 페이징 처리를 위한 값 계산 Service호출
 				PageInfo pInfo = service.getPageInfo(cp);
+				
 				
 				// 2) 게시글 목록 조회 비즈니스 로직 수행
 				List<Hospital> hList = service.selectHospitalList(pInfo);
 				// pInfo를 가져가는 이유 = 
 				// pInfo에 담겨져있는 currentPage와 limit를 이용해 현재 페이지에 맞는 게시글 목록을 조회하기 위해
+				
+				
 				
 				
 				// 썸네일 추가
@@ -85,6 +80,9 @@ public class HospitalController extends HttpServlet {
 				view.forward(request, response);
 				
 			}
+			
+			
+			
 			
 			// 동물병원 상세조회 Controller ******************************
 			else if(command.contentEquals("/view")) {
