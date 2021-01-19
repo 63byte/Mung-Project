@@ -34,10 +34,13 @@
             <div class="bg-image-full" style="background-image: url('https://t1.daumcdn.net/liveboard/modetour/ce1ed892f7e4419e86dd3228d8a6faf2.JPG');" >
             <form action="#" method="GET" id="searchForm">
                 <div class="search">
-                    <input type="text" name="" class="searchBar" placeholder="검색어를 입력해 주세요.">
-                    <button class="btn_class" id="searchBtn">
-                        <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
-                        <!-- <span></span> -->
+                    <select name="sk"  id="searchOption">
+                        <option value="name">숙소명</option>
+                        <option value="location">주소</option>
+                    </select>
+                    <input type="text" name="sv" class="searchBar" placeholder="검색어를 입력해 주세요." autocomplete="off" maxlength='15' >
+                    <button class="searchBar btn_class" id="searchBtn">
+                        <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon" style="display:inline-block; margin:0 auto;" >
                     </button>
                 </div>
             </form>  
@@ -48,7 +51,7 @@
 
     <!-- 지역 선택/옵션 -->
             
-    <div class="row-item">
+  <!--   <div class="row-item">
         <div class="locationSelect">
             <span style="font-size:16px; font-weight:bold;">대한민국 ></span>
             <select class="locationNm" name="location">
@@ -68,7 +71,7 @@
                 <option value="충청도">충청도</option>
             </select>
         </div>
-    </div>    
+    </div>   -->  
 
     <!-- 숙소 리스트 -->
 
@@ -77,6 +80,7 @@
               <tr>
                   <td>
                       <div class="roomList">
+                      
                           <div class="thumbnail_area">
                               <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
                             </div>

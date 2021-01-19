@@ -21,8 +21,9 @@ public class Hospital {
 	
 	
 //	list 조회 용 생성자
-	public Hospital(String hospNm, String location2, String phone, String openingTime, String closingTime) {
+	public Hospital(int hospNo, String hospNm, String location2, String phone, String openingTime, String closingTime) {
 		super();
+		this.hospNo = hospNo;
 		this.hospNm = hospNm;
 		this.location2 = location2;
 		this.phone = phone;

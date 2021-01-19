@@ -56,6 +56,10 @@ public class HospitalDAO {
 		
 		return listCount;
 	}
+	
+	
+	
+	
 
 
 
@@ -63,6 +67,7 @@ public class HospitalDAO {
 	/** 동물병원 목록 조회 DAO
 	 * @param conn
 	 * @param pInfo
+	 * @param location1 
 	 * @return
 	 * @throws Exception
 	 */
@@ -85,9 +90,10 @@ public class HospitalDAO {
 			hList = new ArrayList<Hospital>();
 			
 			while(rset.next()) {
-				Hospital hospital = new Hospital(rset.getString("HOSP_NM"), 
+				Hospital hospital = new Hospital(rset.getInt("HOSP_NO"), rset.getString("HOSP_NM"), 
 						rset.getString("LOCATION2"), rset.getString("PHONE"), 
 						rset.getString("OPENING_TIME"), rset.getString("CLOSING_TIME"));
+						
 				hList.add(hospital);		
 			}
 			
@@ -164,5 +170,9 @@ public class HospitalDAO {
 		
 		return result;
 	}
+
+
+
+	
 
 }
