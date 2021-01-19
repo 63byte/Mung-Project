@@ -152,5 +152,21 @@ public class MemberService {
 
 		return result;
 	}
+	
+	
+	/** 아이디 찾기
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public Member findIdResult(Member member) throws Exception{
+		Connection conn = getConnection();
+		
+		Member findMember = dao.findIdResult(conn, member);
+		
+		close(conn);
+		
+		return findMember;
+	}
 
 }
