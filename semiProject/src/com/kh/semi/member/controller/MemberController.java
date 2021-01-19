@@ -1,7 +1,17 @@
 package com.kh.semi.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Random;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -196,6 +206,95 @@ public class MemberController extends HttpServlet {
 				view.forward(request, response);
 
 			}
+			
+			
+			// ------------------ id 찾기 인증번호 발송 Controller -----------------------
+			else if(command.equals("/CheckMail")) {
+				
+				  final String user   = "pjh87973158@gmail.com";
+				  final String password  = "pjh1218714";
+
+				  String to = request.getParameter("mail");
+				  String mTitle = "[뭉개뭉개] 아이디 찾기 인증.";
+				  
+				  Map<String, Object> map = new HashMap<>();
+				  Random random = new Random();
+				  String key = "";
+				  
+				  for (int i = 0; i < 3; i++) {
+						int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성
+						key += (char) index;
+					}
+					int numIndex = random.nextInt(8999) + 1000; // 4자리 정수를 생성
+					key += numIndex;
+				  
+				  
+				  // Get the session object
+				  Properties props = new Properties();
+				  props.put("mail.smtp.host", "smtp.gmail.com");
+				  props.put("mail.smtp.port", 465);
+				  props.put("mail.smtp.auth", "true");
+				  props.put("mail.smtp.ssl.enable", "true");
+				  props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+				  Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				   protected PasswordAuthentication getPasswordAuthentication() {
+				    return new PasswordAuthentication(user, password);
+				   }
+				  });
+
+				  // Compose the message
+				  
+				   MimeMessage message = new MimeMessage(session);
+				   message.setFrom(new InternetAddress(user));
+				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+				   // Subject
+				   message.setSubject(mTitle);
+				   
+				   // Text
+				   message.setText("뭉개뭉개에서 보내드리는 아이디 찾기용 인증 번호 : " + key);
+
+				   // send the message
+				   Transport.send(message);
+				   
+				   map.put("key", key);
+				   response.getWriter().print(map);
+
+			}
+			
+			// ------------- 아이디 찾기 결과, Form 전환 Controller ------------------
+			else if(command.equals("/findIdResultForm.do")) {
+				errorMsg = "아이디 찾기중 오류 발생";
+				
+				String nickName = request.getParameter("userName");
+				String email = request.getParameter("mail");
+				
+				Member member = new Member();
+				member.setMemberNickName(nickName);
+				member.setEmail(email);
+				
+				Member findMember = service.findIdResult(member);
+				
+				if(findMember != null) {
+					path = "/WEB-INF/views/member/findIdResultForm.jsp";
+					
+					request.setAttribute("findMember", findMember);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+					
+				}else {
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "아이디찾기 실패");
+					response.sendRedirect(request.getHeader("referer"));
+				}
+				
+			}
+			
+			
+			
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

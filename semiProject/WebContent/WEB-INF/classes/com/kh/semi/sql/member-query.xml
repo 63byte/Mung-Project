@@ -43,6 +43,7 @@ WHERE MEM_NO = ?
 AND MEM_PW = ?
 </entry>
 
+
 <!-- 비밀번호 변경 -->
 <entry key="updatePw">
 UPDATE TB_MEMBER SET
@@ -50,11 +51,20 @@ MEM_PW = ?
 WHERE MEM_NO = ?
 </entry>
 
+<<<<<<< HEAD
+
+<!-- 아이디 찾기 -->
+<entry key="findIdResult">
+SELECT MEM_ID FROM TB_MEMBER
+WHERE NICKNAME = ?
+AND EMAIL = ?
+=======
 <!-- 회원탈퇴 -->
 <entry key="withdrawal">
 UPDATE TB_MEMBER SET
 SCSN_FL = 'Y'
 WHERE MEM_NO = ?
+>>>>>>> branch 'master' of https://github.com/63byte/superJunio.git
 </entry>
 
 </properties>

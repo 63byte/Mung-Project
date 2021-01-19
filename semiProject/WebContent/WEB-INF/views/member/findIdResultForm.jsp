@@ -178,7 +178,7 @@ html, body {
         <div id="findWrapper">
         <div id="findDiv1">
             <p id="p1">본인 확인 완료!</p> 
-            <p id="p2">해당 고객님의 아이디는 ${memberId} 입니다.</p>
+            <p id="p2">해당 고객님의 아이디는 ${findMember.memberId} 입니다.</p>
         </div>
 
         

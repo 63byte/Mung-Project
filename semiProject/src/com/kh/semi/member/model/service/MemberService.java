@@ -87,6 +87,7 @@ public class MemberService {
 		return result;
 	}
 
+
 	/**
 	 * 비밀번호 변경 Service
 	 * 
@@ -127,6 +128,7 @@ public class MemberService {
 	 * @return result
 	 * @throws Exception
 	 */
+
 	public int withdrawal(Member loginMember) throws Exception {
 		Connection conn = getConnection();
 
