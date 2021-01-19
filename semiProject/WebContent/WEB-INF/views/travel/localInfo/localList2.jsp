@@ -346,40 +346,60 @@ button#searchBtn:hover{
 				
 				<%-- 게시글 목록 출력 --%>
 				<tbody>
-					<c:choose>
-						<c:when test="${empty tList}">
-	                        <tr>
-	                           <td colspan="5">존재하는 게시글이 없습니다.</td>
-	                        </tr>
-	                    </c:when>
-					
-						<c:otherwise> <%-- 조회된 게시글 목록이 있을 때 --%>
-							<c:forEach var="travel" items="${tList}">
-								<tr>
-									<th scope="row">${travel.travelNo}</th>
-									<td>
-										<div class="post-thumbnail-img"></div> <!-- 썸네일.. -->
-									</td>
-									<td>${travel.travelTitle}</td>
-									<td>${travel.travelReadCount}</td>
-									<td>${travel.travelBoardDate}</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+					<tr>
+						<th scope="row">1</th>
+						<td>
+							<div class="post-thumbnail-img"></div>
+						</td>
+						<td>서울 추천 여행지 TOP 10</td>
+						<td>0</td>
+						<td>2021-01-16</td>
+					</tr>
+					<tr>
+						<th scope="row">2</th>
+						<td>
+							<div class="post-thumbnail-img"></div>
+						</td>
+						<td>견주 정모 공원 BEST 3</td>
+						<td>0</td>
+						<td>2021-01-16</td>
+					</tr>
+					<tr>
+						<th scope="row">3</th>
+						<td>
+							<div class="post-thumbnail-img"></div>
+						</td>
+						<td>댕댕이와 함께 서울 근교 드라이브는 어때요?</td>
+						<td>0</td>
+						<td>2021-01-16</td>
+					</tr>
+					<tr>
+						<th scope="row">4</th>
+						<td>
+							<div class="post-thumbnail-img"></div>
+						</td>
+						<td>인스타 핫플! 반려견 동반 카페 모음</td>
+						<td>0</td>
+						<td>2021-01-16</td>
+					</tr>
+					<tr>
+						<th scope="row">5</th>
+						<td>
+							<div class="post-thumbnail-img"></div>
+						</td>
+						<td>그림 보러갈래요? 애견동반 미술관 BEST 4</td>
+						<td>0</td>
+						<td>2021-01-16</td>
+					</tr>
 				</tbody>
 			</table>
 
-			<!-- 등록하기 버튼  (관리자로 로그인 했을 때만 보인다.-->
-			<c:if test="${loginMember.memberAdmin == 'A' }">
-				<div class="row-item">
-					<button type="button" class="btn_class" id="insertLocal"
-						onclick="location.href = '${contextPath}/travel/localInsert.do'">
-						등록하기</button>
-				</div>
-			</c:if>
-			
-			
+			<!-- 등록하기 버튼  -->
+			<div class="row-item">
+				<button type="button" class="btn_class" id="insertLocal"
+					onclick="location.href = '${contextPath}/travel/localInsert.do'">
+					등록하기</button>
+			</div>
 
 			<!-- 페이징 -->
 			<div class="paging">

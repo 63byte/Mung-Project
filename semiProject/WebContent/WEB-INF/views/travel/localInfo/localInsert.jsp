@@ -194,8 +194,26 @@ div {
 
 						<!-- 이미지 업로드 버튼 -->
 						<div class="filebox">
-							<label for="file">업로드</label> <input type="file" id="file">
-							<input class="file-upload-name" value="파일경로..">
+							<div>
+								<label for="file">업로드</label> <input type="file" id="file" name="img1" onchange="LoadImg(this,1)">
+								<input class="file-upload-name" value="파일경로..">
+							</div>
+							<div>
+								<label for="file">업로드</label> <input type="file" id="file" name="img2" onchange="LoadImg(this,2)">
+								<input class="file-upload-name" value="파일경로..">
+							</div>
+							<div>
+								<label for="file">업로드</label> <input type="file" id="file" name="img3" onchange="LoadImg(this,3)">
+								<input class="file-upload-name" value="파일경로..">
+							</div>
+							<div>
+								<label for="file">업로드</label> <input type="file" id="file" name="img4" onchange="LoadImg(this,4)">
+								<input class="file-upload-name" value="파일경로..">
+							</div>
+							<div>
+								<label for="file">업로드</label> <input type="file" id="file" name="img5" onchange="LoadImg(this,5)">
+								<input class="file-upload-name" value="파일경로..">
+							</div>
 						</div>
 
 					</div>
