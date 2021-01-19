@@ -4,15 +4,12 @@ public class Image {
 	private int hospImgNo;
 	private String hospImgPath;
 	private String hospImgName;
-	private String hospImgLevel;
+	private int hospImgLevel;
 	private int hospNo;
 	
 	public Image() {}
-	
-	
-	
-	// 매개변수 전부 다 있는 생성자
-	public Image(int hospImgNo, String hospImgPath, String hospImgName, String hospImgLevel, int hospNo) {
+
+	public Image(int hospImgNo, String hospImgPath, String hospImgName, int hospImgLevel, int hospNo) {
 		super();
 		this.hospImgNo = hospImgNo;
 		this.hospImgPath = hospImgPath;
@@ -45,11 +42,11 @@ public class Image {
 		this.hospImgName = hospImgName;
 	}
 
-	public String getHospImgLevel() {
+	public int getHospImgLevel() {
 		return hospImgLevel;
 	}
 
-	public void setHospImgLevel(String hospImgLevel) {
+	public void setHospImgLevel(int hospImgLevel) {
 		this.hospImgLevel = hospImgLevel;
 	}
 

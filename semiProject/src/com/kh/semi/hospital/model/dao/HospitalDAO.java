@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.semi.hospital.model.vo.Hospital;
+import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
 public class HospitalDAO {
@@ -170,6 +171,12 @@ public class HospitalDAO {
 		
 		return result;
 	}
+
+
+
+	
+	
+
 
 
 

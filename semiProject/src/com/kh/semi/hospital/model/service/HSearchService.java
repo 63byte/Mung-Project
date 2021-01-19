@@ -58,39 +58,40 @@ public class HSearchService {
 		
 
 		// 검색 조건에 따라 SQL 조합
-		switch (searchValue) {
-		case "hosptalName":
-			 ;
-			break;
-		case "location":
-			;
-			break;
+		switch (searchKey) {
+		case "hospitalName": condition = " HOSP_NM LIKE '%' || '" + searchValue + "' || '%' "; break; 
+			 
+		case "location":  condition = " (LOCATION1 LIKE '%' || '" + searchValue + "' || '%' "
+										+ "OR LOCATION2 LIKE '%' || ' " + searchValue + "' || '%') "; break;
 		}
+		
+		
 		return condition;
 	}
-	
 
-	/**
-	 * 검색 동물병원 목록 리스트 조회 Service
-	 * 
+	
+	
+	
+	
+	/** 검색 게시글 목록 리스트 조회 Service
 	 * @param map
 	 * @param pInfo
 	 * @return hList
 	 * @throws Exception
-	 *//*
-		 * public List<Hospital> searchHospitalList(Map<String, Object> map, PageInfo
-		 * pInfo) throws Exception { Connection conn = getConnection();
-		 * 
-		 * String searchValue = (String)map.get("searchValue");
-		 * 
-		 * // SQL (병원 이름 검색 + 지역명)
-		 * 
-		 * String condition = createCondition(map);
-		 * 
-		 * List<Hospital> hList = dao.searchHospitalList(conn, pInfo, condition);
-		 * 
-		 * close(conn);
-		 * 
-		 * return hList; }
-		 */
+	 */
+	public List<Hospital> searchHospitalList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<Hospital> hList = dao.searchHospitalList(conn, condition, pInfo);
+		
+		close(conn);
+		
+		return hList;
+	}
+	
+
+	
+		 
 }

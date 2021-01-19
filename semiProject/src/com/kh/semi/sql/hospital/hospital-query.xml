@@ -31,6 +31,9 @@ AND HOSP_DEL_FL='N'
 UPDATE HOSPITAL SET
 VIEW_COUNT = VIEW_COUNT +1
 WHERE HOSP_NO = ?
+
+
+
 </entry>
 
 </properties>

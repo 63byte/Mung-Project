@@ -24,4 +24,7 @@ TRAVEL_READ_COUNT = TRAVEL_READ_COUNT + 1
 WHERE TRAVEL_NO = ?
 </entry>
 
+<!-- 게시글 상세 조회  -->
+
+
 </properties>
