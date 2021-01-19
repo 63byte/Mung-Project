@@ -51,9 +51,9 @@ WHERE MEM_NO = ?
 </entry>
 
 <!-- 회원탈퇴 -->
-<entry key="updateStatus">
+<entry key="withdrawal">
 UPDATE TB_MEMBER SET
-SCSN_FL = 'N'
+SCSN_FL = 'Y'
 WHERE MEM_NO = ?
 </entry>
 
