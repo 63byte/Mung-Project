@@ -36,7 +36,6 @@ GENDER = ?
 WHERE MEM_NO=? 
 </entry>
 
-
 <!-- 현재 비밀번호 확인 -->
 <entry key="checkCurrentPw">
 SELECT COUNT(*) FROM TB_MEMBER
@@ -44,12 +43,17 @@ WHERE MEM_NO = ?
 AND MEM_PW = ?
 </entry>
 
-
-
 <!-- 비밀번호 변경 -->
 <entry key="updatePw">
 UPDATE TB_MEMBER SET
 MEM_PW = ?
+WHERE MEM_NO = ?
+</entry>
+
+<!-- 회원탈퇴 -->
+<entry key="updateStatus">
+UPDATE TB_MEMBER SET
+SCSN_FL = 'N'
 WHERE MEM_NO = ?
 </entry>
 
