@@ -32,27 +32,34 @@
 
             <!-- 검색창 -->
             
-            <div class="row-item">
-            	<div class="bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/17/41/friends-1149841_960_720.jpg');" >
-            	  <form action="${contextPath }/hospital/search" method="GET" id="searchForm">
-                    <div class="search">
-                        <input type="text" name="sv" class="searchBar" placeholder="검색어를 입력해 주세요.">
-                        <button class="btn_class" id="searchBtn">
-                            <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon">
-                            <!-- <span></span> -->
-                        </button>
-                    </div>
-                </form>  
-            	</div>
+    <div class="row-item">
+        <form action="${contextPath }/hospital/search" method="GET" id="searchForm">
+            <div class="bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/17/41/friends-1149841_960_720.jpg');" >
+              
+                <div class="search">
+                    <select name="sk"  id="searchOption">
+                        <option value="hosptalName">병원명</option>
+                        <option value="location">주소</option>
+                    </select>
+                    <input type="text" name="sv" class="searchBar" placeholder="검색어를 입력해 주세요." autocomplete="off" maxlength='15' >
+                    <button class="searchBar btn_class" id="searchBtn">
+                        <img src="${contextPath}/resources/image/icon/searchIcon.png" id="searchIcon" style="display:inline-block; margin:0 auto;" >
+                    </button>
+                </div>
+
             </div>
+        </form> 
+    </div>
+            
+            
+         
             
             <!-- 지역 선택/옵션 -->
             
-            <div class="row-item">
+        <!--     <div class="row-item">
                 <div class="locationSelect">
-	              <form>
                     <span style="font-size:16px; font-weight:bold;">대한민국 ></span>
-		                    <select class="locationNm" name="sk">
+		                    <select class="locationNm" name="location1" id="locationName">
 		                        <option value="강원도">강원도</option>
 		                        <option value="경기도">경기도</option>
 		                        <option value="경상도">경상도</option>
@@ -68,10 +75,11 @@
 		                        <option value="제주">제주</option>
 		                        <option value="충청도">충청도</option>
 		                    </select>
-	               </form>
                 </div>
-            </div>
-            
+            </div> 
+          </form>  -->    
+           
+           <c:set var="boardNo" value="1"></c:set>
            
            <!-- 동물 병원 리스트 -->
            
@@ -84,27 +92,40 @@
            		</c:when>
            
            		<c:otherwise>	<!-- 조회된 게시글 목록이 있을 때  -->
-           			 <c:forEach var="hospital" items="${hList }"><!-- hList에서 하나씩 꺼내와 hospital에 담는다.  -->
-				            <div class="row-item">
+           			 <c:forEach var="hospital" items="${hList}"><!-- hList에서 하나씩 꺼내와 hospital에 담는다.  -->
+				            
+				            
+				            
+				            <div class="row-item numberSelect">
+				            	
 				                <div class="thumbnail">
 				                    <div class="thumbnail_img">
-				                        <a href="#"><!-- 해당 동물병원 상세페이지로 이동.  -->
 				                        <!-- 썸네일 출력  -->
 				                            <img class="hospital_img" src="#">
-				                        </a>
 				                    </div>
-				                    <div class="thumbnail_info">
-				                      <div class="hospital_info"><a id="hospital_name" href="#"> ${hospital.hospNm }</a></div>
+				                    <div class="thumbnail_info ">
+				                      <div class="hospital_info"><span id="hospital_name" href="#"> ${hospital.hospNm }</span></div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : ${hospital.location2 }</div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : ${hospital.phone }</div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : ${hospital.openingTime } ~ ${hospital.closingTime }</div>
 				                    </div>
+				                    <span style="visibility:hidden">${hospital.hospNo }</span>
 				                </div>
 				            </div>
+				            
+				            
+				            
+				            
            			 </c:forEach>
            		</c:otherwise>
             </c:choose>
             <!-- 한 페이지 6개씩 보이기 -->
+            
+            
+            
+            
+            
+            
 
 
 
@@ -114,6 +135,45 @@
 	                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = '${contextPath}/hospital/insertForm'">등록하기</button>
 	            </div>
 			</c:if>
+			
+			
+			
+			
+			 <%---------------------- Pagination ----------------------%>
+         <%-- 페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장 --%>
+         <c:choose>
+    				<%-- 검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지인가? --%>        
+         		<c:when test="${!empty param.location1 && !empty param.sv }">
+         				<c:url var="pageUrl" value="/hospital/search"/>
+         				
+         				<%-- 쿼리스트링으로 사용할 내용을 변수에 저장함. --%>
+         				<c:set var="searchStr" value="&location=${param.location1 }&sv=${param.sv }"/>
+         		</c:when>
+         		<c:otherwise>
+				         <c:url var="pageUrl" value="/hospital/list"/>
+         		</c:otherwise>
+         </c:choose>
+         
+         
+         <!-- 화살표에 들어갈 주소를 변수로 생성 -->
+         <%-- 검색을 안 했을 때 : /hospital/list?cp=1 
+         			검색을 했을 때 : /search?cp=1&location=서울&sv=49   --%>
+         <c:set var="firstPage" value="${pageUrl}?cp=1${searchStr }"/>
+         <c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr }"/>
+         
+         <%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다. --%>
+         <%-- <fmt:parseNumber> : 숫자 형태를 지정하여 변수 선언 
+            integerOnly="true" : 정수로만 숫자 표현 (소수점 버림)
+         --%>
+
+			 
+			 <fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1)/10}" integerOnly="true"/>
+         <fmt:parseNumber var="prev" value="${c1 * 10}" integerOnly="true"/>
+         <c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr }"/> <!-- /board/list/do?cp=10  -->
+         
+         <fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9)/10}" integerOnly="true"/>
+         <fmt:parseNumber var="next" value="${c2 * 10 + 1}" integerOnly="true"/>
+         <c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr }"/>
 			
 			
 			
@@ -159,5 +219,60 @@
     </div>
 		
 		 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+		 
+		 
+<script>
+
+
+//동물병원 상세조회
+
+$(".numberSelect > *").on("click", function(){
+	var hospitalNo = $(this).children("span").text());
+	
+	var url = "${contextPath}/hospital/view=cp${pInfo.currentPage}&no="+hospitalNo+"{searchStr}";
+});
+
+
+	
+/* var location = $("#locationName option:selected").val();
+	
+$("#locationName").on("change",function(){
+	location = $("#locationName option:selected").val(); //서울,경기도.. value값이 locationNm에 담긴다.
+	console.log(location);
+}); */
+// 문제점 : 지역선택,,처음에 서울이 선택이 안 된다.(location1 비어있음)
+// 지역만 검색되게 어디로 이동시켜야되는지,,?list 컨트롤러로 바로?
+// list를 보여줄때 지역이 같은 화면만 보여줌. (service.dao->sql)
+
+
+
+// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
+(function(){
+	
+	var searchKey = "${param.sk}";
+	
+	var searchValue ="${param.sv}";
+	
+	// select의 option을 반복 접근
+	$("select[name=location1]").each(function(index,item){
+		// index : 현재 접근중인 요소의 인덱스
+		// item : 현재 접근중인 요소
+		
+		if($(item).val() == searchKey){
+			$(item).prop("selected",true);
+		}
+	});
+	
+	// 검색어 입력창에 searchValue 값 출력
+	$("input[name=sv]").val(searchValue);
+	
+	
+})();
+
+
+
+
+
+</script>
 </body>
 </html>

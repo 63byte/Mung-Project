@@ -163,96 +163,90 @@ public class MemberDAO {
 		return result;
 	}
 
-	/** 현재 비밀번호 검사 DAO
+	/**
+	 * 현재 비밀번호 검사 DAO
+	 * 
 	 * @param conn
 	 * @param loginMember
 	 * @return
 	 * @throws Exception
 	 */
-	public int checkCurrentPw(Connection conn, Member loginMember) throws Exception{
+	public int checkCurrentPw(Connection conn, Member loginMember) throws Exception {
 		int result = 0;
-		
+
 		String query = prop.getProperty("checkCurrentPw");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, loginMember.getMemberNo());
 			pstmt.setString(2, loginMember.getMemberPwd());
-			
+
 			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
+
+			if (rset.next()) {
 				result = rset.getInt(1);
 			}
-			
-		}finally {
+
+		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		
+
 		return result;
 	}
 
-	/** 비밀번호 변경 DAO
+	/**
+	 * 비밀번호 변경 DAO
+	 * 
 	 * @param conn
 	 * @param loginMember
 	 * @return
 	 * @throws Exception
 	 */
-	public int updatePwd(Connection conn, Member loginMember) throws Exception{
+	public int updatePwd(Connection conn, Member loginMember) throws Exception {
 		int result = 0;
-		
+
 		String query = prop.getProperty("updatePw");
-		
+
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, loginMember.getMemberPwd());
 			pstmt.setInt(2, loginMember.getMemberNo());
-			
+
 			result = pstmt.executeUpdate();
-			
-		}finally {
+
+		} finally {
 			close(pstmt);
-			
+
 		}
-		
 		return result;
 	}
 
-	
-	
-	/** 아이디 찾기 DAO
+
+	/**
+	 * 회원 탈퇴 DAO
+	 * 
 	 * @param conn
-	 * @param member
-	 * @return
+	 * @param memberNo
+	 * @return result
 	 * @throws Exception
 	 */
-	public Member findIdResult(Connection conn, Member member) throws Exception{
-		Member findMember = null;
-		
-		String query = prop.getProperty("findIdResult");
-		
+	public int withdrawal(Connection conn, int memberNo) throws Exception {
+		int result = 0;
+
+		String query = prop.getProperty("withdrawal");
+
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, member.getMemberNickName());
-			pstmt.setString(2, member.getEmail());
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				findMember = new Member();
-				findMember.setMemberId(rset.getString("MEM_ID"));
-			}
-			
-			
-		}finally {
-			close(rset);
+			pstmt.setInt(1, memberNo);
+
+			result = pstmt.executeUpdate();
+
+		} finally {
 			close(pstmt);
 		}
-		
-		return findMember;
-	}
 
+		return result;
+	}
 
 }

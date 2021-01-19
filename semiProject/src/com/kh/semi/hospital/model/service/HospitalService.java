@@ -35,11 +35,14 @@ public class HospitalService {
 		return new PageInfo(currentPage, listCount);
 	}
 
+	
+	
 
 
 
 	/**	동물병원 목록 조회 Service
 	 * @param pInfo
+	 * @param location1 
 	 * @return	hList
 	 * @throws Exception
 	 */
@@ -80,5 +83,10 @@ public class HospitalService {
 		close(conn);
 		return hospital;
 	}
+
+
+
+
+	
 
 }

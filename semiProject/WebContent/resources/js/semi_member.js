@@ -262,8 +262,19 @@ function memberChangevalidate(){
 
         return false;
     }
-	
-	
+}
+
+// 회원 탈퇴 약관 동의 체크 확인 ----------------------------------------------------------------------
+function withdrawalValidate(){
+
+    // #agree체크박스가 체크되어 있지 않다면
+    if( !$("#agree").prop("checked") ){
+        swal("약관에 동의해 주세요.");
+        return false;
+    }else{
+        return confirm("정말로 탈퇴하시겠습니까?");
+    }
+
 }
 
 
