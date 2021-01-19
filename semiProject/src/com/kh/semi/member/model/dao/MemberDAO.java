@@ -230,10 +230,10 @@ public class MemberDAO {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateStatus(Connection conn, int memberNo) throws Exception {
+	public int withdrawal(Connection conn, int memberNo) throws Exception {
 		int result = 0;
 
-		String query = prop.getProperty("updateStatus");
+		String query = prop.getProperty("withdrawal");
 
 		try {
 			pstmt = conn.prepareStatement(query);

@@ -24,6 +24,8 @@ public class WithdrawalServlet extends HttpServlet {
 				// 현재 비밀번호
 				String currentPw = request.getParameter("currentPw");
 				
+				System.out.println(currentPw);
+				
 				// 세션에 있는 로그인 회원 정보
 				HttpSession session = request.getSession();
 				Member loginMember = (Member)session.getAttribute("loginMember");
@@ -34,7 +36,7 @@ public class WithdrawalServlet extends HttpServlet {
 				try {
 					
 					// 비즈니스 로직 수행 후 결과 반환 받기
-					int result = new MemberService().updateStatus(loginMember);
+					int result = new MemberService().withdrawal(loginMember);
 					
 					String swalIcon = null;
 					String swalTitle = null;

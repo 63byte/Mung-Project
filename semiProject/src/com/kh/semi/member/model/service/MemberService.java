@@ -127,14 +127,14 @@ public class MemberService {
 	 * @return result
 	 * @throws Exception
 	 */
-	public int updateStatus(Member loginMember) throws Exception {
+	public int withdrawal(Member loginMember) throws Exception {
 		Connection conn = getConnection();
 
 		int result = dao.checkCurrentPw(conn, loginMember); // 재활용
 
 		if (result > 0) {
 
-			result = dao.updateStatus(conn, loginMember.getMemberNo());
+			result = dao.withdrawal(conn, loginMember.getMemberNo());
 
 			if (result > 0)
 				commit(conn);
