@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.kh.semi.hospital.model.dao.HospitalDAO;
 import com.kh.semi.hospital.model.vo.Hospital;
+import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
 public class HospitalService {
@@ -69,7 +70,10 @@ public class HospitalService {
 		
 		Hospital hospital = dao.selectHospital(conn, hospitalNo);
 				
+		// 상세조회가 성공하면
 		if(hospital != null) {
+			
+			
 //			조회 수 증가
 			int result = dao.increaseReadCount(conn,hospitalNo);
 			
@@ -83,6 +87,12 @@ public class HospitalService {
 		close(conn);
 		return hospital;
 	}
+
+
+
+
+
+
 
 
 

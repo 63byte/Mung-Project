@@ -38,7 +38,7 @@
               
                 <div class="search">
                     <select name="sk"  id="searchOption">
-                        <option value="hosptalName">병원명</option>
+                        <option value="hospitalName">병원명</option>
                         <option value="location">주소</option>
                     </select>
                     <input type="text" name="sv" class="searchBar" placeholder="검색어를 입력해 주세요." autocomplete="off" maxlength='15' >
@@ -124,8 +124,6 @@
             
             
             
-            
-            
 
 
 
@@ -143,11 +141,11 @@
          <%-- 페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장 --%>
          <c:choose>
     				<%-- 검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지인가? --%>        
-         		<c:when test="${!empty param.location1 && !empty param.sv }">
+         		<c:when test="${!empty param.sk && !empty param.sv }">
          				<c:url var="pageUrl" value="/hospital/search"/>
          				
          				<%-- 쿼리스트링으로 사용할 내용을 변수에 저장함. --%>
-         				<c:set var="searchStr" value="&location=${param.location1 }&sv=${param.sv }"/>
+         				<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
          		</c:when>
          		<c:otherwise>
 				         <c:url var="pageUrl" value="/hospital/list"/>
@@ -227,9 +225,11 @@
 //동물병원 상세조회
 
 $(".numberSelect > *").on("click", function(){
-	var hospitalNo = $(this).children("span").text());
+	var hospitalNo = $(this).children("span").text();
 	
-	var url = "${contextPath}/hospital/view=cp${pInfo.currentPage}&no="+hospitalNo+"{searchStr}";
+	var url = "${contextPath}/hospital/view=cp${pInfo.currentPage}&no="+ hospitalNo +"${searchStr}";
+	
+	location.href=url;
 });
 
 
@@ -254,7 +254,7 @@ $("#locationName").on("change",function(){
 	var searchValue ="${param.sv}";
 	
 	// select의 option을 반복 접근
-	$("select[name=location1]").each(function(index,item){
+	$("select[name=sk]>option").each(function(index,item){
 		// index : 현재 접근중인 요소의 인덱스
 		// item : 현재 접근중인 요소
 		

@@ -16,42 +16,38 @@
 
         <!-- 이미지 출력 -->
         <div class="imageArea">
-            <img class="imageArea" src="${contextPath}/resources/image/hospital/gyeonggido/heartman.jpg">
+            <img class="imageArea" src="#">
         </div>
     
         <!-- 동물병원 이름 -->
         <div class="row-item" >
-            <p id="hospitalName">동물병원 이름</p>
+            <p id="hospitalName">${hospital.hospNm }</p>
         </div> 
 
-        <!-- 조회수/좋아요 -->
+        <!-- 조회수 -->
         <div class="row-item">
             <div class="viewInfo iconArea">
                 <span><img src="${contextPath}/resources/image/icon/view.png" class="icon"></span>
-                <div class="count">0</div><!-- 최대 999,999 -->
+                <div class="count">${hospital.viewCount }</div><!-- 최대 999,999 -->
             </div>
-            <div class="viewInfo">
-                <button type="button" class="like"><img src="${contextPath}/resources/image/icon/like/png" class="icon"></button>
-                <div class="count">0</div><!-- 최대 999,999 -->
-            </div>    
         </div>
 
         <!-- 동물병원 주소 -->
         <div class="row-item" >
             <span><img class="icon" src="${contextPath}/resources/image/icon/site.png"></span>
-            <span id="hospitalAddress">동물병원 주소</span>
+            <span id="hospitalAddress">${hospital.location2 } </span>
         </div> 
     
         <!-- 동물병원 전화번호 -->
         <div class="row-item" >
             <span><img class="icon" src="${contextPath}/resources/image/icon/phone.png"></span>
-            <span id="hospitalPhone">전화번호 : </span>
+            <span id="hospitalPhone">전화번호 : ${hospital.phone } </span>
         </div> 
 
         <!-- 동물병원 운영시간 -->
         <div class="row-item" >
             <span><img class="icon" src="${contextPath}/resources/image/icon/clock.png"></span>
-            <span id="hospitalHours">운영시간 : 오픈  ~ 마감</span>
+            <span id="hospitalHours">운영시간 : ${hospital.openingTime }  ~ ${hospital.closingTime }</span>
         </div> 
 
         <hr>
@@ -104,13 +100,7 @@
         <div class="row-item" >
             <p style="font-size:13px; margin-bottom: 15px;">병원 정보</p>
             <div style="font-size:15px;">
-                월~금 : 9:00 ~ 19:00 <br>
-                점심시간 : 13:00 ~ 14:00 <br>
-                공휴일 휴무 <br>
-                <br>
-                상세 사이트 주소 : djWJrh.com <br>
-                
-                #전문 수의사 #어쩌고 #저쩌고
+	               ${hospital.hospInfo }
             </div>
         </div>
         <hr style="margin-bottom: 15px;">
@@ -129,7 +119,7 @@
         <!-- 관리자만 보이는 버튼 -->
         <div class="row-item" style="margin-top:50px;">
             <div class="btn_item">
-                <button class= "btn_class"  id="updateBtn" type="button">수정</button>
+                <button class= "btn_class"  id="backBtn" type="button">돌아가기</button>
                 <button class= "btn_class"  id="deleteBtn" type="button">삭제</button>
             </div>
         </div>

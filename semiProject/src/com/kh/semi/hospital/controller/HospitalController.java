@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.hospital.model.service.HospitalService;
 import com.kh.semi.hospital.model.vo.Hospital;
+import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
 @WebServlet("/hospital/*")
@@ -60,7 +61,7 @@ public class HospitalController extends HttpServlet {
 				PageInfo pInfo = service.getPageInfo(cp);
 				
 				
-				// 2) 게시글 목록 조회 비즈니스 로직 수행
+				// 2) 동물병원 목록 조회 비즈니스 로직 수행
 				List<Hospital> hList = service.selectHospitalList(pInfo);
 				// pInfo를 가져가는 이유 = 
 				// pInfo에 담겨져있는 currentPage와 limit를 이용해 현재 페이지에 맞는 게시글 목록을 조회하기 위해
@@ -69,6 +70,16 @@ public class HospitalController extends HttpServlet {
 				
 				
 				// 썸네일 추가
+				
+//				if(hList!=null) {
+//					
+//					// 조회된 동물병원이 있다면 썸네일이 있는지 확인해보고 있으면 출력한다.
+//					List<Image> iList = service.selectThumbnailList(pInfo);
+//					
+//					if(!iList.isEmpty()) {
+//						request.setAttribute("iList", iList);
+//					}
+//				}
 				
 				
 				path = "/WEB-INF/views/hospital/hospitalList.jsp";
@@ -96,6 +107,12 @@ public class HospitalController extends HttpServlet {
 				if(hospital!=null) { // 상세조회 성공 시
 					
 					// 해당 게시글에 포함된 이미지 파일 목록 조회 서비스 호출
+					
+					
+					path ="/WEB-INF/views/hospital/hospitalView.jsp";
+					request.setAttribute("hospital", hospital);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
 				}
 				
 				
