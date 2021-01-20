@@ -1,5 +1,6 @@
 package com.kh.semi.hospital.model.vo;
 
+
 public class Hospital {
 	private int hospNo;
 	private String hospNm;
@@ -33,24 +34,31 @@ public class Hospital {
 
 	
 	// 상세조회용 생성자
-	public Hospital(String hospNm, String location2, String phone, String openingTime, String closingTime,
-			String hospInfo, int viewCount, String wifi, String parking, String appointment, String fullTime) {
+	public Hospital(String hospNm, String location2, String phone, String openingTime, String closingTime, String hospInfo,
+		int viewCount) {
+	super();
+	this.hospNm = hospNm;
+	this.location2 = location2;
+	this.phone = phone;
+	this.openingTime = openingTime;
+	this.closingTime = closingTime;
+	this.hospInfo = hospInfo;
+	this.viewCount = viewCount;
+}
+
+	
+	// 부대시설용 생성자
+	public Hospital(String wifi, String parking, String appointment, String fullTime) {
 		super();
-		this.hospNm = hospNm;
-		this.location2 = location2;
-		this.phone = phone;
-		this.openingTime = openingTime;
-		this.closingTime = closingTime;
-		this.hospInfo = hospInfo;
-		this.viewCount = viewCount;
 		this.wifi = wifi;
 		this.parking = parking;
 		this.appointment = appointment;
 		this.fullTime = fullTime;
 	}
+
 	
 	
-	
+
 	// 모든 매개변수
 	public Hospital(int hospNo, String hospNm, String location1, String location2, String phone, String openingTime,
 			String closingTime, String hospInfo, int viewCount, String hospDelFl, int memNo, String wifi, String parking,
@@ -72,6 +80,10 @@ public class Hospital {
 		this.appointment = appointment;
 		this.fullTime = fullTime;
 	}
+
+
+
+
 
 
 

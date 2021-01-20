@@ -81,11 +81,32 @@ public class HospitalService {
 				commit(conn);
 //				반환되는 병원 데이터에도 조회수를 1 추가해준다.
 				hospital.setViewCount(hospital.getViewCount() +1);
-			}else rollback(conn);
+			}
+			else rollback(conn);
 		}
 		
 		close(conn);
 		return hospital;
+	}
+
+
+
+
+
+ 
+	/** 동물병원 상세조회 부대시설 목록 Service
+	 * @param hospitalNo
+	 * @return	facilityList
+	 * @throws Exception
+	 */
+	public List<Hospital> selectFacility(int hospitalNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Hospital> facilityList = dao.selectFacility(conn, hospitalNo);
+		
+		close(conn);
+		
+		return facilityList;
 	}
 
 

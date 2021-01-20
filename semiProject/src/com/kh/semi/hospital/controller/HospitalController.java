@@ -109,10 +109,21 @@ public class HospitalController extends HttpServlet {
 					// 해당 게시글에 포함된 이미지 파일 목록 조회 서비스 호출
 					
 					
+					// 해당 게시글에 포함된 부대시설 조회 서비스 호출
+					List<Hospital> facilityList = service.selectFacility(hospitalNo);
+					
+					System.out.println(facilityList);
+					
+					
 					path ="/WEB-INF/views/hospital/hospitalView.jsp";
 					request.setAttribute("hospital", hospital);
+					request.setAttribute("facilityList", facilityList);
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
+				}else {
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "동물병원 상세 조회 실패");
+					response.sendRedirect("list");
 				}
 				
 				
