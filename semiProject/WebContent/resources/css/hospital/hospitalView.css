@@ -142,7 +142,7 @@ text-align:center;
 color: #fff;
 line-height: 35px;
 margin : auto;
-margin-top: 30px;
+margin-top: 20px;
 
 }
 
@@ -151,6 +151,8 @@ margin-top: 30px;
 display:inline-block;
 text-align:center;
 line-height: 35px;
+float:right;
 }
+
 
 
