@@ -93,23 +93,6 @@ public class HospitalService {
 
 
 
- 
-	/** 동물병원 상세조회 부대시설 목록 Service
-	 * @param hospitalNo
-	 * @return	facilityList
-	 * @throws Exception
-	 */
-	public List<Hospital> selectFacility(int hospitalNo) throws Exception {
-		Connection conn = getConnection();
-		
-		List<Hospital> facilityList = dao.selectFacility(conn, hospitalNo);
-		
-		close(conn);
-		
-		return facilityList;
-	}
-
-
 
 
 

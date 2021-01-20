@@ -65,7 +65,7 @@ public class HSearchDAO {
 		String query = "SELECT HOSP_NO, HOSP_NM, LOCATION2, PHONE, OPENING_TIME, CLOSING_TIME FROM" + 
 	            "    (SELECT ROWNUM RNUM , H.*" + 
 	            "    FROM" + 
-	            "        (SELECT * FROM V_HOSP " + 
+	            "        (SELECT * FROM HOSPITAL " + 
 	            "        WHERE " + condition +
 	            "        AND HOSP_DEL_FL = 'N' ORDER BY HOSP_NO DESC) H )" + 
 	            "WHERE RNUM BETWEEN ? AND ?";
