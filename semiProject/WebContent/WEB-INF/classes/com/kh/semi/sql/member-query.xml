@@ -65,6 +65,23 @@ WHERE MEM_NO = ?
 SELECT MEM_ID FROM TB_MEMBER
 WHERE NICKNAME = ?
 AND EMAIL = ?
+AND SCSN_FL = 'N'
 </entry>
+
+<!-- 비밀먼호 찾기를 위한 회원 검색 -->
+<entry key="findPw">
+SELECT COUNT(*) FROM TB_MEMBER
+WHERE MEM_ID = ?
+AND EMAIL = ?
+AND SCSN_FL = 'N'
+</entry>
+
+<entry key="updatePwd">
+UPDATE TB_MEMBER SET
+MEM_PW = ?
+WHERE MEM_ID = ?
+AND SCSN_FL = 'N'
+</entry>
+
 
 </properties>

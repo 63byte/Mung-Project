@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +12,11 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+	
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	
+	
 
 <style>
 * {
@@ -152,13 +159,31 @@ html, body {
         bottom: 0;
     }
 
-    #cloudImg {
+    /* #cloudImg {
         margin-top: 100px;
-    }
+    } */
 </style>
 </head>
 
 <body>
+
+<c:set var="contextPath" scope="application"
+		value="${pageContext.servletContext.contextPath}" />
+
+	<c:if test="${!empty sessionScope.swalTitle }">
+		<script>
+			swal({
+				icon : "${swalIcon}",
+				title : "${swalTitle}",
+				text : "${swalText}"
+			});
+		</script>
+
+		<%-- 2) 한 번 출력한 메세지를 Session에서 삭제 --%>
+		<c:remove var="swalIcon" />
+		<c:remove var="swalTitle" />
+		<c:remove var="swalText" />
+	</c:if>
 
 
 	<div id="wrapper">
@@ -173,6 +198,7 @@ html, body {
 			<a href="${contextPath}/member/findPdForm"><button id="pwBtn">비밀번호 찾기</button></a>
         </div>
     
+        <form action="${contextPath}/member/findPwResult.do" method="post" onsubmit="return validate();">
         <div id="findWrapper">
         <div id="findDiv1">
             <p id="p1">본인 확인 완료!</p> 
@@ -180,26 +206,98 @@ html, body {
         </div>
 
         <div id="findDiv2">
-            <label id="pw1">새 비밀번호</label>
-            <input type="password" id="input" required>
+        		
+        
+            <label for="id1">현재 아이디</label>
+            <input type="text" id="id1" name="id1" required>
+            <br>
+            <label for="pw1">새 비밀번호</label>
+            <input type="password" id="pw1" name="pw1" required>
+            <br><span id="checkPwd1"></span>
             <br>
 
-            <label id="pw2">새 비밀번호 확인</label>
-            <input type="password" id="input" required>
+            <label for="pw2">새 비밀번호 확인</label>
+            <input type="password" id="pw2" name="pw2" required>
+            <br><span id="checkPwd2"></span>
             
         </div>
 
         </div>
 
         <div id="changeDiv">
-            <a href="#"><button type="submit" id="changeBtn">변경</button></a>
+            <button type="submit" id="changeBtn">변경</button>
         </div>
+        </form>
     </div>
 
 
     <div id="cloudDiv">
         <img src="${pageContext.request.contextPath}/resources/image/common/cloud.png" id="cloud">
     </div>
+    
+    <script>
+    var validateCheck = {
+    		"pw1" : false,
+    	  "pw2" : false
+    }
+
+    
+    $("#pw1, #pw2").on("input", function () {
+
+        // 비밀번호 유효성 검사 
+        var regExp = /^[A-Za-z\d]{6,12}$/;
+        var v1 = $("#pw1").val();
+        var v2 = $("#pw2").val();
+
+        if (!regExp.test(v1)) {
+            $("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
+            validateCheck.pw1 = false;
+        } else {
+            $("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color", "green");
+            validateCheck.pw1 = true;
+        }
+        // 비밀번호가 유효하지 않은 상태에서 비밀번호 확인 작성 시
+        if (!validateCheck.pw1 && v2.length > 0) {
+            alert("유효한 비밀번호를 먼저 작성해주세요.");
+            $("#pw2").val(""); // 비밀번호 확인에 입력한 값 삭제
+            $("#pw1").focus();
+        } else {
+            // 비밀번호, 비밀번호 확인의 일치 여부
+            if (v1.length == 0 || v2.length == 0) {
+                $("#checkPwd2").html("&nbsp;");
+            
+            } else if(v1 == v2){
+                $("#checkPwd2").text("비밀번호 일치").css("color", "green");
+                validateCheck.pw2 = true;
+           
+
+            } else {
+                $("#checkPwd2").text("비밀번호 불일치").css("color", "red");
+                validateCheck.pw2 = false;
+            }
+        }
+    });
+    
+$("#changeBtn").click(function validate(){
+    for(var key in validateCheck){
+        if(!validateCheck[key]){
+            var msg;
+            switch(key){
+                case "pw1" : 
+                case "pw2" : msg="비밀번호가"; break;
+            }
+
+            alert(msg + " 유효하지 않습니다.");
+
+            $("#"+key).focus();
+
+            return false;
+        }
+    }
+});
+    
+    
+    </script>
 
 </body>
 </html>

@@ -113,7 +113,7 @@ html, body {
 }
 
 /* 이메일 버튼 & 효과 */
-#eCode {
+#sendMail {
 	border: white;
 	background-color: #379194;
 	color: white;
@@ -121,7 +121,7 @@ html, body {
 	border-radius: 5px;
 }
 
-#eCode:hover {
+#sendMail:hover {
 	font-weight: 500;
 }
 
@@ -194,7 +194,7 @@ html, body {
 		<div id="btnDiv">
 			<a href="${contextPath}/member/findIdForm.do"><button id="idBtn">아이디 찾기</button></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="${contextPath}/member/findPdForm.do"><button id="pwBtn">비밀번호 찾기</button></a>
+			<a href="${contextPath}/member/findPwForm.do"><button id="pwBtn">비밀번호 찾기</button></a>
 		</div>
 
 		<div id="findWrapper">
@@ -214,7 +214,7 @@ html, body {
 				<button id="sendMail" class="sendMail">인증번호 받기</button>
 
 
-				<label id="email2">&nbsp;</label> <input type="text" id="inputEmail" placeholder="인증번호 입력" required>
+				<label for="inputEmail">&nbsp;</label> <input type="text" id="inputEmail" placeholder="인증번호 입력" required>
 				<span id="checkFl"></span>
 			</div>
 

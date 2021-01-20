@@ -189,6 +189,6 @@ html, body {
     <div id="cloudDiv">
         <img src="${pageContext.request.contextPath}/resources/image/common/cloud.png" id="cloud">
     </div>
-
+</div>
 </body>
 </html>
