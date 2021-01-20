@@ -216,7 +216,8 @@ public class MemberController extends HttpServlet {
 
 				  String to = request.getParameter("mail");
 				  String mTitle = "[뭉개뭉개] 아이디 찾기 인증.";
-				  
+				 
+				  try {
 				  Map<String, Object> map = new HashMap<>();
 				  Random random = new Random();
 				  String key = "";
@@ -259,13 +260,18 @@ public class MemberController extends HttpServlet {
 				   Transport.send(message);
 				   
 				   map.put("key", key);
-				   response.getWriter().print(map);
-
+				   response.getWriter().print(key);
+				  }catch(Exception e) {
+					  e.printStackTrace();
+					  
+					  
+				  }
 			}
 			
 			// ------------- 아이디 찾기 결과, Form 전환 Controller ------------------
 			else if(command.equals("/findIdResultForm.do")) {
 				errorMsg = "아이디 찾기중 오류 발생";
+				
 				
 				String nickName = request.getParameter("userName");
 				String email = request.getParameter("mail");
