@@ -48,6 +48,8 @@ public class TravelController extends HttpServlet {
 				// 1) 페이징 처리를 위한 값 계산 Service호출
 				PageInfo pInfo = service.getPageInfo(cp);
 				
+				System.out.println(cp);
+				
 				// 2) 게시글 목록 조회 비즈니스 로직 수행
 				List<Travel> tList = service.selectTravelList(pInfo);
 				// pInfo를 가져가는 이유 = 
@@ -74,7 +76,7 @@ public class TravelController extends HttpServlet {
 				
 				// 쿼리스트링으로 전달된 공지사항 번호를 int형으로 파싱(자료형을 바꿈)하여 저장
 				int travelNo = Integer.parseInt(request.getParameter("no") );				
-				
+				System.out.println(travelNo);
 				// 상세조회 비즈니스 로직 수행 결과 반환
 				Travel travel = service.selectTravel(travelNo);
 				
