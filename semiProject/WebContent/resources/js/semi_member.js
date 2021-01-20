@@ -64,7 +64,7 @@ $("#userId").on("input",function(){
 
 $("#email1").on("input", function(){
     var e1 = $("#email1").val();
-    var regExp = /^[a-zA-Z\d]{4,10}$/;
+    var regExp = /^[a-zA-Z\d_]{4,10}$/;
         if(!regExp.test(e1)){
             $("#checkEmail").text("이메일 형식이 유효하지 않습니다.")
             .css("color", "red");
