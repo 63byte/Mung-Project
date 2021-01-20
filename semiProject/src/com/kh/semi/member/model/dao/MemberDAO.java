@@ -280,4 +280,63 @@ public class MemberDAO {
 		
 		return findMember;
 	}
+	
+	
+
+	/** 비밀번호 변경을 위한 조회 DAO
+	 * @param conn
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public int findPw(Connection conn, Member member) throws Exception{
+		int findPwMember = 0;
+		
+		String query = prop.getProperty("findPw");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getEmail());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				findPwMember = rset.getInt(1);
+			}
+			
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return findPwMember;
+	}
+
+	/** 새로운 비밀번호로 변경 DAO
+	 * @param conn
+	 * @param id
+	 * @param pw1
+	 * @return
+	 * @throws Exception
+	 */
+	public int updatePwd(Connection conn, String id, String pw1) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pw1);
+			pstmt.setString(2, id);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }

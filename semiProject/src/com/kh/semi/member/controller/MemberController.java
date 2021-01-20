@@ -297,6 +297,128 @@ public class MemberController extends HttpServlet {
 				
 			}
 			
+			// -------------- 비밀번호 찾기 화면 전환 Controller ---------------------------
+			else if(command.equals("/findPwForm.do")) {
+				errorMsg = "화면 전환 과정에서 오류 발생";
+
+				path = "/WEB-INF/views/member/findPwForm.jsp";
+				view = request.getRequestDispatcher(path);
+				view.forward(request, response);
+				
+			}
+			
+			// ------------------ 비밀번호 찾기 조회 Cotroller ------------------------------
+			else if(command.equals("/findPwReady.do")) {
+				errorMsg = "조회 과정에서 오류 발생.";
+				
+				String memberId = request.getParameter("id");
+				
+				String email = request.getParameter("mail");
+				
+				Member member = new Member();
+				member.setMemberId(memberId);
+				member.setEmail(email);
+				
+				int findPwMember = service.findPw(member);
+				
+				if(findPwMember > 0) {
+					path = "/WEB-INF/views/member/findPwChangeForm.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+					
+				}else {
+					
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "아이디 또는 이메일을 확인해주세요.");
+					response.sendRedirect(request.getHeader("referer"));
+				}
+				
+			}
+			
+			
+			
+			
+			// ---------------- 비밀번호 찾기 인증 Controller ----------------------------
+			else if(command.equals("/CheckPwMail")) {
+				final String user   = "pjh87973158@gmail.com";
+				  final String password  = "pjh1218714";
+
+				  String to = request.getParameter("mail");
+				  String mTitle = "[뭉개뭉개] 비밀번호 찾기 인증.";
+				 
+				  try {
+				  Map<String, Object> map = new HashMap<>();
+				  Random random = new Random();
+				  String key = "";
+				  
+				  for (int i = 0; i < 3; i++) {
+						int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성
+						key += (char) index;
+					}
+					int numIndex = random.nextInt(8999) + 1000; // 4자리 정수를 생성
+					key += numIndex;
+				  
+				  
+				  // Get the session object
+				  Properties props = new Properties();
+				  props.put("mail.smtp.host", "smtp.gmail.com");
+				  props.put("mail.smtp.port", 465);
+				  props.put("mail.smtp.auth", "true");
+				  props.put("mail.smtp.ssl.enable", "true");
+				  props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+				  Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				   protected PasswordAuthentication getPasswordAuthentication() {
+				    return new PasswordAuthentication(user, password);
+				   }
+				  });
+
+				  // Compose the message
+				  
+				   MimeMessage message = new MimeMessage(session);
+				   message.setFrom(new InternetAddress(user));
+				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+				   // Subject
+				   message.setSubject(mTitle);
+				   
+				   // Text
+				   message.setText("뭉개뭉개에서 보내드리는 비밀번호 찾기용 인증 번호 : " + key);
+
+				   // send the message
+				   Transport.send(message);
+				   
+				   map.put("key", key);
+				   response.getWriter().print(key);
+				  }catch(Exception e) {
+					  e.printStackTrace();
+					  
+				  }
+				  
+			}
+			// ------------- 비밀번호 찾기 변경 Controller -----------------------------
+			else if(command.equals("/findPwResult.do")) {
+				errorMsg = "비밀번호 변경 과정에서 문제 발생";
+				
+				String id = request.getParameter("id1");
+				
+				String pw1 = request.getParameter("pw1");
+				
+				int result = service.updatePwd(id, pw1);
+				
+				if(result > 0) {
+					path = "/WEB-INF/views/member/findPwResultForm.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+					
+				}else {
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "비밀번호 변경 실패");
+					response.sendRedirect(request.getContextPath());
+				}
+				
+			}
+			
 			
 			
 			

@@ -168,5 +168,43 @@ public class MemberService {
 		
 		return findMember;
 	}
+	
+	
+
+	/** 비밀번호 찾기 Service
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public int findPw(Member member) throws Exception{
+		Connection conn = getConnection();
+		
+		int findPwMember = dao.findPw(conn, member);
+		
+		close(conn);
+		
+		return findPwMember;
+	}
+	
+	
+
+	/** 새로운 비밀번호로 변경 Service
+	 * @param id
+	 * @param pw1
+	 * @return
+	 * @throws Exception
+	 */
+	public int updatePwd(String id, String pw1) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.updatePwd(conn, id, pw1);
+		
+		if(result > 0)		commit(conn);
+		else				rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 
 }
