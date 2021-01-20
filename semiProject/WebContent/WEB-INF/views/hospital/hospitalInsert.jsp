@@ -122,11 +122,10 @@
                             <label for="facility">병원 시설</label>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="facility" name="" value="wifi">WiFi
-                           <input type="checkbox" class="facility" name="" value="Parking">주차
-                           <input type="checkbox" class="facility" name="" value="appointmtnet">예약
-                           <input type="checkbox" class="facility" name="" value="businessTrip">출장
-                           <input type="checkbox" class="facility" name="" value="fullTime">24시간
+                           <input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="wifi">WiFi
+                           <input type="checkbox" class="facility" name="hosp_facility" id="parcking" value="주차">주차
+                           <input type="checkbox" class="facility" name="hosp_facility" id="appointment" value="예약">예약
+                           <input type="checkbox" class="facility" name="hosp_facility" id="24hour" value="24시간">24시간
                         </div>
                     </div>
 
