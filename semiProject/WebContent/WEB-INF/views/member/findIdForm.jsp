@@ -12,6 +12,7 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <style>
 * {
@@ -180,7 +181,6 @@ html, body {
 	</c:if>
 
 
-
 	<div id="wrapper">
 
 		<a href="${contextPath}">
@@ -233,7 +233,8 @@ html, body {
 	
 	<script>
 	
-	var isCertification = false;
+	var key;
+	console.log(key);
 	
 	$("#sendMail").click(function() {// 메일 입력 유효성 검사
 		var mail = $("#mail").val(); //사용자의 이메일 입력값. 
@@ -247,42 +248,36 @@ html, body {
 				data : {
 					mail:mail
 					},
-				dataType :'json',
-
+				
+				success : function(result){
+					key = result;
+					
+				}
 			});
-			alert("인증번호가 전송되었습니다.") 
-			isCertification=true; //추후 인증 여부를 알기위한 값
+		alert("인증번호가 전송되었습니다.");
 		}
 	});
 	
+		$("#inputEmail").on("propertychange change keyup paste input", function() {
+			if ($("#inputEmail").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+				$("#checkFl").text("인증 성공!").css("color", "green");
+				isCertification = true;  //인증 성공여부 check
+			} else {
+				$("#checkFl").text("불일치!").css("color", "red");
+				isCertification = false; //인증 실패
+			}
+		});
 	
-	$("#inputEmail").on("propertychange change keyup paste input", function() {
-		if ($("#inputEmail").val() == map.key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
-			$("#checkFl").text("인증 성공!").css("color", "green");
-			isCertification = true;  //인증 성공여부 check
-		} else {
-			$("#checkFl").text("불일치!").css("color", "red");
-			isCertification = false; //인증 실패
-		}
-	});
-	
-	
-	
-	$("#nextBtn").click(function(){
-		if(isCertification==false){ //인증이 완료되지 않았다면
-			alert("메일 인증이 완료되지 않았습니다.");
-		}
-	});
+		$("#nextBtn").click(function submitCheck(){
+			if(isCertification==false){
+				alert("메일 인증이 완료되지 않았습니다.");
+				return false;
+			}
+		});
 	
 	
 	
-	$("#nextBtn").click(function submitCheck(){
-		if(isCertification==false){
-			alert("메일 인증이 완료되지 않았습니다.");
-			return false;
-		}else
-			true;
-	});
+	
 	
 	</script>
 
