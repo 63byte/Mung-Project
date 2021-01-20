@@ -69,7 +69,6 @@ public class HSearchDAO {
 	            "        WHERE " + condition +
 	            "        AND HOSP_DEL_FL = 'N' ORDER BY HOSP_NO DESC) H )" + 
 	            "WHERE RNUM BETWEEN ? AND ?";
-			
 		
 		
 		try {

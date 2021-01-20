@@ -45,6 +45,7 @@ public class Hospital {
 	}
 
 
+	
 	// 모든 매개변수
 	public Hospital(int hospNo, String hospNm, String location1, String location2, String phone, String openingTime,
 				String closingTime, String hospInfo, int viewCount, String hospDelFl, int memNo, String hospFacility) {

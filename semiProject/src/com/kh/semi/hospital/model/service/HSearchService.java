@@ -72,7 +72,6 @@ public class HSearchService {
 	
 	
 	
-	
 	/** 검색 게시글 목록 리스트 조회 Service
 	 * @param map
 	 * @param pInfo

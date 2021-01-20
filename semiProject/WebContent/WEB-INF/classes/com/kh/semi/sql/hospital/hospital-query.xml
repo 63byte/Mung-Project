@@ -27,6 +27,7 @@ AND HOSP_DEL_FL='N'
 
 
 
+
 <!-- 조회수 증가 -->
 <entry key="increaseReadCount">
 UPDATE HOSPITAL SET

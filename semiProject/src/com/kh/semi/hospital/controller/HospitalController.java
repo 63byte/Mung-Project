@@ -131,6 +131,7 @@ public class HospitalController extends HttpServlet {
 			
 			
 			
+			
 			// 동물병원 등록 화면 전환 **************************************
 				else if(command.contentEquals("/insertForm")) {
 					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";

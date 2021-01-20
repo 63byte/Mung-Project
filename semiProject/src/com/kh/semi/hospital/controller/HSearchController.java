@@ -29,7 +29,6 @@ public class HSearchController extends HttpServlet {
 		String cp = request.getParameter("cp");
 		
 		
-		
 		try {
 			HSearchService service = new HSearchService();
 			
