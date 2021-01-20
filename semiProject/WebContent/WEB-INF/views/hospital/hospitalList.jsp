@@ -227,7 +227,7 @@
 $(".numberSelect > *").on("click", function(){
 	var hospitalNo = $(this).children("span").text();
 	
-	var url = "${contextPath}/hospital/view=cp${pInfo.currentPage}&no="+ hospitalNo +"${searchStr}";
+	var url = "${contextPath}/hospital/view?=cp${pInfo.currentPage}&hospitalNo="+ hospitalNo +"${searchStr}";
 	
 	location.href=url;
 });

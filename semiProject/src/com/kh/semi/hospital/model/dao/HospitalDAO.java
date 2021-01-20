@@ -133,11 +133,6 @@ public class HospitalDAO {
 				hospital.setClosingTime(rset.getString("CLOSING_TIME"));
 				hospital.setHospInfo(rset.getString("HOSP_INFO"));
 				hospital.setViewCount(rset.getInt("VIEW_COUNT"));
-				hospital.setWifi(rset.getString("WIFI"));
-				hospital.setParking(rset.getString("PARKING"));
-				hospital.setAppointment(rset.getString("APPOINTMENT"));
-				hospital.setFullTime(rset.getString("FULL_TIME"));
-				
 			}
 		}finally {
 			close(rset);
@@ -170,6 +165,43 @@ public class HospitalDAO {
 		}
 		
 		return result;
+	}
+
+
+
+	
+	
+	/** 동물병원 상세조회 부대시설 목록 DAO
+	 * @param conn
+	 * @param hospitalNo
+	 * @return facilityList
+	 * @throws Exception
+	 */
+	public List<Hospital> selectFacility(Connection conn, int hospitalNo) throws Exception {
+		List<Hospital> facilityList = null;
+		String query = prop.getProperty("selectFacility");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hospitalNo);
+			
+			rset = pstmt.executeQuery();
+			
+			facilityList = new ArrayList<Hospital>();
+			
+			if(rset.next()) {
+				Hospital facility = new Hospital(
+						rset.getString("WIFI"), rset.getString("PARKING"), 
+						rset.getString("APPOINTMENT"), rset.getString("FULL_TIME"));
+				facilityList.add(facility);
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return facilityList;
 	}
 
 
