@@ -58,7 +58,7 @@ public class TravelService {
 		
 		// 2) DAO 수행 후 결과 반환
 		Travel travel = dao.selectTravel(conn, travelNo);
-		
+		System.out.println(travel);
 		// 3) 공지사항 조회 성공 시 조회수 증가
 		if( travel != null) {
 			int result = dao.increaseReadCount(conn, travelNo);

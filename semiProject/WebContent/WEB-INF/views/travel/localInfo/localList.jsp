@@ -333,7 +333,7 @@ button#searchBtn:hover{
 
 			<!-- ------------------------------------------------------------------------- -->
 
-			<table class="table">
+			<table class="table" id="list-table">
 				<thead>
 					<tr>
 						<th scope="col" class="table-1st">글번호</th>
@@ -381,26 +381,48 @@ button#searchBtn:hover{
 			
 			
 
-			<!-- 페이징 -->
-			<div class="paging">
-				<nav aria-label="Page navigation example">
-					<ul id="pagingBtn"
-						class="pagination pagination-sm justify-content-center">
-						<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">6</a></li>
-						<li class="page-item"><a class="page-link" href="#">7</a></li>
-						<li class="page-item"><a class="page-link" href="#">8</a></li>
-						<li class="page-item"><a class="page-link" href="#">9</a></li>
-						<li class="page-item"><a class="page-link" href="#">10</a></li>
-						<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-					</ul>
-				</nav>
-			</div>
+            <!-- 페이징 -->
+            <div class="paging">
+                <nav aria-label="Page navigation example">
+                    <ul id="pagingBtn" class="pagination pagination-sm justify-content-center">
+                    
+               <%-- 현재 페이지가 10페이지 초과인 경우 --%>
+               <c:if test="${pInfo.currentPage>10}">
+                  <!-- 첫 페이지로 이동(<<) -->
+                  <li class="page-item"><a class="page-link" href="${firstPage}">&lt;&lt;</a></li>
+                  
+                  <!-- 이전 페이지로 이동(<)  -->
+                  <li class="page-item"><a class="page-link" href="${prevPage}">&lt;</a></li>
+               </c:if>
+               
+               <!-- 페이지 목록  -->
+               <c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+               		<c:choose> 
+               			<c:when test="${pInfo.currentPage == page }">
+								<!-- 현재 보고 있는 페이지는 클릭이 안 되게 한다.  -->               								
+		                      <li class="page-item"><a class="page-link">${page }</a></li>
+               			</c:when>
+               			
+               			<c:otherwise>
+		                      <li class="page-item"><a class="page-link" href="${pageUrl }?cp=${page}${searchStr}">${page }</a></li>
+               			</c:otherwise>
+               		</c:choose>
+               </c:forEach>       
+               
+               <%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+               <c:if test="${next <= pInfo.maxPage }">
+               		  <!-- 다음 페이지로 이동  -->
+                      <li class="page-item"><a class="page-link" href="${nextPage }">&gt;</a></li>
+                      <li class="page-item"><a class="page-link" href="${lastPage }">&gt;&gt;</a></li>
+               </c:if>
+                    </ul>
+                  </nav>
+                </div>
+                
+                
+                
+                
+                
 			
 			<!-- 검색필드 -->
 			<div class="mb-5">
@@ -424,10 +446,36 @@ button#searchBtn:hover{
 	</div>
 
 
-
+	<!-- 푸터 연결 -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
+
+
+
+	<script>
+    // 게시글 상세보기 기능 (jquery를 통해 작업)
+    
+    $("#list-table td").on("click",function(){
+  	  
+  	  // 게시글 번호 얻어오기
+  	  var travelNo = $(this).parent().children().eq(0).text();
+  	  //console.log(travelNo);
+  	  // 클릭이 되는지 테스트
+  	  
+  	  //var url = "${contextPath}/travel/localView.do?cp=${pInfo.currentPage}&no="+ travelNo + "${searchStr}";
+  	  var url = "${contextPath}/travel/localView.do?no="+travelNo;
+  	  
+  	  location.href = url;
+    });
+	
+	
+	
+	</script>
+	
+	
+	
+	
 
 </body>
 </html>

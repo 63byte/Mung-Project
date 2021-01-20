@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- c 태그를 쓰면 라이브러리 선언해준다!!!! -->
 
 <!DOCTYPE html>
@@ -71,8 +71,6 @@ div {
 	/* 왼쪽 간격 띄우기 */
 }
 
-
-
 /* ------------------------ 상단 빅배너 ------------------------ */
 #localInfo-bigBanner {
 	width: 900px;
@@ -81,7 +79,7 @@ div {
 }
 
 /* ------------------------------------------ */
-.btn_class{
+.btn_class {
 	background-color: #8ad2d5;
 }
 
@@ -92,27 +90,24 @@ div {
 }
 
 /* --------------- 버튼 --------------- */
-
-.btn_class{
-    border-radius: 5px;
-    color: #fff;
-    border : 1px solid  #8bd2d6;
-    background-color: #8bd2d6;
-    cursor: pointer;
-    outline:none;
-    width : 70px;
-    height: 40px;
-}
-.btn_item{
-    margin-left: 35%;
+.btn_class {
+	border-radius: 5px;
+	color: #fff;
+	border: 1px solid #8bd2d6;
+	background-color: #8bd2d6;
+	cursor: pointer;
+	outline: none;
+	width: 70px;
+	height: 40px;
 }
 
-.btn_class:hover{
+.btn_item {
+	margin-left: 35%;
+}
+
+.btn_class:hover {
 	background-color: #17a2b8;
 }
-
-
-
 </style>
 </head>
 <body>
@@ -126,42 +121,63 @@ div {
 
 		<!-- --------------------- 메인Contents --------------------- -->
 		<div class="main">
+			<br> 지역정보>상세글 <br>
 			<br>
-			지역정보>상세글
-			<br><br>
-			
+
 			<div id="localInfo-bigBanner">
 				<img
 					src="${pageContext.request.contextPath}/resources/image/travel/localInfo/local-bigbanner(900x200)_seoul.jpg">
 			</div>
-			
+
 			<br>
 			<!-- 도시 -->
-			서울<br>
-			${travel.travelLocation}
-			<h3>서울 근교 드라이브 어떠세요?</h3>
-			
+			${travel.travelLocation}<br>
+
+			<!-- Title -->
+			<h3>${travel.travelTitle}</h3>
+
 			<hr>
-			글번호  <br>
-			작성일 2021-01-17 <br>
-			조회수 <br> 
-			
+			글번호 : ${travel.travelNo}<br> 작성일 : ${travel.travelBoardDate} <br>
+			조회수 : ${travel.travelReadCount} <br>
 			<hr>
-			
-			본문입니다. . . . . <br>
-			바람 쐬기 좋네요 . ..  . .  .. . 
-			
+
+			<!-- 내용 -->
+			${travel.travelContent}
 			<hr>
-			
-			
-           	<!-- 목록으로 / 수정 / 삭제 버튼  -->
-            <div class="row-item">
-                <div class="btn_item">
-                	<button class="btn_class" id="" type="button" style="width:84px">목록으로</button>
-                    <button class= "btn_class"  id="" type="submit">수정</button>
-                    <button class= "btn_class"  id="" type="reset">삭제</button>
-                </div>
-            </div>
+
+
+
+			<c:choose>
+				<c:when test="${!empty param.sk && !empty param.sv }">
+
+					<%-- .. 상위 주소 --%>
+					<c:url var="goToList" value="../localList.do">
+						<c:param name="cp">${param.cp}</c:param>
+						<c:param name="sk">${param.sk}</c:param>
+						<c:param name="sv">${param.sv}</c:param>
+					</c:url>
+
+				</c:when>
+
+				<c:otherwise>
+					<%-- 목록으로 이동 --%>
+					<c:url var="goToList" value="localList.do">
+						<c:param name="cp">1</c:param>
+					</c:url>
+				</c:otherwise>
+			</c:choose>
+
+
+
+			<!-- 목록으로 / 수정 / 삭제 버튼  -->
+			<div class="row-item">
+				<div class="btn_item">
+					<button class="btn_class" id="" type="button" style="width: 84px"
+						onclick="location.href = '${goToList}'">목록으로</button>
+					<button class="btn_class" id="" type="submit">수정</button>
+					<button class="btn_class" id="" type="reset">삭제</button>
+				</div>
+			</div>
 
 		</div>
 	</div>
