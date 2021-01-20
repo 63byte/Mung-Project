@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
@@ -30,8 +31,8 @@
 
         <!-- 조회수 -->
         <div class="row-item">
-            <div class="viewInfo iconArea">
-                <span><img src="${contextPath}/resources/image/icon/view.png" class="icon"></span>
+            <div class="viewInfo iconArea" style="margin-left: 1020px;">
+                <span><img src="${contextPath}/resources/image/icon/view.png" class="icon" style="margin-right: 0px;"></span>
                 <div class="count">${hospital.viewCount }</div><!-- 최대 999,999 -->
             </div>
         </div>
@@ -60,58 +61,62 @@
 
 
 <!-- 부대시설 출력  -->
+		<%-- 부대시설을  구분자를 이용하여 분리된 배열 형태로 저장 --%>
+		<c:set var="facilityArr" value="${fn:split(hospital.hospFacility,',') }"/>
+		<!-- ${facility[0]}  : WiFi  -->
+
         <div class="row-item" style="margin:0;">
         
-   	     
-   	     <c:choose>
-				<c:when test="${facility.wifi == 'Y'.charAt(0) }">
-	      	      <div class="facility">
-	        	        <div class="icon_area">
-	        	            <img class="facility_icon" src="${contextPath}/resources/image/icon/WiFi.png">
-	        	        </div>
-	        	        <div class="text_area"> 
-	         	           WiFi
-	          	      </div>
-	         	   </div>
-				</c:when>
-	            
-	          
-		        <c:when test="${facility.parking =='Y'.charAt(0) }">    
-		            <div class="facility">
-		                <div class="icon_area">
-		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/park.png">
-		                </div>
-		                <div class="text_area"> 
-		                    주차
-		                </div>
-		            </div>
-		        </c:when>    
-		        
-		        <c:when test="${facility.appointment =='Y'.charAt(0) }">    
+   	    <c:forEach var="facility" items="${facilityArr }">
+   	    	<c:choose>
+					<c:when test="${facility == 'WiFi' }">
+		      	      <div class="facility">
+		        	        <div class="icon_area">
+		        	            <img class="facility_icon" src="${contextPath}/resources/image/icon/WiFi.png">
+		        	        </div>
+		        	        <div class="text_area"> 
+		         	           WiFi
+		          	      </div>
+		         	   </div>
+					</c:when>
+		          
+			        <c:when test="${facility == '주차' }">    
 			            <div class="facility">
 			                <div class="icon_area">
-			                    <img class="facility_icon" src="${contextPath}/resources/image/icon/appointment.png">
+			                    <img class="facility_icon" src="${contextPath}/resources/image/icon/park.png">
 			                </div>
 			                <div class="text_area"> 
-			                    예약
+			                    주차
 			                </div>
 			            </div>
+			        </c:when>    
+			        
+			        <c:when test="${facility == '예약' }">    
+				            <div class="facility">
+				                <div class="icon_area">
+				                    <img class="facility_icon" src="${contextPath}/resources/image/icon/appointment.png">
+				                </div>
+				                <div class="text_area"> 
+				                    예약
+				                </div>
+				            </div>
+			            
+			          </c:when>   
 		            
-		          </c:when>   
-	            
-	           <c:when test="${facility.fullTime =='Y'.charAt(0) }">      
-		            <div class="facility">
-		                <div class="icon_area">
-		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/24hour.png">
-		                </div>
-		                <div class="text_area"> 
-		                    24시
-		                </div>
-		            </div>
-	             </c:when>    
-   	     </c:choose>
+		           <c:when test="${facility == '24시간' }">      
+			            <div class="facility">
+			                <div class="icon_area">
+			                    <img class="facility_icon" src="${contextPath}/resources/image/icon/24hour.png">
+			                </div>
+			                <div class="text_area"> 
+			                    24시
+			                </div>
+			            </div>
+		             </c:when>    
+	   	    	</c:choose>
+	   	    </c:forEach> 
      
-        </div>
+        </div> 
         
         
         
@@ -134,8 +139,13 @@
             </div>
 
         </div>
+        
+        
+        	
 	
 	
+	
+	<div class="row-item">
 	
 		<c:choose>
 			<c:when test="${!empty paramsk && !empty param.sv }">
@@ -148,22 +158,34 @@
 			</c:when>
 			
 			<c:otherwise>
-				<c:url var="goToList" value="list.do">
+				<c:url var="goToList" value="list">
 					<c:param name="cp">${param.cp}</c:param>
 				</c:url>
 			</c:otherwise>	
 		</c:choose>
 
-		<a herf="${goToList }" class="btn_class">돌아가기</a>
+
+		<a href="${goToList }" class="btn_class" id="back">돌아가기</a>
+		
+	</div>
 		
 		
 		    <!-- 관리자만 보이는 버튼 -->
         <c:if test="${!empty loginMember && loginMember.memberAdmin == 'A'   }">
-	        <div class="row-item" style="margin-top:50px;">
+	        <div class="row-item" style="margin-top:50px;margin-bottom: 50px;">
 	            <div class="btn_item">
-	                <button class= "btn_class"  id="backBtn" type="button">수정</button>
+	            	
+	            	<!-- 	수정 버튼 클릭 -> 수정 화면 -> 수정 성공 -> 상세조회 화면
+					검색 -> 검색목록 -> 상세조회 -> 수정 버튼 클릭 -> 수정화면 -> 수정 성공 -> 상세조회 화면
+					 -->	 
+					<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
+					 <c:if test="${!empty param.sv && !empty param.sk }">
+					 		<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
+					 	<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
+					 </c:if>
+	                <a href="update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" class= "btn_class"  id="updateBtn" type="button">수정</a>
 	                <button class= "btn_class"  id="deleteBtn" type="button">삭제</button>
-	            </div>
+	            
 	        </div>
         </c:if>
 
@@ -171,5 +193,28 @@
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	<script>
+	
+	// 수정 버튼 이벤트
+	$("updateBtn").on("click",function(){
+		
+		<!-- 	수정 버튼 클릭 -> 수정 화면 -> 수정 성공 -> 상세조회 화면
+		검색 -> 검색목록 -> 상세조회 -> 수정 버튼 클릭 -> 수정화면 -> 수정 성공 -> 상세조회 화면
+		 -->	 
+		<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
+		 <c:if test="${!empty param.sv && !empty param.sk }">
+		 		<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
+		 	<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
+		 </c:if>
+		 
+		var url = "update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}";
+		
+		location.href = url;
+		
+	});
+	
+	
+	</script>
 </body>
 </html>

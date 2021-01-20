@@ -97,7 +97,7 @@ public class HospitalController extends HttpServlet {
 			
 			// 동물병원 상세조회 Controller ******************************
 			else if(command.contentEquals("/view")) {
-				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
+				errorMsg = "동물병원 상세 조회 과정에서 오류 발생";
 				
 				int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
 				
@@ -119,21 +119,12 @@ public class HospitalController extends HttpServlet {
 					response.sendRedirect("list");
 				}
 				
-				
-				
 			}
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
 			// 동물병원 등록 화면 전환 **************************************
-				else if(command.contentEquals("/insertForm")) {
+				else if(command.contentEquals("/update")) {
 					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
@@ -141,7 +132,7 @@ public class HospitalController extends HttpServlet {
 			
 			
 			// 동물병원 등록 **************************************
-				else if(command.contentEquals("insert")) {
+				else if(command.contentEquals("/insert")) {
 					errorMsg ="동물병원 등록 과정에서 오류 발생";
 					
 					// 1. MultipartRequest 객체 생성하기

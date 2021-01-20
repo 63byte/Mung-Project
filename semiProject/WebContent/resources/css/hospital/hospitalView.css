@@ -19,7 +19,7 @@ div {
 .wrapper{
     width:1100px;
     margin: 0 auto;
-    background-color: rgb(248, 248, 248);   
+   /*  background-color: rgb(248, 248, 248);    */
     /* border : 1px solid sienna; */
     
 }
@@ -53,9 +53,6 @@ div {
     display: inline-block;
 }
 
-.iconArea{
-    margin-left: 935px;
-}
 
 .icon {
     width:20px;
@@ -115,19 +112,8 @@ div {
 
 
 
-/* 버튼 */
-/* 좋아요버튼 */
-.like{
-    width:25px;
-    background-color: rgb(248, 248, 248); 
-    cursor: pointer;
-    outline:none;
-    border:none;
-}
-
-
-
-/* 등록 취소 버튼 */
+/*********** 버튼 ************/
+/* 전체버튼 */
 .btn_class{
     border-radius: 5px;
     color: #fff;
@@ -146,3 +132,25 @@ div {
 .btn_item{
     margin-left: 955px;
 }
+
+
+/* 이전으로 버튼  */
+#back{
+display:block;
+width: 90px;
+text-align:center;
+color: #fff;
+line-height: 35px;
+margin : auto;
+margin-top: 30px;
+
+}
+
+/* 수정버튼  */
+#updateBtn{
+display:inline-block;
+text-align:center;
+line-height: 35px;
+}
+
+
