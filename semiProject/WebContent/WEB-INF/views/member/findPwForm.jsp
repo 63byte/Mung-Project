@@ -200,9 +200,9 @@ html, body {
         </div>
         
         <div id="btnDiv">
-            <a href="${contextPath}/member/findIdForm"><button id="idBtn">아이디 찾기</button></a>
+            <a href="${contextPath}/member/findIdForm.do"><button id="idBtn">아이디 찾기</button></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="${contextPath}/member/findPwForm"><button id="pwBtn">비밀번호 찾기</button></a>
+			<a href="${contextPath}/member/findPwForm.do"><button id="pwBtn">비밀번호 찾기</button></a>
         </div>
     
     
