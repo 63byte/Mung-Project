@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
 import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
@@ -166,6 +168,104 @@ public class HospitalDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+	
+	
+    /*****************************게시글 등록 + 파일 업로드 DAO *****************************/
+
+
+	/** 다음 병원번호 조회 DAO
+	 * @param conn
+	 * @return	hospitalNo
+	 * @throws Exception
+	 */
+	public int selectNextNo(Connection conn) throws Exception {
+		int hospitalNo =0;
+		String query = prop.getProperty("selectNextNo");
+		
+		try {	
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				hospitalNo = rset.getInt(1);
+			}
+			
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return hospitalNo;
+	}
+
+
+
+	
+	
+	
+	/** 동물병원 등록 DAO (첨부파일 제외)
+	 * @param conn
+	 * @param map
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertHospital(Connection conn, Map<String, Object> map) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("insertHospital");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1,(int)map.get("hospitalNo"));
+			pstmt.setString(2,(String)map.get("hospNm"));
+			pstmt.setString(3,(String)map.get("location1"));
+			pstmt.setString(4,(String)map.get("location2"));
+			pstmt.setString(5,(String)map.get("phone"));
+			pstmt.setString(6,(String)map.get("openTime"));
+			pstmt.setString(7,(String)map.get("closeTime"));
+			pstmt.setString(8,(String)map.get("hospitalInfo"));
+			pstmt.setString(9,(String)map.get("memberNo"));
+			pstmt.setString(10,(String)map.get("facility"));
+			
+			result = pstmt.executeUpdate();
+		
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	
+	
+	
+	/** 파일 정보 등록 DAO
+	 * @param conn
+	 * @param at
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertAttachment(Connection conn, Attachment at) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, at.getFilePath());
+			pstmt.setString(2, at.getFileName());
+			pstmt.setInt(3, at.getFileLevel());
+			pstmt.setInt(4, at.getHospNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

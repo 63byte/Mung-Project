@@ -25,8 +25,10 @@
                 <hr id="hr_tag">
             </div>
             
+            
+            <!-- COS.JAR 이용해서 파일 업로드 -->
             <div class="insert_hospital">
-                <form action="${contextPath }/hospital/insert.do" method="post" 
+                <form action="${contextPath }/hospital/insert" method="post"  
                       enctype="multipart/form-data"  role="form" onsubmit="return hospitalInsertvalidate();">
                     
                     <div class="row-item">
@@ -34,7 +36,7 @@
                             <label for="location1">지역</label>
                         </div>
                         <div class="input_tag">
-                            <select class="full_input" id="location1" name="sk" required>
+                            <select class="full_input" id="location1" name="lacation1" required>
                                 <option value="강원도">강원도</option>
                                 <option value="경기도">경기도</option>
                                 <option value="경상도">경상도</option>
@@ -42,7 +44,7 @@
                                 <option value="대구">대구</option>
                                 <option value="대전">대전</option>
                                 <option value="부산">부산</option>
-                                <option value="서울" selected>서울</option>
+                                <option value="서울">서울</option>
                                 <option value="세종">세종</option>
                                 <option value="울산">울산</option>
                                 <option value="인천">인천</option>
@@ -59,7 +61,7 @@
                             <label for="companyName">병원명</label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="companyName"  placeholder="병원명을 입력해 주세요." autocomplete="off" required>
+                            <input type="text" class="full_input" id="companyName"  name="hospNm" placeholder="병원명을 입력해 주세요." autocomplete="off" required>
                         </div>
                     </div>
 
@@ -101,7 +103,7 @@
                             <label for="location2">상세주소</label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="location2" placeholder="상세주소를 입력해 주세요." autocomplete="off" required>
+                            <input type="text" class="full_input" id="location2" name="location2" placeholder="상세주소를 입력해 주세요." autocomplete="off" required>
                         </div>
                     </div>
 
@@ -111,9 +113,9 @@
                         </div>
                         <div class="input_tag">
 
-                            <input type="text" class="office_hours" id="open_hours" placeholder="00:00" name="" autocomplete="off" required>
+                            <input type="text" class="office_hours" id="openTime" placeholder="00:00" name="openTime" autocomplete="off" required>
                             &nbsp;~&nbsp;&nbsp;
-                            <input type="text" class="office_hours" id="close_hours" placeholder="00:00" name="" autocomplete="off" required>
+                            <input type="text" class="office_hours" id="closeTime" placeholder="00:00" name="closeTime" autocomplete="off" required>
                         </div>
                     </div>
 
@@ -136,11 +138,13 @@
                         </div>
                         <div class="input_tag">
                             <textarea class="full_input hospital_info" id="hospital_info" rows="10"
-                                placeholder="동물병원 상세 정보를 작성해 주세요."></textarea>
+                                name ="hospital_info" placeholder="동물병원 상세 정보를 작성해 주세요."></textarea>
                         </div>
                     </div>
                     
                     
+
+					<!-- 파일 업로드  -->
 
                     <div class="row-item">
                     	<div class="label_name">
@@ -174,8 +178,9 @@
 					</div>
 				</div>
 			
+			<!-- 파일 업로드 버튼 (숨기기) -->
 					<div id="fileArea">
-						<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"  required >
+						<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)">
 						<!-- multiple 속성 = 사진 여러개 선택 가능  --> 
 						<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
 						<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
@@ -205,6 +210,17 @@
 /* --------------------유효성 검사---------------  */
 
 function hospitalInsertvalidate(){
+	
+	// 시간 입력 ??:??
+	var regExp = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/;
+	
+	var open = $("#open_hours").val();
+	var close = $("#close_hours").val();
+	
+	if(!regexp.test(open) || !regexp.test(close)){
+		swal("영업 시간의 형식이 유효하지 않습니다.");
+		return false;
+	}
 	
 	/* 병원명 */
 	if ($("#companyName").val().trim().length ==0){

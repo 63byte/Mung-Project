@@ -37,5 +37,26 @@ WHERE HOSP_NO = ?
 
 
 
+<!--****** 게시글 게시글 등록+파일업로드  ******-->
+
+<!-- 다음 게시글 번호 조회  -->
+<entry key="selectNextNo">
+SELECT SEQ_HOSPITAL.NEXTVAL FROM DUAL
+</entry>
+
+
+<!-- 동물병원 등록 (첨부파일 제외)  -->
+<entry key="insertHospital">
+INSERT INTO HOSPITAL (HOSP_NO, HOSP_NM, LOCATION1, LOCATION2, PHONE, 
+						OPENING_TIME, CLOSING_TIME, HOSP_INFO, MEM_NO, HOSP_FACILITY)
+VALUE (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+</entry>
+
+
+<!-- 첨부파일 등록  -->
+<entry key="insertAttachment">
+INSERT INTO HOSPITAL_IMG
+VALUES(SEQ_HOSIMG, ?, ?, ?, ?)
+</entry>
 
 </properties>
