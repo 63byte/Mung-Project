@@ -1,7 +1,10 @@
 package com.kh.semi.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -21,8 +24,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.semi.common.MyFileRenamePolicy;
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.wrapper.EncryptWrapper;
+import com.oreilly.servlet.MultipartRequest;
 
 @WebServlet("/member/*")
 public class MemberController extends HttpServlet {
@@ -422,23 +429,169 @@ public class MemberController extends HttpServlet {
 			// ------------------- 업체 회원가입 Controller ------------------------------
 			else if(command.equals("/comSignUp.do")) {
 				errorMsg = "회원가입 과정에서 오류 발생";
+				int maxSize = 20 * 1024 * 1024;
 				
-				String memberId = request.getParameter("userId");
-				String memberPwd = request.getParameter("pwd1");
-				String memberNickName = request.getParameter("userName");
+				String root = request.getSession().getServletContext().getRealPath("/");
+				String filePath = root + "resources/uploadImages/comLicenese";
+				
+				MultipartRequest multiRequest 
+				= new MultipartRequest(request, filePath, maxSize,
+						"UTF-8", new MyFileRenamePolicy());
+				
+				String memberId = multiRequest.getParameter("userId");
+				String memberPwd = EncryptWrapper.getSha512( multiRequest.getParameter("passwd") );
+				String memberNickName = multiRequest.getParameter("userName");
 
-				String e1 = request.getParameter("email1");
-				String e2 = request.getParameter("email2");
+				String e1 = multiRequest.getParameter("email1");
+				String e2 = multiRequest.getParameter("email2");
 				String email = e1 + "@" + e2;
 
-				String phone1 = request.getParameter("phone1");
-				String phone2 = request.getParameter("phone2");
-				String phone3 = request.getParameter("phone3");
+				String phone1 = multiRequest.getParameter("phone1");
+				String phone2 = multiRequest.getParameter("phone2");
+				String phone3 = multiRequest.getParameter("phone3");
 
 				String phone = phone1 + "-" + phone2 + "-" + phone3;
 
-				String gender = request.getParameter("gender");
+				String gender = multiRequest.getParameter("gender");
+				
+				Member member = new Member(memberId, memberPwd, memberNickName, email, phone, gender);
 
+				int result = service.signUpCom1(member);
+				
+				if(result > 0) {
+					String comName = multiRequest.getParameter("companyName");
+					
+					String comPhone1 = multiRequest.getParameter("comPhone1"); 
+					String comPhone2 = multiRequest.getParameter("comPhone2");
+					String comPhone3 = multiRequest.getParameter("comPhone3");
+					
+					String comPhone = comPhone1 + "-" + comPhone2 + "-" + comPhone3;
+					
+					String post = multiRequest.getParameter("post"); // 우편번호
+					String address1 = multiRequest.getParameter("address1");	// 도로명 주소
+					String address2 = multiRequest.getParameter("address2");	// 상세 주소
+					
+					String comAddress = post + "," + address1 + "," + address2;
+					
+					
+
+					
+					List<Attachment> list = new ArrayList<Attachment>();
+					
+					Enumeration<String> files = multiRequest.getFileNames();
+					
+					while(files.hasMoreElements()) {
+						
+						String name = files.nextElement();
+						
+						if(multiRequest.getFilesystemName(name) != null) {
+							
+							// Attachment 객체에 파일 정보 저장
+							Attachment temp = new Attachment();
+							
+							temp.setFileName(multiRequest.getFilesystemName(name));
+							temp.setFilePath(filePath);
+							
+							// name 속성에 따라 fileLevel 지정
+							int fileLevel = 0;
+							switch(name) {
+							case "img0" : fileLevel = 0; break;
+							}
+							
+							temp.setFileLevel(fileLevel);
+							
+							list.add(temp);
+						}
+						
+					}
+					Map<String, Object> map = new HashMap<String, Object>();
+					map.put("list", list);
+					map.put("comName", comName);
+					map.put("comPhone", comPhone);
+					map.put("comAddress", comAddress);
+					
+					result = service.signUpCom(map);
+					
+					if(result > 0) {	// DB 삽입 성공 시 result에는 삽입한 글 번호가 저장되어 있다.
+						swalIcon = "success";
+						swalTitle = "회원가입 성공";
+					}else {
+						swalIcon = "error";
+						swalTitle = "게시글 등록 실패";
+					}
+					
+					request.getSession().setAttribute("swalIcon", swalIcon);
+					request.getSession().setAttribute("swalTitle", swalTitle);
+					response.sendRedirect(request.getContextPath());
+					
+					
+					
+					
+					
+					
+				}
+				
+				
+
+				
+			}
+			
+			// ----------------- 업체 회원가입용 이메일 Controller ------------------------------
+			else if(command.equals("/signUpMail")) {
+				  final String user   = "pjh87973158@gmail.com";
+				  final String password  = "pjh1218714";
+
+				  String to = request.getParameter("mail");
+				  String mTitle = "[뭉개뭉개] 비밀번호 찾기 인증.";
+				 
+				  try {
+				  Map<String, Object> map = new HashMap<>();
+				  Random random = new Random();
+				  String key = "";
+				  
+				  for (int i = 0; i < 3; i++) {
+						int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성
+						key += (char) index;
+					}
+					int numIndex = random.nextInt(8999) + 1000; // 4자리 정수를 생성
+					key += numIndex;
+				  
+				  
+				  // Get the session object
+				  Properties props = new Properties();
+				  props.put("mail.smtp.host", "smtp.gmail.com");
+				  props.put("mail.smtp.port", 465);
+				  props.put("mail.smtp.auth", "true");
+				  props.put("mail.smtp.ssl.enable", "true");
+				  props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+				  Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				   protected PasswordAuthentication getPasswordAuthentication() {
+				    return new PasswordAuthentication(user, password);
+				   }
+				  });
+
+				  // Compose the message
+				  
+				   MimeMessage message = new MimeMessage(session);
+				   message.setFrom(new InternetAddress(user));
+				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+				   // Subject
+				   message.setSubject(mTitle);
+				   
+				   // Text
+				   message.setText("뭉개뭉개에서 보내드리는 업체 회원가입 인증 번호 : " + key);
+
+				   // send the message
+				   Transport.send(message);
+				   
+				   map.put("key", key);
+				   response.getWriter().print(key);
+				  }catch(Exception e) {
+					  e.printStackTrace();
+					  
+				  }
 				
 			}
 			

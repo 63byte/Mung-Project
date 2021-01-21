@@ -2,8 +2,13 @@ package com.kh.semi.member.model.service;
 
 import static com.kh.semi.common.JDBCTemplate.*;
 
+import java.io.File;
 import java.sql.Connection;
+import java.util.List;
+import java.util.Map;
 
+import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.member.model.dao.MemberDAO;
 import com.kh.semi.member.model.vo.Member;
 
@@ -206,5 +211,104 @@ public class MemberService {
 		
 		return result;
 	}
+
+	/** 업체 회원가입
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public int signUpCom(Map<String, Object> map) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = 0;
+		
+		int memNo = dao.selectNextNo(conn);
+		
+		if(memNo > 0) {
+			map.put("memNo", memNo);
+			
+			
+			try {
+				result = dao.signUpCom(conn, map);
+				
+				List<Attachment> list =  (List<Attachment>)map.get("list");
+				
+				if(result > 0 && !list.isEmpty()) {
+					
+					result = 0;	// result 재활용을 위해 0으로 초기화
+					
+					// fList의 요소를 하나씩 반복 접근하여
+					// DAO 메소드를 반복 호출해 정보를 삽입함
+					for(Attachment at : list) {
+						
+						// 파일 정보가 저장된 Attachment 객체에
+						// 해당 파일이 작성된 게시글 번호를 추가 세팅
+						at.setParentBoardNo(memNo);
+						
+						result = dao.insertAttachment(conn, at);
+						
+						if(result == 0) {	
+							
+							throw new FileInsertFailedException("파일정보 삽입 실패");
+						}
+					}
+					
+				}
+				
+			}catch (Exception e) {
+				List<Attachment> list = (List<Attachment>)map.get("list");
+				
+				if(!list.isEmpty()) {
+					
+					for(Attachment at : list) {
+						
+						String filePath = at.getFilePath();
+						String fileName = at.getFileName();
+						
+						File deleteFile = new File(filePath + fileName);
+						// 파일 경로가 나옴
+						
+						if(deleteFile.exists()) {
+							// 해당 경로에 해당 파일이 존재하면
+							deleteFile.delete();	// 파일 삭제
+						}
+						
+					}
+				}
+				throw e;
+			}
+			
+			if(result > 0) {
+				commit(conn);
+		
+			}else {
+				rollback(conn);
+			}
+			
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	/** 업체 회원가입 공통부분
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public int signUpCom1(Member member) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.signUpCom1(conn, member);
+		
+		if(result > 0)		commit(conn);
+		else				rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+
 
 }

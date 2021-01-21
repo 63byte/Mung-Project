@@ -3,7 +3,7 @@
 // 입력값들이 유효성 검사가 진행되었는지 확인하기 위한  객체 생성
 var validateCheck = {
     "id" : false,
-    "pwd1" : false,
+    "passwd" : false,
     "pwd2" : false,
     "phone2" : false,
     "email" : false,
@@ -89,25 +89,25 @@ $("#email1").on("input", function(){
 // + 비밀번호를 입력하지 않거나 유효하지 않은 상태로
 //   비밀번호 확인을 작성하는 경우
 
-$("#pwd1, #pwd2").on("input", function () {
+$("#passwd, #pwd2").on("input", function () {
 
     // 비밀번호 유효성 검사 
     var regExp = /^[A-Za-z\d]{6,12}$/;
-    var v1 = $("#pwd1").val();
+    var v1 = $("#passwd").val();
     var v2 = $("#pwd2").val();
 
     if (!regExp.test(v1)) {
         $("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
-        validateCheck.pwd1 = false;
+        validateCheck.passwd = false;
     } else {
         $("#checkPwd1").text("유효한 비밀번호 형식입니다.").css("color", "green");
-        validateCheck.pwd1 = true;
+        validateCheck.passwd = true;
     }
     // 비밀번호가 유효하지 않은 상태에서 비밀번호 확인 작성 시
-    if (!validateCheck.pwd1 && v2.length > 0) {
+    if (!validateCheck.passwd && v2.length > 0) {
         alert("유효한 비밀번호를 먼저 작성해주세요.");
         $("#pwd2").val(""); // 비밀번호 확인에 입력한 값 삭제
-        $("#pwd1").focus();
+        $("#passwd").focus();
     } else {
         // 비밀번호, 비밀번호 확인의 일치 여부
         if (v1.length == 0 || v2.length == 0) {
@@ -212,22 +212,13 @@ $("#companyName").on("input", function(){
 
 function memberJoinvalidate(){
 
-    // 아이디 중복검사 여부 확인
-/*     if($("#idDup").val() != "true"){
-        swal("아이디 중복 검사를 진행해 주세요.");
-        $("#idDupCheck").focus();
 
-        return false;
-    }
- */
-
-    // 유효성 검사 여부 확인
     for(var key in validateCheck){
         if(!validateCheck[key]){
             var msg;
             switch(key){
                 case "id" : msg="아이디가"; break;
-                case "pwd1" : 
+                case "passwd" : 
                 case "pwd2" : msg="비밀번호가"; break;
                 case "nickName" : msg="이름이"; break;
                 case "phone2" : msg="전화번호가"; break;
@@ -240,16 +231,30 @@ function memberJoinvalidate(){
 
             return false;
         }
-    }
 
-		
+    }
+			for(var key in validateCheck2){
+        if(!validateCheck2[key]){
+            var msg;
+            switch(key){
+                case "comName" : msg="업체명이"; break;
+                case "comPhone2" : msg="업체 전화번호가"; break;
+            }
+
+            alert(msg + " 유효하지 않습니다.");
+
+            $("#"+key).focus();
+
+            return false;
+        }
+		}
 		
     
 
 }
 
 
-// 내 정보 수정 ------------------------------------------------------------------
+/*// 내 정보 수정 ------------------------------------------------------------------
 // 유효성 검사
 function memberUpdateValidate(){
 	
@@ -327,3 +332,4 @@ function withdrawalValidate(){
 
 
 
+*/
