@@ -30,6 +30,8 @@
             padding-bottom: 20px;
 
             margin-top: 0px;
+            
+            clear: both;
         }
 
 </style>

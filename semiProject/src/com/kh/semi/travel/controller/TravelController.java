@@ -22,7 +22,7 @@ import com.kh.semi.hospital.model.vo.PageInfo;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.travel.model.service.TravelService;
 import com.kh.semi.travel.model.vo.Travel;
-import com.kh.semi.travel.model.vo.travelAttachment;
+import com.kh.semi.travel.model.vo.TravelAttachment;
 import com.oreilly.servlet.MultipartRequest;
 
 @WebServlet("/travel/*")
@@ -66,6 +66,16 @@ public class TravelController extends HttpServlet {
 				
 				
 				// 썸네일 추가
+	            if(tList != null) {
+	                // 썸네일 이미지 목록 조회 서비스 호출
+	                List<TravelAttachment> fList = service.selectThumbnailList(pInfo);
+	                
+	                // 썸네일 이미지 목록이 비어있지 않은 경우
+	                if(!fList.isEmpty()) {
+	                   request.setAttribute("fList", fList);
+	                }
+	                
+	            }
 				
 				
 				// 요청을 위임할 경로 jsp 경로 지정
@@ -102,7 +112,7 @@ public class TravelController extends HttpServlet {
 				// 조회 결과에 따른 view 연결 처리
 				if(travel != null) { // 조회 성공
 					
-					List<travelAttachment> fList = service.selectBoardFiles(travelNo);
+					List<TravelAttachment> fList = service.selectBoardFiles(travelNo);
 					
 					if(!fList.isEmpty()) {	// 해당 게시글 이미지 정보가 DA에 있을 경우
 						request.setAttribute("fList", fList);
@@ -151,7 +161,7 @@ public class TravelController extends HttpServlet {
 	            // 별도의 List에 모두 저장하기
 	            
 	            // 2-1. 파일 정보를 모두 저장할 List 객체 생성
-	            List<travelAttachment> fList = new ArrayList<travelAttachment>();
+	            List<TravelAttachment> fList = new ArrayList<TravelAttachment>();
 	            
 	            // 2-2. MultipartRequest에서 업로드된 파일  name 속성값 모두 반환 받기
 	            Enumeration<String> files = multiRequest.getFileNames();
@@ -176,7 +186,7 @@ public class TravelController extends HttpServlet {
 	               if(multiRequest.getFilesystemName(name) != null) {
 	                  
 	                  // Attachment 객체에 파일 정보 저장
-	                  travelAttachment temp = new travelAttachment();
+	                  TravelAttachment temp = new TravelAttachment();
 	                  
 	                  temp.setFileName(multiRequest.getFilesystemName(name));
 						temp.setFilePath(filePath);
