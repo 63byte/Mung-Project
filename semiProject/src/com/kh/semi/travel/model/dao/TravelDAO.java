@@ -205,11 +205,10 @@ public class TravelDAO {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, at.getTravelImgNo());
-			pstmt.setString(2, at.getTravelImgPath());
-			pstmt.setString(3, at.getTravelImgName());
-			pstmt.setInt(4, at.getTravelImgLevel());
-			pstmt.setInt(5, at.getTravelNo());
+			pstmt.setString(1, at.getFilePath());
+			pstmt.setString(2, at.getFileName());
+			pstmt.setInt(3, at.getFileLevel());
+			pstmt.setInt(4, at.getParentBoardNo());
 			
 			result = pstmt.executeUpdate();
 		} finally {
@@ -257,11 +256,29 @@ public class TravelDAO {
 		String query = prop.getProperty("selectBoardFiles");
 
 		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, travelNo);
+			
+			rset = pstmt.executeQuery();
+					
+			fList = new ArrayList<travelAttachment>();
+			
+			while(rset.next()) {
+				
+				travelAttachment at = new travelAttachment(
+								rset.getInt("TRVEL_IMG_NO"),
+								rset.getString("TRVEL_IMG_NAME"),
+								rset.getInt("TRVEL_IMG_LEVEL"));
+				
+				at.setFilePath(rset.getString("TRVEL_IMG_PATH"));
+				
+				fList.add(at);
+			}
 			
 			
 		}finally{
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, travelNo);
+			close(rset);
+			close(pstmt);
 			
 		}
 		

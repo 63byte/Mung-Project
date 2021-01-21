@@ -419,6 +419,29 @@ public class MemberController extends HttpServlet {
 				
 			}
 			
+			// ------------------- 업체 회원가입 Controller ------------------------------
+			else if(command.equals("/comSignUp.do")) {
+				errorMsg = "회원가입 과정에서 오류 발생";
+				
+				String memberId = request.getParameter("userId");
+				String memberPwd = request.getParameter("pwd1");
+				String memberNickName = request.getParameter("userName");
+
+				String e1 = request.getParameter("email1");
+				String e2 = request.getParameter("email2");
+				String email = e1 + "@" + e2;
+
+				String phone1 = request.getParameter("phone1");
+				String phone2 = request.getParameter("phone2");
+				String phone3 = request.getParameter("phone3");
+
+				String phone = phone1 + "-" + phone2 + "-" + phone3;
+
+				String gender = request.getParameter("gender");
+
+				
+			}
+			
 			
 			
 			
