@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
-import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
 public class HospitalDAO {
@@ -219,7 +218,7 @@ public class HospitalDAO {
 		try {
 			
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1,(int)map.get("hospitalNo"));
+			pstmt.setInt(1,(int)map.get("insertNo"));
 			pstmt.setString(2,(String)map.get("hospNm"));
 			pstmt.setString(3,(String)map.get("location1"));
 			pstmt.setString(4,(String)map.get("location2"));
@@ -227,7 +226,7 @@ public class HospitalDAO {
 			pstmt.setString(6,(String)map.get("openTime"));
 			pstmt.setString(7,(String)map.get("closeTime"));
 			pstmt.setString(8,(String)map.get("hospitalInfo"));
-			pstmt.setString(9,(String)map.get("memberNo"));
+			pstmt.setInt(9,(int)map.get("memberNo"));
 			pstmt.setString(10,(String)map.get("facility"));
 			
 			result = pstmt.executeUpdate();
