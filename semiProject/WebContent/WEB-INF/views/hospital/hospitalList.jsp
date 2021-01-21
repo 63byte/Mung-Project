@@ -207,11 +207,15 @@
                		<c:choose> 
                			<c:when test="${pInfo.currentPage == page }">
 								<!-- 현재 보고 있는 페이지는 클릭이 안 되게 한다.  -->               								
-		                      <li class="page-item"><a class="page-link">${page }</a></li>
+		                      <li class="page-item">
+		                      		<a class="page-link">${page }</a>
+		                      </li>
                			</c:when>
                			
                			<c:otherwise>
-		                      <li class="page-item"><a class="page-link" href="${pageUrl }?cp=${page}${searchStr}">${page }</a></li>
+		                      <li class="page-item">
+		                      		<a class="page-link" href="${pageUrl }?cp=${page}${searchStr}">${page}</a>
+		                      </li>
                			</c:otherwise>
                		</c:choose>
                </c:forEach>       

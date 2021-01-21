@@ -8,6 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>동물병원 상세조회 페이지</title>
+
+<!-- 카카오 API  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0195b24c7dce0dc71f3dbcf7ca0a12c4"></script>
+
 <link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalView.css" type="text/css">
 
 <!-- 부트스트랩 사용을 위한 css 추가 -->
@@ -102,6 +106,9 @@
             <span><img class="icon" src="${contextPath}/resources/image/icon/site.png"></span>
             <span id="hospitalAddress">${hospital.location2 } </span>
         </div> 
+        
+        
+        
     
         <!-- 동물병원 전화번호 -->
         <div class="row-item" >
@@ -192,24 +199,23 @@
 
 
         <div class="row-item">
+        	
             <p>상세위치</p>
 
-            <div class="mapAPI">
-                &lt; 지도 API&gt;
+            <div id="map">
+                &lt;지도 API&gt;
             </div>
 
         </div>
         
-        
-        	
-	
+
 	
 	
 	<div class="row-item">
 	
 		<c:choose>
-			<c:when test="${!empty paramsk && !empty param.sv }">
-				<c:url var="goToList" value="../search">
+			<c:when test="${!empty param.sk && !empty param.sv }">
+				<c:url var="goToList" value="../hospital/search">
 												<!--../ : 상위 주소로 이동 <상대경로>  -->
 					<c:param name="cp">${param.cp }</c:param>
 					<c:param name="sk">${param.sk }</c:param>
@@ -218,7 +224,7 @@
 			</c:when>
 			
 			<c:otherwise>
-				<c:url var="goToList" value="list">
+				<c:url var="goToList" value="/hospital/list">
 					<c:param name="cp">${param.cp}</c:param>
 				</c:url>
 			</c:otherwise>	
@@ -243,7 +249,7 @@
 					 		<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
 					 	<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
 					 </c:if>
-	                <a href="update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" class= "btn_class"  id="updateBtn" type="button">수정</a>
+	                <a href="updateForm?cp=${param.cp}&hospitalNo=${param.hospitalNo}" class= "btn_class"  id="updateBtn" type="button">수정</a>
 	                <button class= "btn_class"  id="deleteBtn" type="button">삭제</button>
 	            
 	        </div>
@@ -256,25 +262,57 @@
 	
 	<script>
 	
-	// 수정 버튼 이벤트
-	$("updateBtn").on("click",function(){
-		
-		<!-- 	수정 버튼 클릭 -> 수정 화면 -> 수정 성공 -> 상세조회 화면
-		검색 -> 검색목록 -> 상세조회 -> 수정 버튼 클릭 -> 수정화면 -> 수정 성공 -> 상세조회 화면
-		 -->	 
-		
-		<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
-		 <c:if test="${!empty param.sv && !empty param.sk }">
-		 		<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
-		 	<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
-		 </c:if>
-		 
-		var url = "update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}";
-		
-		location.href = url;
-		
+	
+	/*삭제 버튼 클릭했을 때  */
+	$("#deleteBtn").on("click",function(){
+		if(confirm("해당 병원을 삭제하시겠습니까?")){
+			location.href="delete?hospitalNo=${param.hospitalNo}"
+		}
 	});
 	
+	</script>
+	
+	
+	
+	
+	<!-- 지도 API  -->
+	<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };  
+
+	// 지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('동작구 사당동 1013-17', function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        });
+        infowindow.open(map, marker);
+
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
 	
 	</script>
 </body>
