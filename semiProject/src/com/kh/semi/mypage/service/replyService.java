@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.kh.semi.mypage.dao.InquiryDAO;
+import com.kh.semi.mypage.dao.postDAO;
 import com.kh.semi.mypage.vo.PageInfo;
-import com.kh.semi.mypage.vo.fBoard;
+import com.kh.semi.mypage.vo.rBoard;
 
 
 
-public class InquiryService {
+public class replyService {
 
-	private InquiryDAO dao = new InquiryDAO();
+	private postDAO dao = new postDAO();
 
 	/**
 	 * 페이징 처리를 위한 값 계산 Service
@@ -50,14 +50,14 @@ public class InquiryService {
 	 * @return fList
 	 * @throws Exception
 	 */
-	public List<fBoard> selectBoardList(PageInfo pInfo, int memberNo) throws Exception {
+/*	public List<rBoard> selectBoardList(PageInfo pInfo, int memberNo) throws Exception {
 		Connection conn = getConnection();
 
-		List<fBoard> fList = dao.selectBoardList(conn, pInfo, memberNo);
+		List<rBoard> fList = dao.selectBoardList(conn, pInfo, memberNo);
 
 		close(conn);
 
 		return fList;
-	}
+	}*/
 
 }

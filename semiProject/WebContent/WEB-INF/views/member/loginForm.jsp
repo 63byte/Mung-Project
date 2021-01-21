@@ -122,7 +122,7 @@ html, body {
 
 		<div id="inputDiv">
 			<input type="text" id="userId" name="userId" placeholder="아이디"
-				value="${cookie.saveId.value }"> <br> 
+				value="${cookie.saveId.value}"> <br> 
 				<input type="password" id="userPw" name="userPw" placeholder="비밀번호">
 			<br>
 
