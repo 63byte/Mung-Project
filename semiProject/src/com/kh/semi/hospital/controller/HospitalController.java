@@ -78,16 +78,15 @@ public class HospitalController extends HttpServlet {
 				
 				// 썸네일 추가
 				
-//				if(hList!=null) {
-//					
-//					// 조회된 동물병원이 있다면 썸네일이 있는지 확인해보고 있으면 출력한다.
-//					List<Image> iList = service.selectThumbnailList(pInfo);
-//					
-//					if(!iList.isEmpty()) {
-//						request.setAttribute("iList", iList);
-//					}
-//				}
-				
+				if(hList!=null) {
+					
+					// 조회된 동물병원이 있다면 썸네일이 있는지 확인해보고 있으면 출력한다.
+					List<Attachment> fList = service.selectThumbnailList(pInfo);
+					
+					if(!fList.isEmpty()) {
+						request.setAttribute("fList", fList);
+					}
+				}
 				
 				path = "/WEB-INF/views/hospital/hospitalList.jsp";
 				
@@ -114,6 +113,11 @@ public class HospitalController extends HttpServlet {
 				if(hospital!=null) { // 상세조회 성공 시
 					
 					// 해당 게시글에 포함된 이미지 파일 목록 조회 서비스 호출
+					List<Attachment> fList = service.selectHospitalFiles(hospitalNo);
+					
+					if(!fList.isEmpty()) { // 해당 동물병원 이미지 정보가 DB에 있을 경우
+						request.setAttribute("fList", fList);
+					}
 															
 					
 					path ="/WEB-INF/views/hospital/hospitalView.jsp";

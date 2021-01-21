@@ -232,6 +232,49 @@ public class HospitalService {
 
 
 
+	/** 동물병원에 포함된 이미지 목록 조회 Service
+	 * @param hospitalNo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectHospitalFiles(int hospitalNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Attachment> fList = dao.selectHospitalFiles(conn,hospitalNo);
+		
+		close(conn);
+				
+		
+		return fList;
+	}
+
+
+
+
+
+
+
+	/** 썸네일 목록 조회 Service
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Attachment> fList = dao.selectThumbnailList(conn,pInfo);
+		
+		close(conn);
+		
+		return fList;
+	}
+
+
+
+
+
+
+
 
 
 
