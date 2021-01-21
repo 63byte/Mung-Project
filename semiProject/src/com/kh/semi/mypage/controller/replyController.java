@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.semi.mypage.service.InquiryService;
+import com.kh.semi.mypage.service.postService;
 import com.kh.semi.mypage.vo.PageInfo;
-import com.kh.semi.mypage.vo.fBoard;
+import com.kh.semi.mypage.vo.rBoard;
 import com.kh.semi.member.model.vo.Member;
 
-@WebServlet("/member/myPageInquiryPost.do")
-public class InquiryFreeController extends HttpServlet {
+@WebServlet("/member/myPageInquiryReply.do")
+public class replyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+/*	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String path = null;
 		String errorMsg = null;
@@ -30,7 +30,7 @@ public class InquiryFreeController extends HttpServlet {
 		String cp = request.getParameter("cp");
 		
 	    try {
-	    	InquiryService service = new InquiryService();
+	    	postService service = new postService();
 	    	String swalIcon = null;
 	    	String swalTitle = null;
 	    	String swalText = null;
@@ -42,14 +42,14 @@ public class InquiryFreeController extends HttpServlet {
 	    	PageInfo pInfo = service.getPageInfo(cp, memberNo);
 	    	
 	    	// 게시글 목록 조회 비즈니스 로직 수행
-	    	List<fBoard> fList = service.selectBoardList(pInfo, memberNo);
+	    	List<rBoard> rList = service.selectBoardList(pInfo, memberNo);
 	    	
-	    	if(fList != null) {
+	    	if(rList != null) {
 	    		
-	    		request.setAttribute("fList", fList);
+	    		request.setAttribute("rList", rList);
 	    		request.setAttribute("pInfo", pInfo);
 	    		
-	    		path = "/WEB-INF/views/member/myPageInquiryPost.jsp";
+	    		path = "/WEB-INF/views/member/myPageInquiryReply.jsp";
 	    		RequestDispatcher view = request.getRequestDispatcher(path);
 	    		view.forward(request, response);
 	    	}
@@ -62,7 +62,7 @@ public class InquiryFreeController extends HttpServlet {
 	        //view.forward(request, response);
 	    	
 	    }
-	}
+	}*/
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
