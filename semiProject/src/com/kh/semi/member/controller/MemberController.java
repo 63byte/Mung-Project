@@ -133,8 +133,8 @@ public class MemberController extends HttpServlet {
 			
 			// ------------------ 일반 회원가입용 메일 발송 Controller -------------------------
 			else if(command.equals("/normalSignUpMail")) {
-				final String user   = "pjh87973158@gmail.com";
-				  final String password  = "pjh1218714";
+				final String user   = "jihoprac@gmail.com";
+				  final String password  = "qkr3158!";
 
 				  String to = request.getParameter("mail");
 				  String mTitle = "[뭉개뭉개] 회원가입 인증.";
@@ -283,9 +283,8 @@ public class MemberController extends HttpServlet {
 			// ------------------ id 찾기 인증번호 발송 Controller -----------------------
 			else if(command.equals("/CheckMail")) {
 				
-				  final String user   = "pjh87973158@gmail.com";
-				  final String password  = "pjh1218714";
-
+				final String user   = "jihoprac@gmail.com";
+				  final String password  = "qkr3158!";
 				  String to = request.getParameter("mail");
 				  String mTitle = "[뭉개뭉개] 아이디 찾기 인증.";
 				 
@@ -412,8 +411,8 @@ public class MemberController extends HttpServlet {
 			
 			// ---------------- 비밀번호 찾기 인증 Controller ----------------------------
 			else if(command.equals("/CheckPwMail")) {
-				final String user   = "pjh87973158@gmail.com";
-				  final String password  = "pjh1218714";
+				final String user   = "jihoprac@gmail.com";
+				  final String password  = "qkr3158!";
 
 				  String to = request.getParameter("mail");
 				  String mTitle = "[뭉개뭉개] 비밀번호 찾기 인증.";
@@ -590,10 +589,6 @@ public class MemberController extends HttpServlet {
 					response.sendRedirect(request.getContextPath());
 					
 					
-					
-					
-					
-					
 				}
 				
 				
@@ -603,8 +598,8 @@ public class MemberController extends HttpServlet {
 			
 			// ----------------- 업체 회원가입용 이메일 Controller ------------------------------
 			else if(command.equals("/signUpMail")) {
-				  final String user   = "pjh87973158@gmail.com";
-				  final String password  = "pjh1218714";
+				final String user   = "jihoprac@gmail.com";
+				  final String password  = "qkr3158!";
 
 				  String to = request.getParameter("mail");
 				  String mTitle = "[뭉개뭉개] 비밀번호 찾기 인증.";
