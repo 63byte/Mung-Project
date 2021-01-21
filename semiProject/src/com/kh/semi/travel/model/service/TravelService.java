@@ -13,7 +13,7 @@ import com.kh.semi.hospital.model.vo.PageInfo;
 import com.kh.semi.travel.model.dao.TravelDAO;
 import com.kh.semi.travel.model.exception.FileInsertFailedException;
 import com.kh.semi.travel.model.vo.Travel;
-import com.kh.semi.travel.model.vo.travelAttachment;
+import com.kh.semi.travel.model.vo.TravelAttachment;
 
 public class TravelService {
 	
@@ -121,7 +121,7 @@ public class TravelService {
 				result = dao.insertBoard(conn, map);
 				
 				// 5. 파일 정보 부분만 ATTACHMENT 테이블에 삽입하는 DAO 호출
-				List<travelAttachment> fList = (List<travelAttachment>)map.get("fList"); // 노란줄 뜨는데 문제는 없음.. 
+				List<TravelAttachment> fList = (List<TravelAttachment>)map.get("fList"); // 노란줄 뜨는데 문제는 없음.. 
 				
 				// 게시글 부분 삽입 성공 && 파일 정보가 있을 경우 
 				if(result > 0 && !fList.isEmpty()) {
@@ -130,7 +130,7 @@ public class TravelService {
 					
 					// fList의 요소를 하나씩 반복 접근하여
 					// DAO 메소드를 반복 호출해 정보를 삽입함. 
-					for(travelAttachment at : fList) {
+					for(TravelAttachment at : fList) {
 						
 						// 파일 정보가 저장된 Attachment 객체에 
 						// 해당 파일이 작성된 게시글 번호를 추가 세팅
@@ -151,10 +151,10 @@ public class TravelService {
 				// 게시글 또는 파일 정보 삽입 중 에러 발생 시 
 				// 서버에 저장된 파일을 삭제하는 작업이 필요.
 				
-				List<travelAttachment> fList = (List<travelAttachment>)map.get("fList");
+				List<TravelAttachment> fList = (List<TravelAttachment>)map.get("fList");
 				
 				if(!fList.isEmpty()) {
-					for(travelAttachment at : fList ) {
+					for(TravelAttachment at : fList ) {
 						String filePath = at.getFilePath();
 						String fileName = at.getFileName();
 						
@@ -210,11 +210,24 @@ public class TravelService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<travelAttachment> selectBoardFiles(int travelNo) throws Exception{
+	public List<TravelAttachment> selectBoardFiles(int travelNo) throws Exception{
 		Connection conn = getConnection();
 		
-		List<travelAttachment> fList = dao.selectBoardFiles(conn, travelNo);
+		List<TravelAttachment> fList = dao.selectBoardFiles(conn, travelNo);
 
+		close(conn);
+		
+		return fList;
+	}
+
+	/** 썸네일용 Service 
+	 * @param pInfo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<TravelAttachment> selectThumbnailList(PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		List<TravelAttachment> fList = dao.selectThumbnailList(conn, pInfo);
 		close(conn);
 		
 		return fList;

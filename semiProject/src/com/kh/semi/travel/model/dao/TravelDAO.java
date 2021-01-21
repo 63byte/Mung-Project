@@ -17,7 +17,7 @@ import com.kh.semi.hospital.model.dao.HospitalDAO;
 import com.kh.semi.hospital.model.vo.Hospital;
 import com.kh.semi.hospital.model.vo.PageInfo;
 import com.kh.semi.travel.model.vo.Travel;
-import com.kh.semi.travel.model.vo.travelAttachment;
+import com.kh.semi.travel.model.vo.TravelAttachment;
 
 public class TravelDAO {
 	
@@ -199,7 +199,7 @@ public class TravelDAO {
 	 * @return result 
 	 * @throws Exception
 	 */
-	public int insertAttachment(Connection conn, travelAttachment at) throws Exception {
+	public int insertAttachment(Connection conn, TravelAttachment at) throws Exception {
 		int result = 0;
 		String query = prop.getProperty("insertAttachment");
 		
@@ -250,8 +250,8 @@ public class TravelDAO {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<travelAttachment> selectBoardFiles(Connection conn, int travelNo) throws Exception{
-		List<travelAttachment> fList = null;
+	public List<TravelAttachment> selectBoardFiles(Connection conn, int travelNo) throws Exception{
+		List<TravelAttachment> fList = null;
 		
 		String query = prop.getProperty("selectBoardFiles");
 
@@ -261,11 +261,11 @@ public class TravelDAO {
 			
 			rset = pstmt.executeQuery();
 					
-			fList = new ArrayList<travelAttachment>();
+			fList = new ArrayList<TravelAttachment>();
 			
 			while(rset.next()) {
 				
-				travelAttachment at = new travelAttachment(
+				TravelAttachment at = new TravelAttachment(
 								rset.getInt("TRVEL_IMG_NO"),
 								rset.getString("TRVEL_IMG_NAME"),
 								rset.getInt("TRVEL_IMG_LEVEL"));
@@ -282,6 +282,47 @@ public class TravelDAO {
 			
 		}
 		
+		return fList;
+	}
+
+
+	/** 썸네일용 DAO 
+	 * @param conn
+	 * @param pInfo
+	 * @return fList 
+	 * @throws Exception
+	 */
+	public List<TravelAttachment> selectThumbnailList(Connection conn, PageInfo pInfo) throws Exception {
+		List<TravelAttachment> fList = null;
+		
+		String query = prop.getProperty("selectThumbnailList");
+		
+		try {
+			// 위치 홀더에 들어갈 시작행, 끝 행번호 계싼
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() + 1;
+			int endRow = startRow + pInfo.getLimit() - 1 ;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			// 조회 결과를 저장할 List 생성
+			fList = new ArrayList<TravelAttachment>();
+			
+			while(rset.next()) {
+				
+				TravelAttachment at = new TravelAttachment();
+				at.setFileName(rset.getString("TRVEL_IMG_NAME"));
+				at.setParentBoardNo(rset.getInt("TRAVEL_NO"));
+				
+				fList.add(at);
+			}
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return fList;
 	}
 
