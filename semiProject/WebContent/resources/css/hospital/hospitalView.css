@@ -104,9 +104,9 @@ div {
 
 
 /* 지도 API */
-.mapAPI {
+#map {
     width:100%;
-    height: 300px;
+    height: 400px;
     text-align : center;
     background-color: gray;
 }

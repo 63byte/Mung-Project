@@ -75,7 +75,6 @@ public class HospitalController extends HttpServlet {
 				
 				
 				
-				
 				// 썸네일 추가
 				
 				if(hList!=null) {
@@ -95,9 +94,7 @@ public class HospitalController extends HttpServlet {
 				
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
-				
 			}
-			
 			
 			
 			
@@ -283,6 +280,65 @@ public class HospitalController extends HttpServlet {
 					
 				}
 			
+			// 동물병원 수정 화면 전환 Controller ************
+				else if(command.contentEquals("/updateForm")) {
+					errorMsg ="동물병원 수정 페이지 불러오는 과정에서 오류 발생";
+					
+					// 병원번호를 이용하여 이전에 작성했던 내용 조회해 옴
+					int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
+					Hospital hospital = service.updateView(hospitalNo);
+					
+					
+					if(hospital!=null) {
+						// 첨부된 파일을 가져 옴
+						List<Attachment> fList = service.selectHospitalFiles(hospitalNo);
+						
+						if(!fList.isEmpty()) {
+							request.setAttribute("fList", fList);
+						}
+						
+						request.setAttribute("hospital", hospital);
+						path = "WEB-INF/views/hospital/hospitalUpdate.jsp";
+						view = request.getRequestDispatcher(path);
+						view.forward(request, response);
+						
+					}else {
+						request.getSession().setAttribute("swalIcon", "error");
+						request.getSession().setAttribute("swalTitle", "동물 병원 수정 화면 전환에 실패했습니다.");
+						response.sendRedirect(request.getHeader("referer"));
+					}
+					
+				}
+			
+			// cp를 못 얻어와서 수정화면 전환 실패!!!!!
+			
+				else if(command.equals("/delete")) {
+					errorMsg = "삭제 과정에서 오류 발생";
+				
+					// 병원번호 얻어오기
+					
+					int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
+					// 병원 삭제 (DELETE_FL -> 'Y'로 변경)
+					int result = service.deleteHospital(hospitalNo);
+					
+					
+					if(result>0) {
+						swalIcon = "success";
+		        		 swalTitle="삭제 성공";
+		        		 
+		        		 path = "list";
+					}else {
+						 swalIcon = "error";
+		        		 swalTitle = "삭제 실패";
+		        		 
+		        		 path = request.getHeader("referer");
+					}
+					 request.getSession().setAttribute("swalIcon", swalIcon);
+		        	 request.getSession().setAttribute("swalTitle", swalTitle);
+		        	 
+		        	 response.sendRedirect(path);
+					
+				}
 			
 			
 			

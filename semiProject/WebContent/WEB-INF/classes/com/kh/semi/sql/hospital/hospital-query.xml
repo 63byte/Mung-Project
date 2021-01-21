@@ -81,4 +81,14 @@ WHERE RNUM BETWEEN ? AND ? )
 AND IMG_LEVEL =0
 </entry>
 
+
+
+
+<!-- 동물병원 삭제(상태변경)  -->
+<entry key="deleteHospital">
+UPDATE HOSPITAL SET
+HOSP_DEL_FL = 'Y'
+WHERE HOSP_NO = ?
+
+</entry>
 </properties>

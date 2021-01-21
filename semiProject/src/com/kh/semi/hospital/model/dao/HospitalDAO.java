@@ -357,6 +357,33 @@ public class HospitalDAO {
 
 
 	
+	
+	
+	/** 동물병원 삭제 DAO
+	 * @param conn
+	 * @param hospitalNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteHospital(Connection conn, int hospitalNo) throws Exception {
+		int result =0;
+		String query = prop.getProperty("deleteHospital");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hospitalNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+	
 
 
 
