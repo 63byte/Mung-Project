@@ -1,17 +1,17 @@
 package com.kh.semi.travel.model.vo;
 
-public class travelAttachment {
+public class TravelAttachment {
 	private int fileNo;
 	private String filePath;
 	private String fileName;
 	private int fileLevel;
 	private int parentBoardNo;
 	
-	public travelAttachment() {
+	public TravelAttachment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public travelAttachment(int fileNo, String filePath, String fileName, int fileLevel, int parentBoardNo) {
+	public TravelAttachment(int fileNo, String filePath, String fileName, int fileLevel, int parentBoardNo) {
 		super();
 		this.fileNo = fileNo;
 		this.filePath = filePath;
@@ -23,7 +23,7 @@ public class travelAttachment {
 	
 	
 
-	public travelAttachment(int fileNo, String fileName, int fileLevel) {
+	public TravelAttachment(int fileNo, String fileName, int fileLevel) {
 		super();
 		this.fileNo = fileNo;
 		this.fileName = fileName;

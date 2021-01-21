@@ -54,7 +54,7 @@ div {
 /* ------------------------------------------------------ */
 #container {
 	width: 1100px;
-	height: 1600px;
+	min-height: 800px;
 	display: block;
 	margin: auto;
 	box-sizing: border-box;
@@ -151,6 +151,16 @@ div {
 	height: 100px;
 	background-color: lightgray;
 }
+
+
+/* 썸네일 이미지 크기 */
+.boardThumbnail>img {
+   width: 200px;
+   height: 100px;
+}
+
+
+
 
 /* 테이블 : 수직 가운데 정렬 */
 .table td, .table th {
@@ -357,9 +367,24 @@ button#searchBtn:hover{
 							<c:forEach var="travel" items="${tList}">
 								<tr>
 									<th scope="row">${travel.travelNo}</th>
-									<td>
-										<div class="post-thumbnail-img"></div> <!-- 썸네일.. -->
-									</td>
+									
+									
+									<!-- ----------- 썸네일.. ----------- -->
+		                            <td class="boardThumbnail">
+		                              	
+		                              	<%-- 썸네일 출력 --%>
+		                              	<c:forEach var="thumbnail" items="${fList}">
+		                              		
+		                              		<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중
+		                              			부모 게시글 번호가 일치하는 썸네일 정보가 있다면 --%>
+		                              		<c:if test="${travel.travelNo == thumbnail.parentBoardNo}">
+		                              			<img src="${contextPath}/resources/uploadImages/travel/${thumbnail.fileName}">
+		                              		</c:if>
+		                              	
+		                              	</c:forEach>
+		                            </td>	
+									
+									
 									<td>${travel.travelTitle}</td>
 									<td>${travel.travelReadCount}</td>
 									<td>${travel.travelBoardDate}</td>

@@ -57,7 +57,7 @@ div {
 /* ------------------------------------------------------ */
 #container {
 	width: 1100px;
-	height: 800px;
+	min-height: 800px;
 	display: block;
 	margin: auto;
 }
