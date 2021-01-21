@@ -130,6 +130,71 @@ public class MemberController extends HttpServlet {
 				response.sendRedirect(request.getContextPath());
 
 			}
+			
+			// ------------------ 일반 회원가입용 메일 발송 Controller -------------------------
+			else if(command.equals("/normalSignUpMail")) {
+				final String user   = "pjh87973158@gmail.com";
+				  final String password  = "pjh1218714";
+
+				  String to = request.getParameter("mail");
+				  String mTitle = "[뭉개뭉개] 회원가입 인증.";
+				 
+				  try {
+				  Map<String, Object> map = new HashMap<>();
+				  Random random = new Random();
+				  String key = "";
+				  
+				  for (int i = 0; i < 3; i++) {
+						int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성
+						key += (char) index;
+					}
+					int numIndex = random.nextInt(8999) + 1000; // 4자리 정수를 생성
+					key += numIndex;
+				  
+				  
+				  // Get the session object
+				  Properties props = new Properties();
+				  props.put("mail.smtp.host", "smtp.gmail.com");
+				  props.put("mail.smtp.port", 465);
+				  props.put("mail.smtp.auth", "true");
+				  props.put("mail.smtp.ssl.enable", "true");
+				  props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+				  Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				   protected PasswordAuthentication getPasswordAuthentication() {
+				    return new PasswordAuthentication(user, password);
+				   }
+				  });
+
+				  // Compose the message
+				  
+				   MimeMessage message = new MimeMessage(session);
+				   message.setFrom(new InternetAddress(user));
+				   message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+				   // Subject
+				   message.setSubject(mTitle);
+				   
+				   // Text
+				   message.setText("뭉개뭉개에서 보내드리는 회원 가입용 인증 번호 : " + key);
+
+				   // send the message
+				   Transport.send(message);
+				   
+				   map.put("key", key);
+				   response.getWriter().print(key);
+				  }catch(Exception e) {
+					  e.printStackTrace();
+					  
+					  
+				  }
+				
+			}
+			
+			
+			
+			
+			
 
 			// ------- 아이디 중복검사 ajax --------------
 			else if (command.equals("/idDupCheck.do")) {

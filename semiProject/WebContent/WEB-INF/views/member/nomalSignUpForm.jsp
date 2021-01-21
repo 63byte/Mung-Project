@@ -240,8 +240,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요.">
                     </div>
                     <div class= "verifyBtn display-ib">
-                        <button class="btn_class" type="button" id="emailBtn">인증번호 받기</button>
+                        <button class="btn_class" type="button" id="sendMail" name="sendMail" >인증번호 받기</button>
                     </div>
+                    <span id="checkFl"></span>
                     <div>
                         <span id="checkEmail" >&nbsp;</span>
                     </div> 
@@ -287,7 +288,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
                 <br><br>
                 <div class="submit">
-                    <button class="btn_class" id="submitBtn" type="submit">회원가입</button>
+                    <button class="btn_class" id="nextBtn" type="submit">회원가입</button>
                 </div>
             </div>
         </form>
@@ -297,6 +298,54 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     </div>
 
      <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+     
+     
+     <script>
+     
+     
+     var key;
+ 	
+ 	$("#sendMail").click(function() {// 메일 입력 유효성 검사
+ 		var mail = $("#email1").val() + "@" + $("#email2").val(); //사용자의 이메일 입력값. 
+ 		
+ 		if (mail == "") {
+ 			alert("메일 주소가 입력되지 않았습니다.");
+ 		} else {
+ 			$.ajax({
+ 				type : 'post',
+ 				url : '${contextPath}/member/normalSignUpMail',
+ 				data : {
+ 					mail:mail
+ 					},
+ 				
+ 				success : function(result){
+ 					key = result;
+ 					
+ 				}
+ 			});
+ 		alert("인증번호가 전송되었습니다.");
+ 		}
+ 	});
+ 	
+ 		$("#verifyEmail").on("propertychange change keyup paste input", function() {
+ 			if ($("#verifyEmail").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+ 				$("#checkFl").text("인증 성공!").css("color", "green");
+ 				isCertification = true;  //인증 성공여부 check
+ 			} else {
+ 				$("#checkFl").text("불일치!").css("color", "red");
+ 				isCertification = false; //인증 실패
+ 			}
+ 		});
+ 		
+ 		
+ 		$("#nextBtn").click(function memberJoinvalidate(){
+ 			if(isCertification==false){
+ 				alert("메일 인증이 완료되지 않았습니다.");
+ 				return false;
+ 			}
+ 		}); 
+     
+     </script>
      
      
 
