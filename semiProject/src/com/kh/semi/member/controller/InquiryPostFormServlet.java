@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/myPageInquiryPost.do") // 절대 경로
+/*@WebServlet("/member/myPageInquiryPost.do") // 절대 경로
 public class InquiryPostFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,4 +24,4 @@ public class InquiryPostFormServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-}
+}*/
