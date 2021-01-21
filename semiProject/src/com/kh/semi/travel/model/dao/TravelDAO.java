@@ -9,12 +9,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.hospital.model.dao.HospitalDAO;
 import com.kh.semi.hospital.model.vo.Hospital;
 import com.kh.semi.hospital.model.vo.PageInfo;
 import com.kh.semi.travel.model.vo.Travel;
+import com.kh.semi.travel.model.vo.travelAttachment;
 
 public class TravelDAO {
 	
@@ -158,6 +161,111 @@ public class TravelDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+	/** 게시글 삽입 DAO 
+	 * @param conn
+	 * @param map
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int insertBoard(Connection conn, Map<String, Object> map) throws Exception {
+		int result = 0; 
+		String query = prop.getProperty("insertBoard");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (int)map.get("travelNo")  );
+			pstmt.setString(2, (String)map.get("travelLocation")  );
+			pstmt.setString(3, (String)map.get("travelTitle")  );
+			pstmt.setString(4, (String)map.get("travelContent")  );
+			pstmt.setInt(5, (int)map.get("boardWriter")  );
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+	/** 파일 정보 삽입 DAO 
+	 * @param conn
+	 * @param at
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int insertAttachment(Connection conn, travelAttachment at) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, at.getTravelImgNo());
+			pstmt.setString(2, at.getTravelImgPath());
+			pstmt.setString(3, at.getTravelImgName());
+			pstmt.setInt(4, at.getTravelImgLevel());
+			pstmt.setInt(5, at.getTravelNo());
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 다음 게시글 번호 조회 DAO 
+	 * @param conn
+	 * @return travelNo 
+	 * @throws Exception
+	 */
+	public int selectNextNo(Connection conn) throws Exception {
+		int travelNo = 0;
+		String query = prop.getProperty("selectNextNo");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				travelNo = rset.getInt(1);
+			}
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return travelNo;
+	}
+
+
+	/**
+	 * @param conn
+	 * @param travelNo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<travelAttachment> selectBoardFiles(Connection conn, int travelNo) throws Exception{
+		List<travelAttachment> fList = null;
+		
+		String query = prop.getProperty("selectBoardFiles");
+
+		try {
+			
+			
+		}finally{
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, travelNo);
+			
+		}
+		
+		return fList;
 	}
 
 
