@@ -145,8 +145,8 @@ div {
 			${travel.travelContent}
 			<c:if test="${!empty fList }">
 				<c:forEach var="file" items="${fList }">
-					<img id="${file.travelImgNo }"
-						src="${contextPath}/resources/uploadImages/travel/${file.travelImgName}">
+					<img id="${file.fileNo }"
+						src="${contextPath}/resources/uploadImages/travel/${file.fileName}">
 				</c:forEach>
 			</c:if>
 			<hr>

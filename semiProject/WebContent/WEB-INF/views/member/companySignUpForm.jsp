@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>header-footer</title>
+    <title>업체 회원가입</title>
     <head>
      <!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     
@@ -108,6 +108,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     height : 45px;   
 }
 
+.comphone{
+    width : 119px;
+    height : 45px;   
+}
+
 .gender{
     width: 100%;
 }
@@ -167,7 +172,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
         <br>
 
         
-        <form action="#" method="POST" onsubmit="return memberJoinvalidate();">
+        <form action="${contextPath}/member/comSignUp.do" method="POST" onsubmit="return memberJoinvalidate();">
             <div class="memberJoin">
                 <hr>
 
@@ -177,7 +182,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="userId">아이디</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag" id="userId" name="" autocomplete="off" required>
+                        <input type="text" class="inputTag" id="userId" name="userId" autocomplete="off" required>
                     </div>
                     <div>
                         <span id="checkId" >&nbsp;</span>
@@ -190,10 +195,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="pwd1">비밀번호</label>  <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd1" name=""  required>
+                        <input type="password" class="inputTag"  id="pwd1" name="pwd1"  required>
                     </div>     
                     <div>
-                        <span id="chechPwd1" >&nbsp;</span>
+                        <span id="checkPwd1" >&nbsp;</span>
                     </div>  
                 </div>
 
@@ -203,10 +208,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="pwd2">비밀번호 재확인</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd2" name=""   required>
+                        <input type="password" class="inputTag"  id="pwd2" name="pwd2"   required>
                     </div>
                     <div>
-                        <span id="chechPwd2" >&nbsp;</span>
+                        <span id="checkPwd2" >&nbsp;</span>
                     </div>  
                 </div>
                 
@@ -216,7 +221,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="userName">닉네임</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag"  id="userName" name="" required>
+                        <input type="text" class="inputTag"  id="userName" name="userName" required>
                     </div>
                     <div>
                         <span id="checkUserName" >&nbsp;</span>
@@ -229,9 +234,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="email">이메일</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag display-ib email"  id="email1" name="" autocomplete="off" required> 
+                        <input type="text" class="inputTag display-ib email"  id="email1" name="email1" autocomplete="off" required> 
                         @
-                        <select class="inputTag display-ib email" id="email2" name="" required>
+                        <select class="inputTag display-ib email" id="email2" name="email2" required>
                             <option style="color:gray;">이메일 주소 선택</option>
                             <option>daum.net</option>
                             <option>naver.com</option>
@@ -258,7 +263,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="phone">전화번호</label>
                     </div>
                     <div class="ip">
-                        <select class="display-ib inputTag phone" id="phone1" name="" required> 
+                        <select class="display-ib inputTag phone" id="phone1" name="phone1" required> 
                             <option>010</option>
                             <option>011</option>
                             <option>016</option>
@@ -266,9 +271,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                             <option>019</option>
                         </select>
                         &nbsp;-&nbsp;
-                        <input type="number" class="display-ib inputTag phone" id="phone2" name="" required>
+                        <input type="number" class="display-ib inputTag phone" id="phone2" name="phone2" required>
                         &nbsp;-&nbsp;
-                        <input type="number" class="display-ib inputTag phone" id="phone3" name="" required>
+                        <input type="number" class="display-ib inputTag phone" id="phone3" name="phone3" required>
                     </div>
                     <div>
                         <span id="checkPhone" >&nbsp;</span>
@@ -281,7 +286,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="gender">성별</label>
                     </div>
                     <div class="ip">
-                        <select class="inputTag gender" id="gender" name="" required>
+                        <select class="inputTag gender" id="gender" name="gender" required>
                             <option>성별</option>
                             <option>여자</option>
                             <option>남자</option>
@@ -292,7 +297,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 
                 <br>
                 <hr>
-                <span style="font-size:13px; font-weight:lighter; margin-top:0;">업체 정보 기입<span>
+                <span style="font-size:13px; font-weight:lighter; margin-top:0;">업체 정보 기입</span>
                 <br>
                 
                  <!-- 업체명 입력 -->
@@ -301,7 +306,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="companyName">업체명</label> <br>
                     </div>
                     <div class="ip">
-                        <input type="text" class="inputTag" id="companyName" name="" autocomplete="off" required>
+                        <input type="text" class="inputTag" id="companyName" name="companyName" autocomplete="off" required>
                     </div>
                     <div>
                         <span id="checkCNM" >&nbsp;</span>
@@ -314,7 +319,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="phone">업체번호</label>
                     </div>
                     <div class="ip">
-                        <select class="display-ib inputTag phone" id="phone1" name="" required> 
+                        <select class="display-ib inputTag comphone" id="comPhone1" name="comPhone1" required> 
                             <option>02</option>
                             <option>051</option>
                             <option>053</option>
@@ -335,12 +340,12 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                             <option>070</option>
                         </select>
                         &nbsp;-&nbsp;
-                        <input type="number" class="display-ib inputTag phone" id="phone2" name="" required>
+                        <input type="number" class="display-ib inputTag comphone" id="comPhone2" name="comPhone2" required>
                         &nbsp;-&nbsp;
-                        <input type="number" class="display-ib inputTag phone" id="phone3" name="" required>
+                        <input type="number" class="display-ib inputTag comphone" id="comPhone3" name="comPhone3" required>
                     </div>
                     <div>
-                        <span id="checkPhone" >&nbsp;</span>
+                        <span id="checkPhone1" >&nbsp;</span>
                     </div> 
                 </div>
                 
@@ -387,7 +392,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="license">사업자 등록증</label> <br>
                     </div>
                     <div class="ip display-ib license">
-                        <input type="text" class="inputTag" id="license" name=""  required>
+                        <input type="text" class="inputTag" id="license" name="license"  required>
                     </div>
                     <div class="display-ib">
                         <button type="button" class="btn_class" id="licenseBtn">이미지첨부</button>
@@ -405,6 +410,16 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     </div>
   <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     
+    <script src="${contextPath}/resources/js/semi_commember.js"></script>
+    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+    
+    <script>
+    $(function(){
+        $("#postcodify_search_button").postcodifyPopUp();
+    });
+    
+    
+    </script>
 
 </body>
 </html>

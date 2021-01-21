@@ -134,7 +134,7 @@ public class TravelService {
 						
 						// 파일 정보가 저장된 Attachment 객체에 
 						// 해당 파일이 작성된 게시글 번호를 추가 세팅
-						at.setTravelNo(travelNo);
+						at.setParentBoardNo(travelNo);
 						
 						result = dao.insertAttachment(conn, at);
 								
@@ -155,8 +155,8 @@ public class TravelService {
 				
 				if(!fList.isEmpty()) {
 					for(travelAttachment at : fList ) {
-						String filePath = at.getTravelImgPath();
-						String fileName = at.getTravelImgName();
+						String filePath = at.getFilePath();
+						String fileName = at.getFileName();
 						
 						File deleteFile = new File(filePath + fileName);
 						// 

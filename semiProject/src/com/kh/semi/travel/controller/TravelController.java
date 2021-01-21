@@ -113,9 +113,8 @@ public class TravelController extends HttpServlet {
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
 				} else { // 조회 실패 했을 때
-					HttpSession session = request.getSession();
-					session.setAttribute("swalIcon", "error");
-					session.setAttribute("swalTitle", "지역정보글 상세 조회 실패");
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "지역정보글 상세 조회 실패");
 					response.sendRedirect(request.getHeader("referer"));
 				}
 			}
@@ -179,8 +178,8 @@ public class TravelController extends HttpServlet {
 	                  // Attachment 객체에 파일 정보 저장
 	                  travelAttachment temp = new travelAttachment();
 	                  
-	                  temp.setTravelImgName(multiRequest.getFilesystemName(name));
-	                  temp.setTravelImgPath(filePath);
+	                  temp.setFileName(multiRequest.getFilesystemName(name));
+						temp.setFilePath(filePath);
 	                  
 	                  // name 속성에 따라 fileLevel 지정
 	                  int fileLevel = 0;
@@ -191,7 +190,7 @@ public class TravelController extends HttpServlet {
 	                  case "img3" : fileLevel = 3; break;
 	                  }
 	                  
-	                  temp.setTravelImgLevel(fileLevel);
+	                  temp.setFileLevel(fileLevel);
 	                  
 	                  // fList에 추가
 	                  fList.add(temp);
