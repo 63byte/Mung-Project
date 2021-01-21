@@ -130,7 +130,7 @@
 			<!-- 등록하기 버튼  (관리자로 로그인 했을 때만 보인다.-->
 			<c:if test="${!empty loginMember && loginMember.memberAdmin == 'A' }">
 	            <div class="row-item">
-	                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = '${contextPath}/hospital/insert'">등록하기</button>
+	                <button type="button" class= "btn_class"  id="insertHospital" onclick="location.href = '${contextPath}/hospital/insertForm'">등록하기</button>
 	            </div>
 			</c:if>
 			

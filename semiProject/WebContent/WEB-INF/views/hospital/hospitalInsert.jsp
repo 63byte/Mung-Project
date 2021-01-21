@@ -29,14 +29,14 @@
             <!-- COS.JAR 이용해서 파일 업로드 -->
             <div class="insert_hospital">
                 <form action="${contextPath }/hospital/insert" method="post"  
-                      enctype="multipart/form-data"  role="form" onsubmit="return hospitalInsertvalidate();">
+                      enctype="multipart/form-data"  role="form" onsubmit="return hospitalInsertValidate();">
                     
                     <div class="row-item">
                         <div class="label_name">
                             <label for="location1">지역</label>
                         </div>
                         <div class="input_tag">
-                            <select class="full_input" id="location1" name="lacation1" required>
+                            <select class="full_input" id="location1" name="location1" required>
                                 <option value="강원도">강원도</option>
                                 <option value="경기도">경기도</option>
                                 <option value="경상도">경상도</option>
@@ -44,7 +44,7 @@
                                 <option value="대구">대구</option>
                                 <option value="대전">대전</option>
                                 <option value="부산">부산</option>
-                                <option value="서울">서울</option>
+                                <option value="서울" selected>서울</option>
                                 <option value="세종">세종</option>
                                 <option value="울산">울산</option>
                                 <option value="인천">인천</option>
@@ -91,9 +91,9 @@
                                 <option>070</option>
                             </select>
                             &nbsp;-&nbsp;&nbsp;
-                            <input type="number" class="phone" id="phone2" name="phone2" required>
+                            <input type="number" class="phone phoneTest" id="phone2" name="phone2" maxlength="4" oninput="phoneLength(this)" required>
                             &nbsp;-&nbsp;
-                            <input type="number" class="phone" id="phone3" name="phone3" required>
+                            <input type="number" class="phone phoneTest" id="phone3" name="phone3" maxlength="4" oninput="phoneLength(this)" required>
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
                             <label for="facility">병원 시설</label>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="wifi">WiFi
+                           <input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi
                            <input type="checkbox" class="facility" name="hosp_facility" id="parcking" value="주차">주차
                            <input type="checkbox" class="facility" name="hosp_facility" id="appointment" value="예약">예약
                            <input type="checkbox" class="facility" name="hosp_facility" id="24hour" value="24시간">24시간
@@ -209,40 +209,21 @@
 
 /* --------------------유효성 검사---------------  */
 
-function hospitalInsertvalidate(){
+function hospitalInsertValidate(){
 	
-	// 시간 입력 ??:??
-	var regExp = /^(0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/;
+	// 시간 입력 정규식 00:00
+	var regExp = /^(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9])$/;
 	
-	var open = $("#open_hours").val();
-	var close = $("#close_hours").val();
+	var open = $("#openTime").val();
+	var close = $("#closeTime").val();
 	
-	if(!regexp.test(open) || !regexp.test(close)){
-		swal("영업 시간의 형식이 유효하지 않습니다.");
+	if(!regExp.test(open) || !regExp.test(close)){
+		alert("영업 시간의 형식이 유효하지 않습니다.");
 		return false;
 	}
 	
-	/* 병원명 */
-	if ($("#companyName").val().trim().length ==0){
-		alert("병원명을 입력해 주세요.");
-		$("#companyName").focus();
-		return false;
-	}
-	if ($("#location2").val().trim().length ==0){
-		alert("상세주소를 입력해 주세요.");
-		$("#location2").focus();
-		return false;
-	}
-	if ($("#open_hours").val().trim().length ==0){
-		alert("오픈 시간을 입력해 주세요.");
-		$("#open_hours").focus();
-		return false;
-	}
-	if ($("#close_hours").val().trim().length ==0){
-		alert("마감 시간을 입력해 주세요.");
-		$("#close_hours").focus();
-		return false;
-	}
+	/* 병원정보에 내용이 입력이 안 된다면*/
+	
 	if ($("#hospital_info").val().trim().length ==0){
 		alert("동물 병원 정보를 입력해 주세요.");
 		$("#hospital_info").focus();
@@ -253,11 +234,13 @@ function hospitalInsertvalidate(){
 
 
 /* 전화번호 4글자 이상 입력 안 되게 지정  */
-$(".phone").on("input",function(){
-	if ($(".phone").val().length >4){
-		$(this).val()($(this).val().slice(0,4));
-	}
-});
+$(".phoneTest").on("input",function(){
+	 if ($(this).val().length > 4) {
+	    $(this).val( $(this).val().slice(0, 4));
+	 }  
+	
+})
+
 
 
 

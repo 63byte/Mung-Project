@@ -11,7 +11,6 @@ import com.kh.semi.hospital.model.dao.HospitalDAO;
 import com.kh.semi.hospital.model.exception.FileInsertFailedException;
 import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
-import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
 public class HospitalService {
@@ -111,11 +110,11 @@ public class HospitalService {
 		int result =0;
 		
 		// 1. 동물병원 번호 얻어오기. (다음 번호 얻어오기임,, 추가되면 다음번호로 추가됨)
-		int hospitalNo = dao.selectNextNo(conn);
+		int insertNo = dao.selectNextNo(conn);
 		
-		if(hospitalNo>0) {
+		if(insertNo>0) {
 			// 얻어온 번호를 map에 추가해준다.
-			map.put("hospitalNo", hospitalNo);
+			map.put("insertNo", insertNo);
 			
 			// 병원이름/병원소개 창에  크로스 사이트 스크립팅 방지처리..
 			String hospNm = (String)map.get("hospNm");
@@ -149,7 +148,7 @@ public class HospitalService {
 					 // fList의 요소를 하나씩 반복접근하여 DAO메소드를 반복 호출해 정보를 삽입함.
 					 for(Attachment at : fList) {
 						 // 파일 정보가 저장된 Attachment 객체에 해당 파일이 작성된 게시글 번호를 추가 세팅
-						 at.setHospNo(hospitalNo);
+						 at.setHospNo(insertNo);
 						 
 						 result = dao.insertAttachment(conn,at); 
 						 
@@ -195,7 +194,7 @@ public class HospitalService {
 				commit(conn);
 				// 삽입 성공 시 해당 병원의 상세 조회 화면으로 이동해야되기 때문에 
 				// 글 번호를 받환할 수 있도록 result에 hospitalNo를 대입
-				result = hospitalNo;
+				result = insertNo;
 				
 			}else {
 				rollback(conn);

@@ -15,10 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.common.MyFileRenamePolicy;
-import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.hospital.model.service.HospitalService;
+import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
-import com.kh.semi.hospital.model.vo.Image;
 import com.kh.semi.hospital.model.vo.PageInfo;
 import com.kh.semi.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -132,7 +131,7 @@ public class HospitalController extends HttpServlet {
 			
 			
 			// 동물병원 등록 화면 전환 **************************************
-				else if(command.contentEquals("/update")) {
+				else if(command.contentEquals("/insertForm")) {
 					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
@@ -153,7 +152,7 @@ public class HospitalController extends HttpServlet {
 					// 1-2. 서버에 업로드된 파일을 저장할 경로 지정
 					String root = request.getSession().getServletContext().getRealPath("/");
 					
-					String filePath = root + "resources/image/hospital";
+					String filePath = root + "resources/uploadHospitalImages/";
 					
 					// 1-3. 파일명 변환을 위한 클래스 작성 (Attachment.java)
 					
@@ -207,6 +206,7 @@ public class HospitalController extends HttpServlet {
 					
 					// 3.파일정보를 제외한 게시글 정보를 얻어와 저장하기
 					String location1 = multiRequest.getParameter("location1"); //지역1
+					
 					String hospNm = multiRequest.getParameter("hospNm"); // 병원명
 					
 					String phone1 = multiRequest.getParameter("phone1"); // 전화번호
@@ -214,20 +214,31 @@ public class HospitalController extends HttpServlet {
 					String phone3 = multiRequest.getParameter("phone3"); // 전화번호
 					String phone = phone1+"-" + phone2 + "-" + phone3; // 전화번호 합치기
 					
+					
 			
 					String location2 = multiRequest.getParameter("location2"); //상세주소
+					
 					
 					String openTime = multiRequest.getParameter("openTime"); //오픈시간
 					String closeTime = multiRequest.getParameter("closeTime"); //오픈시간
 					
+					
+					
+					
 					String[] facilityArr = multiRequest.getParameterValues("hosp_facility"); // 병원시설 배열로 받기
 					String facility = null;
+					
+				
 					
 					if(facilityArr!=null) { //병원 시설 배열이 비어있지 않다면.
 						facility= String.join(",", facilityArr);
 					}
 					
+					
+					
+					
 					String hospitalInfo = multiRequest.getParameter("hospital_info");
+					
 					
 					// 세션에서 로그인한 회원의 번호를 얻어옴
 					Member loginMember = (Member)request.getSession().getAttribute("loginMember");
@@ -248,13 +259,14 @@ public class HospitalController extends HttpServlet {
 					map.put("memberNo", memberNo);
 					
 					
+					
 					// 4. 게시글 등록 비즈니스 로직 수행 후 결과 반환받기
 					int result = service.insertHospital(map);
 					
 					if(result>0) {// DB에 데이터 등록 성공하면 result에 병원번호가 저장되어 있다.
 						swalIcon = "success";
 						swalTitle = "병원 등록 완료";
-						path = "view?cp=1&no="+result;
+						path = "view?cp=1&hospitalNo="+result;
 					} else {
 						swalIcon = "error";
 						swalTitle ="병원 등록 실패";
