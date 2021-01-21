@@ -84,4 +84,24 @@ AND SCSN_FL = 'N'
 </entry>
 
 
+<entry key="selectNextNo">
+SELECT SEQ_MNO.CURRVAL FROM DUAL
+</entry>
+
+<!-- 업체 정보 삽입 -->
+<entry key="signUpCom">
+INSERT INTO COOPERATOR
+VALUES(?, ?, ?, ?)
+</entry>
+
+<entry key="insertAttachment">
+INSERT INTO COO_LICENESE_IMG
+VALUES(SEQ_CLM.NEXTVAL, ?, ?, ?, ?)
+</entry>
+
+<entry key="signUpCom1">
+INSERT INTO TB_MEMBER
+VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, 'C', ?)
+</entry>
+
 </properties>

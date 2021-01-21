@@ -127,7 +127,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 }
 
 /* 사업자 등록증  */
-.license{
+#license{
 	width : 70%;
 	margin-right : 5px;
 }
@@ -172,7 +172,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
         <br>
 
         
-        <form action="${contextPath}/member/comSignUp.do" method="POST" onsubmit="return memberJoinvalidate();">
+        <form action="${contextPath}/member/comSignUp.do" method="post" 
+        	enctype="multipart/form-data" role="form" onsubmit="return memberJoinvalidate();">
             <div class="memberJoin">
                 <hr>
 
@@ -192,10 +193,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 <!-- 비밀번호 입력 -->
                 <div>
                     <div class="lb">
-                        <label for="pwd1">비밀번호</label>  <br>
+                        <label for="passwd">비밀번호</label>  <br>
                     </div>
                     <div class="ip">
-                        <input type="password" class="inputTag"  id="pwd1" name="pwd1"  required>
+                        <input type="password" class="inputTag"  id="passwd" name="passwd"  required>
                     </div>     
                     <div>
                         <span id="checkPwd1" >&nbsp;</span>
@@ -250,7 +251,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요." required>
                     </div>
                     <div class="display-ib">
-                        <button class="btn_class" type="button" id="emailBtn">인증번호 받기</button>
+                        <button class="btn_class" type="button" id="sendMail">인증번호 받기</button>
+                        <span id="checkFl"></span>
                     </div>
                     <div>
                         <span id="checkEmail" >&nbsp;</span>
@@ -392,10 +394,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <label for="license">사업자 등록증</label> <br>
                     </div>
                     <div class="ip display-ib license">
-                        <input type="text" class="inputTag" id="license" name="license"  required>
+                        <input type="text" class="inputTag img0" id="t12" name="t12">
                     </div>
                     <div class="display-ib">
-                        <button type="button" class="btn_class" id="licenseBtn">이미지첨부</button>
+                        <input type="file" class="btn_class img0" id="img0" name="img0"></input>
                     </div>
                 </div>
 
@@ -403,7 +405,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                 
                 
                 <div class="submit">
-                    <button class="btn_class" id="submitBtn" type="submit">회원가입</button>
+                    <button class="btn_class" id="nextBtn" type="submit">회원가입</button>
                 </div>
             </div>
         </form>
@@ -417,6 +419,50 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     $(function(){
         $("#postcodify_search_button").postcodifyPopUp();
     });
+    
+    
+    
+    var key;
+	
+	$("#sendMail").click(function() {// 메일 입력 유효성 검사
+		var mail = $("#email1").val() + "@" + $("#email2").val(); //사용자의 이메일 입력값. 
+		
+		if (mail == "") {
+			alert("메일 주소가 입력되지 않았습니다.");
+		} else {
+			$.ajax({
+				type : 'post',
+				url : '${contextPath}/member/signUpMail',
+				data : {
+					mail:mail
+					},
+				
+				success : function(result){
+					key = result;
+					
+				}
+			});
+		alert("인증번호가 전송되었습니다.");
+		}
+	});
+	
+		$("#verifyEmail").on("propertychange change keyup paste input", function() {
+			if ($("#verifyEmail").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+				$("#checkFl").text("인증 성공!").css("color", "green");
+				isCertification = true;  //인증 성공여부 check
+			} else {
+				$("#checkFl").text("불일치!").css("color", "red");
+				isCertification = false; //인증 실패
+			}
+		});
+		
+		
+		$("#nextBtn").click(function memberJoinvalidate(){
+			if(isCertification==false){
+				alert("메일 인증이 완료되지 않았습니다.");
+				return false;
+			}
+		}); 
     
     
     </script>

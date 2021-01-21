@@ -1,15 +1,15 @@
-package com.kh.semi.travel.model.vo;
+package com.kh.semi.member.model.vo;
 
-public class TravelAttachment {
+public class Attachment {
 	private int fileNo;
 	private String filePath;
 	private String fileName;
 	private int fileLevel;
 	private int parentBoardNo;
 	
-	public TravelAttachment() {	}
+	public Attachment() {	}
 
-	public TravelAttachment(int fileNo, String filePath, String fileName, int fileLevel, int parentBoardNo) {
+	public Attachment(int fileNo, String filePath, String fileName, int fileLevel, int parentBoardNo) {
 		super();
 		this.fileNo = fileNo;
 		this.filePath = filePath;
@@ -20,7 +20,7 @@ public class TravelAttachment {
 	
 	
 
-	public TravelAttachment(int fileNo, String fileName, int fileLevel) {
+	public Attachment(int fileNo, String fileName, int fileLevel) {
 		super();
 		this.fileNo = fileNo;
 		this.fileName = fileName;

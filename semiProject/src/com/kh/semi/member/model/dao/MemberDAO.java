@@ -7,8 +7,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.member.model.vo.Member;
 
 public class MemberDAO {
@@ -331,6 +333,123 @@ public class MemberDAO {
 			pstmt.setString(1, pw1);
 			pstmt.setString(2, id);
 			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	/** 회원번호 얻어오기
+	 * @param conn
+	 * @return
+	 * @throws Exception
+	 */
+	public int selectNextNo(Connection conn) throws Exception{
+		int memNo = 0;
+		
+		String query = prop.getProperty("selectNextNo");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				memNo = rset.getInt(1);
+			}
+			
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memNo;
+	}
+
+	
+	/** 업체 회원가입 DAO
+	 * @param conn
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public int signUpCom(Connection conn, Map<String, Object> map) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("signUpCom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (int)map.get("memNo"));
+			pstmt.setString(2, (String)map.get("comName"));
+			pstmt.setString(3, (String)map.get("comAddress"));
+			pstmt.setString(4, (String)map.get("comPhone"));
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	/** 사업자 등록증 삽입 DAO
+	 * @param conn
+	 * @param at
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertAttachment(Connection conn, Attachment at) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, at.getFilePath());
+			pstmt.setString(2, at.getFileName());
+			pstmt.setInt(3, at.getFileLevel());
+			pstmt.setInt(4, at.getParentBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	
+	
+	
+	/** 업체 회원가입 공통부분
+	 * @param conn
+	 * @param member
+	 * @return
+	 * @throws Exception
+	 */
+	public int signUpCom1(Connection conn, Member member) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("signUpCom1");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getMemberId());
+			pstmt.setString(2, member.getMemberPwd());
+			pstmt.setString(3, member.getMemberNickName());
+			pstmt.setString(4, member.getEmail());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getGender());
+
 			result = pstmt.executeUpdate();
 			
 		}finally {

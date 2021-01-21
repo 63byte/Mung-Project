@@ -13,7 +13,60 @@ public class Member {
 	private String memberAdmin;
 	
 	
+	// -------------- 업체 ---------------------
 	
+	private String comName;
+	private String comAddress;
+	private String comPhone;
+	
+	
+	
+	
+	public String getComName() {
+		return comName;
+	}
+
+
+
+	public void setComName(String comName) {
+		this.comName = comName;
+	}
+
+
+
+	public String getComAddress() {
+		return comAddress;
+	}
+
+
+
+	public void setComAddress(String comAddress) {
+		this.comAddress = comAddress;
+	}
+
+
+
+	public String getComPhone() {
+		return comPhone;
+	}
+
+
+
+	public void setComPhone(String comPhone) {
+		this.comPhone = comPhone;
+	}
+
+
+
+	public Member(String comName, String comAddress, String comPhone) {
+		super();
+		this.comName = comName;
+		this.comAddress = comAddress;
+		this.comPhone = comPhone;
+	}
+
+
+
 	public Member() {}
 
 
