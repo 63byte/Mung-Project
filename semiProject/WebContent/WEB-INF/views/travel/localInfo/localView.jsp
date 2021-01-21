@@ -143,6 +143,12 @@ div {
 
 			<!-- 내용 -->
 			${travel.travelContent}
+			<c:if test="${!empty fList }">
+				<c:forEach var="file" items="${fList }">
+					<img id="${file.travelImgNo }"
+						src="${contextPath}/resources/uploadImages/travel/${file.travelImgName}">
+				</c:forEach>
+			</c:if>
 			<hr>
 
 

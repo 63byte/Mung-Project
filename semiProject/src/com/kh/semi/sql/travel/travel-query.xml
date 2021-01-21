@@ -32,4 +32,29 @@ TRAVEL_READ_COUNT = TRAVEL_READ_COUNT + 1
 WHERE TRAVEL_NO = ?
 </entry>
 
+<!-- 게시글 삽입 -->
+<entry key="insertBoard">
+INSERT INTO TRAVEL(TRAVEL_NO, TRAVEL_LOCATION, TRAVEL_TITLE, TRAVEL_CONTENT, MEM_NO)
+VALUES(?, ?, ?, ?, ?)
+</entry>
+
+<!-- 파일정보 삽입 -->
+<entry key="insertAttachment">
+INSERT INTO TRAVEL_IMG
+VALUES(SEQ_TIO.NEXTVAL, ?, ?, ?, ?)
+</entry>
+
+<!-- 다음 게시글 번호 조회 -->
+<entry key="selectNextNo">
+SELECT SEQ_TNO.NEXTVAL FROM DUAL
+</entry>
+
+
+<entry key="selectBoardFiles">
+SELECT TRAVEL_IMG_NO, TRAVEL_IMG_PATH, TRAVEL_IMG_NAME, TRAVEL_IMG_LEVEL
+FROM TRAVEL_IMG
+WHERE TRAVEL_NO = ?
+ORDER BY TRAVEL_IMG_LEVEL
+</entry>
+
 </properties>

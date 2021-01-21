@@ -19,6 +19,23 @@ public class Travel {
 	
 	
 	
+	// 다음 게시글 번호 조회 (??) 
+	public Travel(int travelNo) {
+		super();
+		this.travelNo = travelNo;
+	}
+
+
+	// 게시글 삽입용 생성자
+	public Travel(int travelNo, String travelLocation, String travelTitle, String travelContent) {
+		super();
+		this.travelNo = travelNo;
+		this.travelLocation = travelLocation;
+		this.travelTitle = travelTitle;
+		this.travelContent = travelContent;
+	}
+	
+	
 	// 게시글 상세조회 화면용 생성자
 	public Travel(int travelNo, String travelLocation, String travelTitle, String travelContent, int travelReadCount,
 			Date travelBoardDate) {
@@ -30,6 +47,7 @@ public class Travel {
 		this.travelReadCount = travelReadCount;
 		this.travelBoardDate = travelBoardDate;
 	}
+
 
 	// 게시글 리스트 조회 화면용 생성자
 	public Travel(int travelNo, String travelTitle, int travelReadCount, Date travelBoardDate) {

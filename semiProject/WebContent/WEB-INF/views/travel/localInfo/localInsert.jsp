@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!-- c 태그를 쓰면 라이브러리 선언해준다!!!! -->
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -69,7 +72,7 @@ div {
 }
 
 /* ------------------------------------------ */
-.btn_class{
+.btn_class {
 	background-color: #8ad2d5;
 }
 
@@ -114,28 +117,32 @@ div {
 	color: gray;
 }
 
-
-
 /* 등록 취소 버튼 */
-.btn_class{
-    border-radius: 5px;
-    color: #fff;
-    border : 1px solid  #8bd2d6;
-    background-color: #8bd2d6;
-    cursor: pointer;
-    outline:none;
-    width : 70px;
-    height: 40px;
-}
-.btn_item{
-    margin-left: 45%;
+.btn_class {
+	border-radius: 5px;
+	color: #fff;
+	border: 1px solid #8bd2d6;
+	background-color: #8bd2d6;
+	cursor: pointer;
+	outline: none;
+	width: 70px;
+	height: 40px;
 }
 
-.btn_class:hover{
+.btn_item {
+	margin-left: 45%;
+}
+
+.btn_class:hover {
 	background-color: #17a2b8;
 }
 
 
+
+/* 이미지에 커서를 댔을 때 마우스 모양으로 변경 */
+.boardImg{
+   cursor : pointer;
+}
 
 </style>
 </head>
@@ -143,7 +150,7 @@ div {
 
 	<!-- --------------------- header 연결 --------------------- -->
 	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
-ㄴ
+
 	<div id="container">
 		<!-- --------------------- 사이드 메뉴 연결 --------------------- -->
 		<jsp:include page="/WEB-INF/views/travel/travelSideMenu.jsp"></jsp:include>
@@ -155,12 +162,12 @@ div {
 			<h3>지역정보 글쓰기</h3>
 			<hr>
 
-			<form>
+			<form action="${contextPath}/travel/localInsert.do" method="post" 
+              enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
 				<div class="form-group row">
 					<label for="my-1 mr-sm-2" class="col-sm-2 col-form-label">지역</label>
 					<div class="col-sm-10">
-						<form class="form-inline">
-							<select class="custom-select my-1 mr-sm-2" id="">
+							<select class="custom-select my-1 mr-sm-2" name="travelLocation">
 								<option value="강원도">강원도</option>
 								<option value="경기도">경기도</option>
 								<option value="경상도">경상도</option>
@@ -176,15 +183,14 @@ div {
 								<option value="제주">제주</option>
 								<option value="충청도">충청도</option>
 							</select>
-						</form>
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputTitle"
-							placeholder="제목을 입력하세요">
+						<input type="text" class="form-control" id="boardTitle"
+							name="travelTitle" placeholder="제목을 입력하세요">
 					</div>
 				</div>
 
@@ -193,28 +199,46 @@ div {
 					<div class="col-sm-10">
 
 						<!-- 이미지 업로드 버튼 -->
+						<!-- 
 						<div class="filebox">
 							<div>
-								<label for="file">업로드</label> <input type="file" id="file" name="img1" onchange="LoadImg(this,1)">
-								<input class="file-upload-name" value="파일경로..">
+								<label for="file">업로드</label> <input type="file" id="file"
+									name="img1" onchange="LoadImg(this,1)"> <input
+									class="file-upload-name" value="파일경로..">
 							</div>
-							<div>
-								<label for="file">업로드</label> <input type="file" id="file" name="img2" onchange="LoadImg(this,2)">
-								<input class="file-upload-name" value="파일경로..">
-							</div>
-							<div>
-								<label for="file">업로드</label> <input type="file" id="file" name="img3" onchange="LoadImg(this,3)">
-								<input class="file-upload-name" value="파일경로..">
-							</div>
-							<div>
-								<label for="file">업로드</label> <input type="file" id="file" name="img4" onchange="LoadImg(this,4)">
-								<input class="file-upload-name" value="파일경로..">
-							</div>
-							<div>
-								<label for="file">업로드</label> <input type="file" id="file" name="img5" onchange="LoadImg(this,5)">
-								<input class="file-upload-name" value="파일경로..">
-							</div>
-						</div>
+						</div> -->
+						
+						<!-- 강사님 ver 이미지 업로드  -->
+						<div class="form-inline mb-2">
+			               <label class="input-group-addon mr-3 insert-label">썸네일</label>
+			               <div class="boardImg" id="titleImgArea">
+			                  <img id="titleImg" width="200" height="200">
+			               </div>
+			            </div>
+			
+			            <div class="form-inline mb-2">
+			               <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+			               <div class="mr-2 boardImg" id="contentImgArea1">
+			                  <img id="contentImg1" width="150" height="150">
+			               </div>
+			
+			               <div class="mr-2 boardImg" id="contentImgArea2">
+			                  <img id="contentImg2" width="150" height="150">
+			               </div>
+			
+			               <div class="mr-2 boardImg" id="contentImgArea3">
+			                  <img id="contentImg3" width="150" height="150">
+			               </div>
+			            </div>
+						
+						
+						<!-- 강사님 ver 파일 업로드 하는 부분 -->
+			            <div id="fileArea">
+			               <input type="file" id="img0" name="img0" onchange="LoadImg(this,0)"> 
+			               <input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
+			               <input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
+			               <input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+			            </div>
 
 					</div>
 				</div>
@@ -222,27 +246,27 @@ div {
 				<div class="form-group row">
 					<label for="writingDate" class="col-sm-2 col-form-label">작성일</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control-plaintext" id="writingDate"
-							value="2021-01-12">
+						<div class="my-0" id="today"></div>
+						<!-- 작성일 오늘 날짜 출력 -->
 					</div>
 				</div>
 
 				<div class="form-group row">
 					<label for="writingContent" class="col-sm-2 col-form-label">내용</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" id="writingContent" rows="5"
-							placeholder="내용을 입력하세요"></textarea>
+						<textarea class="form-control" id="boardContent"
+							name="travelContent" rows="5" placeholder="내용을 입력하세요"></textarea>
+					</div>
+				</div>
+
+				<!-- 등록 / 취소 버튼  -->
+				<div class="row-item">
+					<div class="btn_item">
+						<button class="btn_class" id="insertBtn" type="submit">등록</button>
+						<button class="btn_class" id="resetBtn" type="reset">취소</button>
 					</div>
 				</div>
 			</form>
-			
-           	<!-- 등록 / 취소 버튼  -->
-            <div class="row-item">
-                <div class="btn_item">
-                    <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
-                    <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
-                </div>
-            </div>
 
 		</div>
 	</div>
@@ -258,6 +282,89 @@ div {
 			var fileName = $("#file").val();
 			$(".file-upload-name").val(fileName);
 		});
+
+		(function printToday() {
+			// 오늘 날짜 출력 
+			var today = new Date();
+			var month = (today.getMonth() + 1);
+			var date = today.getDate();
+
+			var str = today.getFullYear() + "-"
+					+ (month < 10 ? "0" + month : month) + "-"
+					+ (date < 10 ? "0" + date : date);
+			$("#today").html(str);
+		})();
+
+		// 유효성 검사 
+		function boardValidate() {
+			if ($("#boardTitle").val().trim().length == 0) {
+				alert("제목을 입력해 주세요.");
+				$("#boardTitle").focus();
+				return false;
+			}
+
+			if ($("#boardContent").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$("#boardContent").focus();
+				return false;
+			}
+		}
+		
+		// -------------------------------------------------
+	      
+	      
+	      // 이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+	      // 페이지 로딩이 끝나고나면 #fileArea 요소를 숨김.
+	      $(function(){
+	         $("#fileArea").hide(); 
+	         
+	         $(".boardImg").on("click",function(){// 이미지 영역이 클릭 되었을 때
+	            // 클릭한 이미지 영역 인덱스 얻어오기
+	            var index = $(".boardImg").index(this);
+	            // 클릭된 요소가 .boardImg 중 몇 번째 인덱스인지 반환
+	            
+	            //console.log(index);
+	            
+	            // 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+	            $("#img" + index).click();
+	            
+	            
+	         });
+	      });
+	      
+
+	       
+	     // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+	     function LoadImg(value, num) {
+	    	 // value.files : 파일이 업로드되어 있으면 true
+	    	 // &&value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어 있으면 true
+	    	 
+	    	 if(value.files && value.files[0]) { // 해당 요소에 업로드된 파일이 있을 경우
+	    		 
+	    		var reader = new FileReader();
+	    		// 자바스크립트 FileReader
+	        	// 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여
+	        	// 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해
+	        	// 파일의 내용을 읽고 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+
+	    	 	reader.readAsDataURL(value.files[0]);
+	    	 	// FileReader.readAsDataURL()
+		      	// 지정된의 내용을 읽기 시작합니다.
+		      	// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됩니다.
+		      	
+		      	reader.onload = function(e){
+			    // FileReader.onload
+				// load 이벤트의 핸들러.
+				// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생합니다.
+		      	
+				// 읽어들인 내용(이미지 파일)을 화면에 출력
+				
+				$(".boardImg").eq(num).children("img").attr("src", e.target.result);
+			    // e.target.result : 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용 
+			    
+		      	}
+	    	 }
+	     }
 	</script>
 
 

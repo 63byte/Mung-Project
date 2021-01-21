@@ -374,7 +374,7 @@ button#searchBtn:hover{
 			<c:if test="${loginMember.memberAdmin == 'A' }">
 				<div class="row-item">
 					<button type="button" class="btn_class" id="insertLocal"
-						onclick="location.href = '${contextPath}/travel/localInsert.do'">
+						onclick="location.href = '${contextPath}/travel/localInsertForm.do'">
 						등록하기</button>
 				</div>
 			</c:if>
