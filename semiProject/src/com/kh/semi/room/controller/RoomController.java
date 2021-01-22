@@ -1,7 +1,11 @@
 package com.kh.semi.room.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.common.MyFileRenamePolicy;
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.room.model.service.RoomService;
 import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
+import com.oreilly.servlet.MultipartRequest;
 
 
 @WebServlet("/room/*")
@@ -86,7 +93,7 @@ public class RoomController extends HttpServlet {
 				int roomNo = Integer.parseInt(request.getParameter("roomNo"));
 				
 				// 상세조회 비즈니스 로직 수행 후 결과 반환받기
-				Room room = service.selectRoomList(roomNo);
+				Room room = service.selectRoom(roomNo);
 				
 				if(room!=null) {
 					// 상세조회 성공 시 (파일목록)
@@ -112,7 +119,141 @@ public class RoomController extends HttpServlet {
 				view.forward(request, response);
 			}
 			
-			// 숙소 등록 *****************************
+			
+			
+			// 숙소 등록 *********************************************
+			else if(command.equals("/insert")) {
+				errorMsg = "숙소 등록 과정에서 오류 발생";
+				
+				// form태그에서 encType이 multipart/form-data형식이면
+				// 기존에 사용하던 request  객체로 파라미터를 얻어올 수 없다.
+				
+				// 1. MultipartRequest 객체 생성하기
+				// 1-1. 전송 파일 용량 지정(byte단위)
+				int maxSize = 20* 1024 * 1024; // 20MB
+				
+				// 1-2. 서버에 업로드된 파일을 저장할 경로 지정
+				String root = request.getSession().getServletContext().getRealPath("/");
+				
+				String filePath = root + "resources/image/uploadRoomImages/";
+				
+				// 1-3. 파일명 변환을 위한 클래스 작성 (Attachment.java)
+				
+				// 1-4. MultipartRequest 객체 생성 (객체 생성과 동시에 파라미터로 넘어온 내용 중 파일이 서버에 바로 저장됨)
+				MultipartRequest multiRequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+				
+				
+				// 2. 생성한 객체에서 파일 정보만을 얻어와 별도의 List에 모두 저장
+				
+				// 2-1. 파일 정보를 모두 저장할 List 객체 생성
+				List<Attachment> fList= new ArrayList<Attachment>();
+				
+				// 2-2. 업로드된 파일의 name 모두 받기
+				Enumeration<String> files = multiRequest.getFileNames();
+				
+				
+				// 2-3. 얻어온 Enumeration 객체에 요소를 하나씩 반복 접근, 
+				// 업로드된 파일 정보를 Attachment객체에 저장 후 iList에 추가
+				
+				while(files.hasMoreElements()) { //다음 요소가 있다면
+					String name = files.nextElement(); //img0
+					
+					// 제출받은 file태그 요소 중 업로드된 파일이 있을 경우
+					if(multiRequest.getFilesystemName(name)!=null) {
+						// Attachment 객체에 파일 정보 저장
+						Attachment temp = new Attachment();
+						
+						temp.setFileName(multiRequest.getFilesystemName(name));
+						temp.setFilePath(filePath);
+						
+
+						// name 속성에 따라 fileLevel 지정
+						int fileLevel =0;
+						
+						switch(name) {
+						case "img0" : fileLevel =0; break;
+						case "img1" : fileLevel =1; break;
+						case "img2" : fileLevel =2; break;
+						case "img3" : fileLevel =3; break;
+						case "img4" : fileLevel =4; break;
+						case "img5" : fileLevel =5; break;
+						
+						}
+						temp.setFileLevel(fileLevel);
+						
+						// fList에 추가
+						fList.add(temp);
+					}
+				}// end while
+				
+				// 3.파일정보를 제외한 게시글 정보를 얻어와 저장하기
+				String location1 = multiRequest.getParameter("location1");
+				String roomName = multiRequest.getParameter("roomName");
+				String phone1 = multiRequest.getParameter("phone1");
+				String phone2 = multiRequest.getParameter("phone2");
+				String phone3 = multiRequest.getParameter("phone2");
+				String phone = phone1+"-" + phone2 + "-" + phone3; // 전화번호 합치기
+				
+				String location2 = multiRequest.getParameter("location2");
+				String checkin = multiRequest.getParameter("checkin");
+				String checkout = multiRequest.getParameter("checkout");
+				
+				String[] facilityArr = multiRequest.getParameterValues("facility");
+				String facility = null;
+				if(facilityArr!=null) { // 숙소 시설 배열이 비어있지 않다면.
+					facility= String.join(",", facilityArr);
+				}
+				
+				
+				String[] dogArr = multiRequest.getParameterValues("dog");
+				String dog = null;
+				if(dogArr!=null) { // 견종이 비어있지 않다면.
+					dog= String.join(",", dogArr);
+				}
+				
+				
+				String roomInfo = multiRequest.getParameter("roomInfo");
+				
+				// 세션에서 로그인한 회원의 번호를 얻어옴
+				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+				int memberNo = loginMember.getMemberNo();
+				
+				// 얻어온 변수들을 모두 저장할 Map  생성
+				Map<String,Object> map = new HashMap<String,Object>();
+				
+				map.put("fList",fList);
+				map.put("location1", location1);
+				map.put("roomName", roomName);
+				map.put("phone", phone);
+				map.put("location2", location2);
+				map.put("checkin", checkin);
+				map.put("checkout", checkout);
+				map.put("facility", facility);
+				map.put("dog", dog);
+				map.put("roomInfo", roomInfo);
+				map.put("memberNo", memberNo);
+				
+				// 4. 게시글 등록 비즈니스 로직 수행 후 결과 반환받기
+				int result = service.insertRoom(map);
+				
+				if(result>0) {// DB에 데이터 등록 성공하면 result에 병원번호가 저장되어 있다.
+					swalIcon = "success";
+					swalTitle = "숙소 등록 완료";
+					path = "view?cp=1&roomNo"+result;
+				} else {
+					swalIcon = "error";
+					swalTitle ="등록 실패";
+					path = "list";
+				}
+				
+				request.getSession().setAttribute("swalIcon", swalIcon);
+	        	request.getSession().setAttribute("swalTitle", swalTitle);
+	        	 
+	        	 response.sendRedirect(path);
+				
+				
+				
+			}
 			
 			
 			

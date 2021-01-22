@@ -134,7 +134,7 @@ public class HospitalController extends HttpServlet {
 			
 			
 			// 동물병원 등록 화면 전환 **************************************
-				else if(command.contentEquals("/insertForm")) {
+				else if(command.equals("/insertForm")) {
 					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
@@ -145,7 +145,7 @@ public class HospitalController extends HttpServlet {
 			
 			
 			// 동물병원 등록 **************************************
-				else if(command.contentEquals("/insert")) {
+				else if(command.equals("/insert")) {
 					errorMsg ="동물병원 등록 과정에서 오류 발생";
 					
 					// form태그에서 encType이 multipart/form-data형식이면
@@ -275,7 +275,7 @@ public class HospitalController extends HttpServlet {
 					} else {
 						swalIcon = "error";
 						swalTitle ="병원 등록 실패";
-						path = "list.do";
+						path = "list";
 					}
 					
 					request.getSession().setAttribute("swalIcon", swalIcon);

@@ -97,8 +97,8 @@
 
 
 
-        <!-- 등록하기 버튼 (업체에게만 보임)  -->
-        <c:if test="${!empty loginMember && loginMember.memberAdmin == 'C' }">
+        <!-- 등록하기 버튼 (업체/관리자에게만 보임)  -->
+        <c:if test="${!empty loginMember && loginMember.memberAdmin == 'C' || loginMember.memberAdmin == 'A'}">
 	        <div class="row-item">
 	            <button type="button" class= "btn_class"  id="insertRoom" onclick="location.href = '${contextPath}/room/insertForm'">등록하기</button>
 	        </div>

@@ -111,9 +111,6 @@ div {
 
 
 
-/* 버튼 */
-/* 좋아요버튼 */
-
 
 
 
@@ -130,7 +127,6 @@ div {
 }
 
 
-
 .btn_item{
     margin-left: 955px;
 }
@@ -138,6 +134,48 @@ div {
 .btn_class:hover{
 	background-color: #17a2b8;
 }
+
+
+
+/* 이전으로 버튼  */
+#back{
+display:block;
+width: 90px;
+text-align:center;
+color: #fff;
+line-height: 35px;
+margin : auto;
+margin-top: 20px;
+
+}
+
+
+/* 수정버튼  */
+#updateBtn{
+display:inline-block;
+text-align:center;
+line-height: 35px;
+float:right;
+}
+
+
+
+	
+	
+/* 형광펜  */
+
+.highlighter{
+	display:block;
+	
+	width: 60px;
+	background: linear-gradient(to top, #ffc75f 100%, transparent 100%);
+
+	font-size:14px; 
+	text-align:center;
+
+	margin-bottom: 15px;
+}
+
 
 
 
@@ -149,3 +187,4 @@ div {
 	.carousel-control-next-icon {
   		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 	}
+	
