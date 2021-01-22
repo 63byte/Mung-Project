@@ -21,6 +21,8 @@
 
         <div class="main">
 
+
+
             <div class="row-item">
                 <div id="page_name">병원 수정</div>
                 <hr id="hr_tag">

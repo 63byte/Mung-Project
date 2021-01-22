@@ -312,6 +312,7 @@ public class HospitalController extends HttpServlet {
 						response.sendRedirect(request.getHeader("referer"));
 					}
 					
+					
 				}
 			
 				// 동물병원 수정하기 **********************************
