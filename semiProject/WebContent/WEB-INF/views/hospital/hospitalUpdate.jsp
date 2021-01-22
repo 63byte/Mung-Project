@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>동물병원 수정</title>
+
+
+
+
 <!-- css연결  -->
 <link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalUpdate.css" type="text/css">
 </head>
@@ -52,7 +56,7 @@
                                 <option value="대구">대구</option>
                                 <option value="대전">대전</option>
                                 <option value="부산">부산</option>
-                                <option value="서울" selected>서울</option>
+                                <option value="서울">서울</option>
                                 <option value="세종">세종</option>
                                 <option value="울산">울산</option>
                                 <option value="인천">인천</option>
@@ -117,7 +121,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="location2" name="location2" value="${hospital.hospInfo }" autocomplete="off" required>
+                            <input type="text" class="full_input" id="location2" name="location2" value="${hospital.location2 }" autocomplete="off" required>
                         </div>
                     </div>
 
@@ -334,7 +338,7 @@ function LoadImg(value,num){
 // 지역 초기값 지정
 (function(){
 	$("#location1 > option").each(function(index,item){
-		if($(item).text()== "${hospital.location1}"){
+		if($(item).text() == "${hospital.location1}"){
 			$(item).prop("selected",true);
 		}
 	});

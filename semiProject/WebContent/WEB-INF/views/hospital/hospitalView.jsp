@@ -190,7 +190,7 @@
         <hr style="margin-bottom: 15px;">
 
         <div class="row-item" >
-            <p style="font-size:13px; margin-bottom: 15px;">병원 정보</p>
+            	<span class="highlighter">병원 정보</span>
             <div style="font-size:15px;">
 	               ${hospital.hospInfo }
             </div>
@@ -200,7 +200,7 @@
 
         <div class="row-item">
         	
-            <p>상세위치</p>
+            <span class="highlighter">상세위치</span>
 
             <div id="map">
                 &lt;지도 API&gt;

@@ -76,10 +76,10 @@
 			                            </div>
 			                            
 			                            
-			                            <div class="title_area numberSelect">
+			                            <div class="title_area numberSelect" style="cursor: pointer;">
 			                                <p class="title">${room.roomName }</p>
 			                            </div>
-			                            <div class="address_area numberSelect">
+			                            <div class="address_area numberSelect" style="cursor: pointer;">
 			                                <p class="address">${room.location2 }</p>
 			                            </div>
 			                            <span style="visibility:hidden">${room.roomNo }</span>
