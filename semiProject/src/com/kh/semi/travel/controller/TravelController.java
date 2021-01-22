@@ -245,6 +245,163 @@ public class TravelController extends HttpServlet {
 	            request.getSession().setAttribute("swalTitle", swalTitle);
 	            response.sendRedirect(path);
 			}
+			
+			
+			// 지역정보 게시글 수정 Controller ******************************************
+			else if(command.equals("/updateForm.do")) {
+				 
+	            errorMsg = "게시글 수정 화면 전환 과정에서 오류 발생";
+	            
+	            // 수정화면이 미리 이전 내용을 작성 될 수 있게
+	            // 글 번호를 이용하여 이전 내용을 조회해옴
+	            
+	            int travelNo = Integer.parseInt(request.getParameter("no"));
+	            
+	            Travel travel = service.updateView(travelNo);
+				
+				// 조회 결과에 따른 view 연결 처리
+				if(travel != null) { // 조회 성공
+					
+					List<TravelAttachment> fList = service.selectBoardFiles(travelNo);
+					
+					if(!fList.isEmpty()) {	// 해당 게시글 이미지 정보가 DA에 있을 경우
+						request.setAttribute("fList", fList);
+					}
+					
+					path = "/WEB-INF/views/travel/localInfo/localUpdate.jsp";
+					request.setAttribute("travel", travel);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				} else { // 조회 실패 했을 때
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "지역정보글 상세 조회 실패");
+					response.sendRedirect(request.getHeader("referer"));
+				}
+	            
+				
+			}
+			
+			
+			
+			else if(command.equals("/localUpdate.do")) {
+	            
+	            errorMsg = "게시글 수정 과정에서 오류 발생";
+	            
+	            // 1. MultipartRequest 객체 생성에 필요한 값 설정
+	            int maxSize = 20 * 1024 * 1024; // 최대 크기 20MB
+	            String root = request.getSession().getServletContext().getRealPath("/");
+	            String filePath = root + "resources/uploadImages/travel/";
+	            
+	            // 2. MultipartRequest 객체 생성
+	            // -> 생성과 동시에 전달받은 파일이 서버에 저장됨
+	            MultipartRequest mRequest 
+	               = new MultipartRequest(request, filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+	            
+	            // 3. 파일 정보를 제외한 파라미터 얻어오기
+	            String travelTitle = mRequest.getParameter("travelTitle");
+	            String travelContent = mRequest.getParameter("travelContent");
+	            String travelLocation = mRequest.getParameter("travelLocation");
+	            int travelNo = Integer.parseInt(mRequest.getParameter("no"));
+	            
+	            // 4. 전달 받은 파일 정보를 List에 저장
+	            List<TravelAttachment> fList = new ArrayList<TravelAttachment>();
+	            
+	            Enumeration<String> files = mRequest.getFileNames();
+	            // input type="file"인 모든 요소의 name 속성값을 반환 받아 files에 저장
+	            
+	            while(files.hasMoreElements()) {
+	               
+	               // 현재 접근중인 name 속성 값을 변수에 저장
+	               String name = files.nextElement();
+	               
+	               // 현재 name 속성이 일치하는 요소로 업로드된 파일이 있다면
+	               if(mRequest.getFilesystemName(name) != null) {
+	                  
+	            	   TravelAttachment temp = new TravelAttachment();
+	                  
+	                  // 변경된 파일 이름 temp에 저장
+	                  temp.setFileName(mRequest.getFilesystemName(name));
+	                  
+	                  // 지정한 파일 경로 temp에 저장
+	                  temp.setFilePath(filePath);
+	                  
+	                  // 해당 게시글 번호 temp에 저장
+	                  temp.setParentBoardNo(travelNo);
+	                  
+	                  // 파일 레벨 temp에 저장
+	                  switch(name) {
+	                  case "img0" : temp.setFileLevel(0); break;
+	                  case "img1" : temp.setFileLevel(1); break;
+	                  case "img2" : temp.setFileLevel(2); break;
+	                  case "img3" : temp.setFileLevel(3); break;
+	                  }
+	                  
+	                  // temp를 fList에 추가
+	                  fList.add(temp);
+	               }
+	            }
+	            
+	            // 5. Session에서 로그인한 회원의 번호를 얻어와 저장
+	            int memNo
+	               = ((Member)request.getSession().getAttribute("loginMember")).getMemberNo();
+	            
+	            // 6. 준비된 값들을 하나의 Map에 저장
+	            Map<String, Object> map = new HashMap<String, Object>();
+	            map.put("travelTitle", travelTitle);
+	            map.put("travelContent", travelContent);
+	            map.put("travelLocation", travelLocation);
+	            map.put("travelNo", travelNo);
+	            map.put("fList", fList);
+	            map.put("memNo", memNo);
+	            
+	            // 7. 준비된 값을 매개변수로 하여 게시글 수정 Service 호출
+	            int result = service.updateTravel(map);
+	            
+	            // 8. result 값에 따라 View 연결 처리
+	            path = "localView.do?cp=" + cp + "&no=" + travelNo;
+	            
+	            
+	            String sk = mRequest.getParameter("sk");
+	            String sv = mRequest.getParameter("sv");
+	            
+	            if(sk != null && sv !=null) {
+	               path += "&sk=" + sk + "&sv=" + sv;
+	            }
+
+	            
+	            if(result > 0) {
+	               swalIcon = "success";
+	               swalTitle = "게시글 수정 성공";
+	            }else {
+	               swalIcon = "error";
+	               swalTitle = "게시글 수정 실패";
+	            }
+	            
+	            request.getSession().setAttribute("swalIcon", swalIcon);
+	            request.getSession().setAttribute("swalTitle", swalTitle);
+	            
+	            response.sendRedirect(path);
+	         }
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 			
 			// ***********************************************************************
@@ -271,6 +428,9 @@ public class TravelController extends HttpServlet {
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
+			
+			
+			
 			
 			
 
