@@ -246,9 +246,10 @@
 					<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
 					 <c:if test="${!empty param.sv && !empty param.sk }">
 					 		<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
-					 	<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
+					 	<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
 					 </c:if>
-	                <a href="updateForm?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" class= "btn_class"  id="updateBtn" type="button">수정</a>
+	                <a href="updateForm?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" 
+	                			class= "btn_class"  id="updateBtn">수정</a>
 	                <button class= "btn_class"  id="deleteBtn" type="button">삭제</button>
 	            
 	        </div>

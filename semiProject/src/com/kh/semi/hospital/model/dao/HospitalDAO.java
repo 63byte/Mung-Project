@@ -136,6 +136,7 @@ public class HospitalDAO {
 				hospital.setHospInfo(rset.getString("HOSP_INFO"));
 				hospital.setViewCount(rset.getInt("VIEW_COUNT"));
 				hospital.setHospFacility(rset.getString("HOSP_FACILITY"));
+				
 			}
 		}finally {
 			close(rset);

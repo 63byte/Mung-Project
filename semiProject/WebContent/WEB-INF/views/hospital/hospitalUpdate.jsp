@@ -34,7 +34,7 @@
             
             
             <div class="update_hospital">
-                <form action="update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" method="post"  
+                <form action="${contextPath}/hospital/update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" method="post"  
                       enctype="multipart/form-data"  role="form" onsubmit="return hospitalInsertValidate();">
                     
                     <div class="row-item">
@@ -270,7 +270,7 @@ $(".phoneTest").on("input",function(){
 /* 삭제 버튼이 눌리면 확인창이 뜬다.  */
 $("#resetBtn").on("click",function(){
 	
- 	if( confirm("병원 등록을 취소하고 목록으로 돌아갑니다.")){
+ 	if( confirm("수정을 취소하고 목록으로 돌아갑니다.")){
  		
  		location.href = "${contextPath}/hospital/list";
  	}
@@ -359,11 +359,19 @@ function LoadImg(value,num){
 
 
 
+// 이미지 배치
+		<c:forEach var="file" items="${fList}">
+			$(".hospitalImg").eq(${file.fileLevel}).children("img").attr("src","${contextPath}/resources/image/uploadHospitalImages/${file.fileName}");
+		</c:forEach>
 
-// 등록된 부대시설  체크하기
+		
+
+
+
+// *** 등록된 부대시설  체크하기 ***
 (function(){
    
-   // 회원 정보에서 관심분야 문자열을 얻어와 ' , '를 구분자로 하여 분리하기
+   // 부대시설에서 문자열을 얻어와 ' , '를 구분자로 하여 분리하기
    var facility = "${hospital.facility}".split(",");
    
    // 체크 박스 요소를 모두 선택하여 반복 접근
@@ -379,22 +387,13 @@ function LoadImg(value,num){
 
 
 
-// 이미지 배치
-		<c:forEach var="file" items="${fList}">
-			$(".hospitalImg").eq(${file.fileLevel}).children("img").attr("src","${contextPath}/resources/image/uploadHospitalImages/${file.fileName}");
-		</c:forEach>
 
-		
-		
-		
-// 취소 버튼 눌렀을 때
-
-	/*삭제 버튼 클릭했을 때  */
-	$("#deleteBtn").on("click",function(){
-		if(confirm("취소하시겠습니까?")){
-			location.href="${header.referer}"
-		}
-	});
+/**** 취소 버튼 클릭했을 때  ****/
+$("#deleteBtn").on("click",function(){
+	if(confirm("수정을 취소합니다.")){
+		location.href="${header.referer}"
+	}
+});
 </script>
 
 </body>
