@@ -246,4 +246,12 @@ font-size:13px; margin:0;
 
 
 
+/* 상세페이지 이동 커서  */
+.numberSelect{
+	
+	cursor: pointer;
+}
+
+
+
 

@@ -95,7 +95,7 @@
 				            
 				            
 				            
-				            <div class="row-item numberSelect" style="cursor: pointer;margin-bottom:40px;">
+				            <div class="row-item " style="margin-bottom:40px;">
 				            	
 				                <div class="thumbnail">
 				                    <div class="thumbnail_img">
@@ -120,7 +120,7 @@
 				                            
 				                            
 				                    </div>
-				                    <div class="thumbnail_info ">
+				                    <div class="thumbnail_info numberSelect" style="cursor: pointer;">
 				                      <div class="hospital_info"><span id="hospital_name" > ${hospital.hospNm }</span></div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : ${hospital.location2 }</div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : ${hospital.phone }</div>
@@ -246,8 +246,8 @@
 
 //동물병원 상세조회
 
-$(".numberSelect > *").on("click", function(){
-	var hospitalNo = $(this).children("span").text();
+$(".numberSelect").on("click", function(){
+	var hospitalNo = $(this).siblings("span").text();
 	
 	var url = "${contextPath}/hospital/view?cp=${pInfo.currentPage}&hospitalNo="+ hospitalNo +"${searchStr}";
 	
