@@ -32,7 +32,7 @@
 
             <!-- 검색창 -->
             
-    <div class="row-item">
+    <div class="row-item" style="margin-bottom:50px;">
         <form action="${contextPath }/hospital/search" method="GET" id="searchForm">
             <div class="bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/17/41/friends-1149841_960_720.jpg');" >
               
@@ -96,12 +96,23 @@
 				            
 				            
 				            
-				            <div class="row-item numberSelect">
+				            <div class="row-item numberSelect" style="cursor: pointer;margin-bottom:40px;">
 				            	
 				                <div class="thumbnail">
 				                    <div class="thumbnail_img">
+				                    
 				                        <!-- 썸네일 출력  -->
-				                            <img class="hospital_img" src="#">
+							
+				                   <c:forEach var="thumbnail" items="${fList }">
+										<c:if test="${hospital.hospNo == thumbnail.hospNo }">
+													<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모게시글번호가 일치하는 썸네일 정보가 있다면  --%>
+													<img class="hospital_img"  src="${contextPath }/resources/uploadHospitalImages/${thumbnail.fileName}">
+											</c:if>
+									</c:forEach>
+		                         	
+				                            
+				                            
+				                            
 				                    </div>
 				                    <div class="thumbnail_info ">
 				                      <div class="hospital_info"><span id="hospital_name" href="#"> ${hospital.hospNm }</span></div>
@@ -196,11 +207,15 @@
                		<c:choose> 
                			<c:when test="${pInfo.currentPage == page }">
 								<!-- 현재 보고 있는 페이지는 클릭이 안 되게 한다.  -->               								
-		                      <li class="page-item"><a class="page-link">${page }</a></li>
+		                      <li class="page-item">
+		                      		<a class="page-link">${page }</a>
+		                      </li>
                			</c:when>
                			
                			<c:otherwise>
-		                      <li class="page-item"><a class="page-link" href="${pageUrl }?cp=${page}${searchStr}">${page }</a></li>
+		                      <li class="page-item">
+		                      		<a class="page-link" href="${pageUrl }?cp=${page}${searchStr}">${page}</a>
+		                      </li>
                			</c:otherwise>
                		</c:choose>
                </c:forEach>       

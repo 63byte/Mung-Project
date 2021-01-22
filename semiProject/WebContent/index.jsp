@@ -4,6 +4,11 @@
 <html lang="ko">
 
 <head>
+
+<!-- 카카오 지도 API  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0195b24c7dce0dc71f3dbcf7ca0a12c4"></script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

@@ -29,7 +29,9 @@ public class HospitalService {
 		Connection conn = getConnection();
 		
 		// cp가 null일 경우 1, 아니면 cp를 얻어옴.
-		int currentPage = cp == null? 1: Integer.parseInt(cp);
+		int currentPage = cp == null ? 1 : Integer.parseInt(cp);
+		
+		// System.out.println(currentPage); 동물병원 화면 들어가자마자 1 출력 됨
 		
 		// DB에서 전체 게시글 수를 조회하여 반환받기
 		int listCount = dao.getListCount(conn);
@@ -223,6 +225,96 @@ public class HospitalService {
 			result = result.replaceAll("\"", "&quot;"); 
 		}
 		
+		return result;
+	}
+
+
+
+
+
+
+
+	/** 동물병원에 포함된 이미지 목록 조회 Service
+	 * @param hospitalNo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectHospitalFiles(int hospitalNo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Attachment> fList = dao.selectHospitalFiles(conn,hospitalNo);
+		
+		close(conn);
+				
+		
+		return fList;
+	}
+
+
+
+
+
+
+
+	/** 썸네일 목록 조회 Service
+	 * @param pInfo
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		List<Attachment> fList = dao.selectThumbnailList(conn,pInfo);
+		
+		close(conn);
+		
+		return fList;
+	}
+
+
+
+
+
+
+
+	/** 동물병원 수정 화면 출력 Service
+	 * @param hospitalNo
+	 * @return hospital
+	 * @throws Exception
+	 */
+	public Hospital updateView(int hospitalNo) throws Exception {
+		Connection conn = getConnection();
+		
+		Hospital hospital = dao.selectHospital(conn, hospitalNo);
+		
+		// 크로스 스크립팅 방지를 위해 개행문자가 <br>로 바뀌어 있는 상태 -> \r\n 으로 바꿈
+		hospital.setHospInfo(hospital.getHospInfo().replaceAll("<br>", "\r\n"));
+		
+		close(conn);
+		
+		return hospital;
+	}
+
+
+
+
+
+
+
+	/** 동물병원 삭제 Service
+	 * @param hospitalNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteHospital(int hospitalNo) throws Exception {
+		Connection conn = getConnection();
+		
+		int result = dao.deleteHospital(conn, hospitalNo);
+		
+		if(result>0) commit(conn);
+		else		rollback(conn);
+		
+		close(conn);
 		return result;
 	}
 

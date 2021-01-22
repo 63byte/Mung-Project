@@ -6,7 +6,7 @@
 <!-- 회원가입용 xml -->
 <entry key="signUp">
 INSERT INTO TB_MEMBER
-VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ?)
+VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT)
 </entry>
 
 <!-- 로그인 -->

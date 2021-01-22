@@ -269,6 +269,119 @@ public class HospitalDAO {
 	}
 
 
+	
+	
+	
+
+	/** 동물병원에 포함된 이미지 목록 조회 DAO
+	 * @param conn
+	 * @param hospitalNo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectHospitalFiles(Connection conn, int hospitalNo) throws Exception {
+		List<Attachment> fList=null;
+		String query = prop.getProperty("selectHospitalFiles");
+		
+		try {
+			pstmt= conn.prepareStatement(query);
+			pstmt.setInt(1, hospitalNo);
+			
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment(
+						rset.getInt("FILE_NO"),
+                        rset.getString("IMG_NAME"),
+                        rset.getInt("IMG_LEVEL"));
+				
+				at.setFilePath(rset.getString("IMG_PATH"));
+				
+				fList.add(at);
+			}
+			
+		}catch(Exception e) {
+			close(rset);
+			close(pstmt);
+		}
+		return fList;
+	}
+
+
+	
+	
+	
+
+	/** 썸네일 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(Connection conn, PageInfo pInfo) throws Exception {
+		List<Attachment> fList = null;
+		
+		String query = prop.getProperty("selectThumbnailList");
+		
+		try {
+			// 위치 홀더에 들어갈 시작 행, 끝 행번호 계산
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() +1;
+			int endRow = startRow + pInfo.getLimit()-1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment();
+				at.setFileName(rset.getString("IMG_NAME"));
+				at.setHospNo(rset.getInt("HOSP_NO"));
+
+				
+				fList.add(at);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fList;
+	}
+
+
+
+	
+	
+	
+	/** 동물병원 삭제 DAO
+	 * @param conn
+	 * @param hospitalNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int deleteHospital(Connection conn, int hospitalNo) throws Exception {
+		int result =0;
+		String query = prop.getProperty("deleteHospital");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, hospitalNo);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
 
 	
 

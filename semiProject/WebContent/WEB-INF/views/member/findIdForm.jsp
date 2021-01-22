@@ -208,7 +208,7 @@ html, body {
 				<label id="userName">이름</label> 
 				<input type="text" id="userName" name="userName" required>
 				<br> 
-				이메일
+				<label id="email">이메일</label> 
 				<input type="text" id="mail" name="mail">
 				
 				<button id="sendMail" class="sendMail">인증번호 받기</button>

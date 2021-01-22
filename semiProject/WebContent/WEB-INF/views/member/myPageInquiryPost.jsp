@@ -266,16 +266,11 @@ h6 {
 			</div>
 
 
-
-
-
-
-
 		<div class="search">
-			<form action="${contextPath}/search.do" method="GET" class="text-center" id="searchForm">
+			<form action="${contextPath}/fSearch.do" method="GET" class="text-center" id="searchForm">
 				<select name="sk" class="form-control"
 					style="width: 100px; display: inline-block;">
-					<option value="title">글제목</option>
+					<option value="title">글 제목</option>
 					<option value="content">내용</option>
 					<option value="titcont">제목+내용</option>
 					<option value="writer">작성자</option>

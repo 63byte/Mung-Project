@@ -26,7 +26,7 @@ public class HSearchService {
 
 		// 얻어온 파라미터 cp가 null이면 1, 아니면 int형으로 파싱
 		map.put("currentPage",
-				(map.get("currentPage") == null) ? 1 : Integer.parseInt((String) map.get("currentPage")));
+				(map.get("currentPage") == null)? 1 : Integer.parseInt((String) map.get("currentPage")));
 
 
 		// 검색 조건에 따른 SQL 조건문을 조합하는 메소드 

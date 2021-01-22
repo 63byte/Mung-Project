@@ -15,15 +15,15 @@ import java.util.Properties;
 import com.kh.semi.mypage.vo.fBoard;
 import com.kh.semi.mypage.vo.PageInfo;
 
-public class InquiryDAO {
+public class postDAO {
 	private Statement stmt = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rset = null;
 
 	private Properties prop = null;
 
-	public InquiryDAO() {
-		String fileName = InquiryDAO.class.getResource("/com/kh/semi/sql/mypage/inquiry-query.xml").getPath();
+	public postDAO() {
+		String fileName = postDAO.class.getResource("/com/kh/semi/sql/mypage/post-query.xml").getPath();
 		try {
 			prop = new Properties();
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -107,34 +107,6 @@ public class InquiryDAO {
 		return fList;
 	}
 
-
-	/**
-	 * 조회수 증가 DAO
-	 * 
-	 * @param conn
-	 * @param boardNo
-	 * @return result
-	 * @throws Exception
-	 */
-/*	public int increaseReadCount(Connection conn, int boardNo) throws Exception {
-		int result = 0;
-
-		String query = prop.getProperty("increaseReadCount");
-
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, boardNo);
-
-			result = pstmt.executeUpdate();
-
-		} finally {
-			close(pstmt);
-		}
-
-		return result;
-	}*/
-
-	
 	
 	/**
 	 * 다음 게시글 번호 조회 DAO
