@@ -55,7 +55,6 @@
     <!-- 숙소 리스트 -->
 
 
-		<c:set var="boardNo" value="1"></c:set> <!-- 상세조회 클릭 위한 게시글 번호  -->
 		
      <c:choose>
      	<c:when test="${empty rList }">
@@ -70,17 +69,17 @@
 	                  <td>
                 			<c:forEach var="room" items="${rList}">
                   			
-			                      <div class="roomList">
+			                      <div class="roomList ">
 			                          <!-- 썸네일 출력  -->
-			                          <div class="thumbnail_area" style="margin-left: 10px;">
+			                          <div class="thumbnail_area " style="margin-left: 10px;">
 			                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
 			                            </div>
 			                            
 			                            
-			                            <div class="title_area">
+			                            <div class="title_area numberSelect">
 			                                <p class="title">${room.roomName }</p>
 			                            </div>
-			                            <div class="address_area">
+			                            <div class="address_area numberSelect">
 			                                <p class="address">${room.location2 }</p>
 			                            </div>
 			                            <span style="visibility:hidden">${room.roomNo }</span>
@@ -220,6 +219,16 @@
 	
 	
 })();
+
+
+// 숙소 상세조회
+$(".numberSelect").on("click", function(){
+	var roomNo = $(this).siblings("span").text();
+	
+	var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="+ roomNo +"${searchStr}";
+	
+	location.href=url;
+});
 
 </script>
 </body>

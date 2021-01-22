@@ -79,7 +79,6 @@
             </div> 
           </form>  -->    
            
-           <c:set var="boardNo" value="1"></c:set> <!-- 상세조회 클릭 위한 게시글 번호  -->
            
            <!-- 동물 병원 리스트 -->
            
@@ -257,15 +256,6 @@ $(".numberSelect > *").on("click", function(){
 
 
 	
-/* var location = $("#locationName option:selected").val();
-	
-$("#locationName").on("change",function(){
-	location = $("#locationName option:selected").val(); //서울,경기도.. value값이 locationNm에 담긴다.
-	console.log(location);
-}); */
-// 문제점 : 지역선택,,처음에 서울이 선택이 안 된다.(location1 비어있음)
-// 지역만 검색되게 어디로 이동시켜야되는지,,?list 컨트롤러로 바로?
-// list를 보여줄때 지역이 같은 화면만 보여줌. (service.dao->sql)
 
 
 

@@ -104,4 +104,72 @@ public class RoomDAO {
 		return rList;
 	}
 
+
+
+
+
+
+	/** 숙소 상세조회 Service
+	 * @param conn
+	 * @param roomNo
+	 * @return room
+	 * @throws Exception
+	 */
+	public Room selectRoomList(Connection conn, int roomNo) throws Exception {
+		Room room = null;
+		String query = prop.getProperty("selectRoom");
+		
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, roomNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				room = new Room();
+				room.setRoomName(rset.getString("ROOM_NAME"));
+				room.setRoomName(rset.getString("LOCATION1"));
+				room.setRoomName(rset.getString("LOCATION2"));
+				room.setRoomName(rset.getString("PHONE"));
+				room.setRoomName(rset.getString("ROOM_INFO"));
+				room.setRoomName(rset.getString("CHECKIN"));
+				room.setRoomName(rset.getString("CHECKOUT"));
+				room.setRoomName(rset.getString("FACILITY"));
+				room.setRoomName(rset.getString("DOG"));
+				room.setRoomName(rset.getString("VIEW_COUNT"));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return room;
+	}
+
+
+
+
+
+
+	/** 조회 수 증가 DAO
+	 * @param conn
+	 * @param roomNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int roomNo) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, roomNo);
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

@@ -55,4 +55,32 @@ public class RoomService {
 		return rList;
 	}
 
+
+
+
+	/** 숙소 상세조회 Service
+	 * @param roomNo
+	 * @return	room
+	 * @throws Exception
+	 */
+	public Room selectRoomList(int roomNo) throws Exception {
+		Connection conn = getConnection();
+		
+		Room room = dao.selectRoomList(conn, roomNo);
+		
+		// 상세조회가 성공하면
+		if(room!=null) {
+			int result = dao.increaseReadCount(conn,roomNo);
+			
+			if(result>0) {
+				commit(conn);
+				room.setViewCount(room.getViewCount()+1);
+			}
+			else  rollback(conn);
+		}
+		
+		close(conn);
+		return room;
+	}
+
 }

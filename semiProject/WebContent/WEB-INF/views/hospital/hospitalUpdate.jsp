@@ -372,7 +372,7 @@ function LoadImg(value,num){
 (function(){
    
    // 부대시설에서 문자열을 얻어와 ' , '를 구분자로 하여 분리하기
-   var facility = "${hospital.facility}".split(",");
+   var facility = "${hospital.hospFacility}".split(",");
    
    // 체크 박스 요소를 모두 선택하여 반복 접근
    $("input[name='hosp_facility']").each(function(index, item){

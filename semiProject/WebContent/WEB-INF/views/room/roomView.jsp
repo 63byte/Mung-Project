@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>숙소 상세조회</title>
+
+<!-- css연결  -->
+<link rel="stylesheet" href="${contextPath}/resources/css/room/roomView.css" type="text/css">
 </head>
 <body>
 		<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
@@ -24,14 +27,10 @@
 
         <!-- 조회수/좋아요 -->
         <div class="row-item">
-            <div class="viewInfo iconArea">
+            <div class="viewInfo iconArea" style="margin-left: 1020px;">
                 <span><img src="${contextPath}/resources/image/icon/view.png" class="icon"></span>
                 <div class="count">0</div><!-- 최대 999,999 -->
-            </div>
-            <div class="viewInfo">
-                <button type="button" class="like"><img src="${contextPath}/resources/image/icon/like/png" class="icon"></button>
-                <div class="count">0</div><!-- 최대 999,999 -->
-            </div>    
+            </div>  
         </div>
 
         <!-- 숙소 주소 -->
