@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.room.model.service.RoomService;
+import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
 
@@ -64,8 +65,6 @@ public class RoomController extends HttpServlet {
 				// 2) 숙소 목록 조회 비즈니스 로직 수행
 				List<Room> rList = service.selectRoomList(pInfo);
 				
-				
-				
 				// ************* 썸네일추가 *************
 
 				path = "/WEB-INF/views/room/roomList.jsp";
@@ -78,21 +77,55 @@ public class RoomController extends HttpServlet {
 			
 			
 			
+			
+			
+			// 숙소 상세조회 Controller **********************************
+			else if(command.equals("/view")) {
+				errorMsg = "숙소 상세 조회 과정에서 오류 발생";
+				
+				int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+				
+				// 상세조회 비즈니스 로직 수행 후 결과 반환받기
+				Room room = service.selectRoomList(roomNo);
+				
+				if(room!=null) {
+					// 상세조회 성공 시 (파일목록)
+					
+					
+					path ="/WEB-INF/views/room/roomView.jsp";
+					request.setAttribute("room", room);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				}else {
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "숙소 상세 조회 실패");
+					response.sendRedirect("list");
+				}
+			}
+			
+			
+			
 			// 숙소 등록 화면 전환 **************************************
-			else if(command.contentEquals("/insertForm")) {
+			else if(command.equals("/insertForm")) {
 				path = "/WEB-INF/views/room/roomInsert.jsp";
 				view = request.getRequestDispatcher(path);
 				view.forward(request, response);
 			}
 			
-		}catch(Exception e) {
+			// 숙소 등록 *****************************
 			
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			path = "/WEB-INF/views/common/errorPage.jsp";
+			
+			// 에러 메세지를 request객체에 담는다
+			request.setAttribute("errorMsg", errorMsg);
+			view = request.getRequestDispatcher(path);
+			view.forward(request, response);
 		}
 		
-		
-		
-		
-	
 	
 	}
 

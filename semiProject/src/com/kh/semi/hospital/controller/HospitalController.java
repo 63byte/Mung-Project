@@ -99,7 +99,7 @@ public class HospitalController extends HttpServlet {
 			
 			
 			// 동물병원 상세조회 Controller ******************************
-			else if(command.contentEquals("/view")) {
+			else if(command.equals("/view")) {
 				errorMsg = "동물병원 상세 조회 과정에서 오류 발생";
 				
 				int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
