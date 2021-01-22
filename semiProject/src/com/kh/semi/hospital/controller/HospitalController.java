@@ -286,7 +286,7 @@ public class HospitalController extends HttpServlet {
 			
 			// 동물병원 수정 화면 전환 Controller ************
 				else if(command.equals("/updateForm")) {
-					errorMsg ="동물병원 수정 페이지 불러오는 과정에서 오류 발생";
+					errorMsg ="동물병원 수정 화면 불러오는 과정에서 오류 발생";
 					
 					// 병원번호를 이용하여 이전에 작성했던 내용 조회해 옴
 					int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
@@ -301,8 +301,8 @@ public class HospitalController extends HttpServlet {
 							request.setAttribute("fList", fList);
 						}
 						
+						path = "/WEB-INF/views/hospital/hospitalUpdate.jsp";
 						request.setAttribute("hospital", hospital);
-						path = "WEB-INF/views/hospital/hospitalUpdate.jsp";
 						view = request.getRequestDispatcher(path);
 						view.forward(request, response);
 						
@@ -322,7 +322,7 @@ public class HospitalController extends HttpServlet {
 					
 					// 1. MultipartRequest 객체 생성에 필요한 값 설정
 		        	 int maxSize = 20 * 1024 * 1024; // 최대 크기 20MB
-		        	 String root = request.getServletContext().getRealPath("/");
+		        	 String root = request.getSession().getServletContext().getRealPath("/");
 		        	 String filePath = root + "resources/image/uploadHospitalImages/";
 		        	 
 		        	 // 2. MultipartRequest 객체 생성
@@ -331,22 +331,18 @@ public class HospitalController extends HttpServlet {
 		        	 
 		        	 // 3. 파일 정보를 제외한 파라미터 얻어오기
 					String location1 = multiRequest.getParameter("location1"); //지역1
-						
 					String hospNm = multiRequest.getParameter("hospNm"); // 병원명
-						
 					String phone1 = multiRequest.getParameter("phone1"); // 전화번호
 					String phone2 = multiRequest.getParameter("phone2"); // 전화번호
 					String phone3 = multiRequest.getParameter("phone3"); // 전화번호
 					String phone = phone1+"-" + phone2 + "-" + phone3; // 전화번호 합치기
 						
 					String location2 = multiRequest.getParameter("location2"); //상세주소
-						
 					String openTime = multiRequest.getParameter("openTime"); //오픈시간
 					String closeTime = multiRequest.getParameter("closeTime"); //오픈시간
 						
 					String[] facilityArr = multiRequest.getParameterValues("hosp_facility"); // 병원시설 배열로 받기
 					String facility = null;
-						
 						
 						if(facilityArr!=null) { //병원 시설 배열이 비어있지 않다면.
 							facility= String.join(",", facilityArr);
