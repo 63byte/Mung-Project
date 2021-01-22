@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
+import com.kh.semi.freeBoard.model.vo.FreeReport;
 import com.kh.semi.freeBoard.model.vo.PageInfo;
 
 public class FreeBoardDAO {
@@ -395,6 +396,55 @@ public class FreeBoardDAO {
 		}finally {
 			
 			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+	public int freeReport(Connection conn, FreeReport fReport) throws Exception{
+		int result = 0;
+	
+		String query = prop.getProperty("freeReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, fReport.getReportTitle());
+			pstmt.setString(2, fReport.getReportContent());
+			pstmt.setInt(3, fReport.getFreeBoardNo());
+			pstmt.setInt(4, fReport.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		return 0;
+	}
+
+
+
+	/** 신고 수 증가
+	 * @param fReport
+	 * @return
+	 * @throws Exception
+	 */
+	public int reportNum(Connection conn, int reportNum) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("reportNum");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reportNum);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(conn);
 		}
 		
 		return result;

@@ -7,7 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+	<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./bootstrapt/css/bootstrap.css" />
+	<script src="./bootstrapt/js/bootstrap.min.js"></script>
 <style>
 	.imgdiv{
 		height: 300px;
@@ -27,7 +29,7 @@
 		margin-right : auto;
 	}
 	
-	.btn-danger{
+	.rBtn{
 		float: right;
 	}
 </style>
@@ -40,10 +42,11 @@
 		<div id="board-area">
 			<!-- Title -->
 				<h3 class="mt-4 display-3">${board.boardTitle}</h3>
+	
 				<c:if test="${!empty loginMember}">
-					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  					게시글 신고
-					</button>
+				<button type="button" class="btn btn-danger rBtn" id="reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">
+  				신고하기
+				</button>
 				</c:if>
 				
 				<p class="lead">
@@ -111,19 +114,36 @@
 	</div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <form action="${contextPath}/freeBoard/reportAction.do" method="post">
+        	<div class="form-group">
+        	<label>신고 제목</label>
+        	<input type="text" id="reportTitle" name="reportTitle" class="form-control">
+        	</div>
+        	<input type="hidden" id="bNum" name="bNum" value="${board.boardNo}"> 
+        	<input type="hidden" id="mNum" name="mNum" value="${loginMember.memberNo}"> 
+        	<div class="form-group">
+        	<label>신고 내용</label>
+        	<input type="text" name="reportContent" id="reportContent" class="form-control">
+        	</div>
+		      <div class="modal-footer">
+		      	<button type="reset" class="btn btn-secondary">취소</button>
+		      	<button type="submit" class="btn btn-danger">신고하기</button>
+		      </div>
+        </form>
       </div>
     </div>
   </div>
@@ -135,12 +155,9 @@
 
 
 
-
-
-
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-		<script>
+<script>
 			$("#deleteBtn").on("click", function(){
 			
 			if(window.confirm("정말 삭제하시겠습니까?")){
@@ -148,7 +165,23 @@
 				
 			}
 			
+			var boardNo = ${board.boardNo};
+			console.log(boardNo);
+			
 		});
-		</script>
+			$('#reportBtn').click(function(e){
+				e.preventDefault();
+				$('#reportModal').modal("show");
+				
+			});
+			
+		/* 	$("#reportBtn").on("click", function(){
+				$("#no").val(parentBoardNo);
+			}); */
+			
+			
+
+			
+	</script>
 </body>
 </html>
