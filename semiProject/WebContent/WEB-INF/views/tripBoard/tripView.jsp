@@ -26,6 +26,10 @@
 		margin-left : auto;
 		margin-right : auto;
 	}
+	
+	/* .btn-danger{
+		float: right;
+	} */
 </style>
 </head>
 <body>
