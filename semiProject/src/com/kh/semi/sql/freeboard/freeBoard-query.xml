@@ -83,5 +83,17 @@ FREE_BOARD_DELETEFL = 'Y'
 WHERE FREE_BOARD_NO = ?
 </entry>
 
+<entry key="freeReport">
+INSERT INTO BOARD_REPORT
+VALUES(SEQ_RFN.NEXTVAL, ?, ?, ?, ?)
+</entry>
+
+
+<entry key="reportNum">
+UPDATE FREE_BOARD SET
+FREE_BOARD_REPORT_COUNT = FREE_BOARD_REPORT_COUNT + 1
+WHERE FREE_BOARD_NO = ?
+</entry>
+
 
 </properties>
