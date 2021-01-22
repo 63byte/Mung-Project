@@ -249,7 +249,7 @@
 					 		<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
 					 	<c:set var="searchStr" value="&sk=${param.sk }&sv=${param.sv }"/>
 					 </c:if>
-	                <a href="updateForm?cp=${param.cp}&hospitalNo=${param.hospitalNo}" class= "btn_class"  id="updateBtn" type="button">수정</a>
+	                <a href="updateForm?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" class= "btn_class"  id="updateBtn" type="button">수정</a>
 	                <button class= "btn_class"  id="deleteBtn" type="button">삭제</button>
 	            
 	        </div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,8 @@
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
+<!-- 전화번호를 구분자를 이용하여 분리된 배열 형태로 저장  -->
+<c:set var="phone" value="${fn:split(hospital.phone,'-') }"/>
 <!-- 동물병원 수정 -->
 <div class="wrapper">
 
@@ -22,15 +26,23 @@
                 <hr id="hr_tag">
             </div>
             
-            <div class="insert_hospital">
-                <form action="#" method="POST" onsubmit="return hospitalUpdatevalidate();">
+         <c:if test="${!empty param.sk && !empty param.sv}">
+			<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/>
+		</c:if>
+            
+            
+            <div class="update_hospital">
+                <form action="update?cp=${param.cp}&hospitalNo=${param.hospitalNo}${searchStr}" method="post"  
+                      enctype="multipart/form-data"  role="form" onsubmit="return hospitalInsertValidate();">
                     
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="location1">지역</label>
+                            <label for="location1">
+                        	 	<span class="highlighter">지역</span>
+                            </label>
                         </div>
                         <div class="input_tag">
-                            <select class="full_input" id="location1" name="" required>
+                            <select class="full_input" id="location1" name="location1" required>
                                 <option value="강원도">강원도</option>
                                 <option value="경기도">경기도</option>
                                 <option value="경상도">경상도</option>
@@ -52,19 +64,23 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="companyName">업체명</label>
+                            <label for="companyName">
+                            	<span class="highlighter">병원명</span>
+                            </label>
                         </div>
                         <div class="input_tag">
-                            XXX 동물병원
+                            <input type="text" class="full_input" id="companyName"  name="hospNm" value="${hospital.hospNm }" autocomplete="off" required>
                         </div>
                     </div>
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="phone">전화번호</label>
+                            <label for="phone">
+                            	<span class="highlighter">전화번호</span>
+                            </label>
                         </div>
                         <div class="input_tag">
-                            <select class="phone" id="phone1" name="" required> 
+                            <select class="phone" id="phone1" name="phone1" required> 
                                 <option>02</option>
                                 <option>051</option>
                                 <option>053</option>
@@ -85,75 +101,123 @@
                                 <option>070</option>
                             </select>
                             &nbsp;-&nbsp;&nbsp;
-                            <input type="number" class="phone" id="phone2" name="" required>
+                            <input type="number" class="phone phoneTest" id="phone2" name="phone2" value="${phone[1] }" required>
                             &nbsp;-&nbsp;
-                            <input type="number" class="phone" id="phone3" name="" required>
+                            <input type="number" class="phone phoneTest" id="phone3" name="phone3" value="${phone[2] }"  required>
                         </div>
                     </div>
 
                     
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="location2">상세주소</label>
+                            <label for="location2">
+                            	<span class="highlighter">상세주소</span>
+                            </label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="location2" name="" autocomplete="off" required>
+                            <input type="text" class="full_input" id="location2" name="location2" value="${hospital.hospInfo }" autocomplete="off" required>
                         </div>
                     </div>
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="office_hours">영업시간</label>
+                            <label for="office_hours">
+                            	<span class="highlighter">영업시간</span>
+                            </label>
                         </div>
                         <div class="input_tag">
 
-                            <input type="text" class="office_hours" id="open_hours" name="" autocomplete="off" required>
+                            <input type="text" class="office_hours" id="openTime" placeholder="00:00" name="openTime" value="${hospital.openingTime }" autocomplete="off" required>
                             &nbsp;~&nbsp;&nbsp;
-                            <input type="text" class="office_hours" id="close_hours" name="" autocomplete="off" required>
+                            <input type="text" class="office_hours" id="closeTime" placeholder="00:00" name="closeTime" value="${hospital.closingTime }" autocomplete="off" required>
                         </div>
                     </div>
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="facility">병원 시설</label>
+                            <label for="facility">
+                            	<span class="highlighter">병원 시설</span>
+                            </label>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="facility" name="" value="wifi">WiFi
-                           <input type="checkbox" class="facility" name="" value="Parking">주차
-                           <input type="checkbox" class="facility" name="" value="appointmtnet">예약
-                           <input type="checkbox" class="facility" name="" value="businessTrip">출장
-                           <input type="checkbox" class="facility" name="" value="fullTime">24시간
+                           <input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi
+                           <input type="checkbox" class="facility" name="hosp_facility" id="parcking" value="주차">주차
+                           <input type="checkbox" class="facility" name="hosp_facility" id="appointment" value="예약">예약
+                           <input type="checkbox" class="facility" name="hosp_facility" id="24hour" value="24시간">24시간
                         </div>
                     </div>
 
-
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="file">이미지 업로드</label>
-                        </div>
-                        <div class="input_tag filebox ">
-                            <label for="file">업로드</label>
-                            <input type="file" id="file">
-                            <input class="file-upload-name" value="파일경로..">
-                        </div>
-                    </div>
 
                     <div class="row-item">
                         <div class="label_name" style="vertical-align:80px;" >
-                            <label for="hospital_info" >동물병원 정보</label>
+                            <label for="hospital_info" >
+                            	<span class="highlighter">동물병원 정보</span>
+                            </label>
                         </div>
                         <div class="input_tag">
                             <textarea class="full_input hospital_info" id="hospital_info" rows="10"
-                                placeholder="동물병원 소개글을 작성해주세요."></textarea>
+                                name ="hospital_info">${hospital.hospInfo }</textarea>
                         </div>
                     </div>
+                    
+                    
+
+					<!-- 파일 업로드  -->
+
+                    <div class="row-item">
+                    	<div class="label_name">
+							<label for="titleImgArea">
+								<span class="highlighter">썸네일</span>
+							</label>
+                    	</div>
+					<div class="hospitalImg input_tag" id="titleImgArea">
+						<img id="titleImg" width="360" height="100" >
+					</div>
+				</div>
+
+				<div class="row-item"  >
+					<div class="label_name">
+						<label class="img">
+							<span class="highlighter">업로드 이미지</span>
+						</label>
+					</div>
+					<div class="input_tag">
+						<div class="hospitalImg imgarea" id="hotpitalImgArea1" style="margin-right:5px;">
+							<img id="hospitalImg1" width="65" height="65" >
+						</div>
+						<div class="hospitalImg imgarea" id="hotpitalImgArea2" style="margin-right:4px;">
+							<img id="hospitalImg2" width="65" height="65" >
+						</div>
+						<div class="hospitalImg imgarea" id="hotpitalImgArea3" style="margin-right:5px;"> 
+							<img id="hospitalImg3" width="65" height="65" >
+						</div>
+						<div class="hospitalImg imgarea" id="hotpitalImgArea4" style="margin-right:5px;">	
+							<img id="hospitalImg4" width="65" height="65" >
+						</div>	
+						<div class="hospitalImg imgarea" id="hotpitalImgArea5">	
+							<img id="hospitalImg5" width="65" height="65">
+						</div>
+					</div>
+				</div>
+			
+			<!-- 파일 업로드 버튼 (숨기기) -->
+					<div id="fileArea">
+						<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)">
+						<!-- multiple 속성 = 사진 여러개 선택 가능  --> 
+						<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
+						<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
+						<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+						<input type="file" id="img4" name="img4" onchange="LoadImg(this,4)">
+						<input type="file" id="img5" name="img4" onchange="LoadImg(this,5)">
+					</div>
 
 
-                    <!-- 수정 / 취소 버튼  -->
+
+                    <!-- 등록 / 취소 버튼  -->
                     <div class="row-item">
                         <div class="btn_item">
-                            <button class= "btn_class"  id="insertBtn" type="submit">수정</button>
-                            <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
+                            <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
+                            <button class= "btn_class"  id="resetBtn" type="button">취소</button>
                         </div>
                     </div>
                 </form>
@@ -162,6 +226,174 @@
 	</div>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+
+<script>
+
+/* --------------------유효성 검사---------------  */
+
+function hospitalInsertValidate(){
+	
+	// 시간 입력 정규식 00:00
+	var regExp = /^(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9])$/;
+	
+	var open = $("#openTime").val();
+	var close = $("#closeTime").val();
+	
+	if(!regExp.test(open) || !regExp.test(close)){
+		alert("영업 시간의 형식이 유효하지 않습니다.");
+		return false;
+	}
+	
+	/* 병원정보에 내용이 입력이 안 된다면*/
+	
+	if ($("#hospital_info").val().trim().length ==0){
+		alert("동물 병원 정보를 입력해 주세요.");
+		$("#hospital_info").focus();
+		return false;
+	}
+	
+}
+
+
+/* 전화번호 4글자 이상 입력 안 되게 지정  */
+$(".phoneTest").on("input",function(){
+	 if ($(this).val().length > 4) {
+	    $(this).val( $(this).val().slice(0, 4));
+	 }  
+	
+})
+
+
+/* 삭제 버튼이 눌리면 확인창이 뜬다.  */
+$("#resetBtn").on("click",function(){
+	
+ 	if( confirm("병원 등록을 취소하고 목록으로 돌아갑니다.")){
+ 		
+ 		location.href = "${contextPath}/hospital/list";
+ 	}
+});
+
+
+
+
+/* --------------------이미지 첨부---------------  */
+
+//이미지 영역을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+// 페이지 로딩이 끝나고나면 #fileArea 요소를 숨김.
+$(function(){
+	$("#fileArea").hide(); 
+	
+	$(".hospitalImg").on("click",function(){// 이미지 영역이 클릭 되었을 때
+		// 클릭한 이미지 영역 인덱스 얻어오기
+		var index = $(".hospitalImg").index(this);
+		// 클릭된 요소가 .hospitalImg 중 몇 번째 인덱스인지 반환
+		
+		// console.log(index);
+
+		// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
+		$("#img" + index).click();
+	});
+});
+
+
+
+
+// 각 영역에 파일을 첨부했을 때 미리보기 가능하게 하는 함수
+function LoadImg(value,num){
+	// value.files == input태그에 파일이 업로드되어 있으면 true
+	// value.files[0] : 여러 파일 중 첫번째 파일이 업로드 되어있으면 true
+	if(value.files && value.files[0] ){ // 해당 요소에 업로드된 파일이 있을 경우
+		  var reader = new FileReader();
+			// 자바스크립트 FileReader
+		    // 웹 애플리케이션이 비동기적으로 데이터를 읽기 위하여 
+		    // 읽을 파일을 가리키는 File 혹은 Blob객체를 이용해 파일의 내용을 읽고 
+		    // 사용자의 컴퓨터에 저장하는 것을 가능하게 해주는 객체
+	    
+	    reader.readAsDataURL(value.files[0]);
+	 		// FileReader.readAsDataURL()
+   			// 지정된의 내용을 읽기 시작합니다. 
+    		// Blob완료되면 result속성 data:에 파일 데이터를 나타내는 URL이 포함 됨.
+    
+    reader.onload = function(e){
+	    	// FileReader.onload
+				// load 이벤트의 핸들러. 
+				// 이 이벤트는 읽기 동작이 성공적으로 완료 되었을 때마다 발생함.
+				
+				// 읽어들인 내용(이미지 파일)을 화면에 출력
+				$(".hospitalImg").eq(num).children("img").attr("src", e.target.result);
+	    	// e.target.result : 이벤트가 발생한 요소의 결과 , 파일 읽기 동작을 성공한 요소가 읽어들인 파일 내용
+	  
+		 }
+	  }
+}
+
+
+// 지역 초기값 지정
+(function(){
+	$("#location1 > option").each(function(index,item){
+		if($(item).text()== "${hospital.location1}"){
+			$(item).prop("selected",true);
+		}
+	});
+});
+
+
+
+// 번호 앞 부분 지정
+(function(){
+		// #phone1의 자식 중 option 태그들을 반복 접근
+	$("#phone1 > option").each(function(index, item){
+		// index : 현재 접근중인 인덱스
+		// item : 현재 접근중인 요소
+		
+			// 현재 접근한 요소에 써져있는 값과 전화번호 배열의 첫번째 값이 같다면
+		if( $(item).text() == "${phone[0]}"){
+			// 현재 접근한 요소에 seleted라는 옵션을 추가
+			$(item).prop("selected",true);
+		}
+	});
+})();		
+
+
+
+
+// 등록된 부대시설  체크하기
+(function(){
+   
+   // 회원 정보에서 관심분야 문자열을 얻어와 ' , '를 구분자로 하여 분리하기
+   var facility = "${hospital.facility}".split(",");
+   
+   // 체크 박스 요소를 모두 선택하여 반복 접근
+   $("input[name='hosp_facility']").each(function(index, item){
+      
+      // interest 배열 내에
+      // 현재 접근 중인 체크박스의 value와 일치하는 요소가 있는지 확인
+      if(facility.indexOf( $(item).val()) != -1 ){
+         $(item).prop("checked", true);
+      }
+   });
+})();
+
+
+
+// 이미지 배치
+		<c:forEach var="file" items="${fList}">
+			$(".hospitalImg").eq(${file.fileLevel}).children("img").attr("src","${contextPath}/resources/image/uploadHospitalImages/${file.fileName}");
+		</c:forEach>
+
+		
+		
+		
+// 취소 버튼 눌렀을 때
+
+	/*삭제 버튼 클릭했을 때  */
+	$("#deleteBtn").on("click",function(){
+		if(confirm("취소하시겠습니까?")){
+			location.href="${header.referer}"
+		}
+	});
+</script>
 
 </body>
 </html>

@@ -54,7 +54,7 @@ border: solid 1px orange;
     font-size : 30px;
 }
 
-.insert_hospital{
+.update_hospital{
     width: 600px;
     padding:0;
     margin : 0 auto;
@@ -84,6 +84,12 @@ margin: 0;
     width: 60%;
     height:40px;
 }
+
+.highlighter{
+	
+	background: linear-gradient(to top, #e4f7fa 50%, transparent 100%);
+}
+
 
 /* 가득 채우는 인풋창  */
 .full_input{
