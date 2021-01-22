@@ -56,7 +56,7 @@ public class ReplyDAO {
 				Reply reply = new Reply();
 				reply.setReplyNo(rset.getInt("REPLY_NO"));
 				reply.setReplyContent(rset.getString("REPLY_CONTENT"));
-				reply.setReplyCreateDate(rset.getTimestamp("REPLY_CREATE_DT"));
+				reply.setReplyCreateDate(rset.getTimestamp("REPLY_DT"));
 				reply.setMemberId(rset.getString("MEM_ID"));
 				
 				rList.add(reply);

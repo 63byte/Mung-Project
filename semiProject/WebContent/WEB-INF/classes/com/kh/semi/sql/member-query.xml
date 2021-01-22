@@ -101,7 +101,7 @@ VALUES(SEQ_CLM.NEXTVAL, ?, ?, ?, ?)
 
 <entry key="signUpCom1">
 INSERT INTO TB_MEMBER
-VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, 'C', ?)
+VALUES(SEQ_MNO.NEXTVAL, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, 'C')
 </entry>
 
 </properties>

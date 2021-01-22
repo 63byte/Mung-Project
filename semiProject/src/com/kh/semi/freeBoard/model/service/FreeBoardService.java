@@ -12,6 +12,7 @@ import com.kh.semi.freeBoard.model.dao.FreeBoardDAO;
 import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
 import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
+import com.kh.semi.freeBoard.model.vo.FreeReport;
 import com.kh.semi.freeBoard.model.vo.PageInfo;
 
 public class FreeBoardService {
@@ -378,6 +379,32 @@ public class FreeBoardService {
 			
 			if(result > 0)		commit(conn);
 			else				rollback(conn);
+			close(conn);
+			
+			return result;
+		}
+
+
+		/** 게시글 신고
+		 * @param fReport
+		 * @return
+		 * @throws Exception
+		 */
+		public int freeReport(FreeReport fReport) throws Exception{
+			Connection conn = getConnection();
+			
+			int result = dao.freeReport(conn, fReport);
+			
+			if(result > 0) {
+				int reportNum = fReport.getFreeBoardNo();
+				result = dao.reportNum(conn, reportNum);
+				
+				
+				if(result > 0)		commit(conn);
+				else				rollback(conn);
+				
+			}
+			
 			close(conn);
 			
 			return result;

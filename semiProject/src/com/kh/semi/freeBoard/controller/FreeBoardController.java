@@ -18,6 +18,7 @@ import com.kh.semi.common.MyFileRenamePolicy;
 import com.kh.semi.freeBoard.model.service.FreeBoardService;
 import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.freeBoard.model.vo.FreeBoard;
+import com.kh.semi.freeBoard.model.vo.FreeReport;
 import com.kh.semi.freeBoard.model.vo.PageInfo;
 import com.kh.semi.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
@@ -318,6 +319,35 @@ public class FreeBoardController extends HttpServlet {
 				request.getSession().setAttribute("swalTitle", swalTitle);
 				
 				response.sendRedirect(path);
+				
+			}
+			
+			// -------------- 게시글 신고 Controller ---------------
+			else if(command.equals("/reportAction.do")) {
+				String reportTitle = request.getParameter("reportTitle");
+				String reportContent = request.getParameter("reportContent");
+				
+				int freeBoardNo = Integer.parseInt(request.getParameter("bNum"));
+				
+				int memberNo = Integer.parseInt(request.getParameter("mNum"));
+				
+				FreeReport fReport = new FreeReport(reportTitle, reportContent, freeBoardNo, memberNo);
+				
+				int result = service.freeReport(fReport);
+				
+				if(result > 0) {
+					swalIcon = "success";
+					swalTitle = "게시글신고 성공";
+					
+				}else {
+					swalIcon = "error";
+					swalTitle = "게시글 신고 실패";
+				}
+					
+				request.getSession().setAttribute("swalIcon", swalIcon);
+				request.getSession().setAttribute("swalTitle", swalTitle);
+				
+				response.sendRedirect(request.getHeader("referer"));
 				
 			}
 			

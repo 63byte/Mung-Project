@@ -488,8 +488,8 @@ button#searchBtn:hover{
   	  //console.log(travelNo);
   	  // 클릭이 되는지 테스트
   	  
-  	  //var url = "${contextPath}/travel/localView.do?cp=${pInfo.currentPage}&no="+ travelNo + "${searchStr}";
-  	  var url = "${contextPath}/travel/localView.do?no="+travelNo;
+  	  var url = "${contextPath}/travel/localView.do?cp=${pInfo.currentPage}&no="+ travelNo + "${searchStr}";
+  	  //var url = "${contextPath}/travel/localView.do?no="+travelNo;
   	  
   	  location.href = url;
     });

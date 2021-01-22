@@ -20,27 +20,22 @@
 	/* font-weight: 100; --> 굵기 지정 */
 	font-weight: 500;
 }
-
 html, body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	background: #8ad2d5;
 }
-
-
 #logoDiv {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 #logo {
 	width: 300px;
 	margin: 110px;
 	margin-left: -75px;
 }
-
 /* 아이디,비밀번호 찾기 버튼 & 효과 */
 #btnDiv {
 	width: 300px;
@@ -50,7 +45,6 @@ html, body {
 	text-align: center;
 	padding: 40px;
 }
-
 #idBtn, #pwBtn {
 	width: 130px;
 	height: 40px;
@@ -60,11 +54,9 @@ html, body {
 	color: white;
 	font-weight: 200;
 }
-
 #idBtn:hover, #pwBtn:hover {
 	font-weight: 500;
 }
-
 /* 찾기 전체 Div */
 #findWrapper {
 	border-radius: 10px;
@@ -74,29 +66,24 @@ html, body {
 	margin: 0 auto;
 	text-agign : center;
 }
-
 /* 찾기 Div 모음 */
 #findDiv1 {
 	margin: 30px;
 }
-
 #findDiv2 {
 	width: 250px;
 	height: 160px;
 	margin: 0 auto;
 	text-align: center;
 }
-
 #findDiv2>label {
 	margin: 3px;
 	float: left;
 }
-
 #findDiv2>input, #findDiv2>button {
 	margin: 3px;
 	float: right;
 }
-
 /* p 태그 */
 #p1 {
 	font-size: 20px;
@@ -104,14 +91,12 @@ html, body {
 	margin: auto;
 	text-align: center;
 }
-
 #p2 {
 	font-size: 14px;
 	font-weight: normal;
 	margin: auto;
 	text-align: center;
 }
-
 /* 이메일 버튼 & 효과 */
 #sendMail {
 	border: white;
@@ -120,17 +105,15 @@ html, body {
 	font-weight: 10;
 	border-radius: 5px;
 }
-
 #sendMail:hover {
 	font-weight: 500;
 }
-
 /* 다음 버튼, 구름 이미지 Div*/
 #nextDiv {
 	margin: auto;
+	margin-top : -30px;
 	text-align: center;
 }
-
 #nextBtn {
 	width: 65px;
 	height: 35px;
@@ -141,19 +124,21 @@ html, body {
 	font-weight: 200;
 	margin: 30px;
 }
-
 #nextBtn:hover {
 	font-weight: 500;
 }
-
 #coludDiv {
 	position: absolute;
 	right: 0;
 	bottom: 0;
 }
-
 #cloud {
 	vertical-align: bottom;
+}
+
+#findDiv2 > span {
+	line-height : 90px;
+	font-size : 12px;
 }
 </style>
 
@@ -215,6 +200,7 @@ html, body {
 
 
 				<label for="inputEmail">&nbsp;</label> <input type="text" id="inputEmail" placeholder="인증번호 입력" required>
+				<br>
 				<span id="checkFl"></span>
 			</div>
 

@@ -33,9 +33,7 @@
                     
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="location1">
-                        	 	<span class="highlighter">지역</span>
-                            </label>
+                            <label for="location1">지역</label>
                         </div>
                         <div class="input_tag">
                             <select class="full_input" id="location1" name="location1" required>
@@ -58,11 +56,10 @@
                     </div>
 
 
+
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="companyName">
-                            	<span class="highlighter">병원명</span>
-                            </label>
+                            <label for="companyName">병원명</label>
                         </div>
                         <div class="input_tag">
                             <input type="text" class="full_input" id="companyName"  name="hospNm" placeholder="병원명을 입력해 주세요." autocomplete="off" required>
@@ -71,9 +68,7 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="phone">
-                            	<span class="highlighter">전화번호</span>
-                            </label>
+                            <label for="phone">전화번호</label>
                         </div>
                         <div class="input_tag">
                             <select class="phone" id="phone1" name="phone1" required> 
@@ -106,9 +101,7 @@
                     
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="location2">
-                            	<span class="highlighter">상세주소</span>
-                            </label>
+                            <label for="location2">상세주소</label>
                         </div>
                         <div class="input_tag">
                             <input type="text" class="full_input" id="location2" name="location2" placeholder="상세주소를 입력해 주세요." autocomplete="off" required>
@@ -117,9 +110,7 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="office_hours">
-                            	<span class="highlighter">영업시간</span>
-                            </label>
+                            <label for="office_hours">영업시간</label>
                         </div>
                         <div class="input_tag">
 
@@ -131,9 +122,7 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="facility">
-                            	<span class="highlighter">병원 시설</span>
-                            </label>
+                            <label for="facility">병원 시설</label>
                         </div>
                         <div class="input_tag">
                            <input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi
@@ -146,9 +135,7 @@
 
                     <div class="row-item">
                         <div class="label_name" style="vertical-align:80px;" >
-                            <label for="hospital_info" >
-                            	<span class="highlighter">동물병원 정보</span>
-                            </label>
+                            <label for="hospital_info" >동물병원 정보</label>
                         </div>
                         <div class="input_tag">
                             <textarea class="full_input hospital_info" id="hospital_info" rows="10"
@@ -162,9 +149,7 @@
 
                     <div class="row-item">
                     	<div class="label_name">
-							<label for="titleImgArea">
-								<span class="highlighter">썸네일</span>
-							</label>
+							<label for="titleImgArea">썸네일</label>
                     	</div>
 					<div class="hospitalImg input_tag" id="titleImgArea">
 						<img id="titleImg" width="360" height="100" >
@@ -173,9 +158,7 @@
 
 				<div class="row-item"  >
 					<div class="label_name">
-						<label class="img">
-							<span class="highlighter">업로드 이미지</span>
-						</label>
+						<label class="img">업로드 이미지</label>
 					</div>
 					<div class="input_tag">
 						<div class="hospitalImg imgarea" id="hotpitalImgArea1" style="margin-right:5px;">
@@ -213,7 +196,7 @@
                     <div class="row-item">
                         <div class="btn_item">
                             <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
-                            <button class= "btn_class"  id="resetBtn" type="button">취소</button>
+                            <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
                         </div>
                     </div>
                 </form>
@@ -260,14 +243,6 @@ $(".phoneTest").on("input",function(){
 })
 
 
-/* 삭제 버튼이 눌리면 확인창이 뜬다.  */
-$("#resetBtn").on("click",function(){
-	
- 	if( confirm("병원 등록을 취소하고 목록으로 돌아갑니다.")){
- 		
- 		location.href = "${contextPath}/hospital/list";
- 	}
-});
 
 
 
@@ -288,6 +263,8 @@ $(function(){
 
 		// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
 		$("#img" + index).click();
+		
+	
 	});
 });
 
@@ -322,8 +299,6 @@ function LoadImg(value,num){
 		 }
 	  }
 }
-
-
 
 
 </script>

@@ -128,6 +128,7 @@ public class HospitalDAO {
 			if(rset.next()) {
 				hospital = new Hospital();
 				hospital.setHospNm(rset.getString("HOSP_NM"));
+				hospital.setLocation1(rset.getString("LOCATION1"));
 				hospital.setLocation2(rset.getString("LOCATION2"));
 				hospital.setPhone(rset.getString("PHONE"));
 				hospital.setOpeningTime(rset.getString("OPENING_TIME"));
@@ -135,6 +136,7 @@ public class HospitalDAO {
 				hospital.setHospInfo(rset.getString("HOSP_INFO"));
 				hospital.setViewCount(rset.getInt("VIEW_COUNT"));
 				hospital.setHospFacility(rset.getString("HOSP_FACILITY"));
+				
 			}
 		}finally {
 			close(rset);
@@ -225,9 +227,9 @@ public class HospitalDAO {
 			pstmt.setString(5,(String)map.get("phone"));
 			pstmt.setString(6,(String)map.get("openTime"));
 			pstmt.setString(7,(String)map.get("closeTime"));
-			pstmt.setString(8,(String)map.get("hospitalInfo"));
-			pstmt.setInt(9,(int)map.get("memberNo"));
-			pstmt.setString(10,(String)map.get("facility"));
+			pstmt.setString(8,(String)map.get("facility"));
+			pstmt.setString(9,(String)map.get("hospitalInfo"));
+			pstmt.setInt(10,(int)map.get("memberNo"));
 			
 			result = pstmt.executeUpdate();
 		
@@ -378,6 +380,72 @@ public class HospitalDAO {
 		}finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+
+
+	
+	
+	
+	/** 동물병원 수정 DAO
+	 * @param conn
+	 * @param map
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateHospital(Connection conn, Map<String, Object> map) throws Exception {
+		int result =0;
+		String query = prop.getProperty("updateHospital");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,(String)map.get("hospNm"));
+			pstmt.setString(2,(String)map.get("location1"));
+			pstmt.setString(3,(String)map.get("location2"));
+			pstmt.setString(4,(String)map.get("phone"));
+			pstmt.setString(5,(String)map.get("openTime"));
+			pstmt.setString(6,(String)map.get("closeTime"));
+			pstmt.setString(7,(String)map.get("facility"));
+			pstmt.setString(8,(String)map.get("hospitalInfo"));
+			pstmt.setInt(9, (int)map.get("hospitalNo"));
+			
+			result = pstmt.executeUpdate();
+			
+		}finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	
+	
+	
+
+	/** 파일 정보 수정 DAO
+	 * @param conn
+	 * @param newFile
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateAttachment(Connection conn, Attachment newFile) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("updateAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newFile.getFilePath());
+			pstmt.setNString(2, newFile.getFileName());
+			pstmt.setInt(3, newFile.getFileNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

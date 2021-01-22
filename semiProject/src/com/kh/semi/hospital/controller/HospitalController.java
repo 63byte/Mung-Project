@@ -131,12 +131,17 @@ public class HospitalController extends HttpServlet {
 			
 			
 			
+			
+			
 			// 동물병원 등록 화면 전환 **************************************
 				else if(command.contentEquals("/insertForm")) {
 					path = "/WEB-INF/views/hospital/hospitalInsert.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
 				}
+			
+			
+			
 			
 			
 			// 동물병원 등록 **************************************
@@ -153,7 +158,7 @@ public class HospitalController extends HttpServlet {
 					// 1-2. 서버에 업로드된 파일을 저장할 경로 지정
 					String root = request.getSession().getServletContext().getRealPath("/");
 					
-					String filePath = root + "resources/uploadHospitalImages/";
+					String filePath = root + "resources/image/uploadHospitalImages/";
 					
 					// 1-3. 파일명 변환을 위한 클래스 작성 (Attachment.java)
 					
@@ -240,7 +245,6 @@ public class HospitalController extends HttpServlet {
 					
 					String hospitalInfo = multiRequest.getParameter("hospital_info");
 					
-					
 					// 세션에서 로그인한 회원의 번호를 얻어옴
 					Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 					int memberNo = loginMember.getMemberNo();
@@ -281,8 +285,8 @@ public class HospitalController extends HttpServlet {
 				}
 			
 			// 동물병원 수정 화면 전환 Controller ************
-				else if(command.contentEquals("/updateForm")) {
-					errorMsg ="동물병원 수정 페이지 불러오는 과정에서 오류 발생";
+				else if(command.equals("/updateForm")) {
+					errorMsg ="동물병원 수정 화면 불러오는 과정에서 오류 발생";
 					
 					// 병원번호를 이용하여 이전에 작성했던 내용 조회해 옴
 					int hospitalNo = Integer.parseInt(request.getParameter("hospitalNo"));
@@ -297,8 +301,8 @@ public class HospitalController extends HttpServlet {
 							request.setAttribute("fList", fList);
 						}
 						
+						path = "/WEB-INF/views/hospital/hospitalUpdate.jsp";
 						request.setAttribute("hospital", hospital);
-						path = "WEB-INF/views/hospital/hospitalUpdate.jsp";
 						view = request.getRequestDispatcher(path);
 						view.forward(request, response);
 						
@@ -308,9 +312,143 @@ public class HospitalController extends HttpServlet {
 						response.sendRedirect(request.getHeader("referer"));
 					}
 					
+					
 				}
 			
-			// cp를 못 얻어와서 수정화면 전환 실패!!!!!
+				// 동물병원 수정하기 **********************************
+				
+				else if(command.equals("/update")) {
+					errorMsg = "동물병원 수정 과정에서 오류 발생";
+					
+					// 1. MultipartRequest 객체 생성에 필요한 값 설정
+		        	 int maxSize = 20 * 1024 * 1024; // 최대 크기 20MB
+		        	 String root = request.getSession().getServletContext().getRealPath("/");
+		        	 String filePath = root + "resources/image/uploadHospitalImages/";
+		        	 
+		        	 // 2. MultipartRequest 객체 생성
+		        	 // -> 생성과 동시에 전달받은 파일이 서버에 저장됨
+		        	 MultipartRequest multiRequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+		        	 
+		        	 // 3. 파일 정보를 제외한 파라미터 얻어오기
+					String location1 = multiRequest.getParameter("location1"); //지역1
+					String hospNm = multiRequest.getParameter("hospNm"); // 병원명
+					String phone1 = multiRequest.getParameter("phone1"); // 전화번호
+					String phone2 = multiRequest.getParameter("phone2"); // 전화번호
+					String phone3 = multiRequest.getParameter("phone3"); // 전화번호
+					String phone = phone1+"-" + phone2 + "-" + phone3; // 전화번호 합치기
+						
+					String location2 = multiRequest.getParameter("location2"); //상세주소
+					String openTime = multiRequest.getParameter("openTime"); //오픈시간
+					String closeTime = multiRequest.getParameter("closeTime"); //오픈시간
+						
+					String[] facilityArr = multiRequest.getParameterValues("hosp_facility"); // 병원시설 배열로 받기
+					String facility = null;
+						
+						if(facilityArr!=null) { //병원 시설 배열이 비어있지 않다면.
+							facility= String.join(",", facilityArr);
+						}
+						
+					String hospitalInfo = multiRequest.getParameter("hospital_info");
+					
+					int hospitalNo = Integer.parseInt(multiRequest.getParameter("hospitalNo"));
+					
+					
+		        	 
+		        	 
+					// 4. 전달받은 파일 정보를 List에 저장
+					List<Attachment> fList = new ArrayList<Attachment>();
+					Enumeration<String> files = multiRequest.getFileNames();
+					// input type="file"인 모든 요소의 name 속성 값을 반환받아 files에 저장
+					
+					while(files.hasMoreElements()) {
+						// 현재 접근중인 name속성값읇 변수에 저장
+						 String name = files.nextElement();
+			        		
+		        		 // 현재 name 속성이 일치하는 요소로 업로드된 파일이 있다면
+		        		 if(multiRequest.getFilesystemName(name) != null) {
+		        			 
+	        			 Attachment temp = new Attachment();
+	        			 
+	        			 // 변경된 파일 이름 temp에 저장
+	        			 temp.setFileName(multiRequest.getFilesystemName(name));
+	        			 
+	        			 // 지정한 파일 경로 tmep에 저장
+	        			 temp.setFilePath(filePath);
+	        			 
+	        			 // 해당 게시글 번호 temp에 저장
+	        			 temp.setHospNo(hospitalNo);
+	        			 
+	        			 // 파일 레벨 temp에 저장
+	        			 switch(name) {
+	        			 case "img0" : temp.setFileLevel(0); break;
+	        			 case "img1" : temp.setFileLevel(1); break;
+	        			 case "img2" : temp.setFileLevel(2); break;
+	        			 case "img3" : temp.setFileLevel(3); break;
+	        			 }
+	        			 
+	        			 // temp를 fList에 추가
+	        			 fList.add(temp);
+	        			// 이미지를 변경한 부분들만 fList에 추가가 된다.
+	        		 }
+						
+					}
+					
+					// 5. Session에서 로그인한 회원의 번호를 얻어와 저장 (작성자)
+					Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+					int memberNo = loginMember.getMemberNo(); 
+					
+					// 6. 준비된 값들을 하나의 Map에 저장
+					Map<String,Object> map = new HashMap<String,Object>();
+					
+					map.put("fList",fList);
+					map.put("hospitalNo",hospitalNo);
+					map.put("location1", location1);
+					map.put("hospNm", hospNm);
+					map.put("phone", phone);
+					map.put("location2", location2);
+					map.put("openTime", openTime);
+					map.put("closeTime", closeTime);
+					map.put("facility", facility);
+					map.put("hospitalInfo", hospitalInfo);
+					map.put("memberNo", memberNo);
+					
+					
+					// 7. 준비된 값을 매개변수로 하여 게시글 수정 Service 호출
+		        	 int result = service.updateHospital(map);
+		        	 
+		        	// 8. result 값에 따라 View 연결 처리
+		        	 path ="view?cp="+cp+"&hospitalNo="+hospitalNo;
+		        	 String sk = multiRequest.getParameter("sk");
+		        	 String sv = multiRequest.getParameter("sv");
+					
+		        	// 전달된 sk,sv가 존재 할 때 (검색을 통한 접근일 때)
+		        	 if(sk != null && sv != null ) {
+		        		 path += "&sk="+sk + "&sv=" + sv;
+		        	 }
+		        	 
+		        	 
+
+		        	 if (result>0) {
+		        		 swalIcon = "success";
+		        		 swalTitle = "수정 성공";
+		        		 
+		        		 
+		        		 	        	 
+		        	 }else {
+		        		 swalIcon = "error";
+		        		 swalTitle = "수정 실패";
+		        	 }
+		        	 request.getSession().setAttribute("swalIcon", swalIcon);
+		        	 request.getSession().setAttribute("swalTitle", swalTitle);
+		        	 
+		        	 response.sendRedirect(path);
+		        	 
+					
+					
+					
+				}
+			
+				// 동물병원 삭제 **************************************
 			
 				else if(command.equals("/delete")) {
 					errorMsg = "삭제 과정에서 오류 발생";

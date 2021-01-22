@@ -32,7 +32,7 @@
 
             <!-- 검색창 -->
             
-    <div class="row-item" style="margin-bottom:50px;">
+    <div class="row-item" style="margin-bottom:90px;">
         <form action="${contextPath }/hospital/search" method="GET" id="searchForm">
             <div class="bg-image-full" style="background-image: url('https://cdn.pixabay.com/photo/2016/01/19/17/41/friends-1149841_960_720.jpg');" >
               
@@ -79,7 +79,7 @@
             </div> 
           </form>  -->    
            
-           <c:set var="boardNo" value="1"></c:set>
+           <c:set var="boardNo" value="1"></c:set> <!-- 상세조회 클릭 위한 게시글 번호  -->
            
            <!-- 동물 병원 리스트 -->
            
@@ -87,7 +87,7 @@
            		<c:when test="${empty hList }">
            		<!-- hList가 비어있을 때 : 게시글 목록 조회에서 조회되지 않았을 때  -->
            		<div class="row-item">
-           			<div style="text-align:center; font-size: 18px;">해당 지역에 등록된 병원이 없습니다.</div>
+           			<div style="text-align:center; font-size: 18px;">등록된 병원이 없습니다.</div>
            		</div>
            		</c:when>
            
@@ -102,20 +102,27 @@
 				                    <div class="thumbnail_img">
 				                    
 				                        <!-- 썸네일 출력  -->
-							
+									
+									<c:set var="flag" value="true"/>
 				                   <c:forEach var="thumbnail" items="${fList }">
+				                   
+				                   
 										<c:if test="${hospital.hospNo == thumbnail.hospNo }">
-													<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모게시글번호가 일치하는 썸네일 정보가 있다면  --%>
-													<img class="hospital_img"  src="${contextPath }/resources/uploadHospitalImages/${thumbnail.fileName}">
-											</c:if>
+												<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모게시글번호가 일치하는 썸네일 정보가 있다면  --%>
+												<img class="hospital_img"  src="${contextPath }/resources/image/uploadHospitalImages/${thumbnail.fileName}">
+												<c:set var="flag" value="false"/>
+										</c:if>
 									</c:forEach>
 		                         	
+		                         	<c:if test="${flag == 'true'}">
+										<img class="hospital_img"  src="${contextPath }/resources/image/icon/nonImage.png">
+		                         	</c:if>
 				                            
 				                            
 				                            
 				                    </div>
 				                    <div class="thumbnail_info ">
-				                      <div class="hospital_info"><span id="hospital_name" href="#"> ${hospital.hospNm }</span></div>
+				                      <div class="hospital_info"><span id="hospital_name" > ${hospital.hospNm }</span></div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/site.png">주소 : ${hospital.location2 }</div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/phone.png">연락처 : ${hospital.phone }</div>
 				                      <div class="hospital_info" ><img class="icon" src="${contextPath}/resources/image/icon/clock.png">영업시간 : ${hospital.openingTime } ~ ${hospital.closingTime }</div>
@@ -131,6 +138,7 @@
            		</c:otherwise>
             </c:choose>
             <!-- 한 페이지 6개씩 보이기 -->
+            
             
             
             
@@ -242,7 +250,7 @@
 $(".numberSelect > *").on("click", function(){
 	var hospitalNo = $(this).children("span").text();
 	
-	var url = "${contextPath}/hospital/view?=cp${pInfo.currentPage}&hospitalNo="+ hospitalNo +"${searchStr}";
+	var url = "${contextPath}/hospital/view?cp=${pInfo.currentPage}&hospitalNo="+ hospitalNo +"${searchStr}";
 	
 	location.href=url;
 });

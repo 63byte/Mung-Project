@@ -78,6 +78,42 @@ div {
 	position: relative;
 }
 
+/*
+img{
+min-width:900px;
+}*/
+
+
+.boardImgArea {
+	height: 300px;
+}
+
+.boardImg {
+	width: 100%;
+	height: 100%;
+	max-width: 300px;
+	max-height: 300px;
+	margin: auto;
+}
+
+/* 이미지 화살표 색 조정
+	-> fill='%23000' 부분의 000을
+	   RGB 16진수 값을 작성하여 변경 가능 
+	 */
+.carousel-control-prev-icon {
+	background-image:
+		url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E")
+		!important;
+}
+
+.carousel-control-next-icon {
+	background-image:
+		url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
+		!important;
+}
+
+
+
 /* ------------------------------------------ */
 .btn_class {
 	background-color: #8ad2d5;
@@ -141,14 +177,55 @@ div {
 			조회수 : ${travel.travelReadCount} <br>
 			<hr>
 
+				<!-- 이미지 출력 -->
+				<c:if test="${!empty fList}">
+					<div class="carousel slide boardImgArea" id="board-image">
+
+
+						<!-- 이미지 선택 버튼(인디케이터) -->
+						<!-- 이미지가 업로드 된 개수만큼 인디케이터 개수가 생기게 함 -->
+						<ol class="carousel-indicators">
+							<c:forEach var="file" items="${fList}" varStatus="vs">
+
+								<li data-slide-to="${vs.index}" data-target="#board-image"
+									<c:if test="${vs.first}"> class="active" </c:if>></li>
+
+							</c:forEach>
+
+						</ol>
+
+						<!-- 출력되는 이미지 -->
+						<div class="carousel-inner">
+
+							<c:forEach var="file" items="${fList}" varStatus="vs">
+
+								<div
+									class="carousel-item <c:if test="${vs.first}">active</c:if>">
+
+									<img class="d-block w-100 boardImg" id="${file.fileNo}"
+										src="${contextPath}/resources/uploadImages/travel/${file.fileName}">
+								</div>
+
+							</c:forEach>
+
+						</div>
+
+						<!-- 좌우 화살표 -->
+						<a class="carousel-control-prev" href="#board-image"
+							data-slide="prev"> <span class="carousel-control-prev-icon"></span>
+							<span class="sr-only">Previous</span>
+						</a> <a class="carousel-control-next" href="#board-image"
+							data-slide="next"> <span class="carousel-control-next-icon"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</c:if>
+			
+			
 			<!-- 내용 -->
 			${travel.travelContent}
-			<c:if test="${!empty fList }">
-				<c:forEach var="file" items="${fList }">
-					<img id="${file.fileNo }"
-						src="${contextPath}/resources/uploadImages/travel/${file.fileName}">
-				</c:forEach>
-			</c:if>
+			
+			
 			<hr>
 
 
@@ -175,15 +252,88 @@ div {
 
 
 
-			<!-- 목록으로 / 수정 / 삭제 버튼  -->
+			<!-- 내가만든..... 목록으로 / 수정 / 삭제 버튼  -->
+			<!-- 
 			<div class="row-item">
-				<div class="btn_item">
+				<div class="btn_item" style="margin-bottom:100px;">
 					<button class="btn_class" id="" type="button" style="width: 84px"
 						onclick="location.href = '${goToList}'">목록으로</button>
 					<button class="btn_class" id="" type="submit">수정</button>
 					<button class="btn_class" id="" type="reset">삭제</button>
 				</div>
 			</div>
+			  -->
+			  
+			  
+			<!-- ----------------------- 목록으로... -------------------------- -->
+			<div>
+
+					<%-- 로그인된 회원과 해당 글 작성자가 같은 경우--%>
+					<c:if
+						test="${!empty loginMember && (travel.memNo == loginMember.memberNo )}">
+						<button id="deleteBtn" class="btn btn-primary float-right">삭제</button>
+
+
+						<%-- 
+						상세 조회 -> 수정 버튼 클릭 -> 수정 화면 -> 수정 성공 -> 상세 조회 
+																	?cp=1&no=505
+						
+						검색 -> 검색목록 -> 상세조회 -> 수정 버튼 클릭 -> 수정 화면 -> 수정 성공 -> 상세 조회
+										?cp=1&no=505&sk=title&sv=파일
+						 --%>
+
+
+						<%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
+						<c:if test="${!empty param.sv && !empty param.sk }">
+							<%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
+
+							<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}" />
+						</c:if>
+
+						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}"
+							class="btn btn-primary float-right ml-1 mr-1">수정</a>
+					</c:if>
+
+					<%-- 
+						상대경로 작성법
+						- 앞에 아무것도 없음 : 현재 위치 (주소 제일 마지막 / 뒷부분)
+						- 앞에 .. 붙음 : 현재 위치에서 한단계 상위 (주소 제일 마지막 / 보다 왼쪽으로 한칸 앞 / ) 
+						http://localhost:8080/wsp/search.do
+					 --%>
+
+
+					<c:choose>
+						<c:when test="${!empty param.sk && !empty param.sv }">
+
+							<%-- .. 상위 주소 --%>
+							<c:url var="goToList" value="../search.do">
+								<c:param name="cp">${param.cp}</c:param>
+								<c:param name="sk">${param.sk}</c:param>
+								<c:param name="sv">${param.sv}</c:param>
+							</c:url>
+
+						</c:when>
+
+						<c:otherwise>
+							<%-- 목록으로 이동 --%>
+							<c:url var="goToList" value="localList.do">
+								<c:param name="cp">${param.cp}</c:param>
+							</c:url>
+						</c:otherwise>
+					</c:choose>
+
+
+					<a href="${goToList}" class="btn btn-primary float-right">목록으로</a>
+				</div>
+
+
+
+
+
+
+
+
+
 
 		</div>
 	</div>
