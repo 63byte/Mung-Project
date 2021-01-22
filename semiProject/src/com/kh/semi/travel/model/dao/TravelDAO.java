@@ -131,6 +131,7 @@ public class TravelDAO {
 				travel.setTravelContent(rset.getString("TRAVEL_CONTENT"));
 				travel.setTravelReadCount(rset.getInt("TRAVEL_READ_COUNT"));
 				travel.setTravelBoardDate(rset.getDate("TRAVEL_BOARD_DATE"));
+				travel.setMemNo(rset.getInt("MEM_NO"));
 			}
 		} finally {
 			// 4) 사용한 JDBC 객체 반환
@@ -324,6 +325,57 @@ public class TravelDAO {
 			close(pstmt);
 		}
 		return fList;
+	}
+
+
+	/** 수정 업데이트 DAO 
+	 * @param conn
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateTravel(Connection conn, Map<String, Object> map) throws Exception {
+		int result = 0; 
+		String query = prop.getProperty("updateTravel"); 
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString( 1, (String)map.get("travelLocation"));
+			pstmt.setString( 2, (String)map.get("travelContent"));
+			pstmt.setString( 3, (String)map.get("travelTitle"));
+			pstmt.setInt( 4, (int)map.get("travelNo"));
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 여행 정보 이미지 수정 DAO  
+	 * @param conn
+	 * @param newFile
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateAttachment(Connection conn, TravelAttachment newFile) throws Exception {
+		int result = 0;
+		String query = prop.getProperty("updateAttachment");
+		System.out.println(newFile);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newFile.getFilePath());
+			pstmt.setString(2, newFile.getFileName());
+			pstmt.setInt(3, newFile.getFileNo());
+			
+			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 
