@@ -48,7 +48,7 @@ SELECT SEQ_HOSPITAL.NEXTVAL FROM DUAL
 <!-- 동물병원 등록 (첨부파일 제외)  -->
 <entry key="insertHospital">
 INSERT INTO HOSPITAL
-VALUES(?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, ?, ?)
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, ?)
 </entry>
 
 

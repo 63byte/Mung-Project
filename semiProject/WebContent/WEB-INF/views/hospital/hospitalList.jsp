@@ -102,14 +102,21 @@
 				                    <div class="thumbnail_img">
 				                    
 				                        <!-- 썸네일 출력  -->
-							
+									
+									<c:set var="flag" value="true"/>
 				                   <c:forEach var="thumbnail" items="${fList }">
+				                   
+				                   
 										<c:if test="${hospital.hospNo == thumbnail.hospNo }">
-													<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모게시글번호가 일치하는 썸네일 정보가 있다면  --%>
-													<img class="hospital_img"  src="${contextPath }/resources/uploadHospitalImages/${thumbnail.fileName}">
-											</c:if>
+												<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모게시글번호가 일치하는 썸네일 정보가 있다면  --%>
+												<img class="hospital_img"  src="${contextPath }/resources/image/uploadHospitalImages/${thumbnail.fileName}">
+												<c:set var="flag" value="false"/>
+										</c:if>
 									</c:forEach>
 		                         	
+		                         	<c:if test="${flag == 'true'}">
+										<img class="hospital_img"  src="${contextPath }/resources/image/icon/nonImage.png">
+		                         	</c:if>
 				                            
 				                            
 				                            
@@ -242,7 +249,7 @@
 $(".numberSelect > *").on("click", function(){
 	var hospitalNo = $(this).children("span").text();
 	
-	var url = "${contextPath}/hospital/view?=cp${pInfo.currentPage}&hospitalNo="+ hospitalNo +"${searchStr}";
+	var url = "${contextPath}/hospital/view?cp=${pInfo.currentPage}&hospitalNo="+ hospitalNo +"${searchStr}";
 	
 	location.href=url;
 });
