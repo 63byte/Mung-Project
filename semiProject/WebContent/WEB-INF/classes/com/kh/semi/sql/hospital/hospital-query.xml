@@ -82,6 +82,7 @@ AND IMG_LEVEL =0
 </entry>
 
 
+
 <!-- 게시글 수정  -->
 <entry key="updateHospital">
 UPDATE HOSPITAL SET
