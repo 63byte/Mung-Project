@@ -153,7 +153,7 @@ public class HospitalController extends HttpServlet {
 					// 1-2. 서버에 업로드된 파일을 저장할 경로 지정
 					String root = request.getSession().getServletContext().getRealPath("/");
 					
-					String filePath = root + "resources/uploadHospitalImages/";
+					String filePath = root + "resources/image/uploadHospitalImages/";
 					
 					// 1-3. 파일명 변환을 위한 클래스 작성 (Attachment.java)
 					
@@ -239,7 +239,6 @@ public class HospitalController extends HttpServlet {
 					
 					
 					String hospitalInfo = multiRequest.getParameter("hospital_info");
-					
 					
 					// 세션에서 로그인한 회원의 번호를 얻어옴
 					Member loginMember = (Member)request.getSession().getAttribute("loginMember");

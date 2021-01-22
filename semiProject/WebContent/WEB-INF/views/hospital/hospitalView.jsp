@@ -58,7 +58,7 @@
                   
                      <div class="carousel-item imageArea <c:if test="${vs.first}">active</c:if>">
                         <img class="d-block w-100 imageArea boardImg" id="${file.fileNo}" 
-                           src="${contextPath}/resources/uploadHospitalImages/${file.fileName}">
+                           src="${contextPath}/resources/image/uploadHospitalImages/${file.fileName}">
                      </div>
                      
                   </c:forEach>

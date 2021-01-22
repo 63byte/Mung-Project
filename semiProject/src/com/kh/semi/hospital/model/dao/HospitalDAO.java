@@ -225,9 +225,9 @@ public class HospitalDAO {
 			pstmt.setString(5,(String)map.get("phone"));
 			pstmt.setString(6,(String)map.get("openTime"));
 			pstmt.setString(7,(String)map.get("closeTime"));
-			pstmt.setString(8,(String)map.get("hospitalInfo"));
-			pstmt.setInt(9,(int)map.get("memberNo"));
-			pstmt.setString(10,(String)map.get("facility"));
+			pstmt.setString(8,(String)map.get("facility"));
+			pstmt.setString(9,(String)map.get("hospitalInfo"));
+			pstmt.setInt(10,(int)map.get("memberNo"));
 			
 			result = pstmt.executeUpdate();
 		
