@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
 
@@ -115,7 +117,7 @@ public class RoomDAO {
 	 * @return room
 	 * @throws Exception
 	 */
-	public Room selectRoomList(Connection conn, int roomNo) throws Exception {
+	public Room selectRoom(Connection conn, int roomNo) throws Exception {
 		Room room = null;
 		String query = prop.getProperty("selectRoom");
 		
@@ -127,15 +129,16 @@ public class RoomDAO {
 			if(rset.next()) {
 				room = new Room();
 				room.setRoomName(rset.getString("ROOM_NAME"));
-				room.setRoomName(rset.getString("LOCATION1"));
-				room.setRoomName(rset.getString("LOCATION2"));
-				room.setRoomName(rset.getString("PHONE"));
-				room.setRoomName(rset.getString("ROOM_INFO"));
-				room.setRoomName(rset.getString("CHECKIN"));
-				room.setRoomName(rset.getString("CHECKOUT"));
-				room.setRoomName(rset.getString("FACILITY"));
-				room.setRoomName(rset.getString("DOG"));
-				room.setRoomName(rset.getString("VIEW_COUNT"));
+				room.setLocation1(rset.getString("LOCATION1"));
+				room.setLocation2(rset.getString("LOCATION2"));
+				room.setPhone(rset.getString("PHONE"));
+				room.setRoomInfo(rset.getString("ROOM_INFO"));
+				room.setCheckin(rset.getString("CHECKIN"));
+				room.setCheckout(rset.getString("CHECKOUT"));
+				room.setFacility(rset.getString("FACILITY"));
+				room.setDog(rset.getString("DOG"));
+				room.setViewCount(rset.getInt("VIEW_COUNT"));
+				
 			}
 			
 		}finally {
@@ -169,6 +172,104 @@ public class RoomDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+
+
+
+
+
+	/** 숙소 다음번호 받아오기 Service
+	 * @param conn
+	 * @return insertNo
+	 * @throws Exception
+	 */
+	public int selectNextNo(Connection conn) throws Exception {
+		int insertNo = 0;
+		String query = prop.getProperty("selectNextNo");
+		
+		try {
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				insertNo = rset.getInt(1);
+			}
+		}finally {
+			close(rset);
+			close(stmt);
+		}
+		return insertNo;
+	}
+
+
+
+
+	
+	
+
+
+	/** 숙소 등록 DAO
+	 * @param conn
+	 * @param map
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertRoom(Connection conn, Map<String, Object> map) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("insertRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, (int)map.get("insertNo"));
+			pstmt.setString(2, (String)map.get("roomName"));
+			pstmt.setString(3, (String)map.get("location1"));
+			pstmt.setString(4, (String)map.get("location2"));
+			pstmt.setString(5, (String)map.get("phone"));
+			pstmt.setString(6, (String)map.get("roomInfo"));
+			pstmt.setString(7, (String)map.get("checkin"));
+			pstmt.setString(8, (String)map.get("checkout"));
+			pstmt.setString(9, (String)map.get("facility"));
+			pstmt.setString(10, (String)map.get("dog"));
+			pstmt.setInt(11, (int)map.get("memberNo"));
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+
+
+
+
+	/**	파일 정보 등록 DAO
+	 * @param conn
+	 * @param at
+	 * @return result
+	 * @throws Exception
+	 */
+	public int insertAttachment(Connection conn, Attachment at) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("insertAttachment");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, at.getFilePath());
+			pstmt.setString(2, at.getFileName());
+			pstmt.setInt(3, at.getFileLevel());
+			pstmt.setInt(4, at.getRoomNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
 		return result;
 	}
 

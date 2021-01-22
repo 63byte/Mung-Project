@@ -32,4 +32,25 @@ VIEW_COUNT = VIEW_COUNT +1
 WHERE ROOM_NO =?
 </entry>
 
+<!-- 다음 번호 얻어오기  -->
+<entry key="selectNextNo">
+SELECT SEQ_ROOM.NEXTVAL FROM DUAL
+</entry>
+
+
+
+<!-- 숙소 등록  -->
+<entry key="insertRoom">
+INSERT INTO ROOM
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ? )
+</entry>
+
+
+<!-- 파일 첨부  -->
+<entry key="insertAttachment">
+INSERT INTO ROOM_IMG
+VALUES(SEQ_ROOMIMG.NEXTVAL,?,?,?,?)
+
+</entry>
+
 </properties>

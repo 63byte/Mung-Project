@@ -119,7 +119,7 @@
         <!-- 동물병원 운영시간 -->
         <div class="row-item" >
             <span><img class="icon" src="${contextPath}/resources/image/icon/clock.png"></span>
-            <span id="hospitalHours">운영시간 : ${hospital.openingTime }  ~ ${hospital.closingTime }</span>
+            <span id="hospitalHours">운영시간 : ${hospital.openingTime } ~ ${hospital.closingTime }</span>
         </div> 
 
         <hr>

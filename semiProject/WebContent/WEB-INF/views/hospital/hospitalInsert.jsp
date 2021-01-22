@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동물병원 등록하기</title>
+<title>동물병원 등록</title>
 <!-- css연결  -->
 <link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalInsert.css" type="text/css">
 </head>
@@ -99,9 +99,9 @@
                                 <option>070</option>
                             </select>
                             &nbsp;-&nbsp;&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone2" name="phone2" maxlength="4" oninput="phoneLength(this)" required>
+                            <input type="number" class="phone phoneTest" id="phone2" name="phone2"  required>
                             &nbsp;-&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone3" name="phone3" maxlength="4" oninput="phoneLength(this)" required>
+                            <input type="number" class="phone phoneTest" id="phone3" name="phone3"  required>
                         </div>
                     </div>
 
@@ -239,6 +239,7 @@ function hospitalInsertValidate(){
 	
 	if(!regExp.test(open) || !regExp.test(close)){
 		alert("영업 시간의 형식이 유효하지 않습니다.");
+		$("#openTime").focus();
 		return false;
 	}
 	
