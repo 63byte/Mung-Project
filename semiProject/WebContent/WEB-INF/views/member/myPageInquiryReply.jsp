@@ -124,8 +124,8 @@ h6 {
 
                         <tr>
                             <td>1</td>
-                            <th>서울 쪽 반려견과 함께 갈 수 있는 숙소 추천 해주세요.</th>
-                            <td>저는 @@호텔 좋았어요 ^ㅅ^</td>
+                            <th>${commember.comName}</th>
+                            <td></td>
                             <td>2021-01-13</td>
                         </tr>
                     </table>
