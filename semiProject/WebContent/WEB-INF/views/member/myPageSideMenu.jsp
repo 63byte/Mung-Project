@@ -25,7 +25,7 @@
 	padding: 0;
 }
 
-/* 메뉴 위아래 간격 */
+/* 메뉴 위아래 간격 */q
 .aside>ul>li {
 	padding: 10px 0px 10px 0px;
 }

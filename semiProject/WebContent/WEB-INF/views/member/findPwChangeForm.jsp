@@ -33,25 +33,24 @@ html, body {
 }
 
 
-#wrapper {
-        width : 1100px;
-        height: 500px;
-        padding-bottom :5%;
-        padding-top: 3%;
-        margin : 0 auto;
-    }
-    
     #logoDiv {
-        width: 300px;
-        display: block;
-        margin : 0 auto;
-    }
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#logo {
+	width: 300px;
+	margin: 110px;
+	margin-left: -75px;
+}
 
     /* 아이디,비밀번호 찾기 버튼 & 효과 */
     #btnDiv {
         width: 300px;
         height: 30px;
         margin : 0 auto;
+        margin-top : -24px;
         text-align: center;
         padding : 40px;
     }
@@ -64,6 +63,7 @@ html, body {
         border: white;
         color: white;
         font-weight: 200;
+        margin-top : -90px;
         
     }
 
@@ -74,9 +74,13 @@ html, body {
     /* 찾기 전체 Div */
 
     #findWrapper {
+    	width : 700px;
+    	margin-top : -5px;
         border-radius: 10px;
         border: 1px solid white;
         background-color: white;
+        text-align : center;
+        margin : 0 auto;
     }
 
     /* 찾기 Div 모음 */
@@ -162,6 +166,23 @@ html, body {
     /* #cloudImg {
         margin-top: 100px;
     } */
+    
+     #check{
+     margin-top : -18px;
+    }
+    
+    .checkpw {
+    margin-left : 38px;
+    }
+    
+    #checkPwd2 {
+    	margin-left : 100px;
+    }
+    
+    #ch1 {
+    	margin : 0 auto;
+    }
+    
 </style>
 </head>
 
@@ -188,14 +209,16 @@ html, body {
 
 	<div id="wrapper">
         
-        <div id="logoDiv">
-            <a href="#"><img src="logo2.png" width="300px"></a>
-        </div>
+        <div id="logoDiv" style="width: 150px; height: 300px">
+			<a href="${contextPath}"><img
+				src="${pageContext.request.contextPath}/resources/image/common/logo.png"
+				id="logo"></a>
+		</div>
         
         <div id="btnDiv">
-            <a href="${contextPath}/member/findIdForm"><button id="idBtn">아이디 찾기</button></a>
+            <a href="${contextPath}/member/findIdForm.do"><button id="idBtn">아이디 찾기</button></a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="${contextPath}/member/findPdForm"><button id="pwBtn">비밀번호 찾기</button></a>
+			<a href="${contextPath}/member/findPwForm.do"><button id="pwBtn">비밀번호 찾기</button></a>
         </div>
     
         <form action="${contextPath}/member/findPwResult.do" method="post" onsubmit="return validate();">
@@ -209,16 +232,24 @@ html, body {
         		
         
             <label for="id1">현재 아이디</label>
-            <input type="text" id="id1" name="id1" required>
+            <input type="text" id="id1" name="currPw" required>
             <br>
             <label for="pw1">새 비밀번호</label>
             <input type="password" id="pw1" name="pw1" required>
-            <br><span id="checkPwd1"></span>
             <br>
-
-            <label for="pw2">새 비밀번호 확인</label>
-            <input type="password" id="pw2" name="pw2" required>
-            <br><span id="checkPwd2"></span>
+            
+            <div id="ch1">
+            <span id="checkPwd1"></span>
+            </div>
+            
+            
+            <label for="pw2" id="check">새 비밀번호 확인</label>
+            <input type="password" id="pw2" class="checkpw" name="pw2" required>
+            <br>
+            
+            <div id="ch2">
+            <span id="checkPwd2"></span>
+            </div>
             
         </div>
 
