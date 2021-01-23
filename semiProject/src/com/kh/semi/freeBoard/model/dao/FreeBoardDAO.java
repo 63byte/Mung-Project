@@ -444,7 +444,7 @@ public class FreeBoardDAO {
 			result = pstmt.executeUpdate();
 			
 		}finally {
-			close(conn);
+			close(pstmt);
 		}
 		
 		return result;

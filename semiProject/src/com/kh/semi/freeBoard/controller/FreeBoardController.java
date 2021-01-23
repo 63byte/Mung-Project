@@ -329,8 +329,6 @@ public class FreeBoardController extends HttpServlet {
 				
 				int freeBoardNo = Integer.parseInt(request.getParameter("bNum"));
 				int memberNo = Integer.parseInt(request.getParameter("mNum"));
-				System.out.println(freeBoardNo);
-				System.out.println(memberNo);
 				
 				FreeReport fReport = new FreeReport(reportTitle, reportContent, freeBoardNo, memberNo);
 				
