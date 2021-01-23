@@ -29,11 +29,10 @@
         }
 
 
-#container{
+.container{
     width:1100px;
     height:800px;
     display: block;
-    margin: auto;
 
     /* background-color: ghostwhite; */
 }
@@ -86,63 +85,90 @@
 	
 	.card:hover{
 		cursor: pointer;
-		border: 1px solid #17a2b8;
+		border: 1px solid orange;
 		
 	}
-	
-
-	
-/* 	.col-md-3:hover{
-		backgroudColor: #17a2b8;
-		cursor: pointer;
-	}
-	 */
-/* 메뉴에 마우스 오버 했을 경우 민트색을 변경 */
-/* .aside > ul > div > li > a {
-    color: #8ad2d5; 
-} */
 
 #aside-touristSpot{
 	color : #8ad2d5;
 }
+
+#container1 {
+	margin : 0 auto;
+}
+
+.row {
+	padding : -20px;
+}
+
+.col-md-4 {
+	margin : 0px;
+	padding : 0px;
+	
+}
+
+.card {
+	margin : 0 auto;
+}
+
+.page {
+	margin: 0 auto;
+	margin-left : 430px;
+}
+
+.search {
+	margin : 0 auto;
+	margin-left : -490px;
+	margin-top : 150px;
+}
+
+#inquiryBtn:hover, #searchBtn:hover {
+	background-color: #17a2b8;
+}
+
+#inquiryBtn {
+	margin-top: 15px;
+	margin-left: 15px;
+	background-color: #8ad2d5;
+	color: white;
+	border: white;
+	border-radius: 5px;
+	width: 150px;
+	height: 40px;
+	margin-bottom : 50px;
+}
+
+#searchBtn {
+	background-color: #8ad2d5;
+	color: white;
+	border: white;
+	border-radius: 5px;
+	height: 38px;
+}
+
+#sea {
+	marin : 0 auto;
+}
+
+
+
+
 </style>
 </head>
 <body>
 
 			<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 			<jsp:include page="/WEB-INF/views/freeBoard/freeSideMenu.jsp"></jsp:include>
-<div class="container my-5">
-	
-	<div class="row my-5">
-		<div class="col-md-9 my-5">
+			
+		<div id="btnDiv">
+					<a href="${contextPath}/freeBoard/freeList.do"><button
+							type="menu" id="inquiryBtn">여행 후기 게시판</button></a>
+				</div>
 		
-			<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item active">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-        
+		<div id="banner">
+			<img src="${pageContext.request.contextPath}/resources/image/trip/sea.jpg" id="sea">
+		</div>
+				
 			<div class="row">
 			
 			<c:if test="${!empty tList }">
@@ -220,7 +246,7 @@
 			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
 				
 				
-			<div class="container my-5">
+			<div class="page my-5">
 				<ul class="pagination">
 				
 				<c:if test="${pInfo.currentPage > 10 }">
@@ -269,7 +295,8 @@
 			</c:if>
 				</div>
 			
-				<div class="container my-5">
+			
+				<div class="search">
 				<form action="${contextPath}/search2.do" method="GET" class="text-center" id="searchForm">
 					<select name="sk" class="form-control" style="width: 100px; display: inline-block;">
 						<option value="title">글제목</option>
@@ -277,16 +304,14 @@
 						<option value="titcont">제목+내용</option>
 						<option value="writer">작성자</option>
 					</select>
-					<input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
-					<button class="form-control btn btn-outline-info" style="width: 100px; display: inline-block;">검색</button>
+					<input type="text" name="sv" class="form-control" style="width: 50%; display: inline-block;">
+					<button id="searchBtn"
+										style="width: 100px; width: 100px; display: inline-block;">검색</button>
 				</form>
-
-
 			</div>
+			
+			
 	</div>
-</div>
-</div>
-</div>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
