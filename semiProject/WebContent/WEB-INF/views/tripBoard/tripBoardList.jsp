@@ -69,17 +69,18 @@
 	}
 	
 	.card{
-		width: 200px;
+		width: 150px;
 	}
 	
 	.col-md-4{
 		float: left;
-		width: 34%;
+		width: 30%;
 		margin-bottom : 50px;
 		margin-right : 30px;
 	}
 	
 	.card-img-top{
+		width: 200px;
 		height: 174px;
 	}
 	
@@ -149,6 +150,7 @@
 				<div class="col-md-4">
 
 						<div class="card" style="width: 14rem;">
+						
 					  	<c:forEach var="thumbnail" items="${trList}">
 												<%-- 현재 출력하려는 게시글 번호와
 															썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면 
@@ -157,7 +159,7 @@
 											<img src="${contextPath}/resources/uploadTripImages/${thumbnail.fileName}" class="card-img-top">
 											</c:if>
 											
-											<c:if test="${empty(thumbnail.fileLevel == 0) }">
+											<c:if test="${empty(board.boardNo == thumbnail.parentBoardNo)}">
 												<img src="${contextPath}/resources/image/common/logo2.png" class="card-img-top">
 											</c:if>
 								</c:forEach>

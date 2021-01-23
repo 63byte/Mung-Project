@@ -396,14 +396,13 @@ public class FreeBoardService {
 			int result = dao.freeReport(conn, fReport);
 			
 			if(result > 0) {
+				result = 0;
 				int reportNum = fReport.getFreeBoardNo();
 				result = dao.reportNum(conn, reportNum);
 				
-				
-				if(result > 0)		commit(conn);
-				else				rollback(conn);
-				
 			}
+			if(result > 0)		commit(conn);
+			else				rollback(conn);
 			
 			close(conn);
 			

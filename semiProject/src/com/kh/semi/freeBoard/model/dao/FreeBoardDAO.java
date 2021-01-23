@@ -422,7 +422,7 @@ public class FreeBoardDAO {
 			
 		}
 		
-		return 0;
+		return result;
 	}
 
 
