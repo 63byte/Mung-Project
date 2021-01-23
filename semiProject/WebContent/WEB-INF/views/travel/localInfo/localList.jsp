@@ -156,8 +156,8 @@ div {
 
 /* 썸네일 이미지 크기 */
 .boardThumbnail>img {
-   width: 200px;
-   height: 100px;
+   width: 300px;
+   height: 150px;
 }
 
 
@@ -166,13 +166,14 @@ div {
 /* 테이블 : 수직 가운데 정렬 */
 .table td, .table th {
 	text-align: center;
-	vertical-align: middle;
+	vertical-align: middle !important;
 }
 
 /* 테이블 가로 간격 */
 .table-1st { width: 70px; } /* 글번호 */
-.table-2th { width: 200px; } /* 이미지 */
-.table-3rd { width: 400px; } /* 제목 */
+.table-2th { width: 70px; } /* 지역 */
+.table-3rd { width: 350px; } /* 사진 */
+.table-4th { width: 350px; } /* 제목 */
 
 /* 페이징 색 변경 */
 .page-item>a { color: #8ad2d5; }
@@ -273,7 +274,7 @@ button#searchBtn:hover{
 		<!-- --------------------- 메인Contents --------------------- -->
 		<div class="main">
 			
-			<div class="main-title">지역의 컨셉별로 여행코스를 추천해줄게요🚄</div>
+			<div class="main-title">지역별로 여행스팟을 추천해줄게요🚄</div>
 			
 			<div class="hot-city">
 				<h4>인기도시</h4>
@@ -365,11 +366,11 @@ button#searchBtn:hover{
 				<thead>
 					<tr>
 						<th scope="col" class="table-1st">글번호</th>
-						<th scope="col" class="table-2st">지역</th>
-						<th scope="col" class="table-2th"></th>
-						<th scope="col" class="table-3rd">제목</th>
-						<th scope="col" class="table-4th">조회수</th>
-						<th scope="col" class="table-5th">작성일</th>
+						<th scope="col" class="table-2th">지역</th>
+						<th scope="col" class="table-3rd"></th>
+						<th scope="col" class="table-4th">제목</th>
+						<th scope="col" class="table-5th">조회수</th>
+						<th scope="col" class="table-6th">작성일</th>
 					</tr>
 				</thead>
 				
