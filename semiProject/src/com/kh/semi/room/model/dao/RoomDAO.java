@@ -130,7 +130,6 @@ public class RoomDAO {
 			if(rset.next()) {
 				room = new Room();
 				room.setRoomName(rset.getString("ROOM_NAME"));
-				room.setLocation1(rset.getString("LOCATION1"));
 				room.setLocation2(rset.getString("LOCATION2"));
 				room.setPhone(rset.getString("PHONE"));
 				room.setRoomInfo(rset.getString("ROOM_INFO"));
@@ -226,14 +225,14 @@ public class RoomDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, (int)map.get("insertNo"));
 			pstmt.setString(2, (String)map.get("roomName"));
-			pstmt.setString(4, (String)map.get("location2"));
-			pstmt.setString(5, (String)map.get("phone"));
-			pstmt.setString(6, (String)map.get("roomInfo"));
-			pstmt.setString(7, (String)map.get("checkin"));
-			pstmt.setString(8, (String)map.get("checkout"));
-			pstmt.setString(9, (String)map.get("facility"));
-			pstmt.setString(10, (String)map.get("dog"));
-			pstmt.setInt(11, (int)map.get("memberNo"));
+			pstmt.setString(3, (String)map.get("location2"));
+			pstmt.setString(4, (String)map.get("phone"));
+			pstmt.setString(5, (String)map.get("roomInfo"));
+			pstmt.setString(6, (String)map.get("checkin"));
+			pstmt.setString(7, (String)map.get("checkout"));
+			pstmt.setString(8, (String)map.get("facility"));
+			pstmt.setString(9, (String)map.get("dog"));
+			pstmt.setInt(10, (int)map.get("memberNo"));
 			
 			result = pstmt.executeUpdate();
 		}finally {
@@ -346,5 +345,53 @@ Member comMember = null;
 		
 		return comMember;
 	}
+
+
+
+
+
+
+	/** 썸네일 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(Connection conn, PageInfo pInfo) throws Exception {
+		List<Attachment> fList =null;
+		
+		String query = prop.getProperty("selectThumbnailList");
+		
+		// 위치 홀더에 들어갈 시작 행, 끝 행번호 계산
+					int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() +1;
+					int endRow = startRow + pInfo.getLimit()-1;
+			  try {		
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, startRow);
+					pstmt.setInt(2, endRow);
+					
+					rset = pstmt.executeQuery();
+					
+					fList = new ArrayList<Attachment>();
+					
+					while(rset.next()) {
+						Attachment at = new Attachment();
+						at.setFileName(rset.getString("FILE_NAME"));
+						at.setRoomNo(rset.getInt("ROOM_NO"));
+
+						
+						fList.add(at);
+					}
+				}finally {
+					close(rset);
+					close(pstmt);
+				}
+		
+		return fList;
+	}
+	
+	
+	
+	
 
 }

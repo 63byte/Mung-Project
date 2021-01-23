@@ -108,10 +108,8 @@ public class RoomService {
 			map.put("insertNo", insertNo);
 			
 			// 크로스 사이트 스크립팅 방지
-			String roomName = (String)map.get("roomName");
 			String roomInfo = (String)map.get("roomInfo");
 			
-			roomName = replaceParameter(roomName);
 			roomInfo = replaceParameter(roomInfo);
 			
 			// 내용에 개행문자 변경처리.
@@ -119,7 +117,6 @@ public class RoomService {
 			roomInfo = roomInfo.replaceAll("\r\n", "<br>");
 			
 			// 처리된 내용을 다시 map에 추가
-			map.put("roomName",roomName);
 			map.put("roomInfo",roomInfo);
 			
 			
@@ -127,6 +124,8 @@ public class RoomService {
 				
 				// 파일 정보 제외한 정보  등록하는 DAO호출
 				result = dao.insertRoom(conn,map);
+				
+				
 				// 파일 정보만 등록하는 DAO
 				List<Attachment> fList = (List<Attachment>)map.get("fList");
 				
@@ -232,23 +231,7 @@ public class RoomService {
 			return room;
 		}
 
-
-
-
-		/**	숙소에 포함된 이미지 목록 조회 Service
-		 * @param roomNo
-		 * @return	fList
-		 * @throws Exception
-		 */
-		public List<Attachment> selectHospitalFiles(int roomNo) throws Exception {
-			Connection conn = getConnection();
-			
-			List<Attachment> fList = dao.selectRoomFiles(conn,roomNo);
-			
-			close(conn);
-			
-			return fList;
-		}
+	
 
 
 
@@ -263,6 +246,39 @@ public class RoomService {
 			Member comMember = dao.selectComMember(conn,memberNo);
 			close(conn);
 			return comMember;
+		}
+
+
+
+
+		/** 숙소에 포함된 이미지 목록 조회 Service
+		 * @param roomNo
+		 * @return fList
+		 * @throws Exception
+		 */
+		public List<Attachment> selectRoomFiles(int roomNo) throws Exception {
+			Connection conn = getConnection();
+			List<Attachment> fList = dao.selectRoomFiles(conn,roomNo);
+			close(conn);
+			return fList;
+		}
+
+
+
+
+		/** 썸네일 목록 조회 Service
+		 * @param pInfo
+		 * @return	fList
+		 * @throws Exception
+		 */
+		public List<Attachment> selectThumbnailList(PageInfo pInfo) throws Exception {
+			Connection conn = getConnection();
+			
+			List<Attachment> fList = dao.selectThumbnailList(conn,pInfo);
+			
+			close(conn);
+			
+			return fList;
 		}
 
 
