@@ -88,6 +88,7 @@ public class TravelDAO {
 			
 			while(rset.next()) {
 				Travel travel = new Travel(rset.getInt("TRAVEL_NO"),
+											rset.getString("TRAVEL_LOCATION"),
 											rset.getString("TRAVEL_TITLE"),
 											rset.getInt("TRAVEL_READ_COUNT"),
 											rset.getDate("TRAVEL_BOARD_DATE"));
@@ -371,6 +372,29 @@ public class TravelDAO {
 			pstmt.setInt(3, newFile.getFileNo());
 			
 			result = pstmt.executeUpdate();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	/** 게시글 삭제 DAO 
+	 * @param conn
+	 * @param travelNo
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateBoardFl(Connection conn, int travelNo) throws Exception {
+		int result = 0 ;
+		String query = prop.getProperty("updateBoardFl");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, travelNo);
+			result = pstmt.executeUpdate();
+			
 		} finally {
 			close(pstmt);
 		}

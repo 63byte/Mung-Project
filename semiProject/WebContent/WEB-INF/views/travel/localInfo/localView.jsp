@@ -64,11 +64,12 @@ div {
 
 /* -------------------------- 내용(컨텐츠부분) ---------------------------- */
 .main {
-	width: 900px;
+	width: 1100px;
+/* 	width: 900px; */
 	height: 100%;
 	float: left;
-	padding-left: 10px;
-	/* 왼쪽 간격 띄우기 */
+	
+	margin-bottom: 100px;
 }
 
 /* ------------------------ 상단 빅배너 ------------------------ */
@@ -85,14 +86,16 @@ min-width:900px;
 
 
 .boardImgArea {
-	height: 300px;
+	height: 500px;
 }
 
 .boardImg {
-	width: 100%;
-	height: 100%;
-	max-width: 300px;
-	max-height: 300px;
+/* 	width: 100%;
+	height: 100%; */
+	width: 1100px;
+	height: 500px;
+	max-width: 1100px;
+	max-height: 500px;
 	margin: auto;
 }
 
@@ -119,10 +122,16 @@ min-width:900px;
 	background-color: #8ad2d5;
 }
 
+.btn-primary {
+    color: #fff;
+    background-color: #8ad2d5 !important;
+    border-color: #8ad2d5 !important;
+}
+
 .btn-primary:hover {
 	color: #8ad2d5;
-	background-color: #ffffff;
-	border-color: #8ad2d5;
+	background-color: #17a2b8 !important;
+	border-color: #8ad2d5 !important;
 }
 
 /* --------------- 버튼 --------------- */
@@ -153,34 +162,26 @@ min-width:900px;
 
 	<div id="container">
 		<!-- --------------------- 사이드 메뉴 연결 --------------------- -->
-		<jsp:include page="/WEB-INF/views/travel/travelSideMenu.jsp"></jsp:include>
-
+		
+		<%-- <jsp:include page="/WEB-INF/views/travel/travelSideMenu.jsp"></jsp:include>
+		 --%>
+		
 		<!-- --------------------- 메인Contents --------------------- -->
 		<div class="main">
 			<br> 지역정보>상세글 <br>
 			<br>
-
-			<div id="localInfo-bigBanner">
+			
+			
+			<%-- <div id="localInfo-bigBanner">
 				<img
 					src="${pageContext.request.contextPath}/resources/image/travel/localInfo/local-bigbanner(900x200)_seoul.jpg">
-			</div>
+			</div> --%>
 
-			<br>
-			<!-- 도시 -->
-			${travel.travelLocation}<br>
 
-			<!-- Title -->
-			<h3>${travel.travelTitle}</h3>
-
-			<hr>
-			글번호 : ${travel.travelNo}<br> 작성일 : ${travel.travelBoardDate} <br>
-			조회수 : ${travel.travelReadCount} <br>
-			<hr>
 
 				<!-- 이미지 출력 -->
 				<c:if test="${!empty fList}">
 					<div class="carousel slide boardImgArea" id="board-image">
-
 
 						<!-- 이미지 선택 버튼(인디케이터) -->
 						<!-- 이미지가 업로드 된 개수만큼 인디케이터 개수가 생기게 함 -->
@@ -220,6 +221,19 @@ min-width:900px;
 						</a>
 					</div>
 				</c:if>
+				
+				
+			<br>
+			<!-- 도시 -->
+			${travel.travelLocation}<br>
+
+			<!-- Title -->
+			<h3>${travel.travelTitle}</h3>
+
+			<hr>
+			글번호 : ${travel.travelNo}<br> 작성일 : ${travel.travelBoardDate} <br>
+			조회수 : ${travel.travelReadCount} <br>
+			<hr>
 			
 			
 			<!-- 내용 -->
@@ -327,21 +341,23 @@ min-width:900px;
 				</div>
 
 
-
-
-
-
-
-
-
-
 		</div>
+	<!-- ************************* 푸터 연결 ************************* -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	</div>
 
 
-	<!-- ************************* 푸터 연결 ************************* -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+
+
+	<script>
+		// 삭제 버튼 이벤트
+		$("#deleteBtn").on("click", function(){
+			if(confirm("정말 삭제 하시겠습니까?")){
+				location.href = "delete.do?no=${travel.travelNo}";
+			}
+		});
+	</script>
 
 </body>
 </html>

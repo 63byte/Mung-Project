@@ -247,7 +247,7 @@ public class TravelController extends HttpServlet {
 			}
 			
 			
-			// 지역정보 게시글 수정 Controller ******************************************
+			// 지역정보 게시글 수정 화면 전환 Controller ******************************************
 			else if(command.equals("/updateForm.do")) {
 				 
 	            errorMsg = "게시글 수정 화면 전환 과정에서 오류 발생";
@@ -277,12 +277,9 @@ public class TravelController extends HttpServlet {
 					request.getSession().setAttribute("swalTitle", "지역정보글 상세 조회 실패");
 					response.sendRedirect(request.getHeader("referer"));
 				}
-	            
-				
 			}
-			
-			
-			
+
+			// 게시글 수정 Controller **********************************************************
 			else if(command.equals("/localUpdate.do")) {
 	            
 	            errorMsg = "게시글 수정 과정에서 오류 발생";
@@ -383,16 +380,32 @@ public class TravelController extends HttpServlet {
 	            response.sendRedirect(path);
 	         }
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			// 게시글 삭제 Controller ***************************************************************
+			else if(command.equals("/delete.do")) {
+	        	 // 게시글 번호 얻어오기
+	        	 int travelNo = Integer.parseInt(request.getParameter("no"));
+	        	 
+	        	 // 게시글 삭제(게시글 상태 -> 'N') 비즈니스 로직 수행 후 결과 반환
+	        	 int result = service.updateBoardFl(travelNo);
+	        	 
+	        	 // 비즈닌스 로직 결과에 따라 
+	        	 // "게시글 삭제 성공" / "게시글 삭제 실패" 메세지를 전달
+	        	 if(result>0) { // 삭제 성공 시 : 게시글 목록 redirect
+	        		 swalIcon = "success";
+	        		 swalTitle = "게시글이 삭제되었습니다.";
+	        		 path = "localList.do?cp=1";
+	        	 }else { // 삭제 실패 시 : 삭제 시도한 게시글 상세조회 페이지 redirect 
+	        		 swalIcon = "error";
+	        		 swalTitle = "게시글 삭제 실패";
+	        		 path = request.getHeader("referer");
+	        		 // 요청을 보냈던 이전 주소(상세페이지)로 이동
+	        	 }
+	        	 
+	        	 request.getSession().setAttribute("swalIcon", swalIcon);
+	        	 request.getSession().setAttribute("swalTitle", swalTitle);
+	        	 
+	        	 response.sendRedirect(path);
+	         }
 			
 			
 			
