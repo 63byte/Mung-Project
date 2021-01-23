@@ -33,7 +33,7 @@ public class MyPageCompanyFormServlet extends HttpServlet {
 			Member comMember = new MemberService().selectComMember(memNo);
 			
 			//System.out.println(comMember);
-			request.setAttribute("comMember", comMember);
+			session.setAttribute("comMember", comMember);
 			
 		}catch(Exception e) {
 			swalIcon = "error";
