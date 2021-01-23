@@ -64,7 +64,8 @@ div {
 /* ------------------------ 내용(컨텐츠부분) ------------------------------ */
 
 .main {
-	width: 900px;
+	width: 1100px;
+	/* width: 900px; */
 	height: 100%;
 	float: left;
 }
@@ -77,7 +78,7 @@ div {
 
 /* ------------------------ 상단 빅배너 ------------------------ */
 #localInfo-bigBanner {
-	width: 900px;
+	width: 1100px;
 	height: 200px;
 	position: relative;
 }
@@ -95,11 +96,11 @@ div {
 
 /* ------------------------ 인기도시 ------------------------ */
 .hot-city {
-	margin: 30px 0px 30px 0px;
+	margin: 30px 0px 40px 0px;
 }
 
 .hot-city-area {
-	width: 900px;
+	width: 1100px;
 	height: 100px;
 	display: flex;
 	margin-top: 20px;
@@ -117,7 +118,7 @@ div {
 .hot-city-thumbnail-img {
 	width: 100px;
 	height: 60px;
-	border: 1px solid red;
+	/* border: 1px solid red; */
 }
 
 .hot-city-title {
@@ -265,7 +266,9 @@ button#searchBtn:hover{
 
 	<div id="container">
 		<!-- --------------------- 사이드 메뉴 연결 --------------------- -->
+		<%--
 		<jsp:include page="/WEB-INF/views/travel/travelSideMenu.jsp"></jsp:include>
+		--%>
 
 		<!-- --------------------- 메인Contents --------------------- -->
 		<div class="main">
@@ -276,48 +279,58 @@ button#searchBtn:hover{
 				<h4>인기도시</h4>
 				<div class="hot-city-area">
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_서울.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="서울">서울</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_인천.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="인천">인천</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_대구.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="대구">대구</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_부산.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="부산">부산</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_강원도.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="강원도">강원도</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_경상도.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="경상도">경상도</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_전라도.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="전라도">전라도</div>
 					</div>
 					<div class="hot-city-box">
-						<div class="hot-city-thumbnail-img"></div>
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_제주도.jpg"
+						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="제주도">제주도</div>
 					</div>
 				</div>
 			</div>
-
-			<div id="localInfo-bigBanner">
+			
+			
+			<%-- <div id="localInfo-bigBanner">
 				<img
-					src="${pageContext.request.contextPath}/resources/image/travel/localInfo/local-bigbanner(900x200)_seoul.jpg">
+					src="${pageContext.request.contextPath}/resources/image/travel/localList/local-bigbanner(900x200)_seoul.jpg">
 				<div id="big-banner-title">서울</div>
-			</div>
+			</div> --%>
 			
 			<!----------------------------- 지역 선택/옵션 ----------------------------->
             
+            <!--  
             <div class="row-item">
                 <div class="locationSelect">
                     <span style="font-size:16px; font-weight:bold;">대한민국 ></span>
@@ -339,7 +352,7 @@ button#searchBtn:hover{
                     </select>
                 </div>
             </div>
-			
+			 -->
 
 			<!-- ------------------------------------------------------------------------- -->
 
@@ -347,6 +360,7 @@ button#searchBtn:hover{
 				<thead>
 					<tr>
 						<th scope="col" class="table-1st">글번호</th>
+						<th scope="col" class="table-2st">지역</th>
 						<th scope="col" class="table-2th"></th>
 						<th scope="col" class="table-3rd">제목</th>
 						<th scope="col" class="table-4th">조회수</th>
@@ -368,6 +382,7 @@ button#searchBtn:hover{
 								<tr>
 									<th scope="row">${travel.travelNo}</th>
 									
+									<td>${travel.travelLocation}</td>
 									
 									<!-- ----------- 썸네일.. ----------- -->
 		                            <td class="boardThumbnail">
@@ -468,11 +483,13 @@ button#searchBtn:hover{
 			
 			
 		</div>
+		
+	<!-- 푸터 연결 -->
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
 	</div>
 
 
-	<!-- 푸터 연결 -->
-	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
 

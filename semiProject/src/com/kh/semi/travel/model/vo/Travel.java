@@ -36,6 +36,19 @@ public class Travel {
 	}
 	
 	
+	public Travel(int travelNo, String travelLocation, String travelTitle, int travelReadCount, Date travelBoardDate) {
+		super();
+		this.travelNo = travelNo;
+		this.travelLocation = travelLocation;
+		this.travelTitle = travelTitle;
+		this.travelReadCount = travelReadCount;
+		this.travelBoardDate = travelBoardDate;
+	}
+
+
+
+
+
 	// 게시글 상세조회 화면용 생성자
 	public Travel(int travelNo, String travelLocation, String travelTitle, String travelContent, int travelReadCount,
 			Date travelBoardDate) {

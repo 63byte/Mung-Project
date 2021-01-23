@@ -55,6 +55,7 @@ div {
 }
 
 /* ------------------------------------------------------ */
+
 #container {
 	width: 1100px;
 	height: 800px;
@@ -64,7 +65,8 @@ div {
 
 /* -------------------------- 내용(컨텐츠부분) ---------------------------- */
 .main {
-	width: 900px;
+	width: 1100px;
+	/* width: 900px; */
 	height: 100%;
 	float: left;
 	padding-left: 10px;
@@ -153,7 +155,7 @@ div {
 
 	<div id="container">
 		<!-- --------------------- 사이드 메뉴 연결 --------------------- -->
-		<jsp:include page="/WEB-INF/views/travel/travelSideMenu.jsp"></jsp:include>
+		<%-- <jsp:include page="/WEB-INF/views/travel/travelSideMenu.jsp"></jsp:include> --%>
 
 		<!-- --------------------- 메인Contents --------------------- -->
 		<div class="main">
@@ -212,22 +214,22 @@ div {
 						<div class="form-inline mb-2">
 			               <label class="input-group-addon mr-3 insert-label">썸네일</label>
 			               <div class="boardImg" id="titleImgArea">
-			                  <img id="titleImg" width="200" height="200">
+			                  <img id="titleImg" width="100" height="100">
 			               </div>
 			            </div>
 			
 			            <div class="form-inline mb-2">
 			               <label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
 			               <div class="mr-2 boardImg" id="contentImgArea1">
-			                  <img id="contentImg1" width="150" height="150">
+			                  <img id="contentImg1" width="100" height="100">
 			               </div>
 			
 			               <div class="mr-2 boardImg" id="contentImgArea2">
-			                  <img id="contentImg2" width="150" height="150">
+			                  <img id="contentImg2" width="100" height="100">
 			               </div>
 			
 			               <div class="mr-2 boardImg" id="contentImgArea3">
-			                  <img id="contentImg3" width="150" height="150">
+			                  <img id="contentImg3" width="100" height="100">
 			               </div>
 			            </div>
 						

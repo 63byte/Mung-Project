@@ -397,4 +397,21 @@ public class TravelService {
 		return result;
 	}
 
+	/** 게시글 삭제 Service 
+	 * @param travelNo
+	 * @return result 
+	 * @throws Exception
+	 */
+	public int updateBoardFl(int travelNo) throws Exception {
+		Connection conn = getConnection();
+		int result = dao.updateBoardFl(conn, travelNo);
+		
+		if(result>0) commit(conn);
+		else 		rollback(conn);
+
+		close(conn);
+		
+		return result;
+	}
+
 }
