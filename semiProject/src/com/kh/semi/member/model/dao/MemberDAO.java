@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.PageInfo;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.reply.model.vo.Reply;
 
@@ -525,18 +526,26 @@ public class MemberDAO {
 
 	/** 내가 쓴 댓그 ㄹ 조회 DAO
 	 * @param conn 
+	 * @param pInfo 
 	 * @param memNo 
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Reply> myReplySelect(Connection conn, int memNo) throws Exception{
+	public List<Reply> myReplySelect(Connection conn, PageInfo pInfo, int memNo) throws Exception{
 		List<Reply> myReply = null;
 		
 		String query = prop.getProperty("myReplySelect");
 		
 		try {
+			
+			// SQL 구문 조건절에 대입할 변수 생성
+			int startRow = (pInfo.getCurrentPage() - 1) * pInfo.getLimit() + 1;
+			int endRow = startRow + pInfo.getLimit() - 1;
+			
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, memNo);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -559,5 +568,31 @@ public class MemberDAO {
 		}
 		
 		return myReply;
+	}
+
+	public int getListCount(Connection conn, int memNo) throws Exception{
+		int listCount = 0;
+		
+		String query = prop.getProperty("getListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+			
+		}finally {
+			close(rset);
+			close(stmt);
+			
+		}
+		
+		return listCount;
+		
 	}
 }
