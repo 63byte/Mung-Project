@@ -26,6 +26,7 @@ import javax.servlet.http.HttpSession;
 
 import com.kh.semi.common.MyFileRenamePolicy;
 import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.PageInfo;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.reply.model.vo.Reply;
@@ -614,7 +615,7 @@ public class MemberController extends HttpServlet {
 				  final String password  = "qkr3158!";
 
 				  String to = request.getParameter("mail");
-				  String mTitle = "[뭉개뭉개] 비밀번호 찾기 인증.";
+				  String mTitle = "[뭉개뭉개] 업체 회원가입 인증.";
 				 
 				  try {
 				  Map<String, Object> map = new HashMap<>();
@@ -673,18 +674,22 @@ public class MemberController extends HttpServlet {
 				Member loginMember = (Member) session.getAttribute("loginMember");
 				int memNo = loginMember.getMemberNo();
 				
+				String cp = request.getParameter("cp");
 				
-				List<Reply> myReply = service.myReplySelect(memNo);
+				PageInfo pInfo = service.getPageInfo(cp, memNo);
+				
+				List<Reply> myReply = service.myReplySelect(pInfo, memNo);
 				
 				if(myReply != null) {
 					request.setAttribute("myReply", myReply);
+					request.setAttribute("pInfo", pInfo);
+					
+					
+					path = "/WEB-INF/views/member/myPageInquiryReply.jsp";
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
 					
 				}
-				
-				
-				path = "/WEB-INF/views/member/myPageInquiryReply.jsp";
-				view = request.getRequestDispatcher(path);
-				view.forward(request, response);
 				
 			}
 			

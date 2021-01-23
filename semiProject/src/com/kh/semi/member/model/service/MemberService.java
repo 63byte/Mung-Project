@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
 import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.PageInfo;
 import com.kh.semi.member.model.dao.MemberDAO;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.reply.model.vo.Reply;
@@ -345,14 +346,33 @@ public class MemberService {
 		return comMember;
 	}
 
-	public List<Reply> myReplySelect(int memNo) throws Exception{
+	public List<Reply> myReplySelect(PageInfo pInfo, int memNo) throws Exception{
 		Connection conn = getConnection();
 		
-		List<Reply> myReply = dao.myReplySelect(conn, memNo);
+		List<Reply> myReply = dao.myReplySelect(conn, pInfo, memNo);
 		
 		close(conn);
 		
 		return myReply;
+	}
+
+	/**
+	 * @param cp
+	 * @param memNo 
+	 * @return
+	 * @throws Exception
+	 */
+	public PageInfo getPageInfo(String cp, int memNo) throws Exception{
+		Connection conn = getConnection();
+		
+		int currentPage = cp == null ? 1 : Integer.parseInt(cp);
+		
+		int listCount = dao.getListCount(conn, memNo);
+		
+		close(conn);
+		
+		return new PageInfo(currentPage, listCount);
+		
 	}
 
 
