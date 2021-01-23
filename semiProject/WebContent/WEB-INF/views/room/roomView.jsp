@@ -170,7 +170,7 @@
 	            <c:when test="${facility == '수영장'  }">
 		            <div class="facility">
 		                <div class="icon_area">
-		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/appointment.png">
+		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/pool.png">
 		                </div>
 		                <div class="text_area"> 
 		                 	   수영장
@@ -181,7 +181,7 @@
 	            <c:when test="${facility == 'BBQ' }">
 		            <div class="facility">
 		                <div class="icon_area">
-		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/business-trip.png">
+		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/BBQ.png">
 		                </div>
 		                <div class="text_area"> 
 		              		BBQ
@@ -192,7 +192,7 @@
 	            <c:when test="${facility == '마당'  }">
 		            <div class="facility">
 		                <div class="icon_area">
-		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/24hour.png">
+		                    <img class="facility_icon" src="${contextPath}/resources/image/icon/yard.png">
 		                </div>
 		                <div class="text_area"> 
 		                    	마당
