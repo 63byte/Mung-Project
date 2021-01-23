@@ -138,6 +138,7 @@ public class RoomDAO {
 				room.setFacility(rset.getString("FACILITY"));
 				room.setDog(rset.getString("DOG"));
 				room.setViewCount(rset.getInt("VIEW_COUNT"));
+				room.setMemNo(rset.getInt("MEM_NO"));
 				
 			}
 			
@@ -290,6 +291,7 @@ public class RoomDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1,roomNo);
+			
 			rset = pstmt.executeQuery();
 			
 			fList = new ArrayList<Attachment>();
@@ -388,6 +390,93 @@ Member comMember = null;
 				}
 		
 		return fList;
+	}
+
+
+
+
+
+
+	/**	숙소 수정 DAO
+	 * @param conn
+	 * @param map
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateRoom(Connection conn, Map<String, Object> map) throws Exception {
+		int result =0;
+		String query = prop.getProperty("updateRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, (String)map.get("roomInfo"));
+			pstmt.setString(2, (String)map.get("checkin"));
+			pstmt.setString(3, (String)map.get("checkout"));
+			pstmt.setString(4, (String)map.get("facility"));
+			pstmt.setString(5, (String)map.get("dog"));
+			pstmt.setInt(6, (int)map.get("roomNo"));
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+
+
+	/**	파일 정보 수정 DAO
+	 * @param conn
+	 * @param newFile
+	 * @return	result
+	 * @throws Exception
+	 */
+	public int updateAttachment(Connection conn, Attachment newFile) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("updateAttachment");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newFile.getFilePath());
+			pstmt.setNString(2, newFile.getFileName());
+			pstmt.setInt(3, newFile.getFileNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+
+
+
+
+	/**	숙소 삭제 DAO
+	 * @param conn
+	 * @param roomNo
+	 * @return	result
+	 * @throws Exception
+	 */
+	public int deleteRoom(Connection conn, int roomNo) throws Exception {
+		int result =0;
+		String query = prop.getProperty("deleteRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, roomNo);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
 	}
 	
 	

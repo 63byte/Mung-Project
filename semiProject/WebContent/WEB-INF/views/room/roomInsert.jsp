@@ -14,7 +14,7 @@
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
-<!-- 전화번호  -->
+<!-- 주소  -->
 <c:set var="address" value="${fn:split(comMember.comAddress,',') }"/>
 
 
@@ -83,16 +83,16 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="facility">
+                            <div for="facility">
                             	<span class="highlighter">숙소 부대 시설</span>
-                            </label>
+                            </div>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="facility" name="facility" value="WiFi">WiFi
-                           <input type="checkbox" class="facility" name="facility" value="주차장">주차장
-                           <input type="checkbox" class="facility" name="facility" value="수영장">수영장
-                           <input type="checkbox" class="facility" name="facility" value="BBQ">BBQ
-                           <input type="checkbox" class="facility" name="facility" value="마당">마당
+                           <label for="WiFi" style="cursor:pointer"> <input type="checkbox" class="facility" name="facility" id="WiFi" value="WiFi">WiFi</label>
+                            <label for="주차장" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="주차장" value="주차장">주차장</label>
+                            <label for="수영장" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="수영장" value="수영장">수영장</label>
+                            <label for="BBQ" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="BBQ" value="BBQ">BBQ</label>
+                            <label for="마당" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="마당" value="마당">마당</label>
                         </div>
                     </div>
 
@@ -103,9 +103,10 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="dog" name="dog" value="소형견">소형견
-                           <input type="checkbox" class="dog" name="dog" value="중형견">중형견
-                           <input type="checkbox" class="dog" name="dog" value="대형견">대형견
+                           <label for="소형견" style="cursor:pointer"><input type="checkbox" class="dog" name="dog"  id="소형견" value="소형견">소형견</label>
+                            <label for="중형견" style="cursor:pointer"><input type="checkbox" class="dog" name="dog"  id="중형견" value="중형견">중형견</label>
+                            <label for="대형견" style="cursor:pointer"> <input type="checkbox" class="dog" name="dog"  id="대형견" value="대형견">대형견</label>
+                            
                         </div>
                     </div>
 

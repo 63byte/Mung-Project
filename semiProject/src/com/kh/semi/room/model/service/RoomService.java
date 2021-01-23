@@ -4,6 +4,7 @@ import static com.kh.semi.common.JDBCTemplate.*;
 
 import java.io.File;
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -279,6 +280,155 @@ public class RoomService {
 			close(conn);
 			
 			return fList;
+		}
+
+
+
+
+		/**	숙소 수정 Service
+		 * @param map
+		 * @return	result
+		 * @throws Exception
+		 */
+		public int updateRoom(Map<String, Object> map) throws Exception {
+			Connection conn = getConnection();
+			
+			int result =0;
+			
+			List<Attachment> deleteFiles = null; // 삭제할 파일 정보 저장
+			
+			// 크로스 사이트 스크립팅 방지
+			String roomInfo = (String)map.get("roomInfo");
+			
+			roomInfo = replaceParameter(roomInfo);
+			
+			// 내용에 개행문자 변경처리.
+			
+			roomInfo = roomInfo.replaceAll("\r\n", "<br>");
+			
+			// 처리된 내용을 다시 map에 추가
+			map.put("roomInfo",roomInfo);
+			
+			try {
+				
+				// 수정 DAO
+				result = dao.updateRoom(conn,map);
+				
+				List<Attachment> newFileList = (List<Attachment>)map.get("fList");
+			
+				if(result>0 && !newFileList.isEmpty()) {
+					List<Attachment> oldFileList = dao.selectRoomFiles(conn, (int)map.get("roomNo"));
+					
+					result =0; // 재활용
+					deleteFiles = new ArrayList<Attachment>(); // 삭제될 파일정보 저장
+					
+					// 새로운 이미지 정보 반복 접근
+					for(Attachment newFile : newFileList) {
+			               
+			               // flag가 false인 경우 : 새 이미지와 기존 이미지의 파일 레벨이 중복되는 경우 -> update
+			               // flag가 true인 경우 : 새 이미지와 기존 이미지의 파일 레벨이 중복되지 않는 경우 -> insert
+			               boolean flag = true;
+			               
+			               // 기존 이미지 정보 반복 접근
+			               for(Attachment oldFile : oldFileList) {
+			                  
+			                  // 새로운 이미지와 기존 이미지의 파일 레벨이 동일한 파일이 있다면
+			                  if(newFile.getFileLevel() == oldFile.getFileLevel()) {
+			                     
+			                     // 기존 파일을 삭제 List에 추가
+			                     deleteFiles.add(oldFile);
+			                     
+			                     // 새 이미지 정보에 이전 파일 번호를 추가 -> 파일 번호를 이용한 수정 진행
+			                     newFile.setFileNo(oldFile.getFileNo());
+			                     
+			                     flag = false;
+			                     
+			                     break;
+			                  }
+			               }
+					
+		            // flag 값에 따라 파일 정보 insert 또는 update수행
+		               if(flag) {
+		                  result = dao.insertAttachment(conn, newFile);
+		               }else {
+		                  result = dao.updateAttachment(conn, newFile);
+		               }
+		               
+		               // 파일 정보 삽입 또는 수정 중 실패 시
+		               if(result == 0) {
+		                  // 강제로 사용자 정의 예외 발생
+		                  throw new FileInsertFailedException("파일 정보 삽입 또는 수정 실패");
+		               }
+		            }
+				}
+				
+				
+			}catch(Exception e) {
+
+				 // 게시글 수정 중 실패 또는 오류 발생 시
+		         // 서버에 미리 저장되어 있던 이미지 파일 삭제
+		         List<Attachment> fList = (List<Attachment>)map.get("fList");
+		         
+		         if(!fList.isEmpty()) {
+		            for(Attachment at : fList) {
+		               String filePath = at.getFilePath();
+		               String fileName = at.getFileName();
+		               
+		               File deleteFile = new File(filePath + fileName);
+		               
+		               if(deleteFile.exists()) {
+		                  // 해당 경로에 해당 파일이 존재하면
+		                  deleteFile.delete(); // 해당 파일 삭제
+		               }
+		            }
+		         }
+		         
+		         // 에러페이지가 보여질 수 있도록 catch한 Exception을 Controller로 던져줌
+		         throw e; 
+			}
+			
+			 // 5. 트랜잭션 처리 및 삭제 목록에 있는 파일 삭제
+		      if(result > 0) {
+		         commit(conn);	
+					
+		         // DB 정보와 맞지 않는 파일(deleteFiles) 삭제 진행
+		         if(deleteFiles !=null) {
+		        	 
+			         for(Attachment at : deleteFiles) {
+			            String filePath = at.getFilePath();
+			            String fileName = at.getFileName();
+			            
+			            File deleteFile = new File(filePath + fileName);
+			            
+			            if(deleteFile.exists()) {
+			               deleteFile.delete();
+			            }
+			         }
+		         }
+		      }else {
+		         rollback(conn);
+		      }
+		      return result;
+		}
+
+
+
+
+		/** 숙소 삭제 Service
+		 * @param roomNo
+		 * @return result
+		 * @throws Exception
+		 */
+		public int deleteRoom(int roomNo) throws Exception {
+			Connection conn = getConnection();
+			
+			int result = dao.deleteRoom(conn, roomNo);
+			
+			if(result>0) commit(conn);
+			else 		 rollback(conn);
+			
+			close(conn);
+			return result;
 		}
 
 

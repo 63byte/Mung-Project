@@ -138,10 +138,10 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi
-                           <input type="checkbox" class="facility" name="hosp_facility" id="parcking" value="주차">주차
-                           <input type="checkbox" class="facility" name="hosp_facility" id="appointment" value="예약">예약
-                           <input type="checkbox" class="facility" name="hosp_facility" id="24hour" value="24시간">24시간
+                           <label for="WiFi" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi</label>
+                           <label for="parcking" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="parcking" value="주차">주차</label>
+                           <label for="appointment" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="appointment" value="예약">예약</label>
+                          <label for="24hour" style="cursor:pointer"> <input type="checkbox" class="facility" name="hosp_facility" id="24hour" value="24시간">24시간</label>
                         </div>
                     </div>
 
