@@ -36,6 +36,14 @@ GENDER = ?
 WHERE MEM_NO=? 
 </entry>
 
+<!-- 내 정보 수정 -->
+<entry key="updateCompany">
+UPDATE COOPERATOR SET 
+COO_PHONE = ?,
+COO_ADDR = ?
+WHERE MEM_NO=? 
+</entry>
+
 <!-- 현재 비밀번호 확인 -->
 <entry key="checkCurrentPw">
 SELECT COUNT(*) FROM TB_MEMBER
@@ -86,6 +94,13 @@ AND SCSN_FL = 'N'
 
 <entry key="selectNextNo">
 SELECT SEQ_MNO.CURRVAL FROM DUAL
+</entry>
+
+<!-- 업체 정보 조회 -->
+<entry key="selectComMember">
+SELECT COO_NM, COO_ADDR, COO_PHONE
+FROM COOPERATOR
+WHERE MEM_NO = ?
 </entry>
 
 <!-- 업체 정보 삽입 -->

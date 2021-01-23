@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -152,7 +154,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	<jsp:include page="myPageSideMenu.jsp"></jsp:include>
 
+	<%-- 이메일 전화번호 -> 구분자를 이용하여 분리된 배열 형태로 저장 --%>
+	<c:set var="email" value="${fn:split(loginMember.email, '@') }" />
+	<c:set var="phone" value="${fn:split(loginMember.phone, '-') }" />
+	<c:set var="comPhone" value="${fn:split(comMember.comPhone, '-') }" />
+	<c:set var="comAddress" value="${fn:split(comMember.comAddress, ',') }" />
+	
 	<div class="wrapper2">
+	
 		<div class="changeTitle">
 			<p style="font-size: 30px;">내 정보 수정</p>
 		</div>
@@ -173,7 +182,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="userName">닉네임</label> <br>
 					</div>
 					<div class="ip">
-						<input type="text" class="inputTag" id="userName" required>
+						<input type="text" class="inputTag" id="userName" value="${loginMember.memberNickName}" required>
 					</div>
 					<div>
 						<span id="checkUserName">&nbsp;</span>
@@ -187,8 +196,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<div class="ip">
 						<input type="text" class="inputTag display-ib email" id="email1"
-							autocomplete="off" required> @ <select
-							class="inputTag display-ib email" id="email2" required>
+							autocomplete="off" value="${email[0]}" required> @ 
+							<select
+							class="inputTag display-ib email" id="email2"  required>
 							<option style="color: gray;">이메일 주소 선택</option>
 							<option>daum.net</option>
 							<option>naver.com</option>
@@ -198,16 +208,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</select>
 					</div>
 					<br>
-					<div class="ip display-ib">
-						<input type="text" class="inputTag email" id="verifyEmail"
-							placeholder="인증번호를 입력해주세요." required>
-					</div>
-					<div class="verifyBtn display-ib">
-						<input type="button" id="emailBtn" value="인증번호 받기">
-					</div>
-					<div>
-						<span id="checkEmail">&nbsp;</span>
-					</div>
 				</div>
 
 				<!-- 전화번호 -->
@@ -216,17 +216,18 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="phone">전화번호</label>
 					</div>
 					<div class="ip">
-						<select class="display-ib inputTag phone" id="phone1" name=""
-							required>
+						<select class="display-ib inputTag phone" id="phone1" name="" required>
 							<option>010</option>
 							<option>011</option>
 							<option>016</option>
 							<option>017</option>
 							<option>019</option>
-						</select> &nbsp;-&nbsp; <input type="number"
-							class="display-ib inputTag phone" id="phone2" name="" required>
-						&nbsp;-&nbsp; <input type="number"
-							class="display-ib inputTag phone" id="phone3" name="" required>
+						</select> &nbsp;-&nbsp; 
+						<input type="number"
+							class="display-ib inputTag phone" id="phone2" name="" value="${phone[1]}" required>
+						&nbsp;-&nbsp; 
+						<input type="number"
+							class="display-ib inputTag phone" id="phone3" name="" value="${phone[2]}" required>
 					</div>
 					<div>
 						<span id="checkPhone">&nbsp;</span>
@@ -256,7 +257,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="phone">업체번호</label>
 					</div>
 					<div class="ip">
-						<select class="display-ib inputTag phone" id="phone1" name=""
+						<select class="display-ib inputTag phone" id="phone3" name=""
 							required>
 							<option>02</option>
 							<option>051</option>
@@ -276,10 +277,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<option>055</option>
 							<option>064</option>
 							<option>070</option>
-						</select> &nbsp;-&nbsp; <input type="number"
-							class="display-ib inputTag phone" id="phone2" name="" required>
-						&nbsp;-&nbsp; <input type="number"
-							class="display-ib inputTag phone" id="phone3" name="" required>
+						</select> &nbsp;-&nbsp; 
+						<input type="number" class="display-ib inputTag phone" id="phone4" name="" value="${comPhone[1]}" required>
+						&nbsp;-&nbsp; 
+						<input type="number" class="display-ib inputTag phone" id="phone5" name="" value="${comPhone[2]}" required>
 					</div>
 					<div>
 						<span id="checkPhone">&nbsp;</span>
@@ -295,7 +296,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<div class="col-md-3 display-ib">
 						<input type="text" name="post"
-							class="form-control postcodify_postcode5 inputTag address">
+							class="form-control postcodify_postcode5 inputTag address" value="${comAddress[0]}">
 					</div>
 					<div class="col-md-3 display-ib">
 						<button type="button" class="btn btn-info"
@@ -311,7 +312,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<div class="col-md-9">
 						<input type="text"
 							class="form-control postcodify_address inputTag" name="address1"
-							id="address1">
+							id="address1" value="${comAddress[1]}">
 					</div>
 				</div>
 
@@ -323,7 +324,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<div class="col-md-9">
 						<input type="text"
 							class="form-control postcodify_details inputTag" name="address2"
-							id="address2">
+							id="address2" value="${comAddress[2]}">
 					</div>
 					<div>
 						<br>
@@ -342,7 +343,37 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+	
+	
+	<script>
+		// 전화번호 옵션 정보 불러오기
+		(function() {
+			$("#phone1 > option").each(function(index, item) {
+				if ($(item).val() == "${phone[0]}") {
+					$(item).prop("selected", true);
+				}
+			});
+		})();
 
+		// 이메일 옵션 정보 불러오기
+		(function() {
+			$("#email2 > option").each(function(index, item) {
+				if ($(item).val() == "${email[1]}") {
+					$(item).prop("selected", true);
+				}
+			});
+		})();
+		
+		// 성별 옵션 정보 불러오기
+		(function() {
+			$("#gender > option").each(function(index, item) {
+				if ($(item).val() == "${loginMember.gender}") {
+					$(item).prop("selected", true);
+					
+				}
+			});
+		});
+	</script>
 
 
 

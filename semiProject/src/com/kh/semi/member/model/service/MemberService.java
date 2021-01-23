@@ -309,6 +309,41 @@ public class MemberService {
 		return result;
 	}
 
+	
+	/** 업체 내 정보 수정 Service
+	 * @param member
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateCompany(Member member)throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.updateCompany(conn, member);
+		
+		if(result > 0) commit(conn);
+		else           rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	/** 업체 정보 조회 Service
+	 * @param memNo
+	 * @return comMember
+	 * @throws Exception
+	 */
+	public Member selectComMember(int memNo)throws Exception {
+		Connection conn = getConnection();
+		
+		Member comMember = dao.selectComMember(conn ,memNo);
+		
+		close(conn);
+		
+		return comMember;
+	}
+
 
 
 }
