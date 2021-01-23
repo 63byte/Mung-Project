@@ -105,8 +105,6 @@ UPDATE HOSPITAL_IMG SET
 IMG_PATH = ?,
 IMG_NAME = ?
 WHERE FILE_NO =?
-
-
 </entry>
 
 

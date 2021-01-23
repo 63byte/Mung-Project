@@ -127,6 +127,8 @@ public class RoomController extends HttpServlet {
 			
 			
 			
+			
+			
 			// 숙소 등록 화면 전환 **************************************
 			else if(command.equals("/insertForm")) {
 				path = "/WEB-INF/views/room/roomInsert.jsp";
@@ -222,13 +224,9 @@ public class RoomController extends HttpServlet {
 				
 				
 				
-				
 				// 세션에서 로그인한 회원의 번호를 얻어옴
 				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 				int memberNo = loginMember.getMemberNo();
-				
-				
-				
 				
 			
 				
@@ -297,7 +295,7 @@ public class RoomController extends HttpServlet {
 			
 			// 숙소 수정하기 **********************************
 			
-			else if(command.equals("update")) {
+			else if(command.equals("/update")) {
 				errorMsg = "숙소 수정 과정에서 오류 발생";
 				
 				// 1. MultipartRequest 객체 생성에 필요한 값 설정
@@ -310,14 +308,7 @@ public class RoomController extends HttpServlet {
 	        	 MultipartRequest multiRequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
 				
 	        	// 3.파일정보를 제외한 게시글 정보를 얻어와 저장하기
-				String location1 = multiRequest.getParameter("location1");
-				String roomName = multiRequest.getParameter("roomName");
-				String phone1 = multiRequest.getParameter("phone1");
-				String phone2 = multiRequest.getParameter("phone2");
-				String phone3 = multiRequest.getParameter("phone2");
-				String phone = phone1+"-" + phone2 + "-" + phone3; // 전화번호 합치기
-				
-				String location2 = multiRequest.getParameter("location2");
+	        	
 				String checkin = multiRequest.getParameter("checkin");
 				String checkout = multiRequest.getParameter("checkout");
 				
@@ -380,7 +371,72 @@ public class RoomController extends HttpServlet {
 					
 				}
 				
+				// 5. Session에서 로그인한 회원 번호를 얻어와 저장(작성자)
+				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+				int memberNo = loginMember.getMemberNo(); 
 				
+				// 6. 준비된 값들을 하나의 Map에 저장
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("fList",fList);
+				map.put("checkin", checkin);
+				map.put("checkout", checkout);
+				map.put("facility", facility);
+				map.put("dog", dog);
+				map.put("roomInfo", roomInfo);
+				map.put("memberNo", memberNo);
+				map.put("roomNo", roomNo);
+				
+				// 7. 준비된 값을 매개변수로 하여 게시글 수정 Service 호출
+	        	 int result = service.updateRoom(map);
+	        	 
+	        	// 8. result 값에 따라 View 연결 처리
+	        	 path ="view?cp="+cp+"&roomNo="+roomNo;
+	        	 String sk = multiRequest.getParameter("sk");
+	        	 String sv = multiRequest.getParameter("sv");
+				
+	        	// 전달된 sk,sv가 존재 할 때 (검색을 통한 접근일 때)
+	        	 if(sk != null && sv != null ) {
+	        		 path += "&sk="+sk + "&sv=" + sv;
+	        	 }
+	        	 
+
+	        	 if (result>0) {
+	        		 swalIcon = "success";
+	        		 swalTitle = "수정 성공";
+	        		 	        	 
+	        	 }else {
+	        		 swalIcon = "error";
+	        		 swalTitle = "수정 실패";
+	        	 }
+	        	 request.getSession().setAttribute("swalIcon", swalIcon);
+	        	 request.getSession().setAttribute("swalTitle", swalTitle);
+	        	 
+	        	 response.sendRedirect(path);
+			}
+			
+			
+			// 숙소 삭제 **********************************
+			else if(command.equals("/delete")) {
+				errorMsg ="삭제 과정에서 오류 발생";
+				
+				int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+				int result = service.deleteRoom(roomNo);
+				
+				if(result>0) {
+					swalIcon = "success";
+	        		 swalTitle="삭제 성공";
+	        		 
+	        		 path = "list";
+				}else {
+					 swalIcon = "error";
+	        		 swalTitle = "삭제 실패";
+	        		 
+	        		 path = request.getHeader("referer");
+				}
+				 request.getSession().setAttribute("swalIcon", swalIcon);
+	        	 request.getSession().setAttribute("swalTitle", swalTitle);
+	        	 
+	        	 response.sendRedirect(path);
 				
 				
 			}

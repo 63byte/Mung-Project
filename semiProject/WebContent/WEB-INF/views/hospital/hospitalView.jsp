@@ -202,7 +202,6 @@
             <span class="highlighter">상세위치</span>
 
             <div id="map">
-                &lt;지도 API&gt;
             </div>
 
         </div>
@@ -259,7 +258,7 @@
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 	
-	<script>
+<script>
 	
 	
 	/*삭제 버튼 클릭했을 때  */
