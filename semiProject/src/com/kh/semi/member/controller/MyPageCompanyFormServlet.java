@@ -33,7 +33,10 @@ public class MyPageCompanyFormServlet extends HttpServlet {
 			Member comMember = new MemberService().selectComMember(memNo);
 			
 			//System.out.println(comMember);
-			session.setAttribute("comMember", comMember);
+			if(comMember != null) {
+				session.setMaxInactiveInterval(60 * 30);
+				session.setAttribute("comMember", comMember);
+			}
 			
 		}catch(Exception e) {
 			swalIcon = "error";
