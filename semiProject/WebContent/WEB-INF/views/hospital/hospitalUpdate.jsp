@@ -214,7 +214,7 @@
 						<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
 						<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
 						<input type="file" id="img4" name="img4" onchange="LoadImg(this,4)">
-						<input type="file" id="img5" name="img4" onchange="LoadImg(this,5)">
+						<input type="file" id="img5" name="img5" onchange="LoadImg(this,5)">
 					</div>
 
 

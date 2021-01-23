@@ -15,7 +15,8 @@
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
 <!-- 전화번호  -->
-<c:set var="phone" value="${fn:split(loginMember.comPhone,'-') }"/>
+<c:set var="address" value="${fn:split(comMember.comAddress,',') }"/>
+
 
 <!-- 숙소 등록하기 -->
     <div class="wrapper">
@@ -31,33 +32,7 @@
                 <form action="${contextPath }/room/insert" method="post" 
                 	enctype="multipart/form-data"  role="form" onsubmit="return roomInsertValidate();">
                     
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="location1">
-                            	<span class="highlighter">지역</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                            <select class="full_input" id="location1" name="location1" required>
-                                <option value="강원도">강원도</option>
-                                <option value="경기도">경기도</option>
-                                <option value="경상도">경상도</option>
-                                <option value="광주">광주</option>
-                                <option value="대구">대구</option>
-                                <option value="대전">대전</option>
-                                <option value="부산">부산</option>
-                                <option value="서울" selected>서울</option>
-                                <option value="세종">세종</option>
-                                <option value="울산">울산</option>
-                                <option value="인천">인천</option>
-                                <option value="전라도">전라도</option>
-                                <option value="제주">제주</option>
-                                <option value="충청도">충청도</option>
-                            </select>
-                        </div>
-                    </div>
-
-
+                   
                     <div class="row-item">
                         <div class="label_name">
                             <label for="companyName">
@@ -65,7 +40,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <h5>${loginMember.comName }</h5>
+                             <input type="text" class="full_input" id="roomName" name="roomName" value="${comMember.comName}" style="border:none; outline:none;" readonly>
                         </div>
                     </div>
 
@@ -77,30 +52,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <select class="phone" id="phone1" name="phone1" required> 
-                                <option>02</option>
-                                <option>051</option>
-                                <option>053</option>
-                                <option>032</option>
-                                <option>062</option>
-                                <option>042</option>
-                                <option>052</option>
-                                <option>044</option>
-                                <option>031</option>
-                                <option>033</option>
-                                <option>043</option>
-                                <option>041</option>
-                                <option>063</option>
-                                <option>061</option>
-                                <option>054</option>
-                                <option>055</option>
-                                <option>064</option>
-                                <option>070</option>
-                            </select>
-                            &nbsp;-&nbsp;&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone2" name="phone2" required>
-                            &nbsp;-&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone3" name="phone3" required>
+                              <input type="text" class="full_input" id="phone" name="phone" value="${comMember.comPhone}" style="border:none; outline:none;" readonly>
                         </div>
                     </div>
 
@@ -112,7 +64,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="location2" name="location2" placeholder="상세주소를 입력해 주세요." autocomplete="off" required>
+                            <input type="text" class="full_input" id="location2" name="location2" value="${address[1]}" style="border:none; outline:none;" readonly>
                         </div>
                     </div>
 
@@ -284,16 +236,7 @@ function roomInsertValidate(){
 	}
 	
 	
-	/* 전화번호 3/4글자 입력  */
-	var regExp1 = /^\d{3,4}$/;
-	var regExp2 = /^\d{4}$/;
-	 var v1 = $("#phone2").val();
-	 var v2 = $("#phone3").val();
-	 if(!regExp1.test(v1) || !regExp2.test(v2)){
-			alert("전화번호를 다시 입력해 주세요.");
-			$("#phone2").focus();
-		    return false;
-		 }	
+	
 	
 	/* 병원정보에 내용이 입력이 안 된다면*/
 	
@@ -324,18 +267,6 @@ function roomInsertValidate(){
 		alert("출입 가능 견종을 하나 이상 선택해 주세요.");
 		return false
 	}
-
-
-
-/* 전화번호 4글자 이상 입력 안 되게 지정  */
-$(".phoneTest").on("input",function(){
-	 if ($(this).val().length > 4) {
-	    $(this).val( $(this).val().slice(0, 4));
-	 }  
-	
-})
-
-
 
 
 

@@ -257,7 +257,7 @@ public class HospitalService {
 
 	/** 썸네일 목록 조회 Service
 	 * @param pInfo
-	 * @return
+	 * @return fList
 	 * @throws Exception
 	 */
 	public List<Attachment> selectThumbnailList(PageInfo pInfo) throws Exception {

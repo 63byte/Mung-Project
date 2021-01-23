@@ -14,7 +14,6 @@ public class Room {
 	private String dog;
 	private int viewCount;
 	private String roomdelFl;
-	private String roomEnrollFl;
 	private int memNo;
 	
 	
@@ -45,7 +44,6 @@ public class Room {
 		this.dog = dog;
 		this.viewCount = viewCount;
 		this.roomdelFl = roomdelFl;
-		this.roomEnrollFl = roomEnrollFl;
 		this.memNo = memNo;
 	}
 
@@ -172,14 +170,6 @@ public class Room {
 	}
 
 
-	public String getRoomEnrollFl() {
-		return roomEnrollFl;
-	}
-
-
-	public void setRoomEnrollFl(String roomEnrollFl) {
-		this.roomEnrollFl = roomEnrollFl;
-	}
 
 
 	public int getMemNo() {
@@ -197,7 +187,7 @@ public class Room {
 		return "Room [roomNo=" + roomNo + ", roomName=" + roomName + ", location1=" + location1 + ", location2="
 				+ location2 + ", phone=" + phone + ", roomInfo=" + roomInfo + ", checkin=" + checkin + ", checkout="
 				+ checkout + ", facility=" + facility + ", dog=" + dog + ", viewCount=" + viewCount + ", roomdelFl="
-				+ roomdelFl + ", roomEnrollFl=" + roomEnrollFl + ", memNo=" + memNo + "]";
+				+ roomdelFl + ", memNo=" + memNo + "]";
 	}
 	
 	

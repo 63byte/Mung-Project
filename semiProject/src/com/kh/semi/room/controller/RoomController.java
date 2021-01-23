@@ -73,6 +73,13 @@ public class RoomController extends HttpServlet {
 				List<Room> rList = service.selectRoomList(pInfo);
 				
 				// ************* 썸네일추가 *************
+				if(rList!=null) {
+					List<Attachment> fList = service.selectThumbnailList(pInfo);
+					
+					if(!fList.isEmpty()) {
+						request.setAttribute("fList", fList);
+					}
+				}
 
 				path = "/WEB-INF/views/room/roomList.jsp";
 				request.setAttribute("rList", rList);
@@ -97,6 +104,14 @@ public class RoomController extends HttpServlet {
 				
 				if(room!=null) {
 					// 상세조회 성공 시 (파일목록)
+					
+					// 해당 게시글에 포함된 이미지 파일 목록 조회 서비스 호출
+					List<Attachment> fList = service.selectRoomFiles(roomNo);
+					
+					if(!fList.isEmpty()) { // 해당 동물병원 이미지 정보가 DB에 있을 경우
+						request.setAttribute("fList", fList);
+					}
+							
 					
 					
 					path ="/WEB-INF/views/room/roomView.jsp";
@@ -187,37 +202,41 @@ public class RoomController extends HttpServlet {
 				}// end while
 				
 				// 3.파일정보를 제외한 게시글 정보를 얻어와 저장하기
+				String roomName = multiRequest.getParameter("roomName");
+				String location2 = multiRequest.getParameter("location2");
+				String phone = multiRequest.getParameter("phone");
 				String checkin = multiRequest.getParameter("checkin");
 				String checkout = multiRequest.getParameter("checkout");
-				
 				String[] facilityArr = multiRequest.getParameterValues("facility");
 				String facility = null;
 				if(facilityArr!=null) { // 숙소 시설 배열이 비어있지 않다면.
 					facility= String.join(",", facilityArr);
 				}
-				
-				
 				String[] dogArr = multiRequest.getParameterValues("dog");
 				String dog = null;
 				if(dogArr!=null) { // 견종이 비어있지 않다면.
 					dog= String.join(",", dogArr);
 				}
-				
-				
 				String roomInfo = multiRequest.getParameter("room_info");
+				
+				
+				
+				
 				
 				// 세션에서 로그인한 회원의 번호를 얻어옴
 				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 				int memberNo = loginMember.getMemberNo();
 				
 				
-				// 업체회원 정보 얻어오기
-				Member comMember = service.selectComMember(memberNo);
-				request.setAttribute("comMember", comMember);
+				
+				
+			
 				
 				// 얻어온 변수들을 모두 저장할 Map  생성
 				Map<String,Object> map = new HashMap<String,Object>();
-				
+				map.put("roomName",roomName);
+				map.put("location2",location2);
+				map.put("phone",phone);
 				map.put("fList",fList);
 				map.put("checkin", checkin);
 				map.put("checkout", checkout);
@@ -231,9 +250,8 @@ public class RoomController extends HttpServlet {
 				
 				if(result>0) {// DB에 데이터 등록 성공하면 result에 병원번호가 저장되어 있다.
 					swalIcon = "success";
-					swalTitle = "숙소 등록 완료."
-							+ "	관리자 확인 후 게시글이 등록됩니다.";
-					path = "list";
+					swalTitle = "숙소 등록 성공";
+					path = "view?cp=1&roomNo="+result;
 					
 					
 				} else {
@@ -261,7 +279,7 @@ public class RoomController extends HttpServlet {
 				
 				if(room!=null) {
 					
-					List<Attachment> fList = service.selectHospitalFiles(roomNo);
+					List<Attachment> fList = service.selectRoomFiles(roomNo);
 					
 					if(!fList.isEmpty()) {
 						request.setAttribute("fList", fList);
