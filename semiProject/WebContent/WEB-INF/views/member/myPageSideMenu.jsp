@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 #container {
 	width: 1100px;
@@ -23,6 +24,7 @@
 	list-style-type: none;
 	/* 불렛 없음 */
 	padding: 0;
+	line-height : 45px;
 }
 
 /* 메뉴 위아래 간격 */q
@@ -48,12 +50,20 @@
 	<div class="aside">
 
 		<ul>
-			<!-- 일반회원시 일반회원수정 / 업체회원시 업체회원수정 각자 마이페이지로 이동시키는 기능추가해야함 -->
-			<li><a href="${contextPath}/member/myPageNormal.do" class="aside-items" id="changeMy">내 정보 수정</a></li>
+			<c:choose>
+			<%-- 일반 회원일 때 --%>
+				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'G') }">
+					<li><a href="${contextPath}/member/myPageNormal.do" class="nav-items" id="nav-mypage">내 정보 수정</a></li>
+				</c:when>
+				
+				<%-- 업체 회원일 때 --%>
+				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'C') }">
+					<li><a href="${contextPath}/member/myPageCompany.do" class="nav-items" id="nav-mypage">내 정보 수정</a></li>
+				</c:when>
+			</c:choose>
 			
 			<li><a href="${contextPath}/member/myPageUpdatePw.do" class="aside-items" id="changePw">비밀번호 변경</a></li>
 			<li><a href="${contextPath}/member/myPageInquiryPost.do" class="aside-items" id="postCheck">내가 쓴 글 조회</a></li>
 			<li><a href="${contextPath}/member/myPageWithdrawal.do" class="aside-items" id="withdrawal">회원 탈퇴</a></li>
 		</ul>
 	</div>
-	
