@@ -26,6 +26,8 @@
 
 .memberChange>hr {
 	border: 1px solid orange;
+}.memberChange>hr {
+	border: 1px solid orange;
 }
 
 .memberChange {
@@ -171,7 +173,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					</div>
 					<div class="ip">
 						<input type="text" class="inputTag display-ib email" id="email1" name="email1"
-							autocomplete="off" value="${email[0]}" required> @ <select
+							autocomplete="off" value="${email[0]}" required> @ 
+							<select
 							class="inputTag display-ib email" id="email2" name="email2" required>
 							<option style="color: gray;">이메일 주소 선택</option>
 							<option>daum.net</option>
@@ -182,16 +185,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</select>
 					</div>
 					<br>
-					<div class="ip display-ib">
-						<input type="text" class="inputTag email" id="verifyEmail" name="verifyEmail"
-							placeholder="인증번호를 입력해주세요." >
-					</div>
-					<div class="verifyBtn display-ib">
-						<input type="button" id="emailBtn" value="인증번호 받기">
-					</div>
-					<div>
-						<span id="checkEmail">&nbsp;</span>
-					</div>
 				</div>
 
 				<!-- 전화번호 -->
@@ -207,11 +200,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<option>017</option>
 							<option>019</option>
 						</select> &nbsp;-&nbsp; 
-						<input type="number"
-							class="display-ib inputTag phone" id="phone2" name="phone2"
-							value="${phone[1]}" required> &nbsp;-&nbsp; <input
-							type="number" class="display-ib inputTag phone" id="phone3"
-							name="phone3" value="${phone[2]}" required>
+						<input type="number" class="display-ib inputTag phone" id="phone2" name="phone2" value="${phone[1]}" required> &nbsp;-&nbsp; 
+						<input type="number" class="display-ib inputTag phone" id="phone3" name="phone3" value="${phone[2]}" required>
 					</div>
 					<div>
 						<span id="checkPhone">&nbsp;</span>

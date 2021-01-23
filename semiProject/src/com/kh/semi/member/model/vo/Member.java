@@ -242,8 +242,8 @@ public class Member {
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
 				+ ", memberNickName=" + memberNickName + ", email=" + email + ", phone=" + phone + ", gender=" + gender
-				+ ", signDt=" + signDt + ", scsnFl=" + scsnFl + ", memberAdmin=" + memberAdmin + "]";
+				+ ", signDt=" + signDt + ", scsnFl=" + scsnFl + ", memberAdmin=" + memberAdmin + ", comName=" + comName
+				+ ", comAddress=" + comAddress + ", comPhone=" + comPhone + "]";
 	}
-	
-	
+
 }

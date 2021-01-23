@@ -458,4 +458,65 @@ public class MemberDAO {
 		
 		return result;
 	}
+
+	/** 업체 내 정보 수정 DAO
+	 * @param conn
+	 * @param member
+	 * @return reusult
+	 */
+	public int updateCompany(Connection conn, Member member) throws Exception {
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateCompany");
+		
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, member.getMemberNickName());
+			pstmt.setString(2, member.getEmail());
+			pstmt.setString(3, member.getPhone());
+			pstmt.setString(4, member.getGender());
+			pstmt.setInt(5, member.getMemberNo());
+			
+			pstmt.setString(6, member.getComPhone());
+			pstmt.setString(7, member.getComAddress());
+
+			result = pstmt.executeUpdate();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	/** 업체 정보 조회 DAO
+	 * @param conn
+	 * @param memNo
+	 * @return comMember
+	 * @throws Exception
+	 */
+	public Member selectComMember(Connection conn, int memNo)throws Exception {
+		Member comMember = null;
+		
+		String query = prop.getProperty("selectComMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				comMember = new Member(rset.getNString("COO_NM"), rset.getNString("COO_ADDR"), rset.getNString("COO_PHONE"));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return comMember;
+	}
 }
