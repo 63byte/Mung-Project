@@ -8,8 +8,26 @@
 <style>
     .boardImg{
     	cursor : pointer;
-    }
-    
+}
+
+.insert-label {
+	font-size : 15px;
+}
+
+.my-0 {
+	font-size : 15px;
+}
+
+#my3 {
+	height: 42px;
+	width: 108px;
+	padding: 0;
+	border: 1px solid #8bd2d6;
+	background-color: #8bd2d6;
+	border-radius: 5px;
+	color: white;
+}
+
 
 </style>
 
@@ -17,7 +35,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 <div class="container my-5">
-	<h3 class="display-3">게시글 등록</h3>
+	<h5 class="display-3" style="font-size:40px;">게시글 등록 ᵔᴥᵔ</h5>
 	<hr>
 	
 	<form action="${contextPath}/freeBoard/insert.do" method="post" 
@@ -29,12 +47,12 @@
 		</div>	
 	
 		<div class="form-inline mb-2">
-			<label class="input-group-addon mr-3 insert-label">작성자</label>
+			<label class="input-group-addon mr-3 insert-label">작성자 :</label>
 			<h5 class="my-0" id="writer">${loginMember.memberId }</h5>
 		</div>
 	
 		<div class="form-inline mb-2">
-			<label class="input-group-addon mr-3 insert-label">작성일</label>
+			<label class="input-group-addon mr-3 insert-label">작성일 :</label>
 			<h5 class="my-0" id="today"></h5>
 		</div>
 	
@@ -74,8 +92,8 @@
 				</div>
 				
 				<div class="text-center">
-					<button type="submit" class="btn btn-info">게시글등록</button>
-					<button type="button" class="btn btn-info">목록으로</button>
+					<button type="submit" id="my3" class="btn">게시글등록</button>
+					<button type="button" id="my3" class="btn">목록으로</button>
 				</div>
 				
 	</form>
