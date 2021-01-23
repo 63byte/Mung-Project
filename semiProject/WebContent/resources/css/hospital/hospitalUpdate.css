@@ -19,9 +19,9 @@ div {
 
 
 
+
 .wrapper{
     width:1100px;
-    height:800px;
     margin: 0 auto;
     /* border : 1px solid sienna; */
     
@@ -46,6 +46,7 @@ margin:auto;
 width: 360px;
 border: solid 1px orange;
 }
+
 /* 병원 등록하기 */
 #page_name{
     text-align : center;
@@ -54,12 +55,14 @@ border: solid 1px orange;
     font-size : 30px;
 }
 
-.insert_hospital{
+.update_hospital{
     width: 600px;
     padding:0;
     margin : 0 auto;
     /* border : 1px solid blue; */
 }
+
+
 
 
 /* number 태그 화살표 제거 */
@@ -71,6 +74,7 @@ margin: 0;
 
 
 
+
 /* 입력창 */
 .label_name{
     display: inline-block;
@@ -79,11 +83,20 @@ margin: 0;
     line-height: 0;
 }
 
+
 .input_tag{
     display: inline-block;
     width: 60%;
     height:40px;
 }
+
+
+.highlighter{
+	
+	background: linear-gradient(to top, #e4f7fa 50%, transparent 100%);
+}
+
+
 
 /* 가득 채우는 인풋창  */
 .full_input{
@@ -91,11 +104,13 @@ margin: 0;
     height:100%;
 }
 
+
 /* 전화번호 인풋창 */
 .phone{
     width: 105px;
     height:100%;
 }
+
 
 /* 영업시간 인풋창  */
 .office_hours{
@@ -103,10 +118,12 @@ margin: 0;
     height:100%;
 }
 
+
 /* 병원시설 체크박스 */
 .facility{
     margin :10px;
 }
+
 
 /* 동물병원 소개글  */
 .hospital_info{
@@ -116,38 +133,21 @@ margin: 0;
 }
 
 
-/* --------------- 업로드 버튼 --------------- */
 
-/* 파일 선택 필드 숨기기 */
-.filebox input[type="file"] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
+
+#titleImgArea{
+	height: 100px;
 }
 
-/* 업로드 버튼 */
-.filebox label {
-    display: inline-block;
-    padding: 6px 12px 6px 12px;
-    border-radius: 5px;
-    color: #fff;
-    /* vertical-align: middle; */
-    border : 1px solid  #8bd2d6;
-    background-color: #8bd2d6;
-    cursor: pointer;
-	  outline:none;
+.hospitalArea:hover{
+	cursor: pointer;
 }
 
-/* 파일경로 부분 스타일 */
-.file-upload-name {
-    /* vertical-align: middle; */
-    height: 100%;
-    width: 286px;
-    color: gray;
+.imgarea{
+	width: 65px;
+	display:inline-block;
 }
+
 
 
 
@@ -161,6 +161,7 @@ margin: 0;
     outline:none;
     width : 70px;
     height: 40px;
+    margin-top : 50px;
 }
 .btn_item{
     margin-left: 235px;

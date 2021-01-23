@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동물병원 등록하기</title>
+<title>동물병원 등록</title>
 <!-- css연결  -->
 <link rel="stylesheet" href="${contextPath}/resources/css/hospital/hospitalInsert.css" type="text/css">
 </head>
@@ -34,7 +34,7 @@
                     <div class="row-item">
                         <div class="label_name">
                             <label for="location1">
-                        	 	<span class="highlighter">지역</span>
+                            	<span class="highlighter">지역</span>
                             </label>
                         </div>
                         <div class="input_tag">
@@ -58,11 +58,13 @@
                     </div>
 
 
+
                     <div class="row-item">
                         <div class="label_name">
                             <label for="companyName">
                             	<span class="highlighter">병원명</span>
                             </label>
+                            	
                         </div>
                         <div class="input_tag">
                             <input type="text" class="full_input" id="companyName"  name="hospNm" placeholder="병원명을 입력해 주세요." autocomplete="off" required>
@@ -97,9 +99,9 @@
                                 <option>070</option>
                             </select>
                             &nbsp;-&nbsp;&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone2" name="phone2" maxlength="4" oninput="phoneLength(this)" required>
+                            <input type="number" class="phone phoneTest" id="phone2" name="phone2"  required>
                             &nbsp;-&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone3" name="phone3" maxlength="4" oninput="phoneLength(this)" required>
+                            <input type="number" class="phone phoneTest" id="phone3" name="phone3"  required>
                         </div>
                     </div>
 
@@ -213,7 +215,7 @@
                     <div class="row-item">
                         <div class="btn_item">
                             <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
-                            <button class= "btn_class"  id="resetBtn" type="button">취소</button>
+                            <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
                         </div>
                     </div>
                 </form>
@@ -237,6 +239,7 @@ function hospitalInsertValidate(){
 	
 	if(!regExp.test(open) || !regExp.test(close)){
 		alert("영업 시간의 형식이 유효하지 않습니다.");
+		$("#openTime").focus();
 		return false;
 	}
 	
@@ -260,14 +263,6 @@ $(".phoneTest").on("input",function(){
 })
 
 
-/* 삭제 버튼이 눌리면 확인창이 뜬다.  */
-$("#resetBtn").on("click",function(){
-	
- 	if( confirm("병원 등록을 취소하고 목록으로 돌아갑니다.")){
- 		
- 		location.href = "${contextPath}/hospital/list";
- 	}
-});
 
 
 
@@ -288,6 +283,8 @@ $(function(){
 
 		// 클릭된 영역 인덱스에 맞는 input file 태그 클릭
 		$("#img" + index).click();
+		
+	
 	});
 });
 
@@ -322,8 +319,6 @@ function LoadImg(value,num){
 		 }
 	  }
 }
-
-
 
 
 </script>

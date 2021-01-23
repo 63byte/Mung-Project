@@ -19,7 +19,6 @@ div {
 .wrapper{
     width:1100px;
     margin: 0 auto;
-    background-color: rgb(248, 248, 248);   
     /* border : 1px solid sienna; */
     
 }
@@ -36,8 +35,9 @@ div {
 /* 이미지 */
 .imageArea{
     width:100%;
-    height: 400px;
+    height: 450px;
     text-align : center;
+    margin-botton:30px;
 }
 
 
@@ -53,9 +53,7 @@ div {
     display: inline-block;
 }
 
-.iconArea{
-    margin-left: 935px;
-}
+
 
 .icon {
     width:20px;
@@ -106,22 +104,13 @@ div {
 /* 지도 API */
 .mapAPI {
     width:100%;
-    height: 300px;
+    height: 400px;
     text-align : center;
     background-color: gray;
 }
 
 
 
-/* 버튼 */
-/* 좋아요버튼 */
-.like{
-    width:25px;
-    background-color: rgb(248, 248, 248); 
-    cursor: pointer;
-    outline:none;
-    border:none;
-}
 
 
 
@@ -138,7 +127,6 @@ div {
 }
 
 
-
 .btn_item{
     margin-left: 955px;
 }
@@ -146,3 +134,57 @@ div {
 .btn_class:hover{
 	background-color: #17a2b8;
 }
+
+
+
+/* 이전으로 버튼  */
+#back{
+display:block;
+width: 90px;
+text-align:center;
+color: #fff;
+line-height: 35px;
+margin : auto;
+margin-top: 20px;
+
+}
+
+
+/* 수정버튼  */
+#updateBtn{
+display:inline-block;
+text-align:center;
+line-height: 35px;
+float:right;
+}
+
+
+
+	
+	
+/* 형광펜  */
+
+.highlighter{
+	display:block;
+	
+	width: 60px;
+	background: linear-gradient(to top, #ffc75f 100%, transparent 100%);
+
+	font-size:14px; 
+	text-align:center;
+
+	margin-bottom: 15px;
+}
+
+
+
+
+/* 이미지 */
+	.carousel-control-prev-icon {
+ 		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+	}
+	
+	.carousel-control-next-icon {
+  		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+	}
+	
