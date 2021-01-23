@@ -62,24 +62,34 @@
      			<div style="text-align:center; font-size: 18px;">등록된 숙소가 없습니다.</div>
      		</div>
      	</c:when>
+     	
+     	
    		<c:otherwise>
 	        <div class="row-item">
     	        <table id="list">
 	              <tr>
 	                  <td>
                 			<c:forEach var="room" items="${rList}">
-                  			
 			                      <div class="roomList ">
 			                          <!-- 썸네일 출력  -->
-			                          <div class="thumbnail_area " style="margin-left: 10px;">
-			                              <img class="thumbnail_img" src="${contextPath}/resources/image/room/seoul/bookhansan.jpg"></img>
-			                            </div>
+			                          <c:set var="flag" value="true"/>
+			                          <c:forEach var="thumbnail" items="${fList }">
+			                          		<c:if test="${room.roomNo == thumbnail.roomNo }">
+						                          <div class="thumbnail_area " style="margin-left: 10px;">
+						                          	    <img class="thumbnail_img" src="${contextPath}/resources/image/uploadRoomImages/${thumbnail.fileName}"></img>
+						                            	<c:set var="flag" value="false"/>
+						                            </div>
+				                            </c:if>
+				                       </c:forEach>
+				                       <c:if test="${flag == 'true'}">
+										<img class="thumbnail_img"  src="${contextPath }/resources/image/icon/nonImage.png">
+		                         	</c:if>
 			                            
 			                            
 			                            <div class="title_area numberSelect" style="cursor: pointer;">
 			                                <p class="title">${room.roomName }</p>
 			                            </div>
-			                            <div class="address_area numberSelect" style="cursor: pointer;">
+			                            <div class="address_area numberSelect" style="cursor: pointer;margin-left: 10px;">
 			                                <p class="address">${room.location2 }</p>
 			                            </div>
 			                            <span style="visibility:hidden">${room.roomNo }</span>

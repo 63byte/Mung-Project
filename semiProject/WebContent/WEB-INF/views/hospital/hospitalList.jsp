@@ -91,6 +91,7 @@
            		</c:when>
            
            		<c:otherwise>	<!-- 조회된 게시글 목록이 있을 때  -->
+           		
            			 <c:forEach var="hospital" items="${hList}"><!-- hList에서 하나씩 꺼내와 hospital에 담는다.  -->
 				            
 				            

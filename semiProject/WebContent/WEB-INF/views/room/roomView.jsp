@@ -9,8 +9,10 @@
 <meta charset="UTF-8">
 <title>숙소 상세조회</title>
 
+
+
 <!-- 카카오 API  -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0195b24c7dce0dc71f3dbcf7ca0a12c4"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0195b24c7dce0dc71f3dbcf7ca0a12c4&libraries=services,clusterer,drawing"></script>
 
 
 <!-- css연결  -->
@@ -34,11 +36,56 @@
 		
 		<!-- 숙소 상세조회  -->
     <div class="wrapper">
+    
+    
+    
+    
+    <c:choose>
+    	<c:when test="${!empty fList }">
 
-        <!-- 이미지 출력 -->
-        <div class="imageArea">
-            <img class="imageArea" src="">
-        </div>
+        <div class="carousel slide boardImgArea imageArea" id="hospital-image">
+               
+               <!-- 이미지 선택 버튼 -->
+               <ol class="carousel-indicators ">
+                  <c:forEach var="file" items="${fList}" varStatus="vs">
+                     
+                     <li data-slide-to="${vs.index }" data-target="#room-image"  
+                           <c:if test="${vs.first}"> class="active" </c:if> >
+                     </li>
+                  </c:forEach>
+               </ol>
+               
+               
+               <!-- 출력되는 이미지 -->
+               <div class="carousel-inner ">
+                  <c:forEach var="file" items="${fList}" varStatus="vs">
+                  
+                     <div class="carousel-item imageArea <c:if test="${vs.first}">active</c:if>">
+                        <img class="d-block w-100 imageArea boardImg" id="${file.fileNo}" 
+                           src="${contextPath}/resources/image/uploadRoomImages/${file.fileName}">
+                     </div>
+                     
+                  </c:forEach>
+               
+               </div> 
+               
+               <!-- 좌우 화살표 -->
+               <a class="carousel-control-prev" href="#room-image" data-slide="prev">
+               		<span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span>
+               </a> 
+               <a class="carousel-control-next" href="#room-image" data-slide="next">
+               		<span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span>
+               </a>
+            </div>
+        </c:when>
+        
+        <c:otherwise>
+        	<div class="imageArea" >
+        		<img  src="${contextPath}/resources/image/icon/nonImage.png">
+        	</div>
+        </c:otherwise>
+        
+        </c:choose>
         
         
         
@@ -78,12 +125,12 @@
             <span id="roomCheckIn">체크인     : ${room.checkin} </span>
         </div> 
         <div class="row-item" >
-            <span><img class="icon" src="${contextPath}/resources/image/icon/clock.png"></span>
+            <span><img class="icon" src="${contextPath}/resources/image/icon/clock2.png"></span>
             <span id="roomCheckOut">체크아웃    : ${room.checkout} </span>
         </div> 
         
         <div class="row-item">
-            <span><img class="icon" src="${contextPath}/resources/image/icon/dog2.png"></span>
+            <span><img class="icon" src="${contextPath}/resources/image/icon/dog.png"></span>
             <span id="roomCheckIn">출입가능 견종 : ${room.dog }  </span>
         </div>
 
@@ -172,13 +219,13 @@
         <hr style="margin-bottom: 15px;">
 
 
-        <div class="row-item">
+         <div class="row-item">
+        	
             <span class="highlighter">상세위치</span>
 
-            <div class="mapAPI">
-                &lt; 지도 API&gt;
+            <div id="map" style="height:400px;">
+            	map
             </div>
-
         </div>
         
         
@@ -210,7 +257,7 @@
 
 
         <!-- 업체/관리자만 보이는 버튼 -->
-        <c:if test="${!empty loginMember && loginMember.memberAdmin == 'C' || loginMember.memberAdmin == 'A'}">
+        <c:if test="${!empty loginMember && (loginMember.memberAdmin == 'C' && room.memNo == loginMember.memberNo) || loginMember.memberAdmin == 'A'}">
 	        <div class="row-item" style="margin-top:50px;">
 	            <div class="btn_item">
 	            
@@ -231,39 +278,34 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     
+<script>
+
+
+/*삭제 버튼 클릭했을 때  */
+$("#deleteBtn").on("click",function(){
+	if(confirm("해당 병원을 삭제하시겠습니까?")){
+		location.href="delete?roomNo=${param.roomNo}"
+	}
+});
+
+</script>   
     
-    
-    	<script>
+
 	
-	
-	/*삭제 버튼 클릭했을 때  */
-	$("#deleteBtn").on("click",function(){
-		if(confirm("해당 병원을 삭제하시겠습니까?")){
-			location.href="delete?hospitalNo=${param.hospitalNo}"
-		}
-	});
-	
-	</script>
-	
-	
-	
-	
-	<!-- 지도 API  -->
-	<script>
+<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
         level: 3 // 지도의 확대 레벨
     };  
 
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
-	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('동작구 사당동 1013-17', function(result, status) {
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('${room.location2 }', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -278,15 +320,16 @@
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+            content: '<div style="font-size: 13px;width:150px;text-align:center;padding:6px 0;">${room.roomName }</div>'
         });
         infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-    } 
+    } else{
+    	console.log(result);
+    }
 });    
-	
 	</script>
     
 </body>

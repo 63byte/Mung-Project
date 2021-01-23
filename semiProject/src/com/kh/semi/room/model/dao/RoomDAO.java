@@ -130,7 +130,6 @@ public class RoomDAO {
 			if(rset.next()) {
 				room = new Room();
 				room.setRoomName(rset.getString("ROOM_NAME"));
-				room.setLocation1(rset.getString("LOCATION1"));
 				room.setLocation2(rset.getString("LOCATION2"));
 				room.setPhone(rset.getString("PHONE"));
 				room.setRoomInfo(rset.getString("ROOM_INFO"));
@@ -139,6 +138,7 @@ public class RoomDAO {
 				room.setFacility(rset.getString("FACILITY"));
 				room.setDog(rset.getString("DOG"));
 				room.setViewCount(rset.getInt("VIEW_COUNT"));
+				room.setMemNo(rset.getInt("MEM_NO"));
 				
 			}
 			
@@ -226,14 +226,14 @@ public class RoomDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, (int)map.get("insertNo"));
 			pstmt.setString(2, (String)map.get("roomName"));
-			pstmt.setString(4, (String)map.get("location2"));
-			pstmt.setString(5, (String)map.get("phone"));
-			pstmt.setString(6, (String)map.get("roomInfo"));
-			pstmt.setString(7, (String)map.get("checkin"));
-			pstmt.setString(8, (String)map.get("checkout"));
-			pstmt.setString(9, (String)map.get("facility"));
-			pstmt.setString(10, (String)map.get("dog"));
-			pstmt.setInt(11, (int)map.get("memberNo"));
+			pstmt.setString(3, (String)map.get("location2"));
+			pstmt.setString(4, (String)map.get("phone"));
+			pstmt.setString(5, (String)map.get("roomInfo"));
+			pstmt.setString(6, (String)map.get("checkin"));
+			pstmt.setString(7, (String)map.get("checkout"));
+			pstmt.setString(8, (String)map.get("facility"));
+			pstmt.setString(9, (String)map.get("dog"));
+			pstmt.setInt(10, (int)map.get("memberNo"));
 			
 			result = pstmt.executeUpdate();
 		}finally {
@@ -291,6 +291,7 @@ public class RoomDAO {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1,roomNo);
+			
 			rset = pstmt.executeQuery();
 			
 			fList = new ArrayList<Attachment>();
@@ -346,5 +347,140 @@ Member comMember = null;
 		
 		return comMember;
 	}
+
+
+
+
+
+
+	/** 썸네일 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectThumbnailList(Connection conn, PageInfo pInfo) throws Exception {
+		List<Attachment> fList =null;
+		
+		String query = prop.getProperty("selectThumbnailList");
+		
+		// 위치 홀더에 들어갈 시작 행, 끝 행번호 계산
+					int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() +1;
+					int endRow = startRow + pInfo.getLimit()-1;
+			  try {		
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, startRow);
+					pstmt.setInt(2, endRow);
+					
+					rset = pstmt.executeQuery();
+					
+					fList = new ArrayList<Attachment>();
+					
+					while(rset.next()) {
+						Attachment at = new Attachment();
+						at.setFileName(rset.getString("FILE_NAME"));
+						at.setRoomNo(rset.getInt("ROOM_NO"));
+
+						
+						fList.add(at);
+					}
+				}finally {
+					close(rset);
+					close(pstmt);
+				}
+		
+		return fList;
+	}
+
+
+
+
+
+
+	/**	숙소 수정 DAO
+	 * @param conn
+	 * @param map
+	 * @return result
+	 * @throws Exception
+	 */
+	public int updateRoom(Connection conn, Map<String, Object> map) throws Exception {
+		int result =0;
+		String query = prop.getProperty("updateRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, (String)map.get("roomInfo"));
+			pstmt.setString(2, (String)map.get("checkin"));
+			pstmt.setString(3, (String)map.get("checkout"));
+			pstmt.setString(4, (String)map.get("facility"));
+			pstmt.setString(5, (String)map.get("dog"));
+			pstmt.setInt(6, (int)map.get("roomNo"));
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+
+
+
+	/**	파일 정보 수정 DAO
+	 * @param conn
+	 * @param newFile
+	 * @return	result
+	 * @throws Exception
+	 */
+	public int updateAttachment(Connection conn, Attachment newFile) throws Exception {
+		int result =0;
+		
+		String query = prop.getProperty("updateAttachment");
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, newFile.getFilePath());
+			pstmt.setNString(2, newFile.getFileName());
+			pstmt.setInt(3, newFile.getFileNo());
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+
+
+
+
+
+
+	/**	숙소 삭제 DAO
+	 * @param conn
+	 * @param roomNo
+	 * @return	result
+	 * @throws Exception
+	 */
+	public int deleteRoom(Connection conn, int roomNo) throws Exception {
+		int result =0;
+		String query = prop.getProperty("deleteRoom");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, roomNo);
+			
+			result = pstmt.executeUpdate();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	
+	
 
 }

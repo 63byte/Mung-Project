@@ -244,6 +244,15 @@ public class MemberController extends HttpServlet {
 					} else {
 						cookie.setMaxAge(0);
 					}
+					
+					int memNo = loginMember.getMemberNo();
+					Member comMember = service.selectComMember(memNo);
+					
+					if(comMember != null) {
+						session.setMaxInactiveInterval(60 * 30);
+						session.setAttribute("comMember", comMember);
+					}
+					
 
 					cookie.setPath(request.getContextPath());
 

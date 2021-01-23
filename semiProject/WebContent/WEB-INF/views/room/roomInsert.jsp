@@ -14,8 +14,9 @@
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
-<!-- 전화번호  -->
-<c:set var="phone" value="${fn:split(loginMember.comPhone,'-') }"/>
+<!-- 주소  -->
+<c:set var="address" value="${fn:split(comMember.comAddress,',') }"/>
+
 
 <!-- 숙소 등록하기 -->
     <div class="wrapper">
@@ -31,33 +32,7 @@
                 <form action="${contextPath }/room/insert" method="post" 
                 	enctype="multipart/form-data"  role="form" onsubmit="return roomInsertValidate();">
                     
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="location1">
-                            	<span class="highlighter">지역</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                            <select class="full_input" id="location1" name="location1" required>
-                                <option value="강원도">강원도</option>
-                                <option value="경기도">경기도</option>
-                                <option value="경상도">경상도</option>
-                                <option value="광주">광주</option>
-                                <option value="대구">대구</option>
-                                <option value="대전">대전</option>
-                                <option value="부산">부산</option>
-                                <option value="서울" selected>서울</option>
-                                <option value="세종">세종</option>
-                                <option value="울산">울산</option>
-                                <option value="인천">인천</option>
-                                <option value="전라도">전라도</option>
-                                <option value="제주">제주</option>
-                                <option value="충청도">충청도</option>
-                            </select>
-                        </div>
-                    </div>
-
-
+                   
                     <div class="row-item">
                         <div class="label_name">
                             <label for="companyName">
@@ -65,7 +40,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <h5>${loginMember.comName }</h5>
+                             <input type="text" class="full_input" id="roomName" name="roomName" value="${comMember.comName}" style="border:none; outline:none;" readonly>
                         </div>
                     </div>
 
@@ -77,30 +52,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <select class="phone" id="phone1" name="phone1" required> 
-                                <option>02</option>
-                                <option>051</option>
-                                <option>053</option>
-                                <option>032</option>
-                                <option>062</option>
-                                <option>042</option>
-                                <option>052</option>
-                                <option>044</option>
-                                <option>031</option>
-                                <option>033</option>
-                                <option>043</option>
-                                <option>041</option>
-                                <option>063</option>
-                                <option>061</option>
-                                <option>054</option>
-                                <option>055</option>
-                                <option>064</option>
-                                <option>070</option>
-                            </select>
-                            &nbsp;-&nbsp;&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone2" name="phone2" required>
-                            &nbsp;-&nbsp;
-                            <input type="number" class="phone phoneTest" id="phone3" name="phone3" required>
+                              <input type="text" class="full_input" id="phone" name="phone" value="${comMember.comPhone}" style="border:none; outline:none;" readonly>
                         </div>
                     </div>
 
@@ -112,7 +64,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="location2" name="location2" placeholder="상세주소를 입력해 주세요." autocomplete="off" required>
+                            <input type="text" class="full_input" id="location2" name="location2" value="${address[1]}" style="border:none; outline:none;" readonly>
                         </div>
                     </div>
 
@@ -131,16 +83,16 @@
 
                     <div class="row-item">
                         <div class="label_name">
-                            <label for="facility">
+                            <div for="facility">
                             	<span class="highlighter">숙소 부대 시설</span>
-                            </label>
+                            </div>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="facility" name="facility" value="WiFi">WiFi
-                           <input type="checkbox" class="facility" name="facility" value="주차장">주차장
-                           <input type="checkbox" class="facility" name="facility" value="수영장">수영장
-                           <input type="checkbox" class="facility" name="facility" value="BBQ">BBQ
-                           <input type="checkbox" class="facility" name="facility" value="마당">마당
+                           <label for="WiFi" style="cursor:pointer"> <input type="checkbox" class="facility" name="facility" id="WiFi" value="WiFi">WiFi</label>
+                            <label for="주차장" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="주차장" value="주차장">주차장</label>
+                            <label for="수영장" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="수영장" value="수영장">수영장</label>
+                            <label for="BBQ" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="BBQ" value="BBQ">BBQ</label>
+                            <label for="마당" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="마당" value="마당">마당</label>
                         </div>
                     </div>
 
@@ -151,9 +103,10 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                           <input type="checkbox" class="dog" name="dog" value="소형견">소형견
-                           <input type="checkbox" class="dog" name="dog" value="중형견">중형견
-                           <input type="checkbox" class="dog" name="dog" value="대형견">대형견
+                           <label for="소형견" style="cursor:pointer"><input type="checkbox" class="dog" name="dog"  id="소형견" value="소형견">소형견</label>
+                            <label for="중형견" style="cursor:pointer"><input type="checkbox" class="dog" name="dog"  id="중형견" value="중형견">중형견</label>
+                            <label for="대형견" style="cursor:pointer"> <input type="checkbox" class="dog" name="dog"  id="대형견" value="대형견">대형견</label>
+                            
                         </div>
                     </div>
 
@@ -284,16 +237,7 @@ function roomInsertValidate(){
 	}
 	
 	
-	/* 전화번호 3/4글자 입력  */
-	var regExp1 = /^\d{3,4}$/;
-	var regExp2 = /^\d{4}$/;
-	 var v1 = $("#phone2").val();
-	 var v2 = $("#phone3").val();
-	 if(!regExp1.test(v1) || !regExp2.test(v2)){
-			alert("전화번호를 다시 입력해 주세요.");
-			$("#phone2").focus();
-		    return false;
-		 }	
+	
 	
 	/* 병원정보에 내용이 입력이 안 된다면*/
 	
@@ -324,18 +268,6 @@ function roomInsertValidate(){
 		alert("출입 가능 견종을 하나 이상 선택해 주세요.");
 		return false
 	}
-
-
-
-/* 전화번호 4글자 이상 입력 안 되게 지정  */
-$(".phoneTest").on("input",function(){
-	 if ($(this).val().length > 4) {
-	    $(this).val( $(this).val().slice(0, 4));
-	 }  
-	
-})
-
-
 
 
 
