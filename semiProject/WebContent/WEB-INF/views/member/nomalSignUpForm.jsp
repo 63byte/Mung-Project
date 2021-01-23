@@ -145,8 +145,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 <body>
 
 		<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
-   <!DOCTYPE html>
-<html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -237,7 +236,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                     </div>
                     <br>  
                     <div class="ip display-ib">
-                        <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요.">
+                        <input type="text" class="inputTag email" id="verifyEmail" placeholder="인증번호를 입력해주세요." required>
                     </div>
                     <div class= "verifyBtn display-ib">
                         <button class="btn_class" type="button" id="sendMail" name="sendMail" >인증번호 받기</button>
