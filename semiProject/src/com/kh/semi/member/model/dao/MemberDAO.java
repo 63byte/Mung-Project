@@ -7,11 +7,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.reply.model.vo.Reply;
 
 public class MemberDAO {
 
@@ -518,5 +521,43 @@ public class MemberDAO {
 		}
 		
 		return comMember;
+	}
+
+	/** 내가 쓴 댓그 ㄹ 조회 DAO
+	 * @param conn 
+	 * @param memNo 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<Reply> myReplySelect(Connection conn, int memNo) throws Exception{
+		List<Reply> myReply = null;
+		
+		String query = prop.getProperty("myReplySelect");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memNo);
+			
+			rset = pstmt.executeQuery();
+			
+			myReply = new ArrayList<Reply>();
+			while(rset.next()) {
+				Reply myRi = new Reply();
+				myRi.setParentBoardNo(rset.getInt("FREE_BOARD_NO"));
+				myRi.setReplyContent(rset.getString("REPLY_CONTENT"));
+				myRi.setReplyCreateDate(rset.getTimestamp("REPLY_DT"));
+				myRi.setBoardTitle(rset.getString("FREE_BOARD_TITLE"));
+				
+				myReply.add(myRi);
+				
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return myReply;
 	}
 }
