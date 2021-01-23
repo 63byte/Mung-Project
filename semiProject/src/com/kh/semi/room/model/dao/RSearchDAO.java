@@ -60,7 +60,7 @@ public class RSearchDAO {
 	 */
 	public List<Room> searchRoomList(Connection conn, String condition, PageInfo pInfo) throws Exception {
 		List<Room> rList=null;
-		String query = "SELECT ROOM_NO, ROOM_NAME, LOCATION2, FROM" + 
+		String query = "SELECT ROOM_NO, ROOM_NAME, LOCATION2 FROM" + 
 	            "    (SELECT ROWNUM RNUM , R.*" + 
 	            "    FROM" + 
 	            "        (SELECT * FROM ROOM " + 

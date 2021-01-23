@@ -103,10 +103,12 @@
 
       <div id="big">
           <div class="big-title">
-              뭉개뭉개와 함께 어디로 갈까요? 🐶
+              	뭉개뭉개와 함께 어디로 갈까요? 🐶
           </div>
           <div class="big-banner">
-              big-banner
+              <a href='${contextPath}/travel/localView.do?no=22'>
+              	<img class="big-banner" src="${contextPath}/resources/image/common/main/메인빅배너_김녕.jpg">
+              </a>
           </div>
       </div>
 
