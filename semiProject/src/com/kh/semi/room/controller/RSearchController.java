@@ -17,7 +17,7 @@ import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
 
 
-@WebServlet("/hospital/search")
+@WebServlet("/room/search")
 public class RSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
