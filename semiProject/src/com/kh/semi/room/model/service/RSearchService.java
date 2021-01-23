@@ -51,7 +51,7 @@ public class RSearchService {
 				switch (searchKey) {
 				case "name": condition = " ROOM_NAME LIKE '%' || '" + searchValue + "' || '%' "; break; 
 					 
-				case "location":  condition = " LOCATION2 LIKE '%' || ' " + searchValue + "' || '%') "; break;
+				case "location":  condition = " LOCATION2 LIKE '%' || ' " + searchValue + "' || '%' "; break;
 				}
 		return condition;
 	}
