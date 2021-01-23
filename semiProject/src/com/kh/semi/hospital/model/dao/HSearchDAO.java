@@ -56,7 +56,7 @@ public class HSearchDAO {
 	 * @param conn
 	 * @param condition
 	 * @param pInfo
-	 * @returnh hList
+	 * @returnh List
 	 * @throws Exception
 	 */
 	public List<Hospital> searchHospitalList(Connection conn, String condition, PageInfo pInfo) throws Exception {

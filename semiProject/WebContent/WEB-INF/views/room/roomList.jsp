@@ -32,7 +32,7 @@
 <div class="wrapper">
     <!-- 검색창 -->
                 
-        <div class="row-item" >
+        <div class="row-item">
             <form action="${contextPath }/room/search" method="GET" id="searchForm">
 	            <div class="bg-image-full" style="background-image: url('https://t1.daumcdn.net/liveboard/modetour/ce1ed892f7e4419e86dd3228d8a6faf2.JPG');" >
 	                <div class="search">

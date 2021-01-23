@@ -26,11 +26,6 @@ public class Room {
 		this.roomName = roomName;
 		this.location2 = location2;
 	}
-		
-		
-	
-		
-	
 
 	// 모든 매개변수
 	public Room(int roomNo, String roomName, String location1, String location2, String phone, String roomInfo,
