@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -71,14 +72,24 @@
             background-color: #F5F6F8;
             width:350px;
             height:250px;
+            margin : 5px;;
+        }
+        
+        .thumbnail_img{
+      	    width:350px;
+            height:250px;
         }
 
         .semi-text1{
             font-weight: 700;
+            margin:5px;
+            margin-left : 10px;
         }
 
         .semi-text2{
             font-weight: 400;
+             margin:5px;
+            margin-left : 10px;
         }
 
 
@@ -99,36 +110,47 @@
           </div>
       </div>
 
-
       <div id="sub">      
           <div class="semi-title">인기 숙소</div>
           <div>
               <div class="semi-banner">
-                  <div class="semi-banner1">
-                      <div class="semi-banner-img-area"></div>
-                      <div class="semi-text1">서울</div>
-                      <div class="semi-text2">어쩌구 느낌의 숙소!</div>
-                  </div>
-
-                  <div class="semi-banner2">
-                      <div class="semi-banner-img-area"></div>
-                      <div class="semi-text1">부산</div>
-                      <div class="semi-text2">어쩌구 느낌의 숙소!</div>
-                  </div>
-
-                  <div class="semi-banner3">
-                      <div class="semi-banner-img-area"></div>
-                      <div class="semi-text1">강릉</div>
-                      <div class="semi-text2">어쩌구 느낌의 숙소!</div>
-                  </div>
+              	<c:choose>
+              		<c:when test="${!empty roomList }">
+              			<c:forEach var="room" items="${roomList }">
+              			
+	              			<div class="semi-banner1">
+	              				
+	              				<c:forEach var="thumbnail" items="${fList }">
+	              					<c:if test="${room.roomNo == thumbnail.roomNo }">
+			                     		 <div class="semi-banner-img-area">
+			                     		 	<img class="thumbnail_img" src="${contextPath}/resources/image/uploadRoomImages/${thumbnail.fileName}">
+			                     		 </div>
+	              					</c:if>
+	              				</c:forEach>
+			                      <div class="semi-text1 numberSelect" style="cursor: pointer;">${room.roomName }</div>
+			                      <div class="semi-text2 numberSelect" style="cursor: pointer;">${room.location2 }</div>
+			                      <span style="visibility:hidden">${room.roomNo }</span>
+			                  </div>	
+              			</c:forEach>
+              		</c:when>
+              	</c:choose>
               </div>
+    	  </div>
       </div>
 
   </div>
-  
   <jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>
   
-
+<script>
+//숙소 상세조회
+$(".numberSelect").on("click", function(){
+	var roomNo = $(this).siblings("span").text();
+	
+	var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="+ roomNo;
+	
+	location.href=url;
+});
+</script>
 
 </body>
 
