@@ -37,12 +37,17 @@ WHERE ROOM_NO =?
 SELECT SEQ_ROOM.NEXTVAL FROM DUAL
 </entry>
 
-
+<!-- 업체 정보 조회 -->
+<entry key="selectComMember">
+SELECT COO_NM, COO_ADDR, COO_PHONE
+FROM COOPERATOR
+WHERE MEM_NO = ?
+</entry>
 
 <!-- 숙소 등록  -->
 <entry key="insertRoom">
 INSERT INTO ROOM
-VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ? )
+VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ? )
 </entry>
 
 
@@ -50,7 +55,14 @@ VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, DEFAULT, DEFAULT, ? )
 <entry key="insertAttachment">
 INSERT INTO ROOM_IMG
 VALUES(SEQ_ROOMIMG.NEXTVAL,?,?,?,?)
+</entry>
 
+<!-- 숙소에 포함된 이미지 목록 조회  -->
+<entry key="selectRoomFiles">
+SELECT FILE_NO, FILE_NAME, FILE_LEVEL , FILE_PATH
+FROM ROOM_IMG
+WHERE ROOM_NO = ?
+ORDER BY FILE_LEVEL
 </entry>
 
 </properties>

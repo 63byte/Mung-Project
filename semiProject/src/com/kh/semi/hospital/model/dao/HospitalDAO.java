@@ -304,7 +304,7 @@ public class HospitalDAO {
 				fList.add(at);
 			}
 			
-		}catch(Exception e) {
+		}finally{
 			close(rset);
 			close(pstmt);
 		}

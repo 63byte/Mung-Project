@@ -187,6 +187,111 @@ public class RoomController extends HttpServlet {
 				}// end while
 				
 				// 3.파일정보를 제외한 게시글 정보를 얻어와 저장하기
+				String checkin = multiRequest.getParameter("checkin");
+				String checkout = multiRequest.getParameter("checkout");
+				
+				String[] facilityArr = multiRequest.getParameterValues("facility");
+				String facility = null;
+				if(facilityArr!=null) { // 숙소 시설 배열이 비어있지 않다면.
+					facility= String.join(",", facilityArr);
+				}
+				
+				
+				String[] dogArr = multiRequest.getParameterValues("dog");
+				String dog = null;
+				if(dogArr!=null) { // 견종이 비어있지 않다면.
+					dog= String.join(",", dogArr);
+				}
+				
+				
+				String roomInfo = multiRequest.getParameter("room_info");
+				
+				// 세션에서 로그인한 회원의 번호를 얻어옴
+				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+				int memberNo = loginMember.getMemberNo();
+				
+				
+				// 업체회원 정보 얻어오기
+				Member comMember = service.selectComMember(memberNo);
+				request.setAttribute("comMember", comMember);
+				
+				// 얻어온 변수들을 모두 저장할 Map  생성
+				Map<String,Object> map = new HashMap<String,Object>();
+				
+				map.put("fList",fList);
+				map.put("checkin", checkin);
+				map.put("checkout", checkout);
+				map.put("facility", facility);
+				map.put("dog", dog);
+				map.put("roomInfo", roomInfo);
+				map.put("memberNo", memberNo);
+				
+				// 4. 게시글 등록 비즈니스 로직 수행 후 결과 반환받기
+				int result = service.insertRoom(map);
+				
+				if(result>0) {// DB에 데이터 등록 성공하면 result에 병원번호가 저장되어 있다.
+					swalIcon = "success";
+					swalTitle = "숙소 등록 완료."
+							+ "	관리자 확인 후 게시글이 등록됩니다.";
+					path = "list";
+					
+					
+				} else {
+					swalIcon = "error";
+					swalTitle ="등록 실패";
+					path = "list";
+				}
+				
+				request.getSession().setAttribute("swalIcon", swalIcon);
+	        	request.getSession().setAttribute("swalTitle", swalTitle);
+	        	 
+	        	 response.sendRedirect(path);
+				
+				
+				
+			}
+			
+			// 동물병원 수정 화면 전환 Controller ************
+			
+			else if(command.equals("/updateForm")) {
+				errorMsg ="숙소 수정 화면 불러오는 과정에서 오류 발생";
+				
+				int roomNo = Integer.parseInt(request.getParameter("roomNo"));
+				Room room = service.updateView(roomNo);
+				
+				if(room!=null) {
+					
+					List<Attachment> fList = service.selectHospitalFiles(roomNo);
+					
+					if(!fList.isEmpty()) {
+						request.setAttribute("fList", fList);
+					}
+					path = "/WEB-INF/views/room/roomUpdate.jsp";
+					request.setAttribute("room", room);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+				}else {
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "숙소 수정 화면 전환에 실패했습니다.");
+					response.sendRedirect(request.getHeader("referer"));
+				}
+			}
+			
+			// 숙소 수정하기 **********************************
+			
+			else if(command.equals("update")) {
+				errorMsg = "숙소 수정 과정에서 오류 발생";
+				
+				// 1. MultipartRequest 객체 생성에 필요한 값 설정
+	        	 int maxSize = 20 * 1024 * 1024; // 최대 크기 20MB
+	        	 String root = request.getSession().getServletContext().getRealPath("/");
+	        	 String filePath = root + "resources/image/uploadRoomImages/";
+	        	 
+	        	 // 2. MultipartRequest 객체 생성
+	        	 // -> 생성과 동시에 전달받은 파일이 서버에 저장됨
+	        	 MultipartRequest multiRequest = new MultipartRequest(request, filePath, maxSize, "UTF-8", new MyFileRenamePolicy());
+				
+	        	// 3.파일정보를 제외한 게시글 정보를 얻어와 저장하기
 				String location1 = multiRequest.getParameter("location1");
 				String roomName = multiRequest.getParameter("roomName");
 				String phone1 = multiRequest.getParameter("phone1");
@@ -212,48 +317,59 @@ public class RoomController extends HttpServlet {
 				}
 				
 				
-				String roomInfo = multiRequest.getParameter("roomInfo");
+				String roomInfo = multiRequest.getParameter("room_info");
 				
-				// 세션에서 로그인한 회원의 번호를 얻어옴
-				Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-				int memberNo = loginMember.getMemberNo();
+				int roomNo = Integer.parseInt(multiRequest.getParameter("roomNo"));
 				
-				// 얻어온 변수들을 모두 저장할 Map  생성
-				Map<String,Object> map = new HashMap<String,Object>();
+				// 4. 전달받은 파일 정보를 List에 저장
+				List<Attachment> fList = new ArrayList<Attachment>();
+				Enumeration<String> files = multiRequest.getFileNames();
+				// input type="file"인 모든 요소의 name 속성 값을 반환받아 files에 저장
 				
-				map.put("fList",fList);
-				map.put("location1", location1);
-				map.put("roomName", roomName);
-				map.put("phone", phone);
-				map.put("location2", location2);
-				map.put("checkin", checkin);
-				map.put("checkout", checkout);
-				map.put("facility", facility);
-				map.put("dog", dog);
-				map.put("roomInfo", roomInfo);
-				map.put("memberNo", memberNo);
 				
-				// 4. 게시글 등록 비즈니스 로직 수행 후 결과 반환받기
-				int result = service.insertRoom(map);
-				
-				if(result>0) {// DB에 데이터 등록 성공하면 result에 병원번호가 저장되어 있다.
-					swalIcon = "success";
-					swalTitle = "숙소 등록 완료";
-					path = "view?cp=1&roomNo"+result;
-				} else {
-					swalIcon = "error";
-					swalTitle ="등록 실패";
-					path = "list";
+				while(files.hasMoreElements()) {
+					// 현재 접근중인 name속성값읇 변수에 저장
+					 String name = files.nextElement();
+		        		
+	        		 // 현재 name 속성이 일치하는 요소로 업로드된 파일이 있다면
+	        		 if(multiRequest.getFilesystemName(name) != null) {
+	        			 
+        			 Attachment temp = new Attachment();
+        			 
+        			 // 변경된 파일 이름 temp에 저장
+        			 temp.setFileName(multiRequest.getFilesystemName(name));
+        			 
+        			 // 지정한 파일 경로 tmep에 저장
+        			 temp.setFilePath(filePath);
+        			 
+        			 // 해당 게시글 번호 temp에 저장
+        			 temp.setRoomNo(roomNo);
+        			 
+        			 // 파일 레벨 temp에 저장
+        			 switch(name) {
+        			 case "img0" : temp.setFileLevel(0); break;
+        			 case "img1" : temp.setFileLevel(1); break;
+        			 case "img2" : temp.setFileLevel(2); break;
+        			 case "img3" : temp.setFileLevel(3); break;
+        			 case "img4" : temp.setFileLevel(4); break;
+        			 case "img5" : temp.setFileLevel(5); break;
+        			 }
+        			 
+        			 // temp를 fList에 추가
+        			 fList.add(temp);
+        			// 이미지를 변경한 부분들만 fList에 추가가 된다.
+        		 }
+					
 				}
 				
-				request.getSession().setAttribute("swalIcon", swalIcon);
-	        	request.getSession().setAttribute("swalTitle", swalTitle);
-	        	 
-	        	 response.sendRedirect(path);
 				
 				
 				
 			}
+			
+			
+			
+			
 			
 			
 			

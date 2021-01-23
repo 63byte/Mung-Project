@@ -222,7 +222,7 @@
                     <!-- 등록 / 취소 버튼  -->
                     <div class="row-item">
                         <div class="btn_item">
-                            <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
+                            <button class= "btn_class"  id="updateBtn" type="submit">수정</button>
                             <button class= "btn_class"  id="resetBtn" type="button">취소</button>
                         </div>
                     </div>
@@ -259,6 +259,18 @@ function hospitalInsertValidate(){
 		return false;
 	}
 	
+	
+	/* 전화번호 3/4글자 입력  */
+	var regExp1 = /^\d{3,4}$/;
+	var regExp2 = /^\d{4}$/;
+	 var v1 = $("#phone2").val();
+	 var v2 = $("#phone3").val();
+	 if(!regExp1.test(v1) || !regExp2.test(v2)){
+			alert("전화번호를 다시 입력해 주세요.");
+			$("#phone2").focus();
+		    return false;
+		 }	
+	
 }
 
 
@@ -271,7 +283,7 @@ $(".phoneTest").on("input",function(){
 })
 
 
-/* 삭제 버튼이 눌리면 확인창이 뜬다.  */
+/* 취소 버튼이 눌리면 확인창이 뜬다.  */
 $("#resetBtn").on("click",function(){
 	
  	if( confirm("수정을 취소하고 목록으로 돌아갑니다.")){
@@ -279,6 +291,8 @@ $("#resetBtn").on("click",function(){
  		location.href = "${contextPath}/hospital/list";
  	}
 });
+
+
 
 
 
@@ -392,12 +406,7 @@ function LoadImg(value,num){
 
 
 
-/**** 취소 버튼 클릭했을 때  ****/
-$("#deleteBtn").on("click",function(){
-	if(confirm("수정을 취소합니다.")){
-		location.href="${header.referer}"
-	}
-});
+
 </script>
 
 </body>

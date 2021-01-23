@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
@@ -225,7 +226,6 @@ public class RoomDAO {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, (int)map.get("insertNo"));
 			pstmt.setString(2, (String)map.get("roomName"));
-			pstmt.setString(3, (String)map.get("location1"));
 			pstmt.setString(4, (String)map.get("location2"));
 			pstmt.setString(5, (String)map.get("phone"));
 			pstmt.setString(6, (String)map.get("roomInfo"));
@@ -271,6 +271,80 @@ public class RoomDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+
+
+
+
+
+	/**	숙소에 포함된 이미지 목록 조회 DAO
+	 * @param conn
+	 * @param roomNo
+	 * @return	fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectRoomFiles(Connection conn, int roomNo) throws Exception {
+		List<Attachment> fList = null;
+		String query = prop.getProperty("selectRoomFiles");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1,roomNo);
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				Attachment at = new Attachment( rset.getInt("FILE_NO"),
+                        rset.getString("FILE_NAME"),
+                        rset.getInt("FILE_LEVEL"));
+				
+				 at.setFilePath(rset.getString("FILE_PATH") );
+				
+				fList.add(at);
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fList;
+	}
+
+
+
+
+
+
+	/** 업체 정보 조회 DAO
+	 * @param conn
+	 * @param memberNo
+	 * @return	comMember
+	 * @throws Exception
+	 */
+	public Member selectComMember(Connection conn, int memberNo) throws Exception {
+Member comMember = null;
+		
+		String query = prop.getProperty("selectComMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				comMember = new Member(rset.getNString("COO_NM"), rset.getNString("COO_ADDR"), rset.getNString("COO_PHONE"));
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return comMember;
 	}
 
 }

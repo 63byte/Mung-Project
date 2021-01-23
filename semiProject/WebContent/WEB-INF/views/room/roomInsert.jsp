@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,8 @@
 
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
+<!-- 전화번호  -->
+<c:set var="phone" value="${fn:split(loginMember.comPhone,'-') }"/>
 
 <!-- 숙소 등록하기 -->
     <div class="wrapper">
@@ -61,7 +65,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                            <input type="text" class="full_input" id="companyName" name="roomName" placeholder="숙소명을 입력해 주세요." autocomplete="off" required>
+                            <h5>${loginMember.comName }</h5>
                         </div>
                     </div>
 
@@ -238,50 +242,6 @@
 
 <script>
 
-/* --------------------유효성 검사---------------  */
-
-function hospitalInsertValidate(){
-	
-	// 시간 입력 정규식 00:00
-	var regExp = /^(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9])$/;
-	
-	var checkIn = $("#checkIn").val();
-	var checkOut = $("#checkOut").val();
-	
-	if(!regExp.test(checkIn) || !regExp.test(checkOut)){
-		alert("체크인/체크아웃 시간의 형식이 유효하지 않습니다.");
-		$("#checkIn").focus();
-		return false;
-	}
-	
-	/* 병원정보에 내용이 입력이 안 된다면*/
-	
-	if ($("#room_info").val().trim().length ==0){
-		alert("숙소 정보를 입력해 주세요.");
-		$("#room_info").focus();
-		return false;
-	}
-	
-	/* 견종 필수 체크  */
-	if ($("input:checkbox[name=dog]:checked".length ==0) {
-		alert("출입 가능 견종을 하나 이상 선택해 주세요.");
-		$("input:checkbox[name=dog]").focus();
-		return false;
-	}
-}
-
-
-/* 전화번호 4글자 이상 입력 안 되게 지정  */
-$(".phoneTest").on("input",function(){
-	 if ($(this).val().length > 4) {
-	    $(this).val( $(this).val().slice(0, 4));
-	 }  
-	
-})
-
-
-
-
 
 
 
@@ -305,6 +265,81 @@ $(function(){
 	
 	});
 });
+
+
+/* --------------------유효성 검사---------------  */
+
+function roomInsertValidate(){
+	
+	// 시간 입력 정규식 00:00
+	var regExp = /^(0[0-9]|1[0-9]|2[0-4]):([0-5][0-9])$/;
+	
+	var checkIn = $("#checkIn").val();
+	var checkOut = $("#checkOut").val();
+	
+	if(!regExp.test(checkIn) || !regExp.test(checkOut)){
+		alert("체크인/체크아웃 시간의 형식이 유효하지 않습니다.");
+		$("#checkIn").focus();
+		return false;
+	}
+	
+	
+	/* 전화번호 3/4글자 입력  */
+	var regExp1 = /^\d{3,4}$/;
+	var regExp2 = /^\d{4}$/;
+	 var v1 = $("#phone2").val();
+	 var v2 = $("#phone3").val();
+	 if(!regExp1.test(v1) || !regExp2.test(v2)){
+			alert("전화번호를 다시 입력해 주세요.");
+			$("#phone2").focus();
+		    return false;
+		 }	
+	
+	/* 병원정보에 내용이 입력이 안 된다면*/
+	
+	if ($("#room_info").val().trim().length ==0){
+		alert("숙소 정보를 입력해 주세요.");
+		$("#room_info").focus();
+		return false;
+	}
+	
+	/* 견종 필수 체크  */
+	if(!checkedDog()){
+		return false;
+	}
+	
+}
+
+
+
+		/* 견종 필수 체크  */
+	function checkedDog(){
+		var checkedDog = document.getElementsByName("dog");
+		
+		for(var i=0; i< checkedDog.length; i++){
+			if(checkedDog[i].checked == true){
+				return true;
+			}
+		}
+		alert("출입 가능 견종을 하나 이상 선택해 주세요.");
+		return false
+	}
+
+
+
+/* 전화번호 4글자 이상 입력 안 되게 지정  */
+$(".phoneTest").on("input",function(){
+	 if ($(this).val().length > 4) {
+	    $(this).val( $(this).val().slice(0, 4));
+	 }  
+	
+})
+
+
+
+
+
+
 
 
 
@@ -337,13 +372,7 @@ function LoadImg(value,num){
 		 }
 	  }
 }
-
-
 </script>
-
-
-
-
 
 </body>
 </html>

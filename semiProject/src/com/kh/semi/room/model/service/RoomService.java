@@ -7,7 +7,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
-
+import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.room.model.dao.RoomDAO;
 import com.kh.semi.room.model.esception.FileInsertFailedException;
 import com.kh.semi.room.model.vo.Attachment;
@@ -148,7 +148,7 @@ public class RoomService {
 							 throw new FileInsertFailedException("파일 정보 삽입 실패");
 							 
 						 }
-						 
+						System.out.println(result);
 					 }
 				}
 				
@@ -209,6 +209,60 @@ public class RoomService {
 			}
 			
 			return result;
+		}
+
+
+
+
+		/** 숙소수정 화면 출력 Service
+		 * @param roomNo
+		 * @return	room
+		 * @throws Exception
+		 */
+		public Room updateView(int roomNo) throws Exception {
+			Connection conn = getConnection();
+			
+			Room room = dao.selectRoom(conn, roomNo);
+			
+			// 크로스 스크립팅 방지를 위해 개행문자가 <br>로 바뀌어 있는 상태 -> \r\n 으로 바꿈
+			room.setRoomInfo(room.getRoomInfo().replaceAll("<br>", "\r\n"));
+			
+			close(conn);
+			
+			return room;
+		}
+
+
+
+
+		/**	숙소에 포함된 이미지 목록 조회 Service
+		 * @param roomNo
+		 * @return	fList
+		 * @throws Exception
+		 */
+		public List<Attachment> selectHospitalFiles(int roomNo) throws Exception {
+			Connection conn = getConnection();
+			
+			List<Attachment> fList = dao.selectRoomFiles(conn,roomNo);
+			
+			close(conn);
+			
+			return fList;
+		}
+
+
+
+
+		/** 업체 정보 얻어오기
+		 * @param memberNo
+		 * @return comMember
+		 * @throws Exception
+		 */
+		public Member selectComMember(int memberNo) throws Exception {
+			Connection conn = getConnection();
+			Member comMember = dao.selectComMember(conn,memberNo);
+			close(conn);
+			return comMember;
 		}
 
 
