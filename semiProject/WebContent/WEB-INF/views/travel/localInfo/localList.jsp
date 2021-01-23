@@ -299,6 +299,11 @@ button#searchBtn:hover{
 						<div class="hot-city-title" name="부산">부산</div>
 					</div>
 					<div class="hot-city-box">
+						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_경기도.jpg"
+						class="hot-city-thumbnail-img">
+						<div class="hot-city-title" name="경기도">경기도</div>
+					</div>
+					<div class="hot-city-box">
 						<img src="${pageContext.request.contextPath}/resources/image/travel/localList/여행_인기도시_강원도.jpg"
 						class="hot-city-thumbnail-img">
 						<div class="hot-city-title" name="강원도">강원도</div>
