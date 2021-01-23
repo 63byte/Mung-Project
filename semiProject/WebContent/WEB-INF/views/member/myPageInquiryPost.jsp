@@ -94,6 +94,10 @@ h6 {
 .page-item > a:hover {
 	color: orange;
 }
+
+#result-table:hover{
+	cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -105,9 +109,9 @@ h6 {
 	<div class="main">
 
 		<div id="btnDiv">
-			<a href="myPageInquiryPost.do">
+			<a href="${contextPath}/member/myPageInquiryPost.do">
 			<button type="menu" id="inquiryBtn">내가 쓴 게시글</button></a> 
-			<a href="myPageInquiryReply.do">
+			<a href="${contextPath}/member/myPageInquiryReply.do">
 			<button type="menu" id="inquiryBtn">내가 쓴 댓글</button></a>
 		</div>
 
@@ -117,7 +121,7 @@ h6 {
 
 		<div id="resultDiv">
 			<table class="table table-hover table-striped text-center"
-				id="result">
+				id="result-table">
 				<thead>
 					<tr>
 						<th>글 번호</th>
@@ -283,5 +287,23 @@ h6 {
 
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+		
+		
+		
+		
+		<script>
+		$("#result-table td").on("click", function(){
+			
+			var boardNo = $(this).parent().children().eq(0).text();
+			var url = "${contextPath}/freeBoard/view.do?cp=${pInfo.currentPage}&no="
+				+ boardNo + "${searchStr}";
+
+		location.href = url;			
+			
+			
+		});
+		
+		</script>
+		
 </body>
 </html>

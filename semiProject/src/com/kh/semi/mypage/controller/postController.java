@@ -31,6 +31,16 @@ public class postController extends HttpServlet {
 		// 현재 페이지 얻어옴
 		String cp = request.getParameter("cp");
 		
+		
+		String uri = request.getRequestURI();
+
+		String contextPath = request.getContextPath();
+
+		String command = uri.substring((contextPath + "/member").length());
+
+		// 컨트롤러 내에서 공용으로 사용할 변수 미리 선언
+		RequestDispatcher view = null; // 요청 위임 객체
+		
 	    try {
 	    	postService service = new postService();
 	    	String swalIcon = null;
@@ -52,7 +62,7 @@ public class postController extends HttpServlet {
 	    		request.setAttribute("pInfo", pInfo);
 	    		
 	    		path = "/WEB-INF/views/member/myPageInquiryPost.jsp";
-	    		RequestDispatcher view = request.getRequestDispatcher(path);
+	    		view = request.getRequestDispatcher(path);
 	    		view.forward(request, response);
 	    	}
 	    	
@@ -71,7 +81,7 @@ public class postController extends HttpServlet {
 						request.setAttribute("fList", fList1);
 					}
 					
-					path = "/WEB-INF/views/freeBoard/boardView.jsp";
+					path = "/WEB-INF/views/freeBoard/view.do?cp=" + cp + "no=" + boardNo;
 					request.setAttribute("board", board);
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
