@@ -384,6 +384,8 @@ public class HospitalController extends HttpServlet {
 	        			 case "img1" : temp.setFileLevel(1); break;
 	        			 case "img2" : temp.setFileLevel(2); break;
 	        			 case "img3" : temp.setFileLevel(3); break;
+	        			 case "img4" : temp.setFileLevel(4); break;
+	        			 case "img5" : temp.setFileLevel(5); break;
 	        			 }
 	        			 
 	        			 // temp를 fList에 추가

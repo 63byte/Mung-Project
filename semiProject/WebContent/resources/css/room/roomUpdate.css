@@ -25,7 +25,6 @@ div {
 
 .wrapper{
     width:1100px;
-    height:800px;
     margin: 0 auto;
     /* border : 1px solid sienna; */
     
@@ -99,6 +98,11 @@ margin: 0;
     
 }
 
+.highlighter{
+	
+	background: linear-gradient(to top, #e4f7fa 50%, transparent 100%);
+}
+
 /* 가득 채우는 인풋창  */
 .full_input{
     width :100%;
@@ -130,37 +134,21 @@ margin: 0;
     font-size : 14px;
 }
 
-/* --------------- 업로드 버튼 --------------- */
 
-/* 파일 선택 필드 숨기기 */
-.filebox input[type="file"] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
+
+/* 파일 업로드  */
+
+#titleImgArea{
+	height: 100px;
 }
 
-/* 업로드 버튼 */
-.filebox label {
-    display: inline-block;
-    padding: 6px 12px 6px 12px;
-    border-radius: 5px;
-    color: #fff;
-    /* vertical-align: middle; */
-    border : 1px solid  #8bd2d6;
-    background-color: #8bd2d6;
-    cursor: pointer;
-	outline:none;
+.hospitalArea:hover{
+	cursor: pointer;
 }
 
-/* 파일경로 부분 스타일 */
-.file-upload-name {
-    /* vertical-align: middle; */
-    height: 100%;
-    width: 286px;
-    color: gray;
+.imgarea{
+	width: 65px;
+	display:inline-block;
 }
 
 
@@ -175,6 +163,7 @@ margin: 0;
     outline:none;
     width : 70px;
     height: 40px;
+    margin-top : 50px;
 }
 .btn_item{
     margin-left: 235px;

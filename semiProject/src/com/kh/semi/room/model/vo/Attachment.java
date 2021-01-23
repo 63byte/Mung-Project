@@ -8,6 +8,13 @@ public class Attachment {
 	private int roomNo;	
 	
 	public Attachment() {}
+	
+	public Attachment(int fileNo, String fileName, int fileLevel) {
+		super();
+		this.fileNo = fileNo;
+		this.fileName = fileName;
+		this.fileLevel = fileLevel;
+	}
 
 	public Attachment(int fileNo, String filePath, String fileName, int fileLevel, int roomNo) {
 		super();

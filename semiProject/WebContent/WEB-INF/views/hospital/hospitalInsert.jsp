@@ -243,8 +243,20 @@ function hospitalInsertValidate(){
 		return false;
 	}
 	
-	/* 병원정보에 내용이 입력이 안 된다면*/
 	
+	/* 전화번호 3/4글자 입력  */
+	var regExp1 = /^\d{3,4}$/;
+	var regExp2 = /^\d{4}$/;
+	 var v1 = $("#phone2").val();
+	 var v2 = $("#phone3").val();
+	 if(!regExp1.test(v1) || !regExp2.test(v2)){
+			alert("전화번호를 다시 입력해 주세요.");
+			$("#phone2").focus();
+		    return false;
+		 }	
+	
+	
+	/* 병원정보에 내용이 입력이 안 된다면*/
 	if ($("#hospital_info").val().trim().length ==0){
 		alert("동물 병원 정보를 입력해 주세요.");
 		$("#hospital_info").focus();
