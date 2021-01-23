@@ -83,4 +83,11 @@ TRVEL_IMG_NAME = ?
 WHERE TRVEL_IMG_NO = ?
 </entry>
 
+<!-- 게시글 삭제 -->
+<entry key="updateBoardFl">
+UPDATE TRAVEL SET
+TRAVEL_DEL_FL='Y'
+WHERE TRAVEL_NO=?
+</entry>
+
 </properties>
