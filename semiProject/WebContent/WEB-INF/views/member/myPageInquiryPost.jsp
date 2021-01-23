@@ -193,7 +193,7 @@ h6 {
 					<%-- 쿼리 스트링으로 사용할 내용을 변수에 저장 --%>
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/></c:when>
 				
-				<c:otherwise><c:url var="pageUrl" value="/board/list.do"/></c:otherwise>
+				<c:otherwise><c:url var="pageUrl" value="/member/myPageInquiryPost.do"/></c:otherwise>
 			</c:choose>
 			
 			

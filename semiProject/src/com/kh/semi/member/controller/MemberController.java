@@ -28,8 +28,7 @@ import com.kh.semi.common.MyFileRenamePolicy;
 import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.member.model.service.MemberService;
 import com.kh.semi.member.model.vo.Member;
-import com.kh.semi.mypage.vo.PageInfo;
-import com.kh.semi.mypage.vo.fBoard;
+import com.kh.semi.reply.model.vo.Reply;
 import com.kh.semi.wrapper.EncryptWrapper;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -670,6 +669,18 @@ public class MemberController extends HttpServlet {
 			
 			// -------------- 내가 쓴 댓글 조회 Controller --------------------------------
 			else if(command.equals("/myPageInquiryReply.do")){
+				HttpSession session = request.getSession();
+				Member loginMember = (Member) session.getAttribute("loginMember");
+				int memNo = loginMember.getMemberNo();
+				
+				
+				List<Reply> myReply = service.myReplySelect(memNo);
+				
+				if(myReply != null) {
+					request.setAttribute("myReply", myReply);
+					
+				}
+				
 				
 				path = "/WEB-INF/views/member/myPageInquiryReply.jsp";
 				view = request.getRequestDispatcher(path);

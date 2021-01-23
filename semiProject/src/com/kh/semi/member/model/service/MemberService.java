@@ -11,6 +11,7 @@ import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
 import com.kh.semi.freeBoard.model.vo.Attachment;
 import com.kh.semi.member.model.dao.MemberDAO;
 import com.kh.semi.member.model.vo.Member;
+import com.kh.semi.reply.model.vo.Reply;
 
 public class MemberService {
 	private MemberDAO dao = new MemberDAO();
@@ -342,6 +343,16 @@ public class MemberService {
 		close(conn);
 		
 		return comMember;
+	}
+
+	public List<Reply> myReplySelect(int memNo) throws Exception{
+		Connection conn = getConnection();
+		
+		List<Reply> myReply = dao.myReplySelect(conn, memNo);
+		
+		close(conn);
+		
+		return myReply;
 	}
 
 
