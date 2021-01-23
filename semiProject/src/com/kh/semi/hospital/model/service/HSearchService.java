@@ -47,7 +47,7 @@ public class HSearchService {
 	 * 검색 조건에 따라 sql 조합
 	 * 
 	 * @param map
-	 * @return
+	 * @return condition
 	 */
 	private String createCondition(Map<String, Object> map) {
 		String condition = null;
