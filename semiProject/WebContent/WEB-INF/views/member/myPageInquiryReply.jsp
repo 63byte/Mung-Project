@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -121,13 +123,27 @@ h6 {
                                 <th>작성일</th>
                             </tr>
                         </thead>
-
+											<tbody>
+												<c:choose>
+												<c:when test="${empty myReply}">
+													<tr>
+														<td colspan="4">존재하는 게시글이 없습니다.</td>
+													</tr>
+												</c:when>
+												
+												
+												<c:otherwise>
+												<c:forEach var="myReply1" items="${myReply }">
                         <tr>
-                            <td>1</td>
-                            <th>${commember.comName}</th>
-                            <td></td>
-                            <td>2021-01-13</td>
+                            <td>${myReply1.parentBoardNo}</td>
+                            <td>${myReply1.boardTitle}</td>
+                            <td>${myReply1.replyContent}</td>
+                            <td>${myReply1.replyCreateDate}</td>
                         </tr>
+                        </c:forEach>
+												</c:otherwise>
+												</c:choose>
+											</tbody>
                     </table>
                 </div>
 

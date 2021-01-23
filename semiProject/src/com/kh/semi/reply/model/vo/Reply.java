@@ -11,6 +11,17 @@ public class Reply {
 	private String memberId;			// 댓글 작성 회원
 	private String replyStatus;			// 댓글 상태
 	
+	
+	private String boardTitle;
+	
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+
 	public Reply() {	}
 
 	public Reply(int replyNo, String replyContent, Timestamp replyCreateDate, int parentBoardNo, String memberId,
