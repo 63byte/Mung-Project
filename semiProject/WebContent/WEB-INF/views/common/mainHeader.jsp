@@ -215,7 +215,7 @@ a {
 				
 				<%-- 업체 회원일 때 --%>
 				<c:when test="${!empty loginMember && (loginMember.memberAdmin == 'C') }">
-					<li><a href="${contextPath}/member/myPageUpCompany.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
+					<li><a href="${contextPath}/member/myPageCompany.do" class="nav-items" id="nav-mypage">마이페이지</a></li>
 				</c:when>
 				
 				<%-- 관리자일 때 --%>

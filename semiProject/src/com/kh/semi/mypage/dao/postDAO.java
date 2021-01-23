@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.mypage.vo.fBoard;
+import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.mypage.vo.PageInfo;
 
 public class postDAO {
@@ -135,5 +137,108 @@ public class postDAO {
 
 		return fBoardNo;
 	}
-
+	
+	
+	/** 게시글 상세조회 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public FreeBoard selectBoard(Connection conn, int boardNo) throws Exception{
+		FreeBoard board = null;
+		
+		String query = prop.getProperty("selectBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new FreeBoard();
+				board.setBoardNo( rset.getInt("FREE_BOARD_NO") );
+				board.setBoardTitle( rset.getString("FREE_BOARD_TITLE") );
+				board.setBoardContent( rset.getString("FREE_BOARD_CONTENT") );
+				board.setMemberId( rset.getString("MEM_ID") );
+				board.setReadCount( rset.getInt("FREE_READ_COUNT") );
+				board.setBoardCreateDate( rset.getTimestamp("FREE_BOARD_DATE") );
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return board;
+	}
+	
+	/** 이미지 상세조회 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectBoardFiles(Connection conn, int boardNo) throws Exception{
+		List<Attachment> fList = null;
+		
+		String query = prop.getProperty("selectBoardFiles");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+					
+			fList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				
+				Attachment at = new Attachment(
+								rset.getInt("FREE_FILE_NO"),
+								rset.getString("FREE_FILE_NAME"),
+								rset.getInt("FREE_FILE_LEVEL"));
+				
+				at.setFilePath(rset.getString("FREE_FILE_PATH"));
+				
+				fList.add(at);
+			}
+			
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return fList;
+	}
+	
+	/** 조회수 증가 DAO
+	 * @param conn
+	 * @param boardNo
+	 * @return 
+	 * @throws Exception
+	 */
+	public int increaseReadCount(Connection conn, int boardNo) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("increaseReadCount");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, boardNo);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
 }

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.mypage.dao.postDAO;
 import com.kh.semi.mypage.vo.PageInfo;
 import com.kh.semi.mypage.vo.fBoard;
@@ -57,6 +59,56 @@ public class postService {
 
 		close(conn);
 
+		return fList;
+	}
+	
+	
+	/** 게시글 상세조회 Service
+	 * @param boardNo
+	 * @return board
+	 * @throws Exception
+	 */
+	public FreeBoard selectBoard(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		FreeBoard board = dao.selectBoard(conn, boardNo);
+		
+			if(board != null) {
+			
+			// 조회수 증가
+			int result = dao.increaseReadCount(conn, boardNo);
+			
+				if(result > 0) {		
+					commit(conn);
+					
+					board.setReadCount(board.getReadCount() + 1);
+					
+				}
+				else {
+					rollback(conn);
+				}
+		}
+		
+		close(conn);
+		
+		
+		return board;
+	}
+	
+	
+	/** 상세조회페이지 이미지 보여주는 Service
+	 * @param boardNo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> selectBoardFiles(int boardNo) throws Exception{
+		Connection conn = getConnection();
+		
+		List<Attachment> fList = dao.selectBoardFiles(conn, boardNo);
+		
+		close(conn);
+		
+		
 		return fList;
 	}
 

@@ -170,9 +170,7 @@ html, body {
 
 		<a href="${contextPath}">
 			<div id="logoDiv" style="width: 150px; height: 300px">
-				<img
-					src="${pageContext.request.contextPath}/resources/image/common/logo.png"
-					id="logo">
+				<img src="${pageContext.request.contextPath}/resources/image/common/logo.png" id="logo">
 			</div>
 		</a>
 
@@ -185,12 +183,12 @@ html, body {
 		<div id="findWrapper">
 			<div id="findDiv1">
 				<p id="p1">회원 정보에 등록한 이메일로 인증</p>
-				<p id="p2">회원정보에 입력하신 성함과 이메일 주소를 입력해 주세요.</p>
+				<p id="p2">회원 정보에 입력하신 닉네임과 이메일 주소를 입력해 주세요.</p>
 			</div>
 
 		<form action="${contextPath}/member/findIdResultForm.do" method="post" onsubmit="return submitCheck();">
 			<div id="findDiv2">
-				<label id="userName">이름</label> 
+				<label id="userName">닉네임</label> 
 				<input type="text" id="userName" name="userName" required>
 				<br> 
 				<label id="email">이메일</label> 
@@ -246,7 +244,7 @@ html, body {
 	
 		$("#inputEmail").on("propertychange change keyup paste input", function() {
 			if ($("#inputEmail").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
-				$("#checkFl").text("인증 성공!").css("color", "green");
+				$("#checkFl").text("일치!").css("color", "green");
 				isCertification = true;  //인증 성공여부 check
 			} else {
 				$("#checkFl").text("불일치!").css("color", "red");

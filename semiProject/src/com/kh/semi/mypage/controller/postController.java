@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.semi.mypage.service.postService;
 import com.kh.semi.mypage.vo.PageInfo;
 import com.kh.semi.mypage.vo.fBoard;
+import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FreeBoard;
 import com.kh.semi.member.model.vo.Member;
 
 @WebServlet("/member/myPageInquiryPost.do")
@@ -53,6 +55,35 @@ public class postController extends HttpServlet {
 	    		RequestDispatcher view = request.getRequestDispatcher(path);
 	    		view.forward(request, response);
 	    	}
+	    	
+	    	// 게시글 상세 조회 Controller ********************************************
+	    	else if(command.equals("/view.do")) {
+				errorMsg = "게시글 상세 조회 과정에서 오류 발생";
+				
+				int boardNo = Integer.parseInt(request.getParameter("no"));
+				
+				FreeBoard board = service.selectBoard(boardNo);
+				
+				if(board != null) {
+					List<Attachment> fList1 = service.selectBoardFiles(boardNo);
+					
+					if(!fList1.isEmpty()) {	// 해당 게시글 이미지 정보가 DA에 있을 경우
+						request.setAttribute("fList", fList1);
+					}
+					
+					path = "/WEB-INF/views/freeBoard/boardView.jsp";
+					request.setAttribute("board", board);
+					view = request.getRequestDispatcher(path);
+					view.forward(request, response);
+					
+				}else {
+					
+					request.getSession().setAttribute("swalIcon", "error");
+					request.getSession().setAttribute("swalTitle", "게시글 상세조회 실패");
+					response.sendRedirect("freeList.do?cp=1");
+				}
+				
+			}
 	    	
 	    } catch (Exception e) {
 	    	e.printStackTrace();

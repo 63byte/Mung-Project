@@ -71,7 +71,7 @@ public class MemberService {
 	}
 
 	/**
-	 * 내 정보 수정 Service
+	 * 일반 내 정보 수정 Service
 	 * 
 	 * @param member
 	 * @return result
