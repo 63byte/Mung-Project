@@ -12,7 +12,7 @@
 		*{
             font-family: 'Noto Sans KR', sans-serif;
             font-weight: 500; /* 굵기 지정(100, 300, 400, 500, 700) */
-            font-size: 16px;
+            font-size: 13px;
             color: #212529;
             box-sizing: border-box;
             margin: 0;
@@ -113,20 +113,19 @@
 
 .page {
 	margin: 0 auto;
-	margin-left : 430px;
+	margin-left : 300px;
 }
 
 .search {
 	margin : 0 auto;
-	margin-left : -490px;
-	margin-top : 150px;
+	margin-
 }
 
-#inquiryBtn:hover, #searchBtn:hover {
+#inquiryBtn:hover, #searchBtn:hover, #insertBtn:hover {
 	background-color: #17a2b8;
 }
 
-#inquiryBtn {
+#inquiryBtn, #insertBtn {
 	margin-top: 15px;
 	margin-left: 15px;
 	background-color: #8ad2d5;
@@ -138,6 +137,10 @@
 	margin-bottom : 50px;
 }
 
+#inquiryBtn{
+	margin-bottom : -10px;
+}
+
 #searchBtn {
 	background-color: #8ad2d5;
 	color: white;
@@ -146,8 +149,13 @@
 	height: 38px;
 }
 
-#sea {
-	marin : 0 auto;
+#insertBtn{
+	margin-top : 20px;
+	margin-bottom : 100px;
+}
+
+.col-md-4 {
+	margin-top : 40px;
 }
 
 
@@ -165,10 +173,6 @@
 							type="menu" id="inquiryBtn">여행 후기 게시판</button></a>
 				</div>
 		
-		<div id="banner">
-			<img src="${pageContext.request.contextPath}/resources/image/trip/sea.jpg" id="sea">
-		</div>
-				
 			<div class="row">
 			
 			<c:if test="${!empty tList }">
@@ -191,8 +195,11 @@
 								</c:forEach>
 								
 						  <div class="card-body">
-						  		No.<p class="card-text">${board.boardNo}</p>
-						    	<p class="card-text"><h5>${board.boardTitle} [${board.readCount}]</h5>작성자 : ${board.memberId}<br>
+						  		No.<p class="card-text" style="display:inline-block; font-size:15px;" >${board.boardNo}</p>
+						    	<p class="card-text" style="display:inline-block; font-size:14px;"><h4>${board.boardTitle}</h4>
+						    	<img src="${pageContext.request.contextPath}/resources/image/icon/view.png" style="width:15px">
+						    	${board.readCount} <br>작성자 : ${board.memberId}
+						    	<br>
 						    	
 						    	 <fmt:formatDate var="createDate" value="${board.boardCreateDate}" pattern="yyyy-MM-dd"/>
 											<fmt:formatDate var="today" value="<%= new java.util.Date() %>" pattern="yyyy-MM-dd"/>
@@ -208,7 +215,7 @@
 													<fmt:formatDate value="${board.boardCreateDate}" pattern="HH:mm"/>
 												</c:otherwise>
 											</c:choose>
-						    	 </p>
+											</p>
 						  </div>
 						</div>
 					
@@ -287,9 +294,12 @@
 						</li>
 					</c:if>
 				</ul>
+			</div>	
+			
+			<div>	
 			<c:if test="${!empty loginMember}">
 				<button type="button" class="btn btn-outline-info btn-md" id="insertBtn" 
-					onclick="location.href = '${contextPath}/tripBoard/insertForm.do'">
+					onclick="location.href = '${contextPath}/tripBoard/insertForm.do'" style="width:100px;">
 					글쓰기
 				</button>
 			</c:if>
