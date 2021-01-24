@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.hospital.model.service.HSearchService;
+import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
@@ -45,7 +46,13 @@ public class HSearchController extends HttpServlet {
 			
 			
 			// 동물병원 목록 조회 성공 시 썸네일 목록 조회 수행
-			
+			if(hList!=null) {
+				List<Attachment> fList = service.searchThumbnailList(map,pInfo);
+				
+				if(!fList.isEmpty()) {
+					request.setAttribute("fList", fList);
+				}
+			}
 			
 			
 			// 조회된 내용과 PageInfo 객체를 request객체에 담아서 요청 위임

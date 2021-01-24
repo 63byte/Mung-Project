@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
 
@@ -96,6 +97,58 @@ public class RSearchDAO {
 			close(pstmt);
 		}
 		return rList;
+	}
+
+
+
+
+
+	/** 검색이 적용된 썸네일 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @param condition
+	 * @return	fList
+	 * @throws Exception
+	 */
+	public List<Attachment> searchThumbnailList(Connection conn, PageInfo pInfo, String condition) throws Exception {
+		List<Attachment> fList = null;
+		
+		String query = "SELECT FILE_NAME, ROOM_NO FROM ROOM_IMG " + 
+				"WHERE ROOM_NO IN (" + 
+				"    SELECT ROOM_NO FROM " + 
+				"    (SELECT ROWNUM RNUM, R.* FROM " + 
+				"            (SELECT ROOM_NO  FROM ROOM " + 
+				"            WHERE ROOM_DEL_FL='N' " + 
+				"            AND " + condition + 
+				"            ORDER BY ROOM_NO DESC ) R) " + 
+				"    WHERE RNUM BETWEEN ? AND ?" + 
+				") " + 
+				"AND FILE_LEVEL = 0";
+		try {
+			// 위치 홀더에 들어갈 시작 행, 끝 행번호 계산
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() + 1;
+			int endRow = startRow + pInfo.getLimit()-1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Attachment>();
+			while(rset.next()){
+				Attachment at = new Attachment();
+				at.setFileName(rset.getString("FILE_NAME"));
+				at.setRoomNo(rset.getInt("ROOM_NO"));
+				
+				fList.add(at);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+	return fList;
 	}
 
 }
