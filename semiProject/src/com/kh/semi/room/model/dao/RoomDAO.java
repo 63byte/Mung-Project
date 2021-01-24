@@ -441,7 +441,7 @@ Member comMember = null;
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, newFile.getFilePath());
-			pstmt.setNString(2, newFile.getFileName());
+			pstmt.setString(2, newFile.getFileName());
 			pstmt.setInt(3, newFile.getFileNo());
 			
 			result = pstmt.executeUpdate();

@@ -80,21 +80,21 @@
                         <div class="input_tag">
                             <select class="phone" id="phone1" name="phone1" required> 
                                 <option>02</option>
-                                <option>051</option>
-                                <option>053</option>
-                                <option>032</option>
-                                <option>062</option>
-                                <option>042</option>
-                                <option>052</option>
-                                <option>044</option>
                                 <option>031</option>
+                                <option>032</option>
                                 <option>033</option>
-                                <option>043</option>
                                 <option>041</option>
-                                <option>063</option>
-                                <option>061</option>
+                                <option>042</option>
+                                <option>043</option>
+                                <option>044</option>
+                                <option>051</option>
+                                <option>052</option>
+                                <option>053</option>
                                 <option>054</option>
                                 <option>055</option>
+                                <option>061</option>
+                                <option>062</option>
+                                <option>063</option>
                                 <option>064</option>
                                 <option>070</option>
                             </select>
@@ -138,7 +138,7 @@
                             </label>
                         </div>
                         <div class="input_tag">
-                           <label for="WiFi" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi</label>
+                           <label for="Wifi" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="Wifi" value="WiFi">WiFi</label>
                            <label for="parcking" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="parcking" value="주차">주차</label>
                            <label for="appointment" style="cursor:pointer"><input type="checkbox" class="facility" name="hosp_facility" id="appointment" value="예약">예약</label>
                           <label for="24hour" style="cursor:pointer"> <input type="checkbox" class="facility" name="hosp_facility" id="24hour" value="24시간">24시간</label>

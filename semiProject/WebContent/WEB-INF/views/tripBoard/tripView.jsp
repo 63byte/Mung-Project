@@ -27,6 +27,11 @@
 		margin-right : auto;
 	}
 	
+		
+	.rBtn{
+		float: right;
+	}
+	
 	/* .btn-danger{
 		float: right;
 	} */
@@ -39,7 +44,13 @@
 	<div>
 		<div id="board-area">
 			<!-- Title -->
-				<h3 class="mt-4 display-3">${board.boardTitle }</h3>		
+				<h3 class="mt-4 display-3">${board.boardTitle }</h3>	
+				
+				<c:if test="${!empty loginMember}">
+				<button type="button" class="btn btn-danger rBtn" id="reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">
+  				신고하기
+				</button>
+				</c:if>	
 				
 				<p class="lead">
 					작성자 : ${board.memberId }
@@ -105,6 +116,38 @@
 	</div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">신고하기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="${contextPath}/tripBoard/reportAction.do" method="post">
+        	<div class="form-group">
+        	<label>신고 제목</label>
+        	<input type="text" id="reportTitle" name="reportTitle" class="form-control">
+        	</div>
+        	<input type="hidden" id="bNum" name="bNum" value="${board.boardNo}"> 
+        	<input type="hidden" id="mNum" name="mNum" value="${loginMember.memberNo}"> 
+        	<div class="form-group">
+        	<label>신고 내용</label>
+        	<input type="text" name="reportContent" id="reportContent" class="form-control">
+        	</div>
+		      <div class="modal-footer">
+		      	<button type="reset" class="btn btn-secondary">취소</button>
+		      	<button type="submit" class="btn btn-danger">신고하기</button>
+		      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 		<script>
@@ -116,6 +159,13 @@
 			}
 			
 		});
+			
+			
+			$('#reportBtn').click(function(e){
+				e.preventDefault();
+				$('#reportModal').modal("show");
+				
+			});
 		</script>
 </body>
 </html>
