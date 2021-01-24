@@ -96,7 +96,7 @@ WHERE ROOM_NO =?
 <!-- 파일정보 수정  -->
 <entry key="updateAttachment">
 UPDATE ROOM_IMG SET
-FILE_PATH =?
+FILE_PATH =?,
 FILE_NAME=?
 WHERE FILE_NO =?
 </entry>

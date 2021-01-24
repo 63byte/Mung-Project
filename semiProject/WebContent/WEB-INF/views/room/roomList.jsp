@@ -70,7 +70,7 @@
 	              <tr>
 	                  <td>
                 			<c:forEach var="room" items="${rList}">
-			                      <div class="roomList ">
+			                      <div class="roomList numberSelect">
 			                          <!-- 썸네일 출력  -->
 			                          <c:set var="flag" value="true"/>
 			                          <c:forEach var="thumbnail" items="${fList }">
@@ -86,10 +86,10 @@
 		                         	</c:if>
 			                            
 			                            
-			                            <div class="title_area numberSelect" style="cursor: pointer;">
+			                            <div class="title_area" style="cursor: pointer;">
 			                                <p class="title">${room.roomName }</p>
 			                            </div>
-			                            <div class="address_area numberSelect" style="cursor: pointer;margin-left: 10px;">
+			                            <div class="address_area" style="cursor: pointer;margin-left: 10px;">
 			                                <p class="address">${room.location2 }</p>
 			                            </div>
 			                            <span style="visibility:hidden">${room.roomNo }</span>
@@ -233,7 +233,7 @@
 
 // 숙소 상세조회
 $(".numberSelect").on("click", function(){
-	var roomNo = $(this).siblings("span").text();
+	var roomNo = $(this).children("span").text();
 	
 	var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="+ roomNo +"${searchStr}";
 	
