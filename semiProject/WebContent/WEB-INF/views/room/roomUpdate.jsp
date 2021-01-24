@@ -250,9 +250,9 @@
   	/* 취소 버튼이 눌리면 확인창이 뜬다.  */
   	$("#resetBtn").on("click",function(){
   		
-  	 	if( confirm("수정을 취소하고 목록으로 돌아갑니다.")){
+  	 	if( confirm("수정을 취소합니다.")){
   	 		
-  	 		location.href = "${contextPath}/room/list";
+  	 		location.href = "${header.referer}";
   	 	}
   	});
 
@@ -313,37 +313,16 @@ function LoadImg(value,num){
 }
 
 
-// 지역 초기값 지정
-(function(){
-	$("#location1 > option").each(function(index,item){
-		if($(item).text() == "${location.location1}"){
-			$(item).prop("selected",true);
-		}
-	});
-});
 
 
 
-// 번호 앞 부분 지정
-(function(){
-		// #phone1의 자식 중 option 태그들을 반복 접근
-	$("#phone1 > option").each(function(index, item){
-		// index : 현재 접근중인 인덱스
-		// item : 현재 접근중인 요소
 		
-			// 현재 접근한 요소에 써져있는 값과 전화번호 배열의 첫번째 값이 같다면
-		if( $(item).text() == "${phone[0]}"){
-			// 현재 접근한 요소에 seleted라는 옵션을 추가
-			$(item).prop("selected",true);
-		}
-	});
-})();		
 
 
 
 // 이미지 배치
 	<c:forEach var="file" items="${fList}">
-		$(".hospitalImg").eq(${file.fileLevel}).children("img").attr("src","${contextPath}/resources/image/uploadHospitalImages/${file.fileName}");
+		$(".roomImg").eq(${file.fileLevel}).children("img").attr("src","${contextPath}/resources/image/uploadRoomImages/${file.fileName}");
 	</c:forEach>
 
 		

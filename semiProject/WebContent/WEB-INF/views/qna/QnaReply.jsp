@@ -85,11 +85,12 @@ margin-right:5px;
 .replyList{
 
 }
-
-
-
-
 #addReply{
+ background-color:#8bd2d6; 
+ color:white;
+}
+
+.addReply{
  background-color:#8bd2d6; 
  color:white;
 }
@@ -124,7 +125,7 @@ margin-right:5px;
 	   								 border-radius: 5px;"></textArea>
 	                            </td>
 	                            <td id="replyBtnArea"  style="text-align:right; align:center;">
-	                                <button class="btn" id="addReply" >
+	                                <button class="btn addReply" id="addReply">
 	                                                                     등록
 	                                </button>
 	                            </td>
@@ -252,7 +253,7 @@ $(function(){
 				  			
 				  	    if(replyContent.length == 0){
 				  	    	
-				  	    	alert("댓글 작성 후 클릭해주세요.");
+					  		swal({"icon" : "error" , "title" : "답변을 작성 후 등록해주세요."});
 				  	    
 				  	    
 				  	    }else{
@@ -348,9 +349,9 @@ $(function(){
 	  $(el).parent().before(textarea);
 	  
 	  
-	  var updateReply = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+	  var updateReply = $("<button>").addClass("btn btn-sm ml-1 mb-4 addReply").text("답변 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
 
-	  var cancelBtn = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("취소").attr("onclick", "updateCancel(this)");
+	  var cancelBtn = $("<button>").addClass("btn  btn-sm ml-1 mb-4 addReply").text("취소").attr("onclick", "updateCancel(this)");
 
 	  var replyBtnArea = $(el).parent();
 

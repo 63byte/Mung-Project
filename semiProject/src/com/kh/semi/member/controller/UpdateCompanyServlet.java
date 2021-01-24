@@ -61,9 +61,10 @@ public class UpdateCompanyServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("loginMember");
 
+		int memNo = loginMember.getMemberNo();
 		// 얻어온 수정 정보와 회원 번호를 하나의 Member 객체에 저장
 		Member member = new Member();
-		member.setMemberNo(loginMember.getMemberNo());
+		member.setMemberNo(memNo);
 		member.setMemberNickName(nickName);
 		member.setEmail(memberEmail);
 		member.setPhone(memberPhone);

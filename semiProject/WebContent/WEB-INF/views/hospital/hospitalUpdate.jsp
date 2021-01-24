@@ -20,7 +20,6 @@
 
 <!-- 전화번호를 구분자를 이용하여 분리된 배열 형태로 저장  -->
 <c:set var="phone" value="${fn:split(hospital.phone,'-') }"/>
-<c:set var="location1" value="${hospital.location1 }"/>
 
 
 <!-- 동물병원 수정 -->
@@ -289,9 +288,9 @@ $(".phoneTest").on("input",function(){
 /* 취소 버튼이 눌리면 확인창이 뜬다.  */
 $("#resetBtn").on("click",function(){
 	
- 	if( confirm("수정을 취소하고 목록으로 돌아갑니다.")){
+ 	if( confirm("수정을 취소합니다.")){
  		
- 		location.href = "${contextPath}/hospital/list";
+ 		location.href = "${header.referer}";
  	}
 });
 
@@ -359,7 +358,7 @@ function LoadImg(value,num){
 			$(item).prop("selected",true);
 		}
 	});
-});
+})();
 
 
 

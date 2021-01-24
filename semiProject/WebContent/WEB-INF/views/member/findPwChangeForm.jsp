@@ -232,7 +232,7 @@ html, body {
         		
         
             <label for="id1">현재 아이디</label>
-            <input type="text" id="id1" name="currPw" required>
+            <input type="text" id="id1" name="currId" required>
             <br>
             <label for="pw1">새 비밀번호</label>
             <input type="password" id="pw1" name="pw1" required>

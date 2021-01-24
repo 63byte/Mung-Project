@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -95,40 +99,120 @@
                                 <th>글 제목</th>
                                 <th>아이디</th>
                                 <th>신고 사유</th>
-                                <th>작성일</th>
+                                <th>신고 내용</th>
                             </tr>
                         </thead>
-
+											
+											<c:choose>
+											<c:when test="${empty report}">
+											<tr>
+												<td colspan="5">제보된 신고가 없습니다.</td>
+											</tr>
+											</c:when>
+											
+											<c:otherwise>
+											<c:forEach var="report" items="${report}">
                         <tr>
-                            <td>1</td>
-                            <th>[19]오늘밤웅앵@#$%</th>
-                            <td>leehansol94</td>
-                            <td>음란성</td>
-                            <td>2021-01-15</td>
+                            <td>${report.reportNo }</td>
+                            <th>${report.boardTitle }</th>
+                            <td>${report.memId }</td>
+                            <td>${report.reportTitle }</td>
+                            <td>${report.reportContent }</td>
                         </tr>
+                        </c:forEach>
+                        
+											</c:otherwise>
+                        </c:choose>
                     </table>
                 </div>
 
-                <div class="paging">
-                    <nav aria-label="Page navigation example">
-                        <ul id="pagingBtn" class="pagination pagination-sm justify-content-center">
-                          <li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
-                          <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">3</a></li>
-                          <li class="page-item"><a class="page-link" href="#">4</a></li>
-                          <li class="page-item"><a class="page-link" href="#">5</a></li>
-                          <li class="page-item"><a class="page-link" href="#">6</a></li>
-                          <li class="page-item"><a class="page-link" href="#">7</a></li>
-                          <li class="page-item"><a class="page-link" href="#">8</a></li>
-                          <li class="page-item"><a class="page-link" href="#">9</a></li>
-                          <li class="page-item"><a class="page-link" href="#">10</a></li>
-                          <li class="page-item"><a class="page-link" href="#">&gt;</a></li>
-                          <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
-                        </ul>
-                      </nav>
-                    </div>
+                
+                <%---------------------- Pagination ----------------------%>
+			<%-- 페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장 --%>
+			
+			<c:choose>
+				<%-- 검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지인가? --%>
+				<c:when test="${!empty param.sk && !empty param.sv}">
+					<c:url var="pageUrl" value="/search.do"/>
+					
+					<%-- 쿼리 스트링으로 사용할 내용을 변수에 저장 --%>
+					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/></c:when>
+				
+				<c:otherwise><c:url var="pageUrl" value="/manager/managerReport.do"/></c:otherwise>
+			</c:choose>
+			
+			
+			<!-- 화살표에 들어갈 주소를 변수로 생성 -->
+			<%--
+				검색을 안했을 때 : /board/list.do?cp=1
+				검색을 했을 때 : /search.do?cp=1&sk=title&sv=49
+			 --%>
+			<c:set var="firstPage" value="${pageUrl}?cp=1"/>
+			<c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr}"/>
+			
+			<%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다. ex) 5/2 = 2.5 --%>
+			<%-- <fmt:parseNumber> : 숫자 형태를 지정하여 변수 선언 
+				integerOnly="true" : 정수로만 숫자 표현 (소수점 버림)
+			--%>
+			
+			<fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1)/10}" integerOnly="true"/>
+			<fmt:parseNumber var="prev" value="${c1 * 10}" integerOnly="true"/>
+			<c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}"/> <!-- /board/list/do?cp=10  -->
+			
+			<fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9)/10}" integerOnly="true"/>
+			<fmt:parseNumber var="next" value="${c2 * 10 + 1}" integerOnly="true"/>
+			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}"/>
+			
+			
+			
+			<div class="my-5">
+				<ul class="pagination pagination-sm justify-content-center">
+				
+					<%-- 현재 페이지가 10페이지 초과인 경우 --%>
+					<c:if test="${pInfo.currentPage>10}">
+					
+						<li class="page-item"><!-- 첫 페이지로 이동(<<) -->
+							<a class="page-link" href="${firstPage}">&lt;&lt;</a>
+						</li>
+						
+						<li class="page-item"> <!-- 이전 페이지로 이동(<) -->
+							<a class="page-link" href="${prevPage}">&lt;</a>
+						</li>
+					</c:if>
+					
+					<!-- 페이지 목록 (숫자만) ex) 1 2 3 4 5 6 7 8 9 10 -->
+					<c:forEach var="page" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+											<!-- for(int page=0; page<=10; page++) 비슷하다고 생각하면 된다. -->
+						<c:choose>
+							<c:when test="${pInfo.currentPage == page}">
+								<li class="page-item">
+									<a class="page-link" style="color:orange;">${page}</a>
+								</li>
+							</c:when>
+							
+							<c:otherwise>
+								<li class="page-item">
+									<a class="page-link" href="${pageUrl}?cp=${page}${searchStr}">${page}</a>
+								</li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+					
+					
+					<%-- 다음 페이지가 마지막 페이지 이하인 경우 --%>
+					<c:if test="${next <= pInfo.maxPage}">
+						<li class="page-item"> <!-- 다음 페이지로 이동(>) -->
+							<a class="page-link" href="${nextPage}">&gt;</a>
+						</li>
+						
+						<li class="page-item"><!-- 마지막 페이지로 이동(>>) -->
+							<a class="page-link" href="${lastPage}">&gt;&gt;</a>
+						</li>
+						
+					</c:if>
+
+				</ul>
+			</div>
 
                 <div class="search">
                     <form action="${contextPath}/search.do" method="GET" class="text-center" id="searchForm">

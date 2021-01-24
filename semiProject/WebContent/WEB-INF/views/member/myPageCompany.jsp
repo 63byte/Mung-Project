@@ -168,7 +168,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		<br>
 
 
-		<form action="#" method="POST"
+		<form action="${contextPath}/member/myPageUpdateCompany.do" method="POST"
 			onsubmit="return memberChangevalidate();">
 			<div class="memberChange">
 				<hr>
@@ -186,7 +186,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="userName">닉네임</label> <br>
 					</div>
 					<div class="ip">
-						<input type="text" class="inputTag" id="userName" value="${loginMember.memberNickName}" required>
+						<input type="text" class="inputTag" id="userName" name="userName" value="${loginMember.memberNickName}" required>
 					</div>
 					<div>
 						<span id="checkUserName">&nbsp;</span>
@@ -196,9 +196,13 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<!-- 이메일 -->
 				<div>
 					<div class="lb">
+
 						<label for="email">이메일</label><br>
 						 <h6>${loginMember.email}</h6>
+						 
+
 					</div>
+				
 					<br>
 
 				<!-- 전화번호 -->
@@ -207,7 +211,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="phone">전화번호</label>
 					</div>
 					<div class="ip">
-						<select class="display-ib inputTag phone" id="phone1" name="" required>
+						<select class="display-ib inputTag phone" id="phone1" name="phone1" required>
 							<option>010</option>
 							<option>011</option>
 							<option>016</option>
@@ -215,10 +219,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<option>019</option>
 						</select> &nbsp;-&nbsp; 
 						<input type="number"
-							class="display-ib inputTag phone" id="phone2" name="" value="${phone[1]}" required>
+							class="display-ib inputTag phone" id="phone2" name="phone2" value="${phone[1]}" required>
 						&nbsp;-&nbsp; 
 						<input type="number"
-							class="display-ib inputTag phone" id="phone3" name="" value="${phone[2]}" required>
+							class="display-ib inputTag phone" id="phone3" name="phone3" value="${phone[2]}" required>
 					</div>
 					<div>
 						<span id="checkPhone">&nbsp;</span>
@@ -231,7 +235,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="gender">성별</label>
 					</div>
 					<div class="ip">
-						<select class="inputTag gender" id="gender" name="" required>
+						<select class="inputTag gender" id="gender" name="gender" required>
 							<option>성별</option>
 							<option>여자</option>
 							<option>남자</option>
@@ -254,7 +258,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<label for="phone">업체번호</label>
 					</div>
 					<div class="ip">
-						<select class="display-ib inputTag phone" id="phone3" name=""
+						<select class="display-ib inputTag phone" id="phone4" name="phone4"
 							required>
 							<option>02</option>
 							<option>051</option>
@@ -275,9 +279,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<option>064</option>
 							<option>070</option>
 						</select> &nbsp;-&nbsp; 
-						<input type="number" class="display-ib inputTag phone" id="phone4" name="" value="${comPhone[1]}" required>
+						<input type="number" class="display-ib inputTag phone" id="phone5" name="phone5" value="${comPhone[1]}" required>
 						&nbsp;-&nbsp; 
-						<input type="number" class="display-ib inputTag phone" id="phone5" name="" value="${comPhone[2]}" required>
+						<input type="number" class="display-ib inputTag phone" id="phone6" name="phone6" value="${comPhone[2]}" required>
 					</div>
 					<div>
 						<span id="checkPhone">&nbsp;</span>
@@ -339,7 +343,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
+<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	
 	
 	<script>
@@ -347,6 +351,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		(function() {
 			$("#phone1 > option").each(function(index, item) {
 				if ($(item).val() == "${phone[0]}") {
+					$(item).prop("selected", true);
+				}
+			});
+		})();
+		
+		// 업체 전화번호 옵션 정보 불러오기
+		(function() {
+			$("#phone4 > option").each(function(index, item) {
+				if ($(item).val() == "${comPhone[0]}") {
 					$(item).prop("selected", true);
 				}
 			});
@@ -370,6 +383,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				}
 			});
 		})();
+		
+	    $(function(){
+	        $("#postcodify_search_button").postcodifyPopUp();
+	    });
 	</script>
 
 

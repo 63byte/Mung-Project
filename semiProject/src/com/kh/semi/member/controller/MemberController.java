@@ -257,15 +257,16 @@ public class MemberController extends HttpServlet {
 					cookie.setPath(request.getContextPath());
 
 					response.addCookie(cookie);
+					response.sendRedirect(request.getContextPath());
 
 				} else {
 					session.setAttribute("swalIcon", "error");
 					session.setAttribute("swalTitle", "로그인 실패");
 					session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요.");
-
+					
+					response.sendRedirect(request.getHeader("referer"));
 				}
 
-				response.sendRedirect(request.getContextPath());
 
 			}
 			// -------------------로그아웃 servlet--------------------------
@@ -484,7 +485,7 @@ public class MemberController extends HttpServlet {
 			else if(command.equals("/findPwResult.do")) {
 				errorMsg = "비밀번호 변경 과정에서 문제 발생";
 				
-				String id = request.getParameter("id1");
+				String id = request.getParameter("currId");
 				
 				String pw1 = request.getParameter("pw1");
 				

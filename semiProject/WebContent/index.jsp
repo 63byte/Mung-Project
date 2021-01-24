@@ -208,7 +208,7 @@
 $(".numberSelect").on("click", function(){
 	var roomNo = $(this).children("span").text();
 	
-	var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="+ roomNo;
+	var url = "${contextPath}/room/view?cp=1&roomNo="+ roomNo;
 	
 	location.href=url;
 });
