@@ -82,8 +82,14 @@ public class memberSearchDAO {
 			mList = new ArrayList<Member>();
 			
 			while(rset.next()) {
-				Member member = new Member(rset.getString("MEM_ID"),
-											rset.getString("NICKNAME"));
+				Member member = new Member(
+									rset.getInt("MEM_NO"),
+									rset.getString("MEM_ID"),
+									rset.getString("NICKNAME"),
+									rset.getString("EMAIL"),
+									rset.getString("PHONE"),
+									rset.getString("GENDER")
+						);
 											
 				mList.add(member);
 			}

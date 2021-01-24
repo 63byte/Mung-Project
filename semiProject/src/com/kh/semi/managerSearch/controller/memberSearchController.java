@@ -16,7 +16,7 @@ import com.kh.semi.managerSearch.service.memberSearchService;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.mypage.vo.PageInfo;
 
-@WebServlet("/mSearch.do")
+@WebServlet("/managerSearch/mSearch.do")
 public class memberSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,7 +43,7 @@ public class memberSearchController extends HttpServlet {
 			
 			// 조회된 내용과 PageInfo 객체를 request 객체에 담아서 요청 위임
 			String path = "/WEB-INF/views/manager/managerNormal.jsp";
-			request.setAttribute("mList", mList);
+			request.setAttribute("nMember", mList);
 			request.setAttribute("pInfo", pInfo);
 			
 			RequestDispatcher view = request.getRequestDispatcher(path);

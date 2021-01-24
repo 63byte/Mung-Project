@@ -376,7 +376,7 @@ public class MemberController extends HttpServlet {
 					
 				}else {
 					request.getSession().setAttribute("swalIcon", "error");
-					request.getSession().setAttribute("swalTitle", "아이디찾기 실패");
+					request.getSession().setAttribute("swalTitle", "존재하지 않는 아이디이거나, 이메일 주소가 다릅니다.");
 					response.sendRedirect(request.getHeader("referer"));
 				}
 				
