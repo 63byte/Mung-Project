@@ -29,7 +29,7 @@ public class TravelService {
 		Connection conn = getConnection();
 		
 		// cp가 null일 경우 1, 아니면 cp를 얻어옴.
-		int currentPage = cp == null? 1: Integer.parseInt(cp);
+		int currentPage = (cp == null || cp.equals(""))? 1: Integer.parseInt(cp);
 		
 		// DB에서 전체 게시글 수를 조회하여 반환받기
 		int listCount = dao.getListCount(conn);
