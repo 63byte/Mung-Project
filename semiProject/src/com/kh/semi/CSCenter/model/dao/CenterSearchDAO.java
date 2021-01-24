@@ -229,15 +229,16 @@ public class CenterSearchDAO {
 	public List<Notice> searchNoticeList(Connection conn, PageInfo pInfo, String condition) throws Exception {
 
 		List<Notice> bList = null;
-
-		String query = 
+		
+		String query =
 		"SELECT * FROM" + 
 		"    (SELECT ROWNUM RNUM , V.*" + 
 		"    FROM" + 
 		"        (SELECT * FROM V_NOTICE_BOARD " + 
 		"        WHERE " + condition +
 		"        AND NOTICE_FL = 'Y' ORDER BY NOTICE_NO DESC) V )" + 
-		"WHERE RNUM BETWEEN ? AND ?";		
+		"WHERE RNUM BETWEEN ? AND ?";	
+		
 		
 		try {
 			// SQL 구문 조건절에 대입할 변수 생성

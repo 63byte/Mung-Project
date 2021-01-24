@@ -73,5 +73,12 @@ NOTICE_REPLY_FL = 'N'
 WHERE NOTICE_REPLY_NO = ?
 </entry>
 
+<!-- Notice 댓글 수 조회  -->
+<entry key= "replyCount">
+SELECT COUNT(*) FROM V_NOTICE_REPLY
+WHERE NOTICE_REPLY_FL='Y'
+AND NOTICE_NO = ?
+</entry>
+
 
 </properties>

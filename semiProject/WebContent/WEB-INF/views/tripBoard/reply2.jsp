@@ -59,6 +59,19 @@
 	padding : 15px 0;
 }
 
+.btn1{
+	background-color: #8ad2d5;
+	color: white;
+	border: white;
+	border-radius: 5px;
+	width : 60px;
+	height: 55px;
+}
+
+.btn1:hover{
+	background-color: #17a2b8;
+}
+
 
 
 </style>
@@ -68,11 +81,11 @@
 		<table align="center">
 			<tr>
 				<td id="replyContentArea">
-					<textArea rows="3" id="replyContent"></textArea>
+					<textArea rows="2" id="replyContent"></textArea>
 				</td>
 				<td id="replyBtnArea">
-					<button class="btn btn-info" id="addReply">
-						댓글<br>등록
+					<button class="btn1" id="addReply">
+						등록
 					</button>
 				</td>
 			</tr>

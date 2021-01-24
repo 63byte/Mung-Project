@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마이페이지_내가 쓴 글 조회</title>
+<title>내가 쓴 글 조회</title>
 <head>
 <!-- 구글 폰트 -->
 <link
@@ -51,8 +51,14 @@ div {
 	float: left;
 }
 
-th, td {
+td {
 	font-size: 13px;
+	cursor : pointer;
+}
+
+th {
+	font-size: 13px;
+	cursor : default;
 }
 
 #inquiryBtn {
@@ -80,6 +86,7 @@ th, td {
 	border: white;
 	border-radius: 5px;
 	height: 38px;
+	margin-bottom : 11px;
 }
 
 h6 {
@@ -95,9 +102,6 @@ h6 {
 	color: orange;
 }
 
-#result-table:hover{
-	cursor: pointer;
-}
 </style>
 </head>
 <body>
@@ -283,7 +287,7 @@ h6 {
 				<button id="searchBtn" style="width: 100px; display: inline-block;">검색</button>
 			</form>
 		</div>
-
+</div>
 
 
 		<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

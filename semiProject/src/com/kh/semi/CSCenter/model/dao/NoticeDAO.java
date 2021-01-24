@@ -111,7 +111,6 @@ public class NoticeDAO {
 				notice.setNoticeReadCount(rset.getInt("NOTICE_READCOUNT"));
 				notice.setMemNo(rset.getInt("MEM_NO"));
 				notice.setMemNickName(rset.getString("NICKNAME"));
-				
 				bList.add(notice);
 			}
 	
