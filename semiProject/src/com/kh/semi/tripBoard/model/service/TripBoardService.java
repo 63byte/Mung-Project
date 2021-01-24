@@ -10,9 +10,11 @@ import java.util.Map;
 
 import com.kh.semi.freeBoard.model.exception.FileInsertFailedException;
 import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FreeReport;
 import com.kh.semi.tripBoard.model.dao.TripBoardDAO;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
+import com.kh.semi.tripBoard.model.vo.TripReport;
 
 public class TripBoardService {
 	
@@ -394,6 +396,31 @@ public class TripBoardService {
 		
 		if(result > 0)		commit(conn);
 		else				rollback(conn);
+		
+		return result;
+	}
+
+
+
+	/** 여행 후기 게시판 신고
+	 * @param tReport
+	 * @return
+	 * @throws Exception
+	 */
+	public int tripReport(TripReport tReport) throws Exception{
+		Connection conn = getConnection();
+		
+		int result = dao.tripReport(conn, tReport);
+		
+		if(result > 0) {
+			int reportNum = tReport.getFreeBoardNo();
+			int result2 = dao.reportNum(conn, reportNum);
+			
+			if(result2 > 0)		commit(conn);
+			else				rollback(conn);
+			
+		}
+		close(conn);
 		
 		return result;
 	}

@@ -101,5 +101,16 @@ WHERE RNUM BETWEEN ? AND ?)
 AND TRIP_FILE_LEVEL = 0
 </entry>
 
+<entry key="tripReport">
+INSERT INTO TRIP_REPORT
+VALUES(SEQ_RFN.NEXTVAL, ?, ?, ?, ?)
+</entry>
+
+<entry key="reportNum">
+UPDATE TRIP_REVIEW SET
+TRIP_BOARD_REPORT = TRIP_BOARD_REPORT + 1
+WHERE TRIP_BOARD_NO = ?
+</entry>
+
 
 </properties>
