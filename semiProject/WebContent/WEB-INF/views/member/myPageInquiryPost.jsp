@@ -280,8 +280,6 @@ h6 {
 					style="width: 100px; display: inline-block;">
 					<option value="title">글 제목</option>
 					<option value="content">내용</option>
-					<option value="titcont">제목+내용</option>
-					<option value="writer">작성자</option>
 				</select> <input type="text" name="sv" class="form-control"
 					style="width: 25%; display: inline-block;">
 				<button id="searchBtn" style="width: 100px; display: inline-block;">검색</button>

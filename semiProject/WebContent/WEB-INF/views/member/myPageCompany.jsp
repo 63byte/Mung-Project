@@ -174,7 +174,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<hr>
 				<br>
 
-
+				<div class="lb">
+						<label for="email">아이디</label><br>
+						 <h6>${loginMember.memberId}</h6>
+					</div>
+					<br>
 
 				<!-- 닉네임 -->
 				<div>
@@ -192,23 +196,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<!-- 이메일 -->
 				<div>
 					<div class="lb">
-						<label for="email">이메일</label> <br>
-					</div>
-					<div class="ip">
-						<input type="text" class="inputTag display-ib email" id="email1"
-							autocomplete="off" value="${email[0]}" required> @ 
-							<select
-							class="inputTag display-ib email" id="email2"  required>
-							<option style="color: gray;">이메일 주소 선택</option>
-							<option>daum.net</option>
-							<option>naver.com</option>
-							<option>gmail.com</option>
-							<option>nate.com</option>
-							<option>hanmail.net</option>
-						</select>
+						<label for="email">이메일</label><br>
+						 <h6>${loginMember.email}</h6>
 					</div>
 					<br>
-				</div>
 
 				<!-- 전화번호 -->
 				<div>

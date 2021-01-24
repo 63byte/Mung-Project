@@ -19,11 +19,14 @@ public class Member {
 	private String comAddress;
 	private String comPhone;
 	
-	// 관리자 업체 조회용
 	
 	
-
-
+	// 일반 검색용
+	public Member(String memberId, String memberNickName) {
+		super();
+		this.memberId = memberId;
+		this.memberNickName = memberNickName;
+	}
 
 	// 관리자 일반 조회용
 	public Member(int memberNo, String memberId, String memberNickName, String email, String phone, String gender) {
@@ -36,6 +39,7 @@ public class Member {
 		this.gender = gender;
 	}
 
+	// 관리자 업체 조회용
 	public Member(String memberId, String memberNickName,int memberNo, String phone, String comName, String comPhone) {
 		super();
 		this.memberNo = memberNo;
