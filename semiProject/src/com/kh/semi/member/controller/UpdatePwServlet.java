@@ -44,15 +44,15 @@ public class UpdatePwServlet extends HttpServlet {
 			
 			if(result > 0) { // 비밀번호 변경 성공
 				swalIcon = "success";
-				swalTitle = "비밀번호가 변경되었습니다. ᵔᴥᵔ";
+				swalTitle = "비밀번호가 변경되었습니다.";
 				
 			} else if (result == 0) { // 비밀번호 변경 실패
 				swalIcon = "error";
-				swalTitle = "비밀번호가 변경에 실패했습니다. TᴥT";
+				swalTitle = "비밀번호가 변경에 실패했습니다.";
 				
 			} else { // 현재 비밀번호 불일치
 				swalIcon = "warning";
-				swalTitle = "현재 비밀번호가 일치하지 않습니다. ㅇᴥㅇ";
+				swalTitle = "현재 비밀번호가 일치하지 않습니다.";
 			}
 			
 			// 알림창 전달
