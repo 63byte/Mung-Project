@@ -146,6 +146,10 @@ div {
    cursor : pointer;
 }
 
+
+
+
+
 </style>
 </head>
 <body>
@@ -265,7 +269,7 @@ div {
 				<div class="row-item">
 					<div class="btn_item">
 						<button class="btn_class" id="insertBtn" type="submit">등록</button>
-						<button class="btn_class" id="resetBtn" type="reset">취소</button>
+						<button class="btn_class" id="resetBtn" type="reset" onclick ="location.href='${header.referer}'">취소</button>
 					</div>
 				</div>
 			</form>
@@ -367,6 +371,16 @@ div {
 		      	}
 	    	 }
 	     }
+	     
+	     
+	     /* 취소 버튼이 눌리면 확인창이 뜬다.  */
+	     $("#resetBtn").on("click",function(){
+	     	
+	      	if( confirm("수정을 취소하시겠습니까?")){
+	      		
+	      		location.href = "${header.referer}";
+	      	}
+	     });
 	</script>
 
 

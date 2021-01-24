@@ -257,6 +257,14 @@ button#searchBtn:hover{
 }
 
 
+
+/* 페이징 색 */
+
+.page-item>a:hover {
+	color: orange;
+}
+
+
 </style>
 </head>
 
@@ -491,7 +499,7 @@ button#searchBtn:hover{
                		<c:choose> 
                			<c:when test="${pInfo.currentPage == page }">
 								<!-- 현재 보고 있는 페이지는 클릭이 안 되게 한다.  -->               								
-		                      <li class="page-item"><a class="page-link">${page }</a></li>
+		                      <li class="page-item"><a class="page-link" style="color:orange;">${page }</a></li>
                			</c:when>
                			
                			<c:otherwise>
