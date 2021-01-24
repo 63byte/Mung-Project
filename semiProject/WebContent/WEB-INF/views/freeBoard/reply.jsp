@@ -15,7 +15,13 @@
 #replyContentArea > textarea {
 	resize: none;
 	width: 100%;
-	border: 1px solid #17a2b8
+	border: 1px solid #17a2b8;;
+	border-radius : 5px;
+	margin : 0px;
+}
+
+#replyWrite {
+	margin-right : 400px;
 }
 
 #replyBtnArea {
@@ -47,6 +53,7 @@
 
 .replyBtnArea {
 	text-align: right;
+	marign:0px;]
 }
 
 .replyUpdateContent {
@@ -59,6 +66,28 @@
 	padding : 15px 0;
 }
 
+.btn1{
+	background-color: #8ad2d5;
+	color: white;
+	border: white;
+	border-radius: 5px;
+	width : 60px;
+	height: 55px;
+}
+
+.btn1:hover{
+	background-color: #17a2b8;
+}
+
+#updateReply, #deleteReply {
+	background-color: #8ad2d5;
+	color: white;
+	border: white;
+	border-radius: 5px;
+	width : 60px;
+	height: 55px;
+}
+
 
 
 </style>
@@ -68,11 +97,11 @@
 		<table align="center">
 			<tr>
 				<td id="replyContentArea">
-					<textArea rows="3" id="replyContent"></textArea>
+					<textArea rows="2" id="replyContent"></textArea>
 				</td>
 				<td id="replyBtnArea">
-					<button class="btn btn-info" id="addReply">
-						댓글<br>등록
+					<button class="btn1" id="addReply">
+						등록
 					</button>
 				</td>
 			</tr>
@@ -107,8 +136,8 @@
 				
 				
 				<div class="replyBtnArea">
-					<button class="btn btn-outline-info" id="updateReply" onclick="showUpdateReply(2, this)">수정</button>
-					<button class="btn btn-outline-info" id="deleteReply" onclick="deleteReply(2)">삭제</button>
+					<button class="btn btn2" id="updateReply" style="background-color:orange;" onclick="showUpdateReply(2, this)">수정</button>
+					<button class="btn btn3" id="deleteReply" onclick="deleteReply(2)">삭제</button>
 				</div>
 			</li>
 	

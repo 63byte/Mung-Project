@@ -19,14 +19,38 @@ public class Member {
 	private String comAddress;
 	private String comPhone;
 	
+	// 관리자 업체 조회용
 	
 	
-	
-	public String getComName() {
-		return comName;
+
+
+
+	// 관리자 일반 조회용
+	public Member(int memberNo, String memberId, String memberNickName, String email, String phone, String gender) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberNickName = memberNickName;
+		this.email = email;
+		this.phone = phone;
+		this.gender = gender;
 	}
 
+	public Member(String memberId, String memberNickName,int memberNo, String phone, String comName, String comPhone) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberNickName = memberNickName;
+		this.phone = phone;
+		this.comName = comName;
+		this.comPhone = comPhone;
+	}
 
+	public String getComName() {
+		return comName;
+
+
+	}
 
 	public void setComName(String comName) {
 		this.comName = comName;

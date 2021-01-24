@@ -183,7 +183,7 @@ a:hover{
 				<c:otherwise>
 				<div class="header-right-items">
 					<div class="header-item" id="header-login">
-						<a href="${contextPath}/member/myPage.do">${loginMember.memberNickName}님</a>
+						${loginMember.memberNickName}님
 					</div>
 					<div class="header-item" id="header-signUp">
 						<a href="${contextPath}/member/logout.do">로그아웃</a>

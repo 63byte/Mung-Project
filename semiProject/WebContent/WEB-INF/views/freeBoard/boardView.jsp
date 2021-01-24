@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자유게시판_게시글상세조회</title>
 	<link rel="stylesheet" href="./bootstrapt/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="./bootstrapt/css/bootstrap.css" />
 	<script src="./bootstrapt/js/bootstrap.min.js"></script>
@@ -32,6 +32,12 @@
 	.rBtn{
 		float: right;
 	}
+	
+	#title {
+		font-size : 55px;
+	}
+	
+	
 </style>
 </head>
 <body>
@@ -41,7 +47,7 @@
 	<div>
 		<div id="board-area">
 			<!-- Title -->
-				<h3 class="mt-4 display-3">${board.boardTitle}</h3>
+				<h6 class="mt-4 display-3" id="title">${board.boardTitle}</h6>
 	
 				<c:if test="${!empty loginMember}">
 				<button type="button" class="btn btn-danger rBtn" id="reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">
