@@ -183,12 +183,15 @@
 			
 			<c:if test="${!empty tList }">
 				<c:forEach var="board"  items="${tList}">
+				
 				<div class="col-md-4">
-
-						<div class="card" style="width: 14rem;">
+				    <div class="card" style="width: 14rem;">
 						
-					  	<c:forEach var="thumbnail" items="${trList}">
-												<%-- 현재 출력하려는 게시글 번호와
+						<c:choose>						
+								<c:when test="${!empty trList}">
+					  			<c:forEach var="thumbnail" items="${trList}">
+												<%-- 		전체 목록 조회 썸네일
+															현재 출력하려는 게시글 번호와
 															썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면 
 												--%>
 											<c:if test="${board.boardNo == thumbnail.parentBoardNo}">
@@ -199,7 +202,26 @@
 												<img src="${contextPath}/resources/image/common/logo2.png" class="card-img-top">
 											</c:if>
 								</c:forEach>
-								
+								</c:when>
+							
+								<c:otherwise>
+									<c:forEach var="imgList" items="${imgList}">
+												<%--   
+														검색 목록 조회 썸네일
+														현재 출력하려는 게시글 번호와
+														썸네일 목록 중 부모 게시글 번호가 일치하는 썸네일 정보가 있다면 
+												--%>
+											<c:if test="${board.boardNo == imgList.parentBoardNo}">
+											<img src="${contextPath}/resources/uploadTripImages/${imgList.fileName}" class="card-img-top">
+											</c:if>
+											
+											<c:if test="${empty(board.boardNo == imgList.parentBoardNo)}">
+												<img src="${contextPath}/resources/image/common/logo2.png" class="card-img-top">
+											</c:if>
+									</c:forEach>
+								</c:otherwise>
+						</c:choose>
+							
 						  <div class="card-body">
 						  		No.<p class="card-text" style="display:inline-block; font-size:15px;" >${board.boardNo}</p>
 						    	<p class="card-text" style="display:inline-block; font-size:14px;"><h4>${board.boardTitle}</h4>
@@ -222,14 +244,11 @@
 												</c:otherwise>
 											</c:choose>
 											</p>
-						  </div>
-						</div>
-					
-				</div>
-				</c:forEach>
-				
-			</c:if>
-				
+						  			</div>
+								</div>
+								</div>
+								</c:forEach>
+						</c:if>
 				
 				<c:choose>
 				<%-- 검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지인가? --%>
@@ -258,10 +277,9 @@
 			<fmt:parseNumber var="next" value="${ c2 * 10 + 1 }" integerOnly="true" />
 			<c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
 				
-				
 			<div class="page my-5">
 				<ul class="pagination pagination-sm justify-content-center">
-				
+			
 				<c:if test="${pInfo.currentPage > 10 }">
 						<li>	<!-- 첫 페이지로 이동(<<)  -->
 							<a class="page-link" href="${firstPage }">&lt;&lt;</a>
@@ -343,6 +361,25 @@ $(".card").on("click", function(){
 	location.href = url;
 	
 });
+
+
+// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
+(function() {
+	var searchKey = "${param.sk}";
+	var searchValue = "${param.sv}";
+
+	$("select[name=sk] > option").each(function(index, item) {
+
+		if ($(item).val() == searchKey) {
+			$(item).prop("selected", true);
+
+		}
+	});
+
+	$("input[name=sv]").val(searchValue);
+
+})();
+
 
 
 

@@ -94,7 +94,7 @@
 				</div>
 				<c:choose>
 						<c:when test="${!empty param.sk && !empty param.sv }">
-							<c:url var="goToList" value="../search.do">
+							<c:url var="goToList" value="../search2.do">
 								<c:param name="cp">${param.cp}</c:param>
 								<c:param name="sk">${param.sk}</c:param>
 								<c:param name="sv">${param.sv}</c:param>

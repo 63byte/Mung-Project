@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.semi.tripBoard.model.vo.Attachment;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
 
@@ -102,4 +103,73 @@ public class SearchDAO2 {
 		return tList;
 	}
 
+	/** 검색 썸네일 이미지 가져오기 
+	 * @param conn
+	 * @param pInfo
+	 * @param condition
+	 * @return imgList
+	 * @throws Exception
+	 */
+	public List<Attachment> searchImgList(Connection conn, PageInfo pInfo, String condition) throws Exception {
+
+		List<Attachment> imgList = null;
+
+		
+/*		String query = 
+				
+		"SELECT * FROM" + 
+		"    (SELECT ROWNUM RNUM , V.*" + 
+		"    FROM" + 
+		"        (SELECT * FROM TV_BOARD " + 
+		"        WHERE " + condition +
+		"        AND TRIP_BOARD_DELETEFL = 'N' ORDER BY TRIP_BOARD_NO DESC) V )" + 
+		"WHERE RNUM BETWEEN ? AND ?";*/
+
+		String query = 
+	
+		"SELECT * FROM" +
+		" (SELECT ROWNUM RNUM , V.*"+
+		"  FROM " +
+		" 		(SELECT TRIP_BOARD_NO ,TRIP_FILE_NAME " +
+		" 		 FROM TV_BOARD"+
+		" 		JOIN TRIP_REVIEW_IMAGE USING(TRIP_BOARD_NO)" +
+		" 		WHERE" + condition +
+		" 		AND TRIP_BOARD_DELETEFL = 'N' " + 
+		" 		ORDER BY TRIP_BOARD_NO DESC) V ) "+
+		" 		WHERE RNUM BETWEEN ? AND ? " ;
+		
+		try {
+			// SQL 구문 조건절에 대입할 변수 생성
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() + 1;
+			int endRow = startRow + pInfo.getLimit() -1 ;
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			imgList = new ArrayList<Attachment>();
+			
+			while(rset.next()) {
+				Attachment boardImg = new Attachment(
+							rset.getString("TRIP_FILE_NAME"),
+							rset.getInt("TRIP_BOARD_NO")
+							);
+				imgList.add(boardImg);
+			}
+			
+		}finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return imgList;
+	}
+
+		
+		
 }

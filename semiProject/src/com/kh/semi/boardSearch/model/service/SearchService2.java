@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.semi.boardSearch.model.dao.SearchDAO2;
+import com.kh.semi.tripBoard.model.vo.Attachment;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
 
@@ -92,6 +93,24 @@ public class SearchService2 {
 		}
 		
 		return condition;
+	}
+
+
+
+
+
+	public List<Attachment> selectBoardImgList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<Attachment> imgList = dao.searchImgList(conn, pInfo, condition);
+		
+		close(conn);
+		
+		return imgList;
+		
 	}
 
 }
