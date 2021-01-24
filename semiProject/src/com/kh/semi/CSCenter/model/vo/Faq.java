@@ -12,23 +12,12 @@ public class Faq {
 	private int faqReadCount;
 	private int memNo;
 	private String memId;
+	private String memNickName;
 	public Faq() {
 		
 	}
-	
-	
-	public Faq(int faqNo, String faqTitle, Timestamp faqCreateDt, int faqReadCount, int memNo) {
-		super();
-		this.faqNo = faqNo;
-		this.faqTitle = faqTitle;
-		this.faqCreateDt = faqCreateDt;
-		this.faqReadCount = faqReadCount;
-		this.memNo = memNo;
-	}
-
-
 	public Faq(int faqNo, String faqTitle, String faqContent, Timestamp faqCreateDt, String faqFl, int faqReadCount,
-			int memNo, String memId) {
+			int memNo, String memId, String memNickName) {
 		super();
 		this.faqNo = faqNo;
 		this.faqTitle = faqTitle;
@@ -38,96 +27,70 @@ public class Faq {
 		this.faqReadCount = faqReadCount;
 		this.memNo = memNo;
 		this.memId = memId;
+		this.memNickName = memNickName;
 	}
-
-
 	public int getFaqNo() {
 		return faqNo;
 	}
-
-
 	public void setFaqNo(int faqNo) {
 		this.faqNo = faqNo;
 	}
-
-
 	public String getFaqTitle() {
 		return faqTitle;
 	}
-
-
 	public void setFaqTitle(String faqTitle) {
 		this.faqTitle = faqTitle;
 	}
-
-
 	public String getFaqContent() {
 		return faqContent;
 	}
-
-
 	public void setFaqContent(String faqContent) {
 		this.faqContent = faqContent;
 	}
-
-
 	public Timestamp getFaqCreateDt() {
 		return faqCreateDt;
 	}
-
-
 	public void setFaqCreateDt(Timestamp faqCreateDt) {
 		this.faqCreateDt = faqCreateDt;
 	}
-
-
 	public String getFaqFl() {
 		return faqFl;
 	}
-
-
 	public void setFaqFl(String faqFl) {
 		this.faqFl = faqFl;
 	}
-
-
 	public int getFaqReadCount() {
 		return faqReadCount;
 	}
-
-
 	public void setFaqReadCount(int faqReadCount) {
 		this.faqReadCount = faqReadCount;
 	}
-
-
 	public int getMemNo() {
 		return memNo;
 	}
-
-
 	public void setMemNo(int memNo) {
 		this.memNo = memNo;
 	}
-
-
 	public String getMemId() {
 		return memId;
 	}
-
-
 	public void setMemId(String memId) {
 		this.memId = memId;
 	}
-
-
+	public String getMemNickName() {
+		return memNickName;
+	}
+	public void setMemNickName(String memNickName) {
+		this.memNickName = memNickName;
+	}
 	@Override
 	public String toString() {
 		return "Faq [faqNo=" + faqNo + ", faqTitle=" + faqTitle + ", faqContent=" + faqContent + ", faqCreateDt="
 				+ faqCreateDt + ", faqFl=" + faqFl + ", faqReadCount=" + faqReadCount + ", memNo=" + memNo + ", memId="
-				+ memId + "]";
+				+ memId + ", memNickName=" + memNickName + "]";
 	}
-  
+	
+	
 	
 
 }

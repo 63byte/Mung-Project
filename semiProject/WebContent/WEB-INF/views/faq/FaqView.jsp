@@ -1,5 +1,9 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -16,61 +20,41 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <style>
-
- #wrapper {
-    width: 1100px;
- 	height:100%;
-    margin: 0px auto;
-    border: 1px soild black;
-    display: block;
-    
-    
-	
-    } 
- #side {
-	width: 200px;
-    height: 100%;
-	float:left;
-	margin-top:30px;
- } 
+#wrapper {
+width: 1100px;
+height: 1000px;
+margin: 0px auto;
+}  
+/* #side {
+width: 200px;
+height: 100%;
+float:left;
+margin-top:30px;
+} */ 
 #contenthead{
-	width: 900px;
-    height: 100%;
-    float:left;
-	
+width: 900px;
+height: 100%;
+float:left;
+border-left: 1px solid #e5e5e5;
 }
 
 #uls > li{
     list-style: none;
-	line-height: 80px;
-    
+/* 	line-height: 80px;
+ */    
 }
 #button > button{
  background-color:#8bd2d6; 
  color:white;
 }
-/*.a{
- display: inline-block;
-/  border: 1px solid black;
- 
- }*/
- 
-/*.b{
-    margin-left: 450px;
+.g{
+font-size: 13px;
 }
-/* #contenthead2{
-    width: 100%;
-     border: 1px solid;
-} */
- 
- .g{
-     font-size: 13px;
- }
 /* 이미지 관련 스타일 */
- .boardImg{
+.boardImg{
 width : 100%;
 height: 100%;
-max-width : 300px;
+max-width : 600px;
 max-height: 300px;
 margin : auto;
 }
@@ -95,101 +79,197 @@ a{
 }
 
 
-/* 댓글 스타일 */
+.aside {
+width: 200px;
+height: 100%;
+float: left;
+/* 	border-right: 1px solid #e5e5e5;
+ */
+	/* border: 1px solid red; */
+}
 
+.aside>ul {
+list-style-type: none;
+/* 불렛 없음 */
+padding: 0;
+}
+
+/* 메뉴 위아래 간격 */
+.aside>ul>li {
+padding: 10px 0px 10px 0px;
+}
+
+.aside>ul>li>a {
+text-decoration: none;
+/* 불렛 없음 */
+font-weight: 700;
+color: black;
+
+/* border: 1px solid red; */
+}
+.aside>ul>li>a:hover {
+	color: orange;
+}
+.bigImg:hover{
+  cursor : pointer;
+}
 
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
  <div id="wrapper">
-     	<div id="side">
-         <ul id="uls">
+     	<div class="aside">
+         <ul id="">
 	        <li><a href="${contextPath}/notice/notice.do">공지사항</a></li>
 			<li><a href="${contextPath}/faq/faq.do">자주묻는질문</a></li>
 			<li><a href="${contextPath}/qna/qna.do">Q&A</a></li>
          </ul>
-   </div>  
+  	 </div>  
     <div id="contenthead">
-        <div class="container-fluid" style="margin-top:50px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>제목 : 아... 너무 어렵다..</h3>   
+          <div class="" style="margin-left:30px;">
+            <div class="">
+                <div class="">
+                    <h3 style="margin-top:30px;">${faq.faqTitle}</h3>   
+                </div>
                     <div class="col-md-12" style="text-align:right; font-size: 0.5em;
-					color: gray;">조회수:1230</div><hr>
+					color: gray;">조회수:${faq.faqReadCount}</div>
                 </div>
             </div>
-        </div>           
-         <div class="container-fluid">
+        <hr>         
+        
+         <div class="" style="margin-left:30px;">
                 <div class="row">
                     <div class="col-md-8" style="color:gray;font-size: 0.8em;">
-                 	       글쓴이 : 관리자
+                 	       글쓴이 :${faq.memId}
                     </div>
                     <div class="col-md-4" style="text-align:right; font-size: 0.5em;
 					color: gray;">
-			                        작성일 :  2020년1월18일19:29:09  <br>
-			                        수정일 :  2020년1월18일19:29:09
+			                        작성일 :  <fmt:formatDate value="${faq.faqCreateDt}" pattern="yyyy년MM월dd일HH:mm:ss"/> 
                     </div>
                 </div>
-            </div>
+        
 
-            
-            <div class="container-fluid">
-                 <div class="row">
+            <div class="">
+           		<c:if test="${!empty fList}">
+                 
+                 <div class="" style="margin-top:50px;">
+                   
                     <div class="col-md-12">
                         <div class="carousel slide boardImgArea" id="board-image">
-                            <ol class="carousel-indicators">
-                                <li data-slide-to="0" data-target="#board-image" class="active">
-                                </li>
-                                <li data-slide-to="1" data-target="#board-image">
-                                </li>
-                                <li data-slide-to="2" data-target="#board-image">
-                                </li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100 boardImg" alt="Carousel Bootstrap First" src="${pageContext.request.contextPath}/resources/image/common/logo.png"/>
                            
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100 boardImg" alt="Carousel Bootstrap Second" src="${pageContext.request.contextPath}/resources/image/common/logo.png" />
-                         
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100 boardImg" alt="Carousel Bootstrap Third" src="${pageContext.request.contextPath}/resources/image/common/logo.png" />
-                        
-                                </div>
+                            <ol class="carousel-indicators">
+                                
+                               <c:forEach var="file" items="${fList}" varStatus="vs">
+                               
+                               <c:if test = "${fn:length(fList) > 1}">
+                                <li data-slide-to="${vs.index}" data-target="#board-image"
+	                 					<c:if test="${vs.first}">class="active"</c:if>>
+                                </li>
+                               </c:if>
+                              
+                               </c:forEach>
+                            </ol>
+                           
+                           <!-- 출력되는 이미지 -->
+                            <div class="carousel-inner">
+                                <c:forEach var ="file" items="${fList}" varStatus="vs">
+                                
+                                 <div class="carousel-item <c:if test="${vs.first}">active</c:if>">
+		          					<img class="d-block w-100 boardImg bigImg" id="${file.faqFileNo}"
+		        					  src="${contextPath}/resources/image/center/faqImg/${file.faqFileName}">
+		        					  
+		        			      <p style="color:gray;font-size:0.8em;margin-left:119px;">*클릭 시 새 창으로 원본 이미지를 볼 수 있습니다.</p>
+		        					  
+	          					 </div>
+                             
+                              </c:forEach>
                             </div> 
+                            <c:if test="${fn:length(fList)> 1}">
                             <a class="carousel-control-prev" href="#board-image" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> 
                             <a class="carousel-control-next" href="#board-image" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
+                     		</c:if>
                         </div>
                     </div>
-                </div> 
-            		<div id="" style="height: 250px; margin-top:20px;">안녕하세요 저는 관리자입니다.. 많은 분들이 뭐라뭐라 하시는데열심히하고 있습니다 제발 믿어주세요 ..제발ㄹ</div>
-            </div>
-              
-        
-        <div class="float-right" id="button">
-            <button type="button" class=" btn  ml-1 mr-1" onclick="location.href='faqUpdate.do'">수정</button>
-            <button id="deleteBtn" class=" btn">삭제</button>
-        </div>
-        
-        
-     	 <div style="margin-top:80px;">
-        	   댓글
-        	 <hr>
-         </div> 
-        
-        </div> 
-        
-        <jsp:include page="/WEB-INF/views/notice/NoticeReply.jsp"></jsp:include>
+               	 	</div> 
+            		</c:if>
+           	 		 <div id="" style=" width:100%;height: 250px; margin-top:20px;">${faq.faqContent}</div>
+		    	</div>
+                  </div>
+        	<c:choose>	
+				  <c:when test="${!empty param.sk && !empty param.sv}">
+				   
+				    <c:url var="goToList" value="../centerSearch/faq.do">
+		                <c:param name="cp">${param.cp}</c:param>
+		                <c:param name="sk">${param.sk}</c:param>
+		                <c:param name="sv">${param.sv}</c:param>
+				    </c:url>
+				  
+				  </c:when>
+				  <c:otherwise>
+						<c:url var="goToList" value="faq.do">
+		             	  <c:param name="cp">${param.cp}</c:param>					 
+						</c:url>
+				  </c:otherwise>
+			</c:choose>
+		
+        <div class="float-right" id="button" style="margin-top:25px;">
+            <button type="button" class=" btn  ml-1 mr-1" onclick="location.href='${goToList}'">목록으로</button>
+            
+			<c:if test="${!empty loginMember && loginMember.memberAdmin =='A'}">
+	            <%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
+				<c:if test="${!empty param.sv && !empty param.sk}">
+				 <%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
+					<c:set var="searchStr" value ="&sk=${param.sk}&sv=${param.sv}"/>
+			    </c:if>
 
+	            <button type="button" class=" btn ml-1 mr-1" onclick="location.href='faqUpdateForm.do?cp=${param.cp}&no=${param.no}${searchStr}'">수정</button>
+	            <button id="deleteBtn" class=" btn">삭제</button>
+	      	</c:if>
+
+        </div>
+      
+       </div> 
   	</div>
      
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+	<script>
+	
+	
+ 	// 삭제 버튼 이벤트
+	$("#deleteBtn").on("click",function(){
+		
+		
+		swal({
+			  title: "정말 삭제 하시겠습니까?",
+			  text: "삭제가 되면 데이터를 되돌릴 수 없습니다.",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			
+				  location.href = "deleteFaq.do?no=${faq.faqNo}";			  
 
-
+			  } else {
+			    swal("삭제를 취소하셨습니다.");
+			  }
+			});
+		
+		
+		
+	});
+	 var img = document.getElementsByClassName("bigImg");
+	 for (var x = 0; x < img.length; x++) {
+	   img.item(x).onclick=function() {window.open(this.src)}; 
+	 
+	   
+    }
+	
+	
+	</script>
 
 
 </body>

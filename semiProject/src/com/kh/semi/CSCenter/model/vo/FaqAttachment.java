@@ -11,10 +11,10 @@ public class FaqAttachment {
 	public FaqAttachment() {
 	}
 
-
-	public FaqAttachment(int faqFileNo, String faqFileName, int faqFileLevel) {
+	public FaqAttachment(int faqFileNo, String faqFilePath, String faqFileName, int faqFileLevel) {
 		super();
 		this.faqFileNo = faqFileNo;
+		this.faqFilePath = faqFilePath;
 		this.faqFileName = faqFileName;
 		this.faqFileLevel = faqFileLevel;
 	}
