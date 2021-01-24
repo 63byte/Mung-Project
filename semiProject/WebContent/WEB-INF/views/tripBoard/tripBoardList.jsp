@@ -29,6 +29,7 @@
         }
 
 
+
 .container{
     width:1100px;
     height:800px;
@@ -159,13 +160,6 @@
 	margin-top : 40px;
 }
 
-.a {
-	color: black;
-}
-
-.my-5 > .page-link {
-	color : black;
-}
 
 </style>
 </head>
@@ -281,10 +275,10 @@
 			
 				<c:if test="${pInfo.currentPage > 10 }">
 						<li>	<!-- 첫 페이지로 이동(<<)  -->
-							<a class="page-link" href="${firstPage }">&lt;&lt;</a>
+							<a class="page-link" style="color : black;" href="${firstPage }">&lt;&lt;</a>
 						</li>
 						<li>	<!-- 이전 페이지로 이동 (<) -->
-							<a class="page-link" href="${prevPage }">Previous</a>
+							<a class="page-link" style="color : black;" href="${prevPage }">&lt;</a>
 						</li>
 					</c:if>
 					
@@ -299,7 +293,7 @@
 							
 							<c:otherwise>
 							<li>
-								<a class="page-link" href="${pageUrl}?cp=${page}${searchStr}">${page}</a>
+								<a class="page-link" style="color : black;" href="${pageUrl}?cp=${page}${searchStr}">${page}</a>
 							</li>
 							</c:otherwise>
 											
@@ -310,10 +304,10 @@
 					<%-- 다음 페이지가 마지막 페이지 미만인 경우 --%>
 					<c:if test="${next <= pInfo.maxPage }">
 						<li>	<!-- 다음 페이지로 이동 (>) -->
-							<a class="page-link" href="${nextPage }">Next</a>
+							<a class="page-link" style="color : black;" href="${nextPage }">&gt;</a>
 						</li>
 						<li>	<!-- 마지막 페이지로 이동(>>)  -->
-							<a class="page-link" href="${lastPage }">&gt;&gt;</a>
+							<a class="page-link" style="color : black;" href="${lastPage }">&gt;&gt;</a>
 						</li>
 					</c:if>
 				</ul>
@@ -342,8 +336,6 @@
 										style="width: 100px; width: 100px; display: inline-block;">검색</button>
 				</form>
 			</div>
-			
-			
 	</div>
 
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -221,7 +221,7 @@ height :100%;
 
 
 			<div class="my-5">
-				<ul class="pagination">
+				<ul class="pagination pagination-sm justify-content-center">
 				
 				<c:if test="${pInfo.currentPage > 10 }">
 					<li><a class="page-link" href="${firstPage}">&lt;&lt;</a></li>
