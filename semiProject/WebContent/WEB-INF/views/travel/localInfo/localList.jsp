@@ -426,7 +426,52 @@ button#searchBtn:hover{
 			</c:if>
 			
 			
-
+			
+			<%---------------------- Pagination ----------------------%>
+	         <%-- 페이징 처리 주소를 쉽게 사용할 수 있도록 미리 변수에 저장 --%>
+	         <c:choose>
+	         	<%-- 검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지인가? --%>
+	         	<c:when test="${!empty param.searchKey && !empty param.searchValue}">
+	         		<c:url var="pageUrl" value="/travelSearch.do"/>
+	         		
+	         		<!-- 쿼리스트링으로 사용할 내용을 변수에 저장 -->
+	         		<c:set var="searchStr" value="&sk=${param.searchKey}&sv=${param.searchValue}"/>
+	         	</c:when>
+	         	
+	         	<c:otherwise>
+			        <c:url var="pageUrl" value="/travel/localList.do"/>
+	         	</c:otherwise>
+	         	
+	         </c:choose>
+	         
+	         
+	         
+	                  <!-- 화살표에 들어갈 주소를 변수로 생성 -->
+	         <%-- 
+	         	검색을 안했을 때 : /board/list.do?cp=1
+	         	검색을 했을 때 :  /search.do?cp=1&sk=title&sv=49
+	          --%>
+	         
+	         <c:set var="firstPage" value="${pageUrl}?cp=1${searchStr}"/>
+	         <c:set var="lastPage" value="${pageUrl}?cp=${pInfo.maxPage}${searchStr}"/>
+	         
+	         <%-- EL을 이용한 숫자 연산의 단점 : 연산이 자료형에 영향을 받지 않는다. --%>
+	         <%--
+	          <fmt : parseNumber> : 숫자 형태를 지정하여 변수 선언 
+	          integerOnly="true" : 정수로만 숫자 표현(소수점 버림)
+	         --%>
+	         
+	         <fmt:parseNumber var="c1" value="${(pInfo.currentPage - 1) / 10}" integerOnly="true"/>
+	         <fmt:parseNumber var="prev" value="${c1 * 10}" integerOnly="true"/>
+	         <c:set var="prevPage" value="${pageUrl}?cp=${prev}${searchStr}" />
+	         
+	         <fmt:parseNumber var="c2" value="${(pInfo.currentPage + 9) / 10 }" integerOnly="true" />
+	         <fmt:parseNumber var="next" value="${ c2 * 10 + 1}" integerOnly="true" />
+	         <c:set var="nextPage" value="${pageUrl}?cp=${next}${searchStr}" />
+	         
+	         
+			
+			
             <!-- 페이징 -->
             <div class="paging">
                 <nav aria-label="Page navigation example">
@@ -472,11 +517,11 @@ button#searchBtn:hover{
 			
 			<!-- 검색필드 -->
 			<div class="mb-5">
-			<form action="search" method="GET" class="text-center" id="searchForm">
+			<form action="${contextPath}/travelSearch.do" method="GET" class="text-center" id="searchForm">
 				<select name="searchKey" class="form-control">
-					<option value="title">글제목</option>
+					<option value="location">지역</option>
+					<option value="title">제목</option>
 					<option value="content">내용</option>
-					<option value="titcont">제목+내용</option>
 				</select>
 				<input type="text" name="searchValue" class="form-control">
 				<button class="form-control btn btn-primary" id="searchBtn">검색</button>
@@ -517,6 +562,35 @@ button#searchBtn:hover{
   	  location.href = url;
     });
 	
+    
+    
+    
+    
+	// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능
+    (function(){
+       var searchKey = "${param.searchKey}";
+       // 파라미터 중 sk가 있을 경우 ex)"49"
+       // 파라미터 중 sk가 없을 경우 ex) ""
+       var searchValue = "${param.searchValue}";
+       
+       // 검색창 select의 option을 반복 접근
+       $("select[name=searchKey] > option").each(function(index, item){
+          // index : 현재 접근 중인 요소의 인덱스
+          // item : 현재 접근 중인 요소
+          
+                // title          title
+          if( $(item).val() == searchKey ){ // 제목으로 검색한 경우
+            $(item).prop("selected", true);
+          }
+       });
+       
+       // 검색어 입력창에 searchValue 값 출력
+       $("input[name=searchValue]").val(searchValue);
+       
+    })();
+    
+    
+    
 	
 	
 	</script>
