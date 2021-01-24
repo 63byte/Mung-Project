@@ -117,8 +117,9 @@
 }
 
 .search {
-	margin : 0 auto;
-	margin-
+	margin-top : -30px;
+	margin-bottom : 60px;
+	margin-left : 190px;
 }
 
 #inquiryBtn:hover, #searchBtn:hover, #insertBtn:hover {
@@ -158,8 +159,13 @@
 	margin-top : 40px;
 }
 
+.a {
+	color: black;
+}
 
-
+.my-5 > .page-link {
+	color : black;
+}
 
 </style>
 </head>
@@ -254,7 +260,7 @@
 				
 				
 			<div class="page my-5">
-				<ul class="pagination">
+				<ul class="pagination pagination-sm justify-content-center">
 				
 				<c:if test="${pInfo.currentPage > 10 }">
 						<li>	<!-- 첫 페이지로 이동(<<)  -->
@@ -270,7 +276,7 @@
 						<c:choose>
 							<c:when test="${pInfo.currentPage == page}">
 								<li>
-									<a class="page-link">${page}</a>
+									<a class="page-link" style="color:orange;">${page}</a>
 								</li>
 							</c:when>
 							
