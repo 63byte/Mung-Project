@@ -344,7 +344,7 @@ div {
 										end="${pInfo.endPage}">
 										<c:choose>
 											<c:when test="${pInfo.currentPage == page}">
-												<li><a class="page-link">${page}</a></li>
+												<li><a class="page-link" style="color:orange;">${page}</a></li>
 											</c:when>
 
 											<c:otherwise>
