@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내가 쓴 글 조회</title>
+<title>마이페이지_내가 쓴 글 조회</title>
 <head>
 <!-- 구글 폰트 -->
 <link

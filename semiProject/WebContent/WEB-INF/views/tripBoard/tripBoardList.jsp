@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>여행 후기 게시판</title>
 <style>
 		*{
             font-family: 'Noto Sans KR', sans-serif;
