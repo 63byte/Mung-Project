@@ -485,7 +485,7 @@ public class MemberController extends HttpServlet {
 			else if(command.equals("/findPwResult.do")) {
 				errorMsg = "비밀번호 변경 과정에서 문제 발생";
 				
-				String id = request.getParameter("id1");
+				String id = request.getParameter("currId");
 				
 				String pw1 = request.getParameter("pw1");
 				
