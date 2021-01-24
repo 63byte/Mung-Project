@@ -288,9 +288,9 @@ $(".phoneTest").on("input",function(){
 /* 취소 버튼이 눌리면 확인창이 뜬다.  */
 $("#resetBtn").on("click",function(){
 	
- 	if( confirm("수정을 취소하고 목록으로 돌아갑니다.")){
+ 	if( confirm("수정을 취소합니다.")){
  		
- 		location.href = "${contextPath}/hospital/list";
+ 		location.href = "${header.referer}";
  	}
 });
 
