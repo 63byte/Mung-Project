@@ -178,7 +178,7 @@
                			<c:when test="${pInfo.currentPage == page }">
 								<!-- 현재 보고 있는 페이지는 클릭이 안 되게 한다.  -->               								
 		                      <li class="page-item">
-		                      		<a class="page-link">${page }</a>
+		                      		<a class="page-link" style="color:orange;">${page }</a>
 		                      </li>
                			</c:when>
                			
