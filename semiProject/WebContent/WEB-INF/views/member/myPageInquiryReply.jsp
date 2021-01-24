@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>마이페이지_내가 쓴 글 조회</title>
+<title>내가 쓴 댓글 조회</title>
 <head>
 <!-- 구글 폰트 -->
 <link
@@ -52,9 +52,21 @@ div {
 	float: left;
 }
 
-th, td {
+td {
 	font-size: 13px;
+	cursor : pointer;
 }
+
+th {
+	font-size: 13px;
+	cursor : default;
+}
+
+#resultDiv {
+	cursor : default;
+}
+
+
 
 #inquiryBtn {
 	margin-top: 15px;
@@ -105,6 +117,7 @@ h6 {
 .page-item>a:hover {
 	color: orange;
 }
+
 </style>
 </head>
 <body>
@@ -128,10 +141,10 @@ h6 {
                     <table class="table table-hover table-striped text-center" id="result-table">
                         <thead>
                             <tr>
-                                <th>글 번호</th>
-                                <th>글 제목</th>
-                                <th>댓글 내용</th>
-                                <th>작성일</th>
+                                <th id="title1">글 번호</th>
+                                <th id="title1">글 제목</th>
+                                <th id="title1">댓글 내용</th>
+                                <th id="title1">작성일</th>
                             </tr>
                         </thead>
 											<tbody>
