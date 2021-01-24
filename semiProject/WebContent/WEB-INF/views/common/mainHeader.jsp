@@ -117,7 +117,7 @@ a {
 }
 
 #header-signUp > a:hover {
-	color : orange;
+	color : white;
 }
 </style>
 </head>
