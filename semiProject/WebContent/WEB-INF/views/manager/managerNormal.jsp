@@ -144,7 +144,6 @@
 			<c:choose>
 				<%-- 검색 내용이 파라미터에 존재할 때 == 검색을 통해 만들어진 페이지인가? --%>
 				<c:when test="${!empty param.sk && !empty param.sv}">
-					<c:url var="pageUrl" value="/search.do"/>
 					
 					<%-- 쿼리 스트링으로 사용할 내용을 변수에 저장 --%>
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/></c:when>
@@ -230,11 +229,10 @@
 			
 
                 <div class="search">
-                    <form action="${contextPath}/mSearch.do" method="GET" class="text-center" id="searchForm">
+                    <form action="${contextPath}/managerSearch/mSearch.do" method="GET" class="text-center" id="searchForm">
                         <select name="sk" class="form-control" style="width: 100px; display: inline-block;">
-                            <option value="title">아이디</option>
-                            <option value="content">닉네임</option>
-                            <option value="titcont">전화번호</option>
+                            <option value="id">아이디</option>
+                            <option value="nickNm">닉네임</option>
                         </select>
 
                         <input type="text" name="sv" class="form-control" style="width: 25%; display: inline-block;">
@@ -248,7 +246,23 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
 
+<script>
+(function() {
+	var searchKey = "${param.sk}";
+	var searchValue = "${param.sv}";
 
+	$("select[name=sk] > option").each(function(index, item) {
+
+		if ($(item).val() == searchKey) {
+			$(item).prop("selected", true);
+
+		}
+	});
+
+	$("input[name=sv]").val(searchValue);
+
+})();
+</script>
 
 
 
