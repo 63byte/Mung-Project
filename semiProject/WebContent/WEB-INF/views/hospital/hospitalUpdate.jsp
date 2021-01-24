@@ -91,21 +91,21 @@
                         <div class="input_tag">
                             <select class="phone" id="phone1" name="phone1" required> 
                                 <option>02</option>
-                                <option>051</option>
-                                <option>053</option>
-                                <option>032</option>
-                                <option>062</option>
-                                <option>042</option>
-                                <option>052</option>
-                                <option>044</option>
                                 <option>031</option>
+                                <option>032</option>
                                 <option>033</option>
-                                <option>043</option>
                                 <option>041</option>
-                                <option>063</option>
-                                <option>061</option>
+                                <option>042</option>
+                                <option>043</option>
+                                <option>044</option>
+                                <option>051</option>
+                                <option>052</option>
+                                <option>053</option>
                                 <option>054</option>
                                 <option>055</option>
+                                <option>061</option>
+                                <option>062</option>
+                                <option>063</option>
                                 <option>064</option>
                                 <option>070</option>
                             </select>
