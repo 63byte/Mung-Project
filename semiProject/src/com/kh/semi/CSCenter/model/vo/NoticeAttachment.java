@@ -13,6 +13,17 @@ public class NoticeAttachment {
 	
 	
 
+	public NoticeAttachment(int notiFileNo, String notifilePath, String notifileName, int notiFileLevel) {
+		super();
+		this.notiFileNo = notiFileNo;
+		this.notifilePath = notifilePath;
+		this.notifileName = notifileName;
+		this.notiFileLevel = notiFileLevel;
+	}
+
+
+
+
 	public NoticeAttachment(int notiFileNo, String notifilePath, String notifileName, int notiFileLevel,
 			int notiParentNo) {
 		super();
