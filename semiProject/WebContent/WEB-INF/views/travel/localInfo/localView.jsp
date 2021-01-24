@@ -168,16 +168,14 @@ min-width:900px;
 		
 		<!-- --------------------- 메인Contents --------------------- -->
 		<div class="main">
-			<br> 지역정보>상세글 <br>
-			<br>
+			<%--  <br> 지역정보>상세글 <br>
+			<br> --%>
 			
 			
 			<%-- <div id="localInfo-bigBanner">
 				<img
 					src="${pageContext.request.contextPath}/resources/image/travel/localInfo/local-bigbanner(900x200)_seoul.jpg">
 			</div> --%>
-
-
 
 				<!-- 이미지 출력 -->
 				<c:if test="${!empty fList}">
@@ -225,10 +223,10 @@ min-width:900px;
 				
 			<br>
 			<!-- 도시 -->
-			${travel.travelLocation}<br>
+			<h5 style="font-weight:600;">[${travel.travelLocation}]</h5>
 
 			<!-- Title -->
-			<h3>${travel.travelTitle}</h3>
+			<h2>${travel.travelTitle}</h2>
 
 			<hr>
 			글번호 : ${travel.travelNo}<br> 작성일 : ${travel.travelBoardDate} <br>
