@@ -1,5 +1,9 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -17,65 +21,93 @@
 </head>
 <style>
 
- #wrapper {
+/*  #wrapper {
     width: 1100px;
- 	height:100%;
-    margin: 0px auto;
+ 	height: 100%;
+    margin:  auto;
     border: 1px soild black;
     display: block;
-    
-    
-	
-  } 
- #side {
+   }	 */
+  
+  #wrapper{ 
+   	width: 1100px;
+	height: 100%;
+	margin: 0px auto;
+   }
+   
+/*  .aside {
 	width: 200px;
-    height: 100%;
-	float:left;
-	margin-top:30px;
- } 
-#contenthead{
+	height: 100%;
+	float: left;
+	border-right: 1px solid #e5e5e5;
+}
+ */
+
+ #contenthead{
 	width: 900px;
     height: 100%;
     float:left;
+	border-left: 1px solid #e5e5e5;
 	
-}
+} 
 
-#uls > li{
+/* #uls > li{
     list-style: none;
-	line-height: 80px;
+ 	 line-height: 80px;
     
-}
+} */
 #button > button{
  background-color:#8bd2d6; 
  color:white;
 }
-/*.a{
- display: inline-block;
-/  border: 1px solid black;
- 
- }*/
- 
-/*.b{
-    margin-left: 450px;
+
+.g{
+    font-size: 13px;
 }
-/* #contenthead2{
-    width: 100%;
-     border: 1px solid;
-} */
  
- .g{
-     font-size: 13px;
- }
+ .aside {
+	width: 200px;
+	height: 100%;
+	float: left;
+/* 	border-right: 1px solid #e5e5e5;
+ */
+	/* border: 1px solid red; */
+}
+
+.aside>ul {
+	list-style-type: none;
+	/* 불렛 없음 */
+	padding: 0;
+}
+
+/* 메뉴 위아래 간격 */
+.aside>ul>li {
+	padding: 10px 0px 10px 0px;
+}
+
+.aside>ul>li>a {
+	text-decoration: none;
+	/* 불렛 없음 */
+	font-weight: 700;
+	color: black;
+
+	/* border: 1px solid red; */
+}
+
+.aside>ul>li>a:hover {
+	color: orange;
+}
+ 
 /* 이미지 관련 스타일 */
  .boardImg{
 width : 100%;
 height: 100%;
-max-width : 300px;
+max-width : 600px;
 max-height: 300px;
 margin : auto;
 }
 .boardImgArea{
-    height: 300px;
+ height: 300px;
 }
 .carousel-indicators > li{
 background-color: #ccc !important;
@@ -93,6 +125,9 @@ li{
 a{
   color:black;
 }
+.bigImg:hover{
+  cursor : pointer;
+}
 
 
 /* 댓글 스타일 */
@@ -101,94 +136,234 @@ a{
 </style>
 <body>
 	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
-
  <div id="wrapper">
-     	<div id="side">
+     <div class="aside" id="aside">
          <ul id="uls">
-	        <li><a href="${contextPath}/notice/notice.do">공지사항</a></li>
-			<li><a href="${contextPath}/faq/faq.do">자주묻는질문</a></li>
-			<li><a href="${contextPath}/qna/qna.do">Q&A</a></li>
+	        <li><a href="${contextPath}/notice/notice.do" class="">공지사항</a></li>
+			<li><a href="${contextPath}/faq/faq.do" class="">자주묻는질문</a></li>
+			<li><a href="${contextPath}/qna/qna.do" class="">Q&A</a></li>
          </ul>
-   </div>  
+    </div>  
     <div id="contenthead">
-        <div class="container-fluid" style="margin-top:50px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>제목 : 아... 너무 어렵다..</h2>   
+     <div class="">
+            <div class="">
+                 <div class="" style="margin-left:30px;">
+                    <h2 style="margin-top:30px;">${qna.qnaTitle}</h2>   
+ 			    </div>
                     <div class="col-md-12" style="text-align:right; font-size: 0.5em;
-					color: gray;">조회수:1230</div><hr>
-                </div>
-            </div>
-        </div>           
-         <div class="container-fluid">
+					color: gray;">조회수:${qna.qnaReadCount}</div>
+       </div>
+        </div>  
+        <hr>         
+         <div class="" style="margin-left:30px;">
                 <div class="row">
                     <div class="col-md-8" style="color:gray;font-size: 0.8em;">
-                 	       글쓴이 : 관리자
+                 	       글쓴이 :${qna.memNickName}
                     </div>
                     <div class="col-md-4" style="text-align:right; font-size: 0.5em;
 					color: gray;">
-			                        작성일 :  2020년1월18일19:29:09  <br>
-			                        수정일 :  2020년1월18일19:29:09
+			                        작성일 :<fmt:formatDate value="${qna.qnaCreateDt}" pattern="yyyy년MM월dd일HH:mm:ss"/>
                     </div>
-                </div>
             </div>
 
-            
-            <div class="container-fluid">
-                 <div class="row">
+           <div class="">
+          	 <c:if test="${!empty fList}">
+                 <div class="row"  style="margin-top:50px;">
+                   
                     <div class="col-md-12">
+                       
                         <div class="carousel slide boardImgArea" id="board-image">
                             <ol class="carousel-indicators">
-                                <li data-slide-to="0" data-target="#board-image" class="active">
-                                </li>
-                                <li data-slide-to="1" data-target="#board-image">
-                                </li>
-                                <li data-slide-to="2" data-target="#board-image">
-                                </li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img class="d-block w-100 boardImg" alt="Carousel Bootstrap First" src="${pageContext.request.contextPath}/resources/image/common/logo.png"/>
+                             
+                             <c:forEach var="file" items="${fList}" varStatus="vs">
+                                
+                                 <c:if test = "${fn:length(fList) > 1}">
+	                                <li data-slide-to="${vs.index}" data-target="#board-image"
+		                 					<c:if test="${vs.first}">class="active"</c:if>>
+	                                </li>
+                              	 </c:if>
+                              
+                              </c:forEach>
                            
+                            </ol>
+                            
+                            <div class="carousel-inner">
+                               
+                              <c:forEach var="file" items="${fList}" varStatus="vs">
+                               
+                                <div class="carousel-item <c:if test="${vs.first}">active</c:if>">
+                                    <img class="d-block w-100 boardImg bigImg"  id="${file.qnaImgNo}" 
+                                    src="${contextPath}/resources/image/center/qnaImg/${file.qnaImgName}"/>
                                 </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100 boardImg" alt="Carousel Bootstrap Second" src="${pageContext.request.contextPath}/resources/image/common/logo.png" />
-                         
-                                </div>
-                                <div class="carousel-item">
-                                    <img class="d-block w-100 boardImg" alt="Carousel Bootstrap Third" src="${pageContext.request.contextPath}/resources/image/common/logo.png" />
-                        
-                                </div>
+                             
+                             </c:forEach>
                             </div> 
+                            
+                           <c:if test = "${fn:length(fList) > 1}">
                             <a class="carousel-control-prev" href="#board-image" data-slide="prev"><span class="carousel-control-prev-icon"></span> <span class="sr-only">Previous</span></a> 
                             <a class="carousel-control-next" href="#board-image" data-slide="next"><span class="carousel-control-next-icon"></span> <span class="sr-only">Next</span></a>
-                        </div>
+                		   </c:if>
+                		  </div>
                     </div>
                 </div> 
-            		<div id="" style="height: 250px; margin-top:20px;">안녕하세요 저는 관리자입니다.. 많은 분들이 뭐라뭐라 하시는데열심히하고 있습니다 제발 믿어주세요 ..제발ㄹ</div>
+               		<p style="color:gray;font-size:0.8em;margin-left:119px;">*클릭 시 새 창으로 원본 이미지를 볼 수 있습니다.</p>
+                </c:if>
+            <div id="" style="height: 250px; margin-top:20px;">
+		        ${qna.qnaContent}
             </div>
-              
+           </div>
+           
+          
+              <c:choose>	
+				  <c:when test="${!empty param.sk && !empty param.sv}">
+				   
+				    <c:url var="goToList" value="../centerSearch/qna.do">
+		                <c:param name="cp">${param.cp}</c:param>
+		                <c:param name="sk">${param.sk}</c:param>
+		                <c:param name="sv">${param.sv}</c:param>
+				    </c:url>
+				  
+				  </c:when>
+				  <c:otherwise>
+						<c:url var="goToList" value="qna.do">
+		             	  <c:param name="cp">${param.cp}</c:param>					 
+						</c:url>
+				  </c:otherwise>
+			</c:choose>
+           
         
         <div class="float-right" id="button">
-            <button type="button" class=" btn  ml-1 mr-1" onclick="location.href='Q&AUpdate.do'">수정</button>
-            <button id="deleteBtn" class=" btn">삭제</button>
+            <button id="" class=" btn" onclick="location.href='${goToList}'">목록으로</button>
+            
+            
+                        
+			<c:if test="${!empty loginMember && ((qna.memNo == loginMember.memberNo) || (loginMember.memberAdmin== 'A'))}">
+	            <%-- 게시글 수정 후 상세조회 페이지로 돌아오기 위한 url 조합 --%>
+				<c:if test="${!empty param.sv && !empty param.sk}">
+				 <%-- 검색을 통해 들어온 상세 조회 페이지인 경우 --%>
+					<c:set var="searchStr" value ="&sk=${param.sk}&sv=${param.sv}"/>
+			    </c:if>
+            
+            <button type="button" id="updateBtn"class=" btn  ml-1 mr-1">수정</button>
+            <button type="button" id="deleteBtn"class=" btn  ml-1 mr-1">삭제</button>
+        	</c:if>
         </div>
         
         
-     	 <div style="margin-top:80px;">
-        	    답변
-        	<hr>
+     
+        
          </div> 
-        
-        </div> 
-        
-        <jsp:include page="/WEB-INF/views/qna/QnaReply.jsp"></jsp:include>
-
+	          <div style="margin-top:80px; margin-left:20px;">
+	    		  답변
+	         </div> 
+	          <hr>
+	    <jsp:include page="/WEB-INF/views/qna/QnaReply.jsp"></jsp:include>
+        </div>
   	</div>
      
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
+<script>
+var parentQnaNo = "${qna.qnaNo}";
+var loginMember ="${loginMember.memberAdmin}";
+console.log(parentQnaNo);
+
+// 삭제 버튼 이벤트
+$("#deleteBtn").on("click",function(){
+	
+	
+	
+	
+	swal({
+		  title: "정말 삭제하시겠습니까?",
+		  text: "삭제되면 데이터를 복구 할 수 없습니다.",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+		  if (willDelete) {
+		
+			  location.href = "deleteQna.do?no=${qna.qnaNo}";			  
+
+		  } else {
+		    swal("삭제를 취소하셨습니다.");
+		  }
+		});
+	
+	
+});
+
+ //수정 버튼 이벤트
+$("#updateBtn").on("click",function(){
+	
+
+	if(loginMember == 'A'){
+		
+		
+		swal({
+			  title: "수정하시겠습니까?",
+			  text: "이미 답변 처리가 완료된 문의글입니다.",
+			  icon: "warning",
+			  buttons: true,
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			
+				location.href ="qnaUpdateForm.do?cp=${param.cp}&no=${param.no}${searchStr}";	  
+
+			  } else {
+			    swal("수정을 취소하셨습니다.");
+			  }
+			});
+		
+
+	}else{
+		
+		
+		 $.ajax({
+ 			  url : "${contextPath}/centerReply/replyCheck.do",
+ 			  data : { "parentQnaNo" : parentQnaNo,
+ 				       },
+ 			  
+ 			  type: "post",
+ 			  success :function(check){
+ 				  
+ 				  
+ 				  if(check == 'Y'){  
+ 					  
+ 				   
+ 				    swal({"icon" : "error" ,"title" :"이미 문의 답변이 처리 됐습니다. 새로 문의 해주세요."});
+ 					  
+ 					  
+ 				  }else{
+ 					  
+ 							
+ 			         location.href ="qnaUpdateForm.do?cp=${param.cp}&no=${param.no}${searchStr}";		  
+ 					  
+ 				  }
+ 			
+ 			  },error : function(){
+ 				  
+ 				  console.log("수정 체크 중 오류 발생")
+ 			  }
+ 			  
+ 			  
+ 		  });
+	}
+	
+}); 
+ 
+ // 사진 원본 보기
+
+var img = document.getElementsByTagName("bigImg");
+for (var x = 0; x < img.length; x++) {
+  img.item(x).onclick=function() {window.open(this.src)}; 
+}
 
 
+</script>
 
 
 

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
 <!DOCTYPE html>
@@ -19,58 +21,90 @@
 </head>
 <style>
  
-    #side{
+/*     #side{
         float: left;
         width: 200px;
         height: 800px;
-    }
-    #wrapper{
-        width: 1100px;
-        height: 800px;
-        margin: 0px auto;
-    }   
-    #wrapper2{
-     float: left;
-     width: 895px;
-     margin-top: 35px;
+} */
 
-    } 
- 
+#wrapper{
+width: 1100px;
+height: 800px;
+margin: 0px auto;
+}   
+#wrapper2{
+float: left;
+width: 900px;
+margin-top: 20px;
+} 
 
-    #uls{
-        margin-top: 30px;
-    } 
 
-   #uls > li{
+/* #uls{
+    margin-top: 30px;
+}  */
+
+/*    #uls > li{
         line-height: 80px;
         list-style: none;
-    }
+    } */
 /*     div{
         border: 1px solid;
     } */
-    #img > div{
-        display: inline-block;
-        border: 1px solid gray;
-   	    border-radius: 5px;
-   	    
-    }
-    #img{
-  	 width: 895px;
-    }
-    
-    a{
-	  color:black;
-	}
+#img > div{
+display: inline-block;
+border: 1px solid gray;
+border-radius: 5px;
+	    
+ }
+ #img{
+ width: 895px;
+ }
+ 
+a{
+color:black;
+}
+	
+	
+.aside {
+width: 200px;
+height: 100%;
+float: left;
+border-right: 1px solid #e5e5e5;
+}
+
+.aside>ul {
+list-style-type: none;
+/* 불렛 없음 */
+padding: 0;
+}
+
+/* 메뉴 위아래 간격 */
+.aside>ul>li {
+	padding: 10px 0px 10px 0px;
+}
+
+.aside>ul>li>a {
+	text-decoration: none;
+	/* 불렛 없음 */
+	font-weight: 700;
+	color: black;
+
+	/* border: 1px solid red; */
+}
+
+.aside>ul>li>a:hover {
+	color: orange;
+}
 
 
 </style>
 <body>
 <jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
  <form  action ="${contextPath}/faq/faqInsert.do" method="post"
-      enctype="multipart/form-data" role="form" onsubmit="return boardValidate();">
+      enctype="multipart/form-data" role="form" onsubmit="return faqValidate();">
 <div id="wrapper">
-    <div id="side">
-        <ul id="uls">
+    <div class="aside">
+        <ul id="">
 			<li><a href="${contextPath}/notice/notice.do">공지사항</a></li>
 			<li><a href="${contextPath}/faq/faq.do">자주묻는질문</a></li>
 			<li><a href="${contextPath}/qna/qna.do">Q&A</a></li>
@@ -78,18 +112,18 @@
     </div>
     <div id="wrapper2">
      
-        <div>
+		 <div style="margin-left:10px;">
             <h3>자주묻는질문 등록</h3>
+        </div>
+            <hr>
+        <div>
+            <input type="text" name="faqTitle" id="faqTitle" style="width:80%; border:none;margin-left:10px;" placeholder="제목을입력하세요.">
             <hr>
         </div>
         <div>
-            <input type="text" name="faqTitle" id="faqTitle"style="width:80%; border:none;" placeholder="제목을입력하세요.">
-            <hr>
+            <p style="color: gray;margin-left:10px;">이미지 업로드</p>
         </div>
-        <div>
-            <p style="color: gray;">이미지 업로드</p>
-        </div>
-        <div id="img" >
+        <div id="img" style="margin-left:10px;" >
             <div class="boardImg">
                 <img id="contentImg0"style="width: 100px; height:100px;">
             </div>
@@ -126,13 +160,33 @@
 			<input type="file" id="img7" name="img7" onchange="LoadImg(this,7)">
 		</div>
         <hr>
-          <p style="color:gray">내용</p>
-          <textarea rows="13" id="faqContent"name="faqContent"style="resize: none; width: 895px; border: 3px solid #8bd2d6;
-   								 border-radius: 5px;"></textarea> 
+          <p style="color:gray; margin-left:10px;">내용</p>
+          <textarea rows="13" id="faqContent"name="faqContent" style="resize: none; width: 890px; border: 3px solid #8bd2d6;
+   								 border-radius: 5px; margin-left:10px;"></textarea> 
 
         <div class="float-right">
             <button type="submit" class="btn" style="background-color:#8bd2d6; color:white;">등록</button>
-            <button type="button"  class="btn"  style="background-color:#8bd2d6; color:white;">취소</button>
+           
+<%--                <c:choose>	
+				  <c:when test="${!empty param.sk && !empty param.sv}">
+				   
+				    <c:url var="goToList" value="../search/faq.do">
+		                <c:param name="cp">${param.cp}</c:param>
+		                <c:param name="sk">${param.sk}</c:param>
+		                <c:param name="sv">${param.sv}</c:param>
+				    </c:url>
+				  
+				  </c:when>
+				  <c:otherwise>
+						<c:url var="goToList" value="faq.do">
+		             	  <c:param name="cp">${param.cp}</c:param>					 
+						</c:url>
+				  </c:otherwise>
+			</c:choose>  
+            --%>
+           
+            <button type="button"  class="btn" style="background-color:#8bd2d6; color:white;"
+            <%-- onclick="location.href='${goToList}'" --%> onclick="history.back()">취소</button>
         </div>
 
     	</div> 
@@ -143,16 +197,16 @@
 
 
 // 유효성 검사 
-function boardValidate() {
-	if ($("#boardTitle").val().trim().length == 0) {
+function faqValidate() {
+	if ($("#faqTitle").val().trim().length == 0) {
 		alert("제목을 입력해 주세요.");
-		$("#boardTitle").focus();
+		$("#faqTitle").focus();
 		return false;
 	}
 
-	if ($("#boardcontent").val().trim().length == 0) {
+	if ($("#faqContent").val().trim().length == 0) {
 		alert("내용을 입력해 주세요.");
-		$("#boardcontent").focus();
+		$("#faqContent").focus();
 		return false;
 	}
 }

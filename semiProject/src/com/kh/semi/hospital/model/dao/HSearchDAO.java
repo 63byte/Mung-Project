@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
@@ -100,6 +101,60 @@ public class HSearchDAO {
 			close(pstmt);
 		}
 		return hList;
+	}
+
+
+
+
+
+
+
+	/** 검색이 적용된 썸네일 목록 조회 DAO
+	 * @param conn
+	 * @param pInfo
+	 * @param condition
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> searchThumbnailList(Connection conn, PageInfo pInfo, String condition) throws Exception {
+		List<Attachment> fList = null;
+		
+		String query = "SELECT IMG_NAME, HOSP_NO FROM HOSPITAL_IMG " + 
+				"WHERE HOSP_NO IN (" + 
+				"    SELECT HOSP_NO FROM " + 
+				"    (SELECT ROWNUM RNUM, H.* FROM " + 
+				"            (SELECT HOSP_NO  FROM HOSPITAL " + 
+				"            WHERE HOSP_DEL_FL='N' " + 
+				"            AND " + condition + 
+				"            ORDER BY HOSP_NO DESC ) H) " + 
+				"    WHERE RNUM BETWEEN ? AND ?" + 
+				") " + 
+				"AND IMG_LEVEL = 0";
+		try {
+			// 위치 홀더에 들어갈 시작 행, 끝 행번호 계산
+			int startRow = (pInfo.getCurrentPage() -1) * pInfo.getLimit() + 1;
+			int endRow = startRow + pInfo.getLimit()-1;
+			
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			fList = new ArrayList<Attachment>();
+			while(rset.next()){
+				Attachment at = new Attachment();
+				at.setFileName(rset.getString("IMG_NAME"));
+				at.setHospNo(rset.getInt("HOSP_NO"));
+				
+				fList.add(at);
+			}
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+
+	return fList;
 	}
 
 

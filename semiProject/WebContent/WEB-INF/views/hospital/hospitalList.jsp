@@ -101,12 +101,11 @@
 				                <div class="thumbnail">
 				                    <div class="thumbnail_img">
 				                    
-				                        <!-- 썸네일 출력  -->
-									
+				                       
+				                       
+				                        <!------------------------ 썸네일 출력  --------------------->
 									<c:set var="flag" value="true"/>
 				                   <c:forEach var="thumbnail" items="${fList }">
-				                   
-				                   
 										<c:if test="${hospital.hospNo == thumbnail.hospNo }">
 												<%-- 현재 출력하려는 게시글 번호와 썸네일 목록 중 부모게시글번호가 일치하는 썸네일 정보가 있다면  --%>
 												<img class="hospital_img"  src="${contextPath }/resources/image/uploadHospitalImages/${thumbnail.fileName}">
@@ -118,7 +117,7 @@
 										<img class="hospital_img"  src="${contextPath }/resources/image/icon/nonImage.png">
 		                         	</c:if>
 				                            
-				                            
+				                     <!-------------------------------------------------------->       
 				                            
 				                    </div>
 				                    <div class="thumbnail_info numberSelect" style="cursor: pointer;">

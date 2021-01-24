@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.semi.hospital.model.dao.HSearchDAO;
+import com.kh.semi.hospital.model.vo.Attachment;
 import com.kh.semi.hospital.model.vo.Hospital;
 import com.kh.semi.hospital.model.vo.PageInfo;
 
@@ -62,7 +63,7 @@ public class HSearchService {
 		case "hospitalName": condition = " HOSP_NM LIKE '%' || '" + searchValue + "' || '%' "; break; 
 			 
 		case "location":  condition = " (LOCATION1 LIKE '%' || '" + searchValue + "' || '%' "
-										+ "OR LOCATION2 LIKE '%' || ' " + searchValue + "' || '%') "; break;
+										+ "OR LOCATION2 LIKE '%' || '" + searchValue + "' || '%') "; break;
 		}
 		
 		
@@ -88,6 +89,26 @@ public class HSearchService {
 		close(conn);
 		
 		return hList;
+	}
+
+	
+	
+	
+	/** 검색이 적용된 썸네일 목록 조회 Service
+	 * @param map
+	 * @param pInfo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> searchThumbnailList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<Attachment> fList = dao.searchThumbnailList(conn,pInfo, condition);
+		
+		close(conn);
+		return fList;
 	}
 	
 

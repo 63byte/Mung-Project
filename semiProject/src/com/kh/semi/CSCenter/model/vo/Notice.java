@@ -4,92 +4,106 @@ import java.sql.Timestamp;
 
 public class Notice {
 
-	private int notice_no;
-	private String notice_title;
-	private String notice_content;
-	private Timestamp create_dt;
-	private int notice_readCount;
-	
-	private char notice_delFl;
-	private int mem_no;
-	
+	private int noticeNo;
+	private String noticeTitle;
+	private String noticeContent;
+	private Timestamp noticeCreateDt;
+	private int noticeReadCount;
+	private String noticeFl;
+	private int memNo;
+	private String memNickName;
 	public Notice() {
 	}
 
-	public Notice(int notice_no, String notice_title, String notice_content, Timestamp create_dt, int notice_readCount,
-			char notice_delFl, int mem_no) {
+	public Notice(int noticeNo, String noticeTitle, String noticeContent, Timestamp noticeCreateDt, int noticeReadCount,
+			String noticeFl, int memNo, String memNickName) {
 		super();
-		this.notice_no = notice_no;
-		this.notice_title = notice_title;
-		this.notice_content = notice_content;
-		this.create_dt = create_dt;
-		this.notice_readCount = notice_readCount;
-		this.notice_delFl = notice_delFl;
-		this.mem_no = mem_no;
+		this.noticeNo = noticeNo;
+		this.noticeTitle = noticeTitle;
+		this.noticeContent = noticeContent;
+		this.noticeCreateDt = noticeCreateDt;
+		this.noticeReadCount = noticeReadCount;
+		this.noticeFl = noticeFl;
+		this.memNo = memNo;
+		this.memNickName = memNickName;
+		
+		
+		
 	}
 
-	public int getNotice_no() {
-		return notice_no;
+	public int getNoticeNo() {
+		return noticeNo;
 	}
 
-	public void setNotice_no(int notice_no) {
-		this.notice_no = notice_no;
+	public void setNoticeNo(int noticeNo) {
+		this.noticeNo = noticeNo;
 	}
 
-	public String getNotice_title() {
-		return notice_title;
+	public String getNoticeTitle() {
+		return noticeTitle;
 	}
 
-	public void setNotice_title(String notice_title) {
-		this.notice_title = notice_title;
+	public void setNoticeTitle(String noticeTitle) {
+		this.noticeTitle = noticeTitle;
 	}
 
-	public String getNotice_content() {
-		return notice_content;
+	public String getNoticeContent() {
+		return noticeContent;
 	}
 
-	public void setNotice_content(String notice_content) {
-		this.notice_content = notice_content;
+	public void setNoticeContent(String noticeContent) {
+		this.noticeContent = noticeContent;
 	}
 
-	public Timestamp getCreate_dt() {
-		return create_dt;
+	public Timestamp getNoticeCreateDt() {
+		return noticeCreateDt;
 	}
 
-	public void setCreate_dt(Timestamp create_dt) {
-		this.create_dt = create_dt;
+	public void setNoticeCreateDt(Timestamp noticeCreateDt) {
+		this.noticeCreateDt = noticeCreateDt;
 	}
 
-	public int getNotice_readCount() {
-		return notice_readCount;
+	public int getNoticeReadCount() {
+		return noticeReadCount;
 	}
 
-	public void setNotice_readCount(int notice_readCount) {
-		this.notice_readCount = notice_readCount;
+	public void setNoticeReadCount(int noticeReadCount) {
+		this.noticeReadCount = noticeReadCount;
 	}
 
-	public char getNotice_delFl() {
-		return notice_delFl;
+	public String getNoticeFl() {
+		return noticeFl;
 	}
 
-	public void setNotice_delFl(char notice_delFl) {
-		this.notice_delFl = notice_delFl;
+	public void setNoticeFl(String noticeFl) {
+		this.noticeFl = noticeFl;
 	}
 
-	public int getMem_no() {
-		return mem_no;
+	public int getMemNo() {
+		return memNo;
 	}
 
-	public void setMem_no(int mem_no) {
-		this.mem_no = mem_no;
+	public void setMemNo(int memNo) {
+		this.memNo = memNo;
+	}
+
+	public String getMemNickName() {
+		return memNickName;
+	}
+
+	public void setMemNickName(String memNickName) {
+		this.memNickName = memNickName;
 	}
 
 	@Override
 	public String toString() {
-		return "Notice [notice_no=" + notice_no + ", notice_title=" + notice_title + ", notice_content="
-				+ notice_content + ", create_dt=" + create_dt + ", notice_readCount=" + notice_readCount
-				+ ", notice_delFl=" + notice_delFl + ", mem_no=" + mem_no + "]";
+		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
+				+ ", noticeCreateDt=" + noticeCreateDt + ", noticeReadCount=" + noticeReadCount + ", noticeFl="
+				+ noticeFl + ", memNo=" + memNo + ", memNickName=" + memNickName + "]";
 	}
+
+	
+
 
 	
 }
