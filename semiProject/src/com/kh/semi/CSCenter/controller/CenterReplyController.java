@@ -133,21 +133,36 @@ public class CenterReplyController extends HttpServlet {
 			
 			}
 			
-			else if(command.equals("/selectNoticeList.do")) {
+	//		else if(command.equals("/NoticeListCount.do")) {
 				
-		    int parentNoticeNo = Integer.parseInt(request.getParameter("parentNoticeNo"));
+	//	    int parentNoticeNo = Integer.parseInt(request.getParameter("parentNoticeNo"));
 
 				
-			 List<NoticeReply> rList = service.selectNotiList(parentNoticeNo);
+	//		int NoticelistCount = service.getNoticeListCount(parentNoticeNo);
 
 		    
-			Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월dd일 HH:mm").create();
-			gson.toJson(rList,response.getWriter());
+	//		Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월dd일 HH:mm").create();
+	//		gson.toJson(NoticelistCount,response.getWriter());
 				
 				
 				
-			}
+	//		}
 			
+			//Notice 댓글 수 조회
+			else if(command.equals("/selectNoticeList.do")) {
+				
+			    int parentNoticeNo = Integer.parseInt(request.getParameter("parentNoticeNo"));
+
+					
+				 List<NoticeReply> rList = service.selectNotiList(parentNoticeNo);
+
+			    
+				Gson gson = new GsonBuilder().setDateFormat("yyyy년 MM월dd일 HH:mm").create();
+				gson.toJson(rList,response.getWriter());
+					
+					
+					
+				}
 			
 			else if(command.equals("/insertNoticeReply.do")){
 

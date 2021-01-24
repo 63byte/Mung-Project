@@ -283,6 +283,7 @@ height :100%;
  	// 글쓰기 버튼과 같이 사용하기 위해서
   	var NoticeBoardNo;
   	var url;
+  	 
 
 	
   	// 게시글 상세보기 기능
@@ -306,10 +307,33 @@ height :100%;
 		
 	});
  	
- 	
- 	
+/*  	// 댓글 수 조회 
+	$(document).ready(function() {
+	    
+		
+		  $.ajax({
+				
+			  url :"${contextPath}/centerReply/selectNoticeList.do",
+			  data : {"parentNoticeNo" : NoticeBoardNo },
+			  type : "get",
+			  dataType : "JSON",
+			  success : function(listCount) {
+				  
+				 console.log(listCount);
+
+			
+		  },
+		  error : function(){
+			  console.log("댓글 수 조회 실패");
+		  }
+	  
+	  
+	  	});
+			  
+	  }); */
  
-	
+	    
+	    
 	
 	
  	// 검색 내용이 있을 경우 검색창에 해당 내용을 작성해두는 기능

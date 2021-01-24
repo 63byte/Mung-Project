@@ -69,8 +69,8 @@ width: 100%;
 
 .replyBtnArea {
 text-align:right;
-width:  100%;
-
+/* width:  100%;
+ */
 }
 
 .replyUpdateContent {
@@ -99,6 +99,10 @@ margin-right:5px;
  background-color:#8bd2d6; 
  color:white;
 }
+.addReply{
+ background-color:#8bd2d6; 
+ color:white;
+}
 
 
 
@@ -120,7 +124,7 @@ margin-right:5px;
 		border-radius: 5px;"></textArea>
         </td>
         <td id="replyBtnArea"  style="text-align:right; align:center;">
-                <button class="btn" id="addReply" >
+                <button class="btn" id="addReply">
                                           등록
                 </button>
             </td>
@@ -316,13 +320,13 @@ $(function(){
 
 	  // 기존의 답변 영역을 삭제 하고 
 	  $(el).parent().prev().remove();
-	  var textarea = $("<textarea>").addClass("replyUpdateContent").attr("rows", "2").val(beforeContent);
+	  var textarea = $("<textarea>").addClass("replyUpdateContent").attr("rows", "3").val(beforeContent);
 	  $(el).parent().before(textarea);
 	  
 	  
-	  var updateReply = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
+	  var updateReply = $("<button>").addClass("btn btn-sm ml-1 mb-4 addReply").text("댓글 수정").attr("onclick", "updateReply(" + replyNo + ", this)");
 
-	  var cancelBtn = $("<button>").addClass("btn btn-primary btn-sm ml-1 mb-4").text("취소").attr("onclick", "updateCancel(this)");
+	  var cancelBtn = $("<button>").addClass("btn btn-sm ml-1 mb-4 addReply").text("취소").attr("onclick", "updateCancel(this)");
 
 	  var replyBtnArea = $(el).parent();
 
