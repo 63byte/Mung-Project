@@ -246,7 +246,8 @@ function memberChangevalidate(){
 	var regExp = /^[a-zA-Z\d]{6,12}$/;
 
     if( !regExp.test($("#newPwd2").val()) ){
-        swal("비밀번호 형식이 유효하지 않습니다.");
+				swalIcon("warning")
+        swalText("비밀번호 형식이 유효하지 않습니다.");
         $("#newPwd2").focus();
 
         return false;
