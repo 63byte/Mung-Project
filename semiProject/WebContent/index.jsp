@@ -180,7 +180,7 @@
               		<c:when test="${!empty roomList }">
               			<c:forEach var="room" items="${roomList }">
               			
-	              			<div class="semi-banner1">
+	              			<div class="semi-banner1 numberSelect" style="cursor: pointer;">
 	              				
 	              				<c:forEach var="thumbnail" items="${fList }">
 	              					<c:if test="${room.roomNo == thumbnail.roomNo }">
@@ -189,8 +189,8 @@
 			                     		 </div>
 	              					</c:if>
 	              				</c:forEach>
-			                      <div class="semi-text1 numberSelect" style="cursor: pointer;">${room.roomName }</div>
-			                      <div class="semi-text2 numberSelect" style="cursor: pointer;">${room.location2 }</div>
+			                      <div class="semi-text1 " >${room.roomName }</div>
+			                      <div class="semi-text2 " >${room.location2 }</div>
 			                      <span style="visibility:hidden">${room.roomNo }</span>
 			                  </div>	
               			</c:forEach>
@@ -206,7 +206,7 @@
 <script>
 //숙소 상세조회
 $(".numberSelect").on("click", function(){
-	var roomNo = $(this).siblings("span").text();
+	var roomNo = $(this).children("span").text();
 	
 	var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="+ roomNo;
 	
