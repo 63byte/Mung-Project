@@ -369,6 +369,14 @@ div {
 
 							</div>
 
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
 							<div class="my-6">
 								<form action="${contextPath}/search.do" method="GET"
 									class="text-center" id="searchForm">
@@ -386,14 +394,6 @@ div {
 
 
 							</div>
-
-
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
