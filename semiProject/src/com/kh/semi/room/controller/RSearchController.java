@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.service.RSearchService;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
@@ -45,6 +46,14 @@ public class RSearchController extends HttpServlet {
 			
 			
 			// 동물병원 목록 조회 성공 시 썸네일 목록 조회 수행
+			
+			if(rList!=null) {
+				List<Attachment> fList = service.searchThumbnailList(map,pInfo);
+				
+				if(!fList.isEmpty()) {
+					request.setAttribute("fList", fList);
+				}
+			}
 			
 			
 			

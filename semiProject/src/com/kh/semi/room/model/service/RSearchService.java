@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.semi.room.model.vo.Attachment;
 import com.kh.semi.room.model.dao.RSearchDAO;
 import com.kh.semi.room.model.vo.PageInfo;
 import com.kh.semi.room.model.vo.Room;
@@ -51,7 +52,7 @@ public class RSearchService {
 				switch (searchKey) {
 				case "name": condition = " ROOM_NAME LIKE '%' || '" + searchValue + "' || '%' "; break; 
 					 
-				case "location":  condition = " LOCATION2 LIKE '%' || ' " + searchValue + "' || '%' "; break;
+				case "location":  condition = " LOCATION2 LIKE '%' || '" + searchValue + "' || '%' "; break;
 				}
 		return condition;
 	}
@@ -74,5 +75,26 @@ Connection conn = getConnection();
 		close(conn);
 		
 		return hList;
+	}
+
+
+	
+
+	/** 검색이 적용된 썸네일 목록 조회 Service
+	 * @param map
+	 * @param pInfo
+	 * @return fList
+	 * @throws Exception
+	 */
+	public List<Attachment> searchThumbnailList(Map<String, Object> map, PageInfo pInfo) throws Exception {
+		Connection conn = getConnection();
+		
+		String condition = createCondition(map);
+		
+		List<Attachment> fList = dao.searchThumbnailList(conn,pInfo,condition);
+		
+		close(conn);
+		
+		return fList;
 	}
 }

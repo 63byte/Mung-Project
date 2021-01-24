@@ -34,16 +34,14 @@
 <body>
 		<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 		
-		<!-- 숙소 상세조회  -->
+	
     <div class="wrapper">
-    
-    
     
     
     <c:choose>
     	<c:when test="${!empty fList }">
 
-        <div class="carousel slide boardImgArea imageArea" id="hospital-image">
+        <div class="carousel slide boardImgArea imageArea" id="room-image">
                
                <!-- 이미지 선택 버튼 -->
                <ol class="carousel-indicators ">

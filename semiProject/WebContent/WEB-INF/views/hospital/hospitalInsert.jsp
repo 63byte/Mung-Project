@@ -227,6 +227,15 @@
 
 <script>
 
+/* 취소 버튼  */
+$("#resetBtn").on("click",function(){
+	
+ 	if( confirm("등록을 취소하고 목록으로 돌아갑니다.")){
+ 		
+ 		location.href = "${contextPath}/hospital/list";
+ 	}
+});
+
 /* --------------------유효성 검사---------------  */
 
 function hospitalInsertValidate(){
