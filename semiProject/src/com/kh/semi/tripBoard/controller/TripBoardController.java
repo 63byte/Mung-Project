@@ -16,10 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.common.MyFileRenamePolicy;
 import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FreeReport;
 import com.kh.semi.member.model.vo.Member;
 import com.kh.semi.tripBoard.model.service.TripBoardService;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
+import com.kh.semi.tripBoard.model.vo.TripReport;
 import com.oreilly.servlet.MultipartRequest;
 
 
@@ -334,6 +336,35 @@ public class TripBoardController extends HttpServlet {
 				
 			}
 			
+			// ------------------- 여행 후기 게시판 신고 Controller ---------------------------
+			
+			else if(command.equals("/reportAction.do")) {
+				String reportTitle = request.getParameter("reportTitle");
+				String reportContent = request.getParameter("reportContent");
+				
+				int freeBoardNo = Integer.parseInt(request.getParameter("bNum"));
+				int memberNo = Integer.parseInt(request.getParameter("mNum"));
+				
+				TripReport tReport = new TripReport(reportTitle, reportContent, freeBoardNo, memberNo);
+				
+				int result = service.tripReport(tReport);
+				
+				if(result > 0) {
+					swalIcon = "success";
+					swalTitle = "게시글신고 성공";
+					
+				}else {
+					swalIcon = "error";
+					swalTitle = "게시글 신고 실패";
+				}
+					
+				request.getSession().setAttribute("swalIcon", swalIcon);
+				request.getSession().setAttribute("swalTitle", swalTitle);
+				
+				response.sendRedirect(request.getHeader("referer"));
+				
+			}
+			
 			
 			
 			
@@ -348,6 +379,9 @@ public class TripBoardController extends HttpServlet {
 		
 	
 	}
+	
+	
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);

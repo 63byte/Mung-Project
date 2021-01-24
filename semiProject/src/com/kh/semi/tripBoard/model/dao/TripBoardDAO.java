@@ -13,8 +13,10 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.kh.semi.freeBoard.model.vo.Attachment;
+import com.kh.semi.freeBoard.model.vo.FreeReport;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
+import com.kh.semi.tripBoard.model.vo.TripReport;
 
 public class TripBoardDAO {
 	private Statement stmt = null;
@@ -419,6 +421,61 @@ public class TripBoardDAO {
 			close(pstmt);
 			
 		}
+		return result;
+	}
+
+
+	/** 여행후기 게시판 신고
+	 * @param conn
+	 * @param tReport
+	 * @return
+	 * @throws Exception
+	 */
+	public int tripReport(Connection conn, TripReport tReport) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("tripReport");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, tReport.getReportTitle());
+			pstmt.setString(2, tReport.getReportContent());
+			pstmt.setInt(3, tReport.getFreeBoardNo());
+			pstmt.setInt(4, tReport.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+
+	/** 신고 수 증가
+	 * @param conn
+	 * @param reportNum
+	 * @return
+	 * @throws Exception
+	 */
+	public int reportNum(Connection conn, int reportNum) throws Exception{
+		int result = 0;
+		
+		String query = prop.getProperty("reportNum");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reportNum);
+			
+			result = pstmt.executeUpdate();
+			
+		}finally {
+			close(pstmt);
+			
+		}
+		
 		return result;
 	}
 	

@@ -188,10 +188,10 @@ html, body {
 
 		<form action="${contextPath}/member/findIdResultForm.do" method="post" onsubmit="return submitCheck();">
 			<div id="findDiv2">
-				<label id="userName">닉네임</label> 
+				<label for="userName">닉네임</label> 
 				<input type="text" id="userName" name="userName" required>
 				<br> 
-				<label id="email">이메일</label> 
+				<label for="email">이메일</label> 
 				<input type="text" id="mail" name="mail">
 				
 				<button id="sendMail" class="sendMail">인증번호 받기</button>
