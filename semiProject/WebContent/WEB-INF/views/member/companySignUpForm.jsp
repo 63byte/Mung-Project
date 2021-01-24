@@ -156,6 +156,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     font-size : 16px;
 }
 
+#nextBtn {
+	margin-top : 30px;
+	margin-left : 140px;
+}
+
 
 
 
@@ -385,24 +390,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
                         <br>
                     </div> 
 					</div>
-                
-                
-                <!-- 사업자 등록증  -->
-                
-                <div>
-                    <div class="lb">
-                        <label for="license">사업자 등록증</label> <br>
-                    </div>
-                    <div class="ip display-ib license">
-                        <input type="text" class="inputTag img0" id="t12" name="t12">
-                    </div>
-                    <div class="display-ib">
-                        <input type="file" class="btn_class img0" id="img0" name="img0"></input>
-                    </div>
-                </div>
-
-                <br><br>
-                
                 
                 <div class="submit">
                     <button class="btn_class" id="nextBtn" type="submit">회원가입</button>

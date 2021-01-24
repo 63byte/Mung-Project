@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내가 쓴 댓글 조회</title>
+<title>마이페이지_내가 쓴 댓글 조회</title>
 <head>
 <!-- 구글 폰트 -->
 <link
@@ -270,20 +270,6 @@ h6 {
 				</ul>
 			</div>
 
-
-		<div class="search">
-			<form action="${contextPath}/fSearch.do" method="GET" class="text-center" id="searchForm">
-				<select name="sk" class="form-control"
-					style="width: 100px; display: inline-block;">
-					<option value="title">글 제목</option>
-					<option value="content">내용</option>
-					<option value="titcont">제목+내용</option>
-					<option value="writer">작성자</option>
-				</select> <input type="text" name="sv" class="form-control"
-					style="width: 25%; display: inline-block;">
-				<button id="searchBtn" style="width: 100px; display: inline-block;">검색</button>
-			</form>
-		</div>
 
 </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

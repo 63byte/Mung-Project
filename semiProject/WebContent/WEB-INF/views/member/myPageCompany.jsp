@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>업체 마이페이지</title>
+<title>마이페이지_내 정보 수정(업체)</title>
 <head>
 <!--   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     
@@ -174,7 +174,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<hr>
 				<br>
 
-
+				<div class="lb">
+						<label for="email">아이디</label><br>
+						 <h6>${loginMember.memberId}</h6>
+					</div>
+					<br>
 
 				<!-- 닉네임 -->
 				<div>
@@ -192,23 +196,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				<!-- 이메일 -->
 				<div>
 					<div class="lb">
-						<label for="email">이메일</label> <br>
+
+						<label for="email">이메일</label><br>
+						 <h6>${loginMember.email}</h6>
+						 
+
 					</div>
-					<div class="ip">
-						<input type="text" class="inputTag display-ib email" id="email1" name="email1"
-							autocomplete="off" value="${email[0]}" required> @ 
-							<select
-							class="inputTag display-ib email" id="email2" name="email2" required>
-							<option style="color: gray;">이메일 주소 선택</option>
-							<option>daum.net</option>
-							<option>naver.com</option>
-							<option>gmail.com</option>
-							<option>nate.com</option>
-							<option>hanmail.net</option>
-						</select>
-					</div>
+				
 					<br>
-				</div>
 
 				<!-- 전화번호 -->
 				<div>
@@ -356,6 +351,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		(function() {
 			$("#phone1 > option").each(function(index, item) {
 				if ($(item).val() == "${phone[0]}") {
+					$(item).prop("selected", true);
+				}
+			});
+		})();
+		
+		// 업체 전화번호 옵션 정보 불러오기
+		(function() {
+			$("#phone4 > option").each(function(index, item) {
+				if ($(item).val() == "${comPhone[0]}") {
 					$(item).prop("selected", true);
 				}
 			});

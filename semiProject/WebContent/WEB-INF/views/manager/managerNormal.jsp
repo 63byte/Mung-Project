@@ -149,7 +149,7 @@
 					<%-- 쿼리 스트링으로 사용할 내용을 변수에 저장 --%>
 					<c:set var="searchStr" value="&sk=${param.sk}&sv=${param.sv}"/></c:when>
 				
-				<c:otherwise><c:url var="pageUrl" value="/manager/manager/Normal.do"/></c:otherwise>
+				<c:otherwise><c:url var="pageUrl" value="/manager/managerNormal.do"/></c:otherwise>
 			</c:choose>
 			
 			
@@ -230,7 +230,7 @@
 			
 
                 <div class="search">
-                    <form action="${contextPath}/search.do" method="GET" class="text-center" id="searchForm">
+                    <form action="${contextPath}/mSearch.do" method="GET" class="text-center" id="searchForm">
                         <select name="sk" class="form-control" style="width: 100px; display: inline-block;">
                             <option value="title">아이디</option>
                             <option value="content">닉네임</option>
