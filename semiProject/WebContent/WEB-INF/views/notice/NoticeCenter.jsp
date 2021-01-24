@@ -232,7 +232,7 @@ height :100%;
 			 <c:forEach var="page" begin="${pInfo.startPage}"  end="${pInfo.endPage}">
 				<c:choose>
 					<c:when test="${pInfo.currentPage == page }">
-					<li><a class="page-link">${page}</a></li>
+					<li><a class="page-link" style="color:orange">${page}</a></li>
 					</c:when>
 					<c:otherwise>
 					<li><a class="page-link" href="${pageUrl}?cp=${page}${searchStr}">${page}</a></li>

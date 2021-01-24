@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.semi.boardSearch.model.service.SearchService2;
+import com.kh.semi.tripBoard.model.vo.Attachment;
 import com.kh.semi.tripBoard.model.vo.PageInfo;
 import com.kh.semi.tripBoard.model.vo.TripBoard;
 
@@ -38,6 +39,19 @@ public class SearchController2 extends HttpServlet {
 			PageInfo pInfo = service.getPageInfo(map);
 			
 			List<TripBoard> tList = service.searchBoardList(map, pInfo);
+			
+			
+			if(tList != null) {
+				
+				List<Attachment> imgList =service.selectBoardImgList(map,pInfo);
+				
+				
+				if(!imgList.isEmpty()) {
+					request.setAttribute("imgList", imgList);
+				}
+				
+			}
+			
 			
 			String path = "/WEB-INF/views/tripBoard/tripBoardList.jsp";
 			
