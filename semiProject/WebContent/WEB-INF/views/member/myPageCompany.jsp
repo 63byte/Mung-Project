@@ -251,8 +251,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 
 				<br>
 
-				<!-- 업체번호 -->
+				<!-- 업체 -->
 				<div>
+				
+					<div class="lb">
+						<label for="comName">업체명</label> <h4 style="color:orange">[ ${comMember.comName} ]</h4>
+					</div>
+					<br>
+				
 					<div class="lb">
 						<label for="phone">업체번호</label>
 					</div>

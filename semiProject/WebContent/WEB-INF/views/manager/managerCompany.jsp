@@ -197,7 +197,7 @@
 						<c:choose>
 							<c:when test="${pInfo.currentPage == page}">
 								<li class="page-item">
-									<a class="page-link">${page}</a>
+									<a class="page-link" style="color:orange;">${page}</a>
 								</li>
 							</c:when>
 							
