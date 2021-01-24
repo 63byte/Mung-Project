@@ -13,7 +13,14 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+	
+	
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">
+</script>
+
+
 <style>
 
 html, body {
@@ -110,6 +117,25 @@ html, body {
 
 </head>
 <body>
+
+	<c:set var="contextPath" scope="application"
+		value="${pageContext.servletContext.contextPath}" />
+
+	<c:if test="${!empty sessionScope.swalTitle }">
+		<script>
+			swal({
+				icon : "${swalIcon}",
+				title : "${swalTitle}",
+				text : "${swalText}"
+			});
+		</script>
+
+		<%-- 2) 한 번 출력한 메세지를 Session에서 삭제 --%>
+		<c:remove var="swalIcon" />
+		<c:remove var="swalTitle" />
+		<c:remove var="swalText" />
+	</c:if>
+
 	
 	<form action="${contextPath}/member/login.do" method="POST">
 

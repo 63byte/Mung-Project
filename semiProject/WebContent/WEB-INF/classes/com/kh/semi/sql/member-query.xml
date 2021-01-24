@@ -41,7 +41,7 @@ WHERE MEM_NO=?
 UPDATE COOPERATOR SET 
 COO_PHONE = ?,
 COO_ADDR = ?
-WHERE MEM_NO=? 
+WHERE MEM_NO = ? 
 </entry>
 
 <!-- 현재 비밀번호 확인 -->

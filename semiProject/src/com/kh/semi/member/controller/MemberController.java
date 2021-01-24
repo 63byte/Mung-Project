@@ -257,15 +257,16 @@ public class MemberController extends HttpServlet {
 					cookie.setPath(request.getContextPath());
 
 					response.addCookie(cookie);
+					response.sendRedirect(request.getContextPath());
 
 				} else {
 					session.setAttribute("swalIcon", "error");
 					session.setAttribute("swalTitle", "로그인 실패");
 					session.setAttribute("swalText", "아이디 또는 비밀번호를 확인해주세요.");
-
+					
+					response.sendRedirect(request.getHeader("referer"));
 				}
 
-				response.sendRedirect(request.getContextPath());
 
 			}
 			// -------------------로그아웃 servlet--------------------------

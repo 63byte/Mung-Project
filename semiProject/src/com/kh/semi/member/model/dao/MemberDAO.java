@@ -477,15 +477,10 @@ public class MemberDAO {
 		try {
 			
 			pstmt = conn.prepareStatement(query);
-
-			pstmt.setString(1, member.getMemberNickName());
-			pstmt.setString(2, member.getEmail());
-			pstmt.setString(3, member.getPhone());
-			pstmt.setString(4, member.getGender());
-			pstmt.setInt(5, member.getMemberNo());
 			
-			pstmt.setString(6, member.getComPhone());
-			pstmt.setString(7, member.getComAddress());
+			pstmt.setString(1, member.getComPhone());
+			pstmt.setString(2, member.getComAddress());
+			pstmt.setInt(3, member.getMemberNo());
 
 			result = pstmt.executeUpdate();
 			
