@@ -8,6 +8,16 @@ public class Attachment {
 	private int parentBoardNo;
 	
 	public Attachment() {	}
+	
+	
+	
+	public Attachment(String fileName, int parentBoardNo) {
+		super();
+		this.fileName = fileName;
+		this.parentBoardNo = parentBoardNo;
+	}
+
+
 
 	public Attachment(int fileNo, String filePath, String fileName, int fileLevel, int parentBoardNo) {
 		super();

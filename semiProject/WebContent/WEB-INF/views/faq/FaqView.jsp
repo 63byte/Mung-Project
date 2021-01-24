@@ -228,8 +228,8 @@ color: black;
 	      	</c:if>
 
         </div>
-      
        </div> 
+       
   	</div>
      
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
