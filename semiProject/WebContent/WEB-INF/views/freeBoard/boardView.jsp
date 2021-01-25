@@ -49,7 +49,7 @@
 			<!-- Title -->
 				<h6 class="mt-4 display-3" id="title">${board.boardTitle}</h6>
 	
-				<c:if test="${!empty loginMember && board.memberId != loginMember.memberId }">
+				<c:if test="${(!empty loginMember && board.memberId != loginMember.memberId)}">
 				<button type="button" class="btn btn-danger rBtn" id="reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">
   				신고하기
 				</button>
@@ -89,7 +89,7 @@
 				
 				
 				
-				<c:if test="${!empty loginMember && (board.memberId == loginMember.memberId) }">
+				<c:if test="${!empty loginMember && (board.memberId == loginMember.memberId) || loginMember.memberAdmin == 'A'}">
 						<button id="deleteBtn" class="btn btn-info float-right">삭제</button>
 				
 						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}" class="btn btn-info float-right ml-1 mr-1">수정</a>
