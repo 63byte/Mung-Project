@@ -85,7 +85,7 @@
 				
 				
 				
-				<c:if test="${!empty loginMember && (board.memberId == loginMember.memberId) }">
+				<c:if test="${!empty loginMember && (board.memberId == loginMember.memberId) || loginMember.memberAdmin == 'A'}">
 						<button id="deleteBtn" class="btn btn-info float-right">삭제</button>
 				
 						<a href="updateForm.do?cp=${param.cp}&no=${param.no}${searchStr}" class="btn btn-info float-right ml-1 mr-1">수정</a>
