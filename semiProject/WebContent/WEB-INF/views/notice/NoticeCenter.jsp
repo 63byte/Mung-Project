@@ -202,7 +202,7 @@ height :100%;
 	          </c:when>  
 	      
 	           <c:otherwise>
-					<c:url var="pageUrl" value="/faq/faq.do"/>
+					<c:url var="pageUrl" value="/notice/notice.do"/>
 	           </c:otherwise>
 	      </c:choose>		
 
