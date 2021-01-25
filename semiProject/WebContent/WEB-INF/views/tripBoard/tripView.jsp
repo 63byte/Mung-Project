@@ -46,7 +46,7 @@
 			<!-- Title -->
 				<h3 class="mt-4 display-3">${board.boardTitle }</h3>	
 				
-				<c:if test="${!empty loginMember}">
+				<c:if test="${!empty loginMember && board.memberId != loginMember.memberId }">
 				<button type="button" class="btn btn-danger rBtn" id="reportBtn" data-bs-toggle="modal" data-bs-target="#reportModal">
   				신고하기
 				</button>
