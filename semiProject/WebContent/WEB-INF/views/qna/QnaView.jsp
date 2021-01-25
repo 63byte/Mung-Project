@@ -303,7 +303,7 @@ $("#updateBtn").on("click",function(){
 		
 		swal({
 			  title: "수정하시겠습니까?",
-			  text: "이미 답변 처리가 완료된 문의글입니다.",
+			  text: "정말 수정 하시겠습니까 ?",
 			  icon: "warning",
 			  buttons: true,
 			  dangerMode: true,

@@ -89,7 +89,7 @@ public class NoticeController extends HttpServlet {
 				int NoticeNo = Integer.parseInt(request.getParameter("no"));
 
 				Notice notice = service.selectNotice(NoticeNo);
-
+				
 				if(notice != null) {
 					
 					List<NoticeAttachment> fList = service.selectNoticeFile(NoticeNo);
@@ -97,7 +97,7 @@ public class NoticeController extends HttpServlet {
 					
 					if(!fList.isEmpty()) {
 						request.setAttribute("fList", fList);
-					
+
 						}
 				
 				path = "/WEB-INF/views/notice/NoticeCenterView.jsp";
@@ -247,7 +247,7 @@ public class NoticeController extends HttpServlet {
 					path = "/WEB-INF/views/notice/NoticeCenterUpdate.jsp";
 					view = request.getRequestDispatcher(path);
 					view.forward(request, response);
-						
+
 					
 				}else {
 					request.setAttribute("notice", notice);
@@ -256,7 +256,7 @@ public class NoticeController extends HttpServlet {
 					view.forward(request, response);
 					
 				}
-				
+					
 				}
 				
 			}

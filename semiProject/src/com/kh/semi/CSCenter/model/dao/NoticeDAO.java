@@ -159,7 +159,7 @@ public class NoticeDAO {
 				
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
-				notice.setNoticeContent(rset.getString("NOTICE_TITLE"));
+				notice.setNoticeContent(rset.getString("NOTICE_CONTENT"));
 				notice.setNoticeCreateDt(rset.getTimestamp("NOTICE_CREATE_DT"));
 				notice.setNoticeReadCount(rset.getInt("NOTICE_READCOUNT"));
 				notice.setMemNo(rset.getInt("MEM_NO"));
