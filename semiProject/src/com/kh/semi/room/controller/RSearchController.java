@@ -41,11 +41,11 @@ public class RSearchController extends HttpServlet {
 			// 페이징 처리를 위한 데이터를 계산하고 저장하는객체 PageInfo 얻어오기
 			PageInfo pInfo = service.getPageInfo(map);
 			
-			// 검색된 동물병원 목록 조회
+			// 검색된 숙소 목록 조회
 			List<Room> rList = service.searchRoomList(map,pInfo);
 			
 			
-			// 동물병원 목록 조회 성공 시 썸네일 목록 조회 수행
+			// 숙소 목록 조회 성공 시 썸네일 목록 조회 수행
 			
 			if(rList!=null) {
 				List<Attachment> fList = service.searchThumbnailList(map,pInfo);
@@ -54,7 +54,6 @@ public class RSearchController extends HttpServlet {
 					request.setAttribute("fList", fList);
 				}
 			}
-			
 			
 			
 			// 조회된 내용과 PageInfo 객체를 request객체에 담아서 요청 위임

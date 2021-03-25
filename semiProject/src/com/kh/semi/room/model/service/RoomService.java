@@ -34,7 +34,7 @@ public class RoomService {
 		// cp가 null일 경우 1, 아니면 cp를 얻어옴.
 		int currentPage = cp == null ? 1 : Integer.parseInt(cp);
 		
-		// System.out.println(currentPage); 동물병원 화면 들어가자마자 1 출력 됨
+		// System.out.println(currentPage); 숙소 화면 들어가자마자 1 출력 됨
 		
 		// DB에서 전체 게시글 수를 조회하여 반환받기
 		int listCount = dao.getListCount(conn);
