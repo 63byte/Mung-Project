@@ -112,7 +112,7 @@ public class RoomDAO {
 
 
 
-	/** 숙소 상세조회 Service
+	/** 숙소 상세조회 DAO
 	 * @param conn
 	 * @param roomNo
 	 * @return room

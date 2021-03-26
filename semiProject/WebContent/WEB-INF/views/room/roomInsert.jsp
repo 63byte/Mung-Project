@@ -1,199 +1,222 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>숙소 등록</title>
 <!-- css연결  -->
-<link rel="stylesheet" href="${contextPath}/resources/css/room/roomInsert.css" type="text/css">
+<link rel="stylesheet"
+	href="${contextPath}/resources/css/room/roomInsert.css" type="text/css">
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/otherHeader.jsp"></jsp:include>
 
-<!-- 주소  -->
-<c:set var="address" value="${fn:split(comMember.comAddress,',') }"/>
-
-
-<!-- 숙소 등록하기 -->
-    <div class="wrapper">
-        <div class="main">
-
-            <div class="row-item">
-                <div id="page_name">숙소 등록</div>
-                <hr id="hr_tag">
-            </div>
+	<!-- 주소  -->
+	<c:set var="address" value="${fn:split(comMember.comAddress,',') }" />
 
 
-            <div class="insert_room">
-                <form action="${contextPath }/room/insert" method="post" 
-                	enctype="multipart/form-data"  role="form" onsubmit="return roomInsertValidate();">
-                    
-                   
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="companyName">
-                            	<span class="highlighter">숙소명</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                             <input type="text" class="full_input" id="roomName" name="roomName" value="${comMember.comName}" style="border:none; outline:none;" readonly>
-                        </div>
-                    </div>
+	<!-- 숙소 등록하기 -->
+	<div class="wrapper">
+		<div class="main">
+
+			<div class="row-item">
+				<div id="page_name">숙소 등록</div>
+				<hr id="hr_tag">
+			</div>
 
 
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="phone">
-                            	<span class="highlighter">전화번호</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                              <input type="text" class="full_input" id="phone" name="phone" value="${comMember.comPhone}" style="border:none; outline:none;" readonly>
-                        </div>
-                    </div>
+			<div class="insert_room">
+				<form action="${contextPath }/room/insert" method="post"
+					enctype="multipart/form-data" role="form"
+					onsubmit="return roomInsertValidate();">
 
 
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="location2">
-                            	<span class="highlighter">상세주소</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                            <input type="text" class="full_input" id="location2" name="location2" value="${address[1]}" style="border:none; outline:none;" readonly>
-                        </div>
-                    </div>
-
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="checkIn">
-                            	<span class="highlighter">체크인/체크아웃</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                            <input type="text" class="checkHours" id="checkIn" name="checkin" placeholder="00:00" autocomplete="off" required>
-                            &nbsp;/
-                            <input type="text" class="checkHours" id="checkOut" name="checkout" placeholder="00:00" autocomplete="off" required>
-                        </div>
-                    </div>
-
-                    <div class="row-item">
-                        <div class="label_name">
-                            <div for="facility">
-                            	<span class="highlighter">숙소 부대 시설</span>
-                            </div>
-                        </div>
-                        <div class="input_tag">
-                           <label for="WiFi" style="cursor:pointer"> <input type="checkbox" class="facility" name="facility" id="WiFi" value="WiFi">WiFi</label>
-                            <label for="주차장" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="주차장" value="주차장">주차장</label>
-                            <label for="수영장" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="수영장" value="수영장">수영장</label>
-                            <label for="BBQ" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="BBQ" value="BBQ">BBQ</label>
-                            <label for="마당" style="cursor:pointer"><input type="checkbox" class="facility" name="facility" id="마당" value="마당">마당</label>
-                        </div>
-                    </div>
-
-                    <div class="row-item">
-                        <div class="label_name">
-                            <label for="dog">
-                            	<span class="highlighter">출입 가능 견종</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                           <label for="소형견" style="cursor:pointer"><input type="checkbox" class="dog" name="dog"  id="소형견" value="소형견">소형견</label>
-                            <label for="중형견" style="cursor:pointer"><input type="checkbox" class="dog" name="dog"  id="중형견" value="중형견">중형견</label>
-                            <label for="대형견" style="cursor:pointer"> <input type="checkbox" class="dog" name="dog"  id="대형견" value="대형견">대형견</label>
-                            
-                        </div>
-                    </div>
-
-                    <div class="row-item">
-                        <div class="label_name" style="vertical-align:80px;" >
-                            <label for="room_info" >
-                            	<span class="highlighter">숙소 상세 정보</span>
-                            </label>
-                        </div>
-                        <div class="input_tag">
-                            <textarea class="full_input room_info" id="room_info" rows="10"
-                              name ="room_info"  placeholder="숙소 상세 정보를 작성해 주세요."></textarea>
-                        </div>
-                    </div>
-
-
-                    <!-- 파일 업로드  -->
-
-                    <div class="row-item">
-                    	<div class="label_name">
-							<label for="titleImgArea">
-								<span class="highlighter">썸네일</span>
+					<div class="row-item">
+						<div class="label_name">
+							<label for="companyName"> <span class="highlighter">숙소명</span>
 							</label>
-                    	</div>
-					<div class="roomImg input_tag" id="titleImgArea">
-						<img id="titleImg" width="360" height="100" >
+						</div>
+						<div class="input_tag">
+							<input type="text" class="full_input" id="roomName"
+								name="roomName" value="${comMember.comName}"
+								style="border: none; outline: none;" readonly>
+						</div>
 					</div>
-				</div>
 
-				<div class="row-item"  >
-					<div class="label_name">
-						<label class="img">
-							<span class="highlighter">업로드 이미지</span>
-						</label>
-					</div>
-					<div class="input_tag">
-						<div class="roomImg imgarea" id="roomImgArea1" style="margin-right:5px;">
-							<img id="roomImg1" width="65" height="65" >
+
+					<div class="row-item">
+						<div class="label_name">
+							<label for="phone"> <span class="highlighter">전화번호</span>
+							</label>
 						</div>
-						<div class="roomImg imgarea" id="roomImgArea2" style="margin-right:4px;">
-							<img id="roomImg2" width="65" height="65" >
-						</div>
-						<div class="roomImg imgarea" id="roomImgArea3" style="margin-right:5px;"> 
-							<img id="roomImg3" width="65" height="65" >
-						</div>
-						<div class="roomImg imgarea" id="roomImgArea4" style="margin-right:5px;">	
-							<img id="roomImg4" width="65" height="65" >
-						</div>	
-						<div class="roomImg imgarea" id="roomImgArea5">	
-							<img id="roomImg5" width="65" height="65">
+						<div class="input_tag">
+							<input type="text" class="full_input" id="phone" name="phone"
+								value="${comMember.comPhone}"
+								style="border: none; outline: none;" readonly>
 						</div>
 					</div>
-				</div>
-			
-			<!-- 파일 업로드 버튼 (숨기기) -->
+
+
+					<div class="row-item">
+						<div class="label_name">
+							<label for="location2"> <span class="highlighter">상세주소</span>
+							</label>
+						</div>
+						<div class="input_tag">
+							<input type="text" class="full_input" id="location2"
+								name="location2" value="${address[1]}"
+								style="border: none; outline: none;" readonly>
+						</div>
+					</div>
+
+					<div class="row-item">
+						<div class="label_name">
+							<label for="checkIn"> <span class="highlighter">체크인/체크아웃</span>
+							</label>
+						</div>
+						<div class="input_tag">
+							<input type="text" class="checkHours" id="checkIn" name="checkin"
+								placeholder="00:00" autocomplete="off" required> &nbsp;/
+							<input type="text" class="checkHours" id="checkOut"
+								name="checkout" placeholder="00:00" autocomplete="off" required>
+						</div>
+					</div>
+
+					<div class="row-item">
+						<div class="label_name">
+							<div for="facility">
+								<span class="highlighter">숙소 부대 시설</span>
+							</div>
+						</div>
+						<div class="input_tag">
+							<label for="WiFi" style="cursor: pointer"> <input
+								type="checkbox" class="facility" name="facility" id="WiFi"
+								value="WiFi">WiFi
+							</label> <label for="주차장" style="cursor: pointer"><input
+								type="checkbox" class="facility" name="facility" id="주차장"
+								value="주차장">주차장</label> <label for="수영장" style="cursor: pointer"><input
+								type="checkbox" class="facility" name="facility" id="수영장"
+								value="수영장">수영장</label> <label for="BBQ" style="cursor: pointer"><input
+								type="checkbox" class="facility" name="facility" id="BBQ"
+								value="BBQ">BBQ</label> <label for="마당" style="cursor: pointer"><input
+								type="checkbox" class="facility" name="facility" id="마당"
+								value="마당">마당</label>
+						</div>
+					</div>
+
+					<div class="row-item">
+						<div class="label_name">
+							<label for="dog"> <span class="highlighter">출입 가능
+									견종</span>
+							</label>
+						</div>
+						<div class="input_tag">
+							<label for="소형견" style="cursor: pointer"><input
+								type="checkbox" class="dog" name="dog" id="소형견" value="소형견">소형견</label>
+							<label for="중형견" style="cursor: pointer"><input
+								type="checkbox" class="dog" name="dog" id="중형견" value="중형견">중형견</label>
+							<label for="대형견" style="cursor: pointer"> <input
+								type="checkbox" class="dog" name="dog" id="대형견" value="대형견">대형견
+							</label>
+
+						</div>
+					</div>
+
+					<div class="row-item">
+						<div class="label_name" style="vertical-align: 80px;">
+							<label for="room_info"> <span class="highlighter">숙소
+									상세 정보</span>
+							</label>
+						</div>
+						<div class="input_tag">
+							<textarea class="full_input room_info" id="room_info" rows="10"
+								name="room_info" placeholder="숙소 상세 정보를 작성해 주세요."></textarea>
+						</div>
+					</div>
+
+
+					<!-- 파일 업로드  -->
+
+					<div class="row-item">
+						<div class="label_name">
+							<label for="titleImgArea"> <span class="highlighter">썸네일</span>
+							</label>
+						</div>
+						<div class="roomImg input_tag" id="titleImgArea">
+							<img id="titleImg" width="360" height="100">
+						</div>
+					</div>
+
+					<div class="row-item">
+						<div class="label_name">
+							<label class="img"> <span class="highlighter">업로드
+									이미지</span>
+							</label>
+						</div>
+						<div class="input_tag">
+							<div class="roomImg imgarea" id="roomImgArea1"
+								style="margin-right: 5px;">
+								<img id="roomImg1" width="65" height="65">
+							</div>
+							<div class="roomImg imgarea" id="roomImgArea2"
+								style="margin-right: 4px;">
+								<img id="roomImg2" width="65" height="65">
+							</div>
+							<div class="roomImg imgarea" id="roomImgArea3"
+								style="margin-right: 5px;">
+								<img id="roomImg3" width="65" height="65">
+							</div>
+							<div class="roomImg imgarea" id="roomImgArea4"
+								style="margin-right: 5px;">
+								<img id="roomImg4" width="65" height="65">
+							</div>
+							<div class="roomImg imgarea" id="roomImgArea5">
+								<img id="roomImg5" width="65" height="65">
+							</div>
+						</div>
+					</div>
+
+					<!-- 파일 업로드 버튼 (숨기기) -->
 					<div id="fileArea">
-						<input type="file" id="img0" name="img0" onchange="LoadImg(this,0)">
-						<!-- multiple 속성 = 사진 여러개 선택 가능  --> 
-						<input type="file" id="img1" name="img1" onchange="LoadImg(this,1)"> 
-						<input type="file" id="img2" name="img2" onchange="LoadImg(this,2)"> 
-						<input type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
-						<input type="file" id="img4" name="img4" onchange="LoadImg(this,4)">
-						<input type="file" id="img5" name="img4" onchange="LoadImg(this,5)">
+						<input type="file" id="img0" name="img0"
+							onchange="LoadImg(this,0)">
+						<!-- multiple 속성 = 사진 여러개 선택 가능  -->
+						<input type="file" id="img1" name="img1"
+							onchange="LoadImg(this,1)"> <input type="file" id="img2"
+							name="img2" onchange="LoadImg(this,2)"> <input
+							type="file" id="img3" name="img3" onchange="LoadImg(this,3)">
+						<input type="file" id="img4" name="img4"
+							onchange="LoadImg(this,4)"> <input type="file" id="img5"
+							name="img4" onchange="LoadImg(this,5)">
 					</div>
 
 
 
 
-                    <!-- 등록 / 취소 버튼  -->
-                    <div class="row-item">
-                        <div class="btn_item">
-                            <button class= "btn_class"  id="insertBtn" type="submit">등록</button>
-                            <button class= "btn_class"  id="resetBtn" type="reset">취소</button>
-                        </div>
-                    </div>
-                </form>
+					<!-- 등록 / 취소 버튼  -->
+					<div class="row-item">
+						<div class="btn_item">
+							<button class="btn_class" id="insertBtn" type="submit">등록</button>
+							<button class="btn_class" id="resetBtn" type="reset">취소</button>
+						</div>
+					</div>
+				</form>
 
-            </div>
+			</div>
 
-        </div>
+		</div>
 
-    </div><!-- wrapper -->
+	</div>
+	<!-- wrapper -->
 
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
-<script>
+	<script>
 
 
 /* 취소 버튼  */

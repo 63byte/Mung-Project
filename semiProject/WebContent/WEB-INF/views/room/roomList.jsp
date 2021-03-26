@@ -102,7 +102,7 @@
 											style="cursor: pointer; margin-left: 10px;">
 											<p class="address">${room.location2 }</p>
 										</div>
-										<span style="visibility: hidden">${room.roomNo }</span>
+										<span id="boardNo" style="visibility: hidden">${room.roomNo }</span>
 									</div>
 
 								</c:forEach></td>
@@ -249,18 +249,14 @@
 		})();
 
 		// 숙소 상세조회
-		$(".numberSelect")
-				.on(
-						"click",
-						function() {
-							var roomNo = $(this).children("span#boardNo")
-									.text();
+	$(".numberSelect").on("click",function() {
+			var roomNo = $(this).children("span#boardNo").text();
 
-							var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="
-									+ roomNo + "${searchStr}";
+			var url = "${contextPath}/room/view?cp=${pInfo.currentPage}&roomNo="
+					+ roomNo + "${searchStr}";
 
-							location.href = url;
-						});
+			location.href = url;
+		});
 	</script>
 </body>
 </html>
