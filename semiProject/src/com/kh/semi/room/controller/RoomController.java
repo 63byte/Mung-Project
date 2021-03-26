@@ -267,7 +267,7 @@ public class RoomController extends HttpServlet {
 				
 			}
 			
-			// 동물병원 수정 화면 전환 Controller ************
+			// 숙소 수정 화면 전환 Controller ************
 			
 			else if(command.equals("/updateForm")) {
 				errorMsg ="숙소 수정 화면 불러오는 과정에서 오류 발생";
