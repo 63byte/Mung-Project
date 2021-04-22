@@ -3,13 +3,14 @@
 
 <br>
 
-### 🐶 𝘾𝙊𝙉𝙏𝙀𝙉𝙏 🐶 
+## 🐶 𝘾𝙊𝙉𝙏𝙀𝙉𝙏 🐶 
 
 𝟭. TEAM SuperJunio <br>
 𝟮. 개발 일정 및 환경 <br>
 𝟯. 기획 의도 <br>
 𝟰. 로고 & 컬러 <br>
-𝟱. 구현 기능 <br><br>
+𝟱. 데이터 베이스 설계 <br>
+𝟲. 구현 기능 <br><br>
 
 
 ### 👍 𝙏𝙀𝘼𝙈 𝙎𝙪𝙥𝙚𝙧 𝙅𝙪𝙣𝙞𝙤
@@ -24,11 +25,12 @@
 - OS : Windows 10
 - WAS : Apache Tomcat 8.5
 - Program : Java Eclipse , Oracle, SQL Developer, VS Code, PhotoShop, Illurstrator
-- Site : 와이어프레임 (Figma), 미리캔버스 (로고, 아이콘), 핀터레스트 (사진), 구글 스프레드시트 (프로젝트 관련 실시간 공유)
+- Site : Figma(와이어 프레임), 미리 캔버스 (로고, 아이콘), 핀터레스트 (사진), 구글 스프레드시트 (프로젝트 관련 실시간 공유)
 - Skill : Servlet, JSP, HTML, CSS3, javascript, jQuery
 - API : Kakao MAP API (동물병원 / 숙소 / 여행), 이메일 인증 API (회원가입 / 내 정보 이메일 수정)
 - Library (cos.jar / gson-2.8.6.jar / json-simple-1.1.1.jar / mail-1.4.7.jar / ojdbc6.jar / taglibs-standard-impl-1.2.5.jar
            / taglibs-standard-jstlel-1.2.5.jar / taglibs-standard-spec-1.2.5.jar
+- Management : GitHub         
 <br><br>
 
 ### 👍 기획 의도
@@ -81,7 +83,7 @@
    <br>
    
    #### 4. 𝖲𝖾𝗅𝖾𝖼𝗍 𝖬𝖾𝗆𝖻𝖾𝗋𝗌𝗁𝗂𝗉 <br>
-   ![image](https://user-images.githubusercontent.com/74957603/115431079-e0051180-a23f-11eb-8acf-45ea492d221a.png)
+   ![image](https://user-images.githubusercontent.com/74957603/115676995-0daaa180-a38b-11eb-8277-acdd724adf71.png)
    - 회원은 회원가입시 선택할 수 있다. 일반 회원과 업체 회원으로 나눠진다. 
    - 버튼 클릭시 각각 회원가입 화면으로 이동한다.
 
