@@ -24,7 +24,7 @@
 ### 👍 개발 환경
 - OS : Windows 10
 - WAS : Apache Tomcat 8.5
-- Program : Java Eclipse , Oracle, SQL Developer, VS Code, PhotoShop, Illurstrator
+- Program : Java Eclipse , Oracle, SQL Developer, VS Code, PhotoShop, Illustrator
 - Site : Figma(와이어 프레임), 미리 캔버스 (로고, 아이콘), 핀터레스트 (사진), 구글 스프레드시트 (프로젝트 관련 실시간 공유)
 - Skill : Servlet, JSP, HTML, CSS3, javascript, jQuery
 - API : Kakao MAP API (동물병원 / 숙소 / 여행), 이메일 인증 API (회원가입 / 내 정보 이메일 수정)
